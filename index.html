@@ -6,8 +6,54 @@
     <title>Vijay Kumaran - Resume</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Critical particles styling in head -->
+    <style>
+        #particles-js {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: -1 !important;
+            pointer-events: none !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            display: block !important;
+        }
+        
+        .particles-js-canvas-el {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: -1 !important;
+            pointer-events: none !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            display: block !important;
+        }
+    </style>
 </head>
 <body class="light-mode">
+    <!-- Add particles container at the very top of body -->
+    <div id="particles-js"></div>
+    
+    <!-- Reading progress indicators -->
+    <div class="reading-progress"></div>
+    <div class="section-indicator">
+        <div class="section-dot" data-section="Summary"></div>
+        <div class="section-dot" data-section="Experience"></div>
+        <div class="section-dot" data-section="Skills"></div>
+        <div class="section-dot" data-section="Education"></div>
+        <div class="section-dot" data-section="Contact"></div>
+    </div>
+    
+    <!-- Theme toggle -->
     <div class="theme-switch">
         <input type="checkbox" id="theme-toggle">
         <label for="theme-toggle" class="switch">
@@ -15,96 +61,275 @@
             <i class="fas fa-moon"></i>
         </label>
     </div>
-
+    
+    <!-- Your glass container and content -->
     <div class="glass-container">
         <header>
             <h1>Vijay Kumaran</h1>
-            <div class="subtitle">
-                🚀 Web Developer | AI-Powered Content Creator | Cybersecurity Enthusiast
-            </div>
             <div class="contact-info">
-                📍 Mumbai, India | 📧 vijju83@gmail.com | 📞 +91 9819688738
+                <span class="icon-animate icon-pulse">🚀</span> Web Developer | AI-Powered Content Creator | Cybersecurity Enthusiast<br>
+                <span class="icon-animate icon-bounce delay-1">📍</span> Mumbai, India | 
+                <span class="icon-animate icon-shake delay-2">📧</span> vijju83@gmail.com | 
+                <span class="icon-animate icon-bounce delay-3">📞</span> +91 9819688738 | 
+                <a href="https://linkedin.com/in/vijaykumaran"><span class="icon-animate icon-pulse delay-4">🔗</span> LinkedIn Profile</a>
             </div>
         </header>
 
-        <section class="summary glass-card">
-            <h2>Professional Summary</h2>
-            <p>Innovative and results-driven Web Developer, AI-Powered Content Creator, and Cybersecurity Enthusiast with 10+ years of experience in WordPress development, JavaScript, SEO-driven content strategy, Python automation, and IT security.</p>
+        <section id="summary" class="summary glass-card">
+            <h2>
+                <span class="icon-animate icon-pulse">💼</span> 
+                Professional Summary
+                <span class="title-decoration">✨</span>
+            </h2>
+            <p>Innovative and results-driven Web Developer, AI-Powered Content Creator, and Cybersecurity Enthusiast with 10+ years of experience in WordPress development, JavaScript, SEO-driven content strategy, Python automation, and IT security. Proven ability to create user-friendly websites, craft high-impact digital content, and drive social media engagement. Passionate about leveraging AI for content automation and cybersecurity best practices. Seeking remote opportunities to contribute expertise in web development, digital marketing, AI-driven automation, and security consulting.</p>
         </section>
 
-        <section class="skills glass-card">
-            <h2>Skills & Expertise</h2>
-            <div class="skill-category">
-                <h3>Web Development</h3>
-                <div class="skill-item">
-                    <span class="skill-name">HTML5/CSS3</span>
-                    <div class="progress-bar">
-                        <div class="progress" data-progress="90"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <span class="skill-name">JavaScript</span>
-                    <div class="progress-bar">
-                        <div class="progress" data-progress="85"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <span class="skill-name">WordPress</span>
-                    <div class="progress-bar">
-                        <div class="progress" data-progress="95"></div>
-                    </div>
-                </div>
-            </div>
+        <section id="experience" class="experience glass-card">
+            <h2>
+                <span class="icon-animate icon-bounce">💼</span> 
+                Work Experience
+                <span class="title-decoration">🚀</span>
+            </h2>
             
-            <div class="skill-category">
-                <h3>AI & Automation</h3>
-                <div class="skill-item">
-                    <span class="skill-name">Python</span>
-                    <div class="progress-bar">
-                        <div class="progress" data-progress="80"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <span class="skill-name">AI Tools</span>
-                    <div class="progress-bar">
-                        <div class="progress" data-progress="90"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="experience glass-card">
-            <h2>Work Experience</h2>
             <div class="job">
                 <h3>V-Infinity</h3>
-                <div class="job-title">Web Developer & Digital Content Strategist</div>
-                <div class="date">2014 - Present</div>
+                <p><strong>Web Developer & Digital Content Strategist</strong></p>
+                <p><span class="date">📅 September 2014 - Present (Remote-Friendly Role)</span></p>
                 <ul>
-                    <li>Designed and developed custom WordPress websites</li>
-                    <li>Created high-performing AI-generated content</li>
-                    <li>Led SEO strategy and content optimization</li>
+                    <li class="achievement">Designed and developed custom WordPress websites with optimized UX/UI, increasing client engagement by 40%</li>
+                    <li class="achievement">Created high-performing AI-generated content, improving organic traffic by 60% using ChatGPT & Claude</li>
+                    <li class="achievement">Led SEO strategy and content optimization, boosting search rankings and driving audience growth</li>
+                    <li class="achievement">Developed a Python-based AI content generator, automating content creation and reducing manual effort by 70%</li>
+                    <li class="achievement">Integrated web scraping and LLMs to fetch real-time data for AI-powered articles</li>
+                    <li class="achievement">Managed end-to-end content execution for client websites, ensuring alignment with SEO and branding goals</li>
+                </ul>
+            </div>
+            
+            <div class="job">
+                <h3>HCL COMNET LTD</h3>
+                <p><strong>Cybersecurity & IT Incident Management Specialist</strong></p>
+                <p><span class="date">📅 December 2009 - May 2013</span></p>
+                <ul>
+                    <li class="achievement">Monitored and resolved IT security incidents using ArcSight Console, reducing response time by 30%</li>
+                    <li class="achievement">Handled zero-day threat alerts and escalations, ensuring swift mitigation of security vulnerabilities</li>
+                    <li class="achievement">Provided technical support to global clients, achieving a 98% satisfaction rate</li>
+                    <li class="achievement">Managed BladeLogic application suite, streamlining ticket resolution and server performance monitoring</li>
+                </ul>
+            </div>
+            
+            <div class="job">
+                <h3>NIIT LIMITED</h3>
+                <p><strong>E-Learning & Content Development Executive</strong></p>
+                <p><span class="date">📅 March 2007 - August 2007</span></p>
+                <ul>
+                    <li class="achievement">Created and edited global e-learning content for corporate training programs</li>
+                    <li class="achievement">Ensured quality control and streamlined content workflows for international projects</li>
                 </ul>
             </div>
         </section>
 
-        <section class="education glass-card">
-            <h2>Education</h2>
-            <div class="degree">
+        <!-- Updated badge structure with progress bars -->
+
+        <section id="skills" class="skills glass-card">
+            <h2>
+                <span class="icon-animate icon-pulse">🔧</span> 
+                Tech Stack
+                <span class="title-decoration">⚙️</span>
+            </h2>
+            
+            <div class="tech-categories">
+                <!-- Frontend Technologies -->
+                <div class="tech-category">
+                    <h3>Frontend</h3>
+                    <div class="badges-container">
+                        <div class="badge frontend html5">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>HTML5</span>
+                                <span class="badge-value">90%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge frontend css3">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>CSS3</span>
+                                <span class="badge-value">85%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge frontend javascript">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>JavaScript</span>
+                                <span class="badge-value">80%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge frontend react">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>React</span>
+                                <span class="badge-value">80%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend Technologies -->
+                <div class="tech-category">
+                    <h3>Backend</h3>
+                    <div class="badges-container">
+                        <div class="badge backend node">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>Node.js</span>
+                                <span class="badge-value">75%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge backend python">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>Python</span>
+                                <span class="badge-value">75%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge backend php">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>PHP</span>
+                                <span class="badge-value">70%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Databases -->
+                <div class="tech-category">
+                    <h3>Databases</h3>
+                    <div class="badges-container">
+                        <div class="badge database mysql">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>MySQL</span>
+                                <span class="badge-value">80%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge database mongodb">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>MongoDB</span>
+                                <span class="badge-value">75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI Tools -->
+                <div class="tech-category">
+                    <h3>AI Tools</h3>
+                    <div class="badges-container">
+                        <div class="badge ai chatgpt">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>ChatGPT</span>
+                                <span class="badge-value">90%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge ai claude">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>Claude</span>
+                                <span class="badge-value">85%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge ai gemini">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>Gemini</span>
+                                <span class="badge-value">75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cloud Services -->
+                <div class="tech-category">
+                    <h3>Cloud</h3>
+                    <div class="badges-container">
+                        <div class="badge cloud aws">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>AWS</span>
+                                <span class="badge-value">70%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge cloud gcp">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>GCP</span>
+                                <span class="badge-value">65%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="badge cloud azure">
+                            <div class="progress-bar"></div>
+                            <div class="badge-label">
+                                <span>Azure</span>
+                                <span class="badge-value">60%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="education glass-card">
+            <h2>
+                <span class="icon-animate icon-bounce">🎓</span> 
+                Education
+                <span class="title-decoration">📚</span>
+            </h2>
+            <div class="education-item">
                 <h3>Bachelor of Science in Computer Science</h3>
-                <div class="university">Maharashtra State Board, Mumbai</div>
-                <div class="date">2004-2005</div>
+                <p><span class="university">📍 Maharashtra State Board, Mumbai</span> | <span class="date">2004-2005</span></p>
+            </div>
+        </section>
+
+        <section id="contact" class="contact glass-card">
+            <h2>
+                <span class="icon-animate icon-bounce">📌</span> 
+                Contact
+                <span class="title-decoration">📱</span>
+            </h2>
+            <div class="contact-list">
+                <p><span class="icon-animate icon-shake">📧</span> Email: <a href="mailto:vijju83@gmail.com">vijju83@gmail.com</a></p>
+                <p><span class="icon-animate icon-bounce">💼</span> LinkedIn: <a href="https://linkedin.com/in/vijaykumaran">linkedin.com/in/vijaykumaran</a></p>
             </div>
         </section>
     </div>
 
     <footer class="glass-footer">
         <div class="social-links">
-            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            <a href="https://linkedin.com/in/vijaykumaran" class="social-icon"><i class="fab fa-linkedin"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
             <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
         </div>
     </footer>
 
+    <!-- Load particles.js from a more reliable CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <!-- Standalone particles initialization -->
+    <script src="particles-config.js"></script>
+    
+    <!-- Your main script -->
     <script src="script.js"></script>
 </body>
 </html>
