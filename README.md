@@ -1,30 +1,35 @@
-# Modern Glass-Morphism Resume
+# My Interactive Resume Site
 
-A modern, responsive resume website featuring a glass-morphism design language, smooth animations, and dark mode support.
-
-## Features
-
-- Glass-morphism design with blur effects and transparency
-- Animated skill progress bars
-- Dark/Light mode toggle with local storage persistence
-- Smooth scroll animations using Intersection Observer
-- Responsive design for all screen sizes
-- Social media links with hover effects
-- Interactive UI elements
+An interactive resume website featuring:
+- Particle.js animated background
+- Wave animation effects
+- Glassmorphism UI design
+- Interactive skill badges with progress bars
+- Dark/light mode toggle
+- Responsive design for all devices
 
 ## Technologies Used
-
 - HTML5
-- CSS3 (Custom Properties, Flexbox, Glass Effects)
-- JavaScript (ES6+)
-- FontAwesome Icons
+- CSS3
+- JavaScript
+- Particles.js
 
-## Usage
+## Features
+- **Animated Background**: Dynamic particle system
+- **Theme Toggle**: Switch between light and dark modes
+- **Progress Indicators**: Visual skill proficiency representation
+- **Section Navigation**: Quick section jumping with indicator dots
+- **Responsive Design**: Looks great on all screen sizes
 
+## Setup
 1. Clone this repository
-2. Open `index.html` in your browser
-3. Toggle dark/light mode using the theme switch
-4. Watch the animations as you scroll
+2. Open index.html in your browser
+
+## Development
+- `index.html` - Main structure
+- `styles.css` - Styling and animations
+- `script.js` - Interactivity and animations
+- `particles-config.js` - Background particle configuration
 
 ## Customization
 
