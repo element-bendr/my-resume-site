@@ -1,4 +1,4 @@
-# My Interactive Resume Site
+# My Resume Site
 
 An interactive resume website featuring:
 - Particle.js animated background
