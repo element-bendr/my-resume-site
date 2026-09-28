@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "blocked",
+  "status": "active",
   "active_stage": "03-command-center-slice",
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
@@ -106,7 +106,7 @@
     },
     {
       "id": "03-command-center-slice",
-      "status": "blocked",
+      "status": "active",
       "context": "workflow/active/portfolio-world-rebuild/03-command-center-slice-CONTEXT.md",
       "depends_on_stages": [
         "02-app-foundation"
@@ -130,8 +130,7 @@
         "package.json",
         "package-lock.json"
       ],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/03-command-center-slice-completion-report.md",
-      "block_reason": "awaiting_activation"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/03-command-center-slice-completion-report.md"
     },
     {
       "id": "04-world-zones",
