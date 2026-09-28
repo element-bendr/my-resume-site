@@ -34,7 +34,7 @@
         "consulting-positioning",
         "profile-governance"
       ],
-      "visibility": "public"
+      "visibility": "private-source-public-safe-fields-only"
     },
     {
       "id": "structured-profile-history",
