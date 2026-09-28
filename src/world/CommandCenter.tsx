@@ -148,11 +148,6 @@ export function CommandCenter({
       ))}
 
       <MoveTargetMarker movementTarget={movementTarget} />
-
-      <mesh position={[0, 0.38, 6.35]}>
-        <boxGeometry args={[4.5, 0.75, 0.4]} />
-        <meshStandardMaterial color="#102540" emissive="#0d2741" emissiveIntensity={0.45} />
-      </mesh>
     </>
   );
 }

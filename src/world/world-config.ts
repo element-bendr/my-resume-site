@@ -46,8 +46,8 @@ export const STATIONS: readonly StationConfig[] = [
     shortLabel: "Newsharness",
     kind: "project",
     projectId: "newsharness",
-    position: [-5.2, 0, -2.7],
-    interactionPoint: { x: -4.4, z: -1.45 },
+    position: [-4.35, 0, -2.7],
+    interactionPoint: { x: -3.55, z: -1.45 },
     accent: "#58d7ff",
   },
   {
@@ -65,8 +65,8 @@ export const STATIONS: readonly StationConfig[] = [
     title: "Ask Terminal",
     shortLabel: "Ask",
     kind: "ask",
-    position: [5.2, 0, -2.7],
-    interactionPoint: { x: 4.4, z: -1.45 },
+    position: [4.35, 0, -2.7],
+    interactionPoint: { x: 3.55, z: -1.45 },
     accent: "#75f2c8",
   },
 ] as const;
