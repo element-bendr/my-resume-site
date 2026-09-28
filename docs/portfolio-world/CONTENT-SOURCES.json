@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-09-28",
+  "sources": [
+    {
+      "id": "public-engineering-profile",
+      "repository": "element-bendr/element-bendr",
+      "ref": "508a3f69da785281684e69a69bef549401b35e8c",
+      "path": "README.md",
+      "authority": [
+        "engineering-positioning",
+        "current-featured-engineering-work"
+      ],
+      "visibility": "public"
+    },
+    {
+      "id": "public-sanitized-case-studies",
+      "repository": "element-bendr/ai-automation-case-studies",
+      "ref": "fb03099fa3746c33a441a4cf045d9dfaccbb11e2",
+      "path": "README.md",
+      "authority": [
+        "public-project-claims",
+        "private-project-disclosure-boundary",
+        "public-contact"
+      ],
+      "visibility": "public"
+    },
+    {
+      "id": "consulting-positioning",
+      "repository": "element-bendr/profile-rejig",
+      "ref": "8568ea2517e1558ea038a7ad6153a128d292de7b",
+      "path": "PROFILE_README_DRAFT.md",
+      "authority": [
+        "consulting-positioning",
+        "profile-governance"
+      ],
+      "visibility": "public"
+    },
+    {
+      "id": "structured-profile-history",
+      "repository": "element-bendr/monorepo-profile-content",
+      "ref": "d7ee030986e5248f303ebecc10e263ef9df75669",
+      "path": "apps/web/content/profile.json",
+      "authority": [
+        "employment-history",
+        "structured-profile-copy"
+      ],
+      "visibility": "private-source-public-safe-fields-only"
+    },
+    {
+      "id": "legacy-resume-site",
+      "repository": "element-bendr/my-resume-site",
+      "ref": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
+      "path": "index.html",
+      "authority": [
+        "historical-presentation-reference-only"
+      ],
+      "visibility": "public",
+      "restrictions": [
+        "not-authoritative-for-current-contact",
+        "not-authoritative-for-skill-scores",
+        "not-authoritative-for-quantitative-outcomes",
+        "education-unverified"
+      ]
+    },
+    {
+      "id": "current-ask-portfolio",
+      "url": "https://vijay-kumaran-portfolio-ask.pages.dev/",
+      "authority": [
+        "presentation-reference-only"
+      ],
+      "visibility": "public",
+      "verification_note": "Observed earlier on 2026-09-28; direct re-fetch later returned a cache miss. Never use as sole authority for new facts."
+    },
+    {
+      "id": "user-approved-hobbies",
+      "authority": [
+        "hobby-content"
+      ],
+      "visibility": "public-safe-user-authored",
+      "values": [
+        "gaming",
+        "anime",
+        "kettlebells",
+        "philosophy",
+        "tinkering"
+      ]
+    }
+  ],
+  "precedence_notes": [
+    "Project repositories/certification evidence govern technical facts and current status.",
+    "Sanitized case studies govern what private-work detail may be public.",
+    "Employment history uses structured-profile-history rather than legacy HTML.",
+    "Unknown or conflicting facts are omitted until resolved."
+  ]
+}

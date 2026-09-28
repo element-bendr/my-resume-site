@@ -4,7 +4,7 @@
 Replace the static resume site with a production-ready gamified 3D portfolio while preserving a fast conventional portfolio/resume path and keeping `main` untouched until certification.
 
 ## Phase
-STAGE_00_CERTIFICATION
+STAGE_01_CONTENT_CONTRACT
 
 ## Execution mode
 implementation
@@ -17,7 +17,7 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-The production baseline is untouched. Stage 00 ICM adoption and architecture work is complete and active; deterministic bootstrap/workflow/status and activation checks passed in a scoped control-surface checkout. Stage certification is the remaining gate before Stage 01.
+Stage 00 is certified. Stage 01 is active. Content sources have been reconciled into a category-specific authority model: project repos/certification for technical facts, sanitized case studies for public disclosure, current profile repos for positioning, structured profile content for employment history, and direct user approval for hobbies. The legacy resume site is historical input only.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -27,6 +27,7 @@ The production baseline is untouched. Stage 00 ICM adoption and architecture wor
 - R2/D1/KV/Durable Objects stay out until evidence demonstrates a need.
 - World locomotion is guided third-person: WASD/click-to-move desktop, tap-to-move mobile, constrained navigation, context interactions, and map fast travel; no jumping/combat/falling in v1.
 - WebGL 2 is the v1 production renderer; WebGPU remains architecture-ready and is evaluated only after the Command Center vertical slice; WebAssembly is permitted selectively for mature performance/codec helpers, not as the application architecture.
+- Content authority is category-specific: current project evidence for technical facts, sanitized case studies for disclosure, current profile sources for positioning, structured profile content for employment history, and user approval for hobbies.
 
 ## Validation evidence
 - branch base: 63d25e7dbc3169cb41aaa181a513ca7af5860ba4
@@ -50,7 +51,7 @@ The production baseline is untouched. Stage 00 ICM adoption and architecture wor
 - Hosted Actions may remain unavailable until minutes reset; deterministic local certification may be used where the workflow contract permits it.
 
 ## Next atomic action
-Run Stage 00 certification against the evidence candidate. If green, advance to Stage 01 content reconciliation before any React/3D implementation.
+Validate the Stage 01 content contract against the pinned sources and certification requirements. If green, certify Stage 01 and advance to Stage 02 application foundation.
 
 ## Minimum resume context
 1. `AGENTS.md`

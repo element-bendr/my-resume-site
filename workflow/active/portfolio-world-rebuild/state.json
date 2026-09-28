@@ -67,7 +67,9 @@
       ],
       "depends_on": [],
       "outputs": [
-        "docs/portfolio-world/CONTENT-CONTRACT.md"
+        "docs/portfolio-world/CONTENT-CONTRACT.md",
+        "docs/portfolio-world/CONTENT-SOURCES.json",
+        "decisions/2026-09-28-content-authority.md"
       ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
     },
