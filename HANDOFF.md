@@ -25,6 +25,7 @@ The production baseline is untouched. ICM 2.1.0 project canon is being adopted b
 - Cloudflare Workers Static Assets is the initial delivery target.
 - A second Cloudflare account is not justified by the 25 MiB individual static-asset limit.
 - R2/D1/KV/Durable Objects stay out until evidence demonstrates a need.
+- World locomotion is guided third-person: WASD/click-to-move desktop, tap-to-move mobile, constrained navigation, context interactions, and map fast travel; no jumping/combat/falling in v1.
 
 ## Validation evidence
 - branch base: 63d25e7dbc3169cb41aaa181a513ca7af5860ba4
