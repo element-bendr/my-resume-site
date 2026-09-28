@@ -73,6 +73,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          : > /tmp/health.json
           npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview.log 2>&1 &
           PREVIEW_PID=$!
           cleanup() {
@@ -80,13 +81,30 @@ jobs:
           }
           trap cleanup EXIT
 
+          READY=0
           for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:4173/api/health > /tmp/health.json; then
+            if ! kill -0 "$PREVIEW_PID" 2>/dev/null; then
+              echo "Preview process exited before becoming ready."
+              break
+            fi
+            if curl --fail --silent --show-error http://127.0.0.1:4173/api/health > /tmp/health.json; then
+              READY=1
               break
             fi
             sleep 1
           done
 
+          echo "---- preview log ----"
+          cat /tmp/portfolio-preview.log || true
+          echo "---- listening ports ----"
+          ss -ltnp || true
+
+          if [ "$READY" -ne 1 ]; then
+            echo "Preview health endpoint never became ready."
+            exit 1
+          fi
+
+          echo "---- health payload ----"
           cat /tmp/health.json
           node -e '
             const fs = require("fs");
@@ -102,6 +120,7 @@ jobs:
           '
 
       - name: Upload generated lockfile
+        if: ${{ always() && hashFiles('package-lock.json') != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: stage02-package-lock
