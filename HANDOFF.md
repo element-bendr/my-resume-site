@@ -4,7 +4,7 @@
 Replace the static resume site with a production-ready gamified 3D portfolio while preserving a fast conventional portfolio/resume path and keeping `main` untouched until certification.
 
 ## Phase
-STAGE_02_APP_FOUNDATION
+STAGE_03_COMMAND_CENTER_SLICE
 
 ## Execution mode
 implementation
@@ -13,11 +13,11 @@ implementation
 - repository: element-bendr/my-resume-site
 - canonical branch: main
 - working branch/worktree: feat/portfolio-world-icm-rebuild
-- active workflow/stage: workflow/active/portfolio-world-rebuild / 02-app-foundation
+- active workflow/stage: workflow/active/portfolio-world-rebuild / 03-command-center-slice
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00 and 01 are certified. Stage 02 application foundation is functionally complete and exact-head CI is green at `62df9c82a1e4860de777803bfdc259b8ab65b3af`: deterministic lockfile, npm ci, content/boundary/config checks, TypeScript, 10/10 tests, production build, 87.0 KiB critical gzip, and Cloudflare preview /api/health all pass. Only the repository ICM certification transition remains before Stage 03.
+Stages 00, 01, and 02 are certified. Stage 02 exact-head application CI and repository ICM certification are green. Stage 03 Command Center is now the blocked next stage pending its explicit contract and activation. No 3D dependency has been introduced yet.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -32,16 +32,11 @@ Stages 00 and 01 are certified. Stage 02 application foundation is functionally 
 ## Validation evidence
 - Stage 00 certified candidate: 6b093fc74a3729018259beefd74bf16388ef98c4
 - Stage 01 certified candidate: 2eb0a1dbbed64555902aa38a44a2d46bcce920fa
-- Stage 02 exact application candidate: 62df9c82a1e4860de777803bfdc259b8ab65b3af
-- Stage 02 CI run 36423770301: PASS
-- deterministic lockfile / npm ci: PASS
-- content/boundary/config gates: PASS
-- TypeScript typecheck: PASS
-- Vitest: 10/10 PASS
-- production build: PASS
-- asset budget: PASS; critical shell 87.0 KiB gzip
-- Cloudflare preview /api/health: PASS
-- Stage 02 ICM certification: PENDING
+- Stage 02 application candidate: 62df9c82a1e4860de777803bfdc259b8ab65b3af
+- Stage 02 app CI run 36423770301: PASS
+- Stage 02 ICM candidate: 0f2ef77df68fdd28674b50bfe83c183770adf890
+- Stage 02 ICM run 36424566049: PASS
+- Stage 03 contract/activation: PENDING
 
 ## Protected state
 - main / production baseline: UNCHANGED
@@ -57,7 +52,7 @@ Stages 00 and 01 are certified. Stage 02 application foundation is functionally 
 - 3D renderer/world behavior remains deferred to Stage 03.
 
 ## Next atomic action
-Run Stage 02 ICM certification. If green, mark Stage 02 certified, activate Stage 03, freeze the Command Center vertical-slice contract, then add the stable Three.js / React Three Fiber stack.
+Freeze the Stage 03 Command Center vertical-slice contract, verify current stable Three.js / React Three Fiber / Drei versions, activate Stage 03, then implement only the first playable room and its movement/camera/interactions.
 
 ## Minimum resume context
 1. `AGENTS.md`
