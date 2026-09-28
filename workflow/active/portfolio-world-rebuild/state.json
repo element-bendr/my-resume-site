@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "blocked",
+  "status": "active",
   "active_stage": "00-bootstrap",
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
@@ -40,8 +40,7 @@
   "stages": [
     {
       "id": "00-bootstrap",
-      "status": "blocked",
-      "block_reason": "bootstrap_validation_pending",
+      "status": "active",
       "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
       "depends_on_stages": [],
       "depends_on": [],
