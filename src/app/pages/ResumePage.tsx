@@ -1,6 +1,10 @@
 import { experience, skills } from "../../content";
+import type { SkillContent } from "../../content/types";
 
-const groupedSkills = Object.groupBy(skills, (skill) => skill.category);
+const groupedSkills = skills.reduce<Record<string, SkillContent[]>>((groups, skill) => {
+  (groups[skill.category] ??= []).push(skill);
+  return groups;
+}, {});
 
 export function ResumePage() {
   return (
@@ -42,7 +46,9 @@ export function ResumePage() {
             <section className="panel" key={category}>
               <h3>{category}</h3>
               <ul className="plain-list">
-                {categorySkills?.map((skill) => <li key={skill.id}>{skill.label}</li>)}
+                {categorySkills.map((skill) => (
+                  <li key={skill.id}>{skill.label}</li>
+                ))}
               </ul>
             </section>
           ))}
