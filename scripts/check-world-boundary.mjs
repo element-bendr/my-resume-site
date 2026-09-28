@@ -60,8 +60,18 @@ for (const file of files) {
 }
 
 const play = fs.readFileSync(path.join(root, "src/app/pages/PlayPage.tsx"), "utf8");
+const worldEntry = fs.readFileSync(path.join(root, "src/world/WorldEntry.tsx"), "utf8");
 if (!/lazy\s*\(\s*\(\)\s*=>\s*import\(["']\.\.\/\.\.\/world\/WorldEntry["']\)/.test(play)) {
   failures.push("/play must lazy-load WorldEntry so 3D code stays out of the conventional shell");
+}
+if (!worldEntry.includes("detectWebGLSupport")) {
+  failures.push("WorldEntry must detect WebGL capability before mounting Canvas");
+}
+if (!worldEntry.includes("WorldCanvasBoundary")) {
+  failures.push("WorldEntry must protect Canvas with a renderer error boundary");
+}
+if (!worldEntry.includes("<WebGLFallback")) {
+  failures.push("WorldEntry must retain a direct non-WebGL fallback");
 }
 
 const publicRoot = path.join(root, "public");

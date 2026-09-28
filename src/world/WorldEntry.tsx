@@ -5,7 +5,10 @@ import { CameraRig } from "./CameraRig";
 import { CommandCenter } from "./CommandCenter";
 import { InteractionOverlay } from "./InteractionOverlay";
 import { PlayerController } from "./PlayerController";
+import { WorldCanvasBoundary } from "./WorldCanvasBoundary";
+import { WebGLFallback } from "./WebGLFallback";
 import { WorldHud } from "./WorldHud";
+import { detectWebGLSupport } from "./webgl";
 import {
   CAMERA,
   COMMAND_CENTER_BOUNDS,
@@ -50,6 +53,7 @@ export default function WorldEntry() {
   const [activeStation, setActiveStation] = useState<StationId | null>(null);
   const [mapOpen, setMapOpen] = useState(false);
   const reducedMotion = useReducedMotion();
+  const [webglAvailable] = useState(() => detectWebGLSupport());
 
   const requestMove = useCallback((x: number, z: number, stationId: StationId | null = null) => {
     const point = clampPoint({ x, z }, COMMAND_CENTER_BOUNDS);
@@ -72,37 +76,39 @@ export default function WorldEntry() {
   return (
     <div className="world-shell">
       <div className="world-canvas" aria-label="Interactive Command Center portfolio world">
-        <Canvas
-          camera={{
-            position: [CAMERA.position[0], CAMERA.position[1], CAMERA.position[2]],
-            fov: 50,
-            near: 0.1,
-            far: 60,
-          }}
-          dpr={[1, 1.5]}
-          gl={{ antialias: true, powerPreference: "high-performance" }}
-          fallback={
-            <div className="world-webgl-fallback" role="status">
-              3D rendering is unavailable. Use Projects, Resume, Ask, or Contact from the navigation.
-            </div>
-          }
-        >
-          <CommandCenter
-            movementTarget={movementTarget}
-            pendingInteraction={pendingInteraction}
-            nearbyStation={nearbyStation}
-            onRequestMove={requestMove}
-          />
-          <PlayerController
-            playerPosition={playerPosition}
-            movementTarget={movementTarget}
-            pendingInteraction={pendingInteraction}
-            controlsEnabled={!activeStation && !mapOpen}
-            onInteract={setActiveStation}
-            onNearestChange={setNearbyStation}
-          />
-          <CameraRig playerPosition={playerPosition} reducedMotion={reducedMotion} />
-        </Canvas>
+        {webglAvailable ? (
+          <WorldCanvasBoundary fallback={<WebGLFallback />}>
+            <Canvas
+              camera={{
+                position: [CAMERA.position[0], CAMERA.position[1], CAMERA.position[2]],
+                fov: 50,
+                near: 0.1,
+                far: 60,
+              }}
+              dpr={[1, 1.5]}
+              gl={{ antialias: true, powerPreference: "high-performance" }}
+              fallback={<WebGLFallback />}
+            >
+              <CommandCenter
+                movementTarget={movementTarget}
+                pendingInteraction={pendingInteraction}
+                nearbyStation={nearbyStation}
+                onRequestMove={requestMove}
+              />
+              <PlayerController
+                playerPosition={playerPosition}
+                movementTarget={movementTarget}
+                pendingInteraction={pendingInteraction}
+                controlsEnabled={!activeStation && !mapOpen}
+                onInteract={setActiveStation}
+                onNearestChange={setNearbyStation}
+              />
+              <CameraRig playerPosition={playerPosition} reducedMotion={reducedMotion} />
+            </Canvas>
+          </WorldCanvasBoundary>
+        ) : (
+          <WebGLFallback />
+        )}
       </div>
 
       <WorldHud
