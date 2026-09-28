@@ -35,7 +35,7 @@ Stages 00 and 01 are certified. Stage 02 application foundation is implemented t
 - Stage 02 content check: PASS (10 projects / 3 experience / 15 skills / 5 hobbies / 6 sources)
 - Stage 02 renderer boundary: PASS (14 source files; 0 Three/R3F/Drei imports/dependencies)
 - Stage 02 conventional routes: PASS
-- Stage 02 Cloudflare/security config: PASS
+- Stage 02 Cloudflare/security config: PASS; compatibility date corrected to tested workerd maximum `2026-09-18`
 - frozen package versions: publicly verified
 - Node/npm baseline: 22.16.0 / 11.20.0
 - package-lock generation: BLOCKED by unavailable registry/cache

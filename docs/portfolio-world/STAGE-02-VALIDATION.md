@@ -4,7 +4,7 @@ date: 2026-09-28
 stage: 02-app-foundation
 status: BLOCKED_FOR_CERTIFICATION
 branch: feat/portfolio-world-icm-rebuild
-candidate_head: 03a2f7c201d088c3104579945705baa1a2676ae4
+candidate_head: 9e2d178f19492b8aadfbdb39af15071243e7e85d
 
 ## Green evidence
 
@@ -64,6 +64,10 @@ The project intentionally does not chase same-day releases such as newer Vite/Wr
 ## Package-manager correction
 
 Initial remote certification exposed an npm 10.9.x Arborist crash during fresh lockfile generation: `Cannot read properties of null (reading 'edgesOut')`. The failure occurred before project installation/build and is a current npm 10 peer-resolution defect. The frozen package-manager baseline is therefore corrected to npm 11.20.0 while Node remains 22.16.0.
+
+## Cloudflare runtime correction
+
+Remote preview reached the built application but workerd refused to start because the original compatibility date `2026-09-28` was newer than the runtime bundled with the pinned Cloudflare Vite plugin, which reported support through `2026-09-18`. The project now freezes `2026-09-18` as the Stage 02 compatibility date instead of upgrading packages mid-certification.
 
 ## Certification blocker
 

@@ -51,7 +51,8 @@ Cloudflare configuration:
 - SPA fallback through Static Assets;
 - `worker/index.ts` for API routes;
 - Worker-first routing restricted to `/api/*`;
-- no persistence bindings in Stage 02.
+- no persistence bindings in Stage 02;
+- Worker compatibility date `2026-09-18`, the newest date supported by the workerd runtime bundled with the pinned Cloudflare Vite plugin during certification.
 
 React Three Fiber, Three.js, Drei, WebGPU-specific code, and Wasm-specific application code are deliberately deferred to Stage 03 or later.
 

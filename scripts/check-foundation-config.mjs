@@ -23,8 +23,8 @@ try {
 
 if (wrangler) {
   if (wrangler.main !== "./worker/index.ts") failures.push("wrangler main must be ./worker/index.ts");
-  if (wrangler.compatibility_date !== "2026-09-28") {
-    failures.push("wrangler compatibility_date must remain frozen at 2026-09-28 during Stage 02");
+  if (wrangler.compatibility_date !== "2026-09-18") {
+    failures.push("wrangler compatibility_date must remain frozen at 2026-09-18 during Stage 02");
   }
   if (wrangler.assets?.not_found_handling !== "single-page-application") {
     failures.push("SPA not_found_handling must be single-page-application");
