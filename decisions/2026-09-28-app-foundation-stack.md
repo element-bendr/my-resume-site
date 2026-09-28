@@ -36,8 +36,9 @@ Development dependencies:
 - `@types/react-dom` 19.3.0
 - `@types/node` 22.20.4
 
-Node baseline:
-- Node 22.x; local reference runtime 22.16.0.
+Node/package-manager baseline:
+- Node 22.x; reference runtime 22.16.0.
+- npm 11.20.0. npm 10.9.x is excluded because its current Arborist peer-resolution bug can crash fresh lockfile generation with `Cannot read properties of null (reading 'edgesOut')`.
 
 Version policy:
 - exact versions in `package.json`;

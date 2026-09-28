@@ -41,6 +41,11 @@ jobs:
         with:
           node-version: 22.16.0
 
+      - name: Use npm 11.20.0
+        run: |
+          npm install --global npm@11.20.0
+          npm --version
+
       - name: Generate frozen lockfile
         run: npm install --package-lock-only --ignore-scripts
 

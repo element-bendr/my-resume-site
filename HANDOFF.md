@@ -37,7 +37,7 @@ Stages 00 and 01 are certified. Stage 02 application foundation is implemented t
 - Stage 02 conventional routes: PASS
 - Stage 02 Cloudflare/security config: PASS
 - frozen package versions: publicly verified
-- Node/npm baseline: 22.16.0 / 10.9.2
+- Node/npm baseline: 22.16.0 / 11.20.0
 - package-lock generation: BLOCKED by unavailable registry/cache
 - npm ci / TS7 typecheck / Vitest / production build / asset budget / Worker preview: PENDING
 - Stage 02 certification: BLOCKED until those gates are green
@@ -52,7 +52,7 @@ Stages 00 and 01 are certified. Stage 02 application foundation is implemented t
 - education is intentionally unresolved and excluded until verified;
 - LinkedIn URL is excluded until directly verified;
 - client testimonials/outcome claims require evidence before inclusion;
-- package-lock and full build evidence are absent because this execution environment has no npm registry access/cache;
+- local package-lock/build evidence remains unavailable because this execution environment has no npm registry access/cache; remote CI is now the certification runner.
 - hosted Actions remain unsuitable while account minutes are constrained.
 
 ## Next atomic action

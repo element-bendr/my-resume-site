@@ -6,7 +6,7 @@
   "engines": {
     "node": ">=22.12 <23"
   },
-  "packageManager": "npm@10.9.2",
+  "packageManager": "npm@11.20.0",
   "scripts": {
     "dev": "vite",
     "typecheck": "tsc -b --pretty false",

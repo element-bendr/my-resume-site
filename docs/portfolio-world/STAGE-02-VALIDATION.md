@@ -61,9 +61,13 @@ The frozen exact versions were checked against current public npm/package docume
 
 The project intentionally does not chase same-day releases such as newer Vite/Wrangler versions during the active certified build.
 
+## Package-manager correction
+
+Initial remote certification exposed an npm 10.9.x Arborist crash during fresh lockfile generation: `Cannot read properties of null (reading 'edgesOut')`. The failure occurred before project installation/build and is a current npm 10 peer-resolution defect. The frozen package-manager baseline is therefore corrected to npm 11.20.0 while Node remains 22.16.0.
+
 ## Certification blocker
 
-The execution container has Node 22.16.0 and npm 10.9.2, matching the frozen local baseline, but outbound DNS/network access is unavailable.
+The execution container has Node 22.16.0 and npm 11.20.0, matching the frozen local baseline, but outbound DNS/network access is unavailable.
 
 Observed:
 - GitHub clone attempt: DNS resolution failure
