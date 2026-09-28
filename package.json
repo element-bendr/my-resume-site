@@ -15,8 +15,9 @@
     "preview": "vite preview",
     "verify:content": "node scripts/check-content.mjs",
     "verify:assets": "node scripts/check-asset-budget.mjs",
-    "verify": "npm run verify:content && npm test && npm run build && npm run verify:assets",
-    "deploy": "npm run verify && wrangler deploy"
+    "verify": "npm run verify:content && npm run verify:boundary && npm test && npm run build && npm run verify:assets",
+    "deploy": "npm run verify && wrangler deploy",
+    "verify:boundary": "node scripts/check-foundation-boundary.mjs"
   },
   "dependencies": {
     "react": "19.3.0",
