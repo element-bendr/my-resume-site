@@ -12,6 +12,7 @@ describe("command-center world contract", () => {
     expect(STATIONS).toHaveLength(3);
     expect(new Set(STATIONS.map((station) => station.id)).size).toBe(3);
     for (const station of STATIONS) expect(station.shortLabel.trim().length).toBeGreaterThan(0);
+    expect(STATIONS.find((station) => station.id === "memory-os")?.position[0]).not.toBe(0);
   });
 
   it("keeps spawn and every interaction point inside legal bounds", () => {

@@ -71,7 +71,7 @@ export function InteractionStation({ station, nearby, onSelect }: InteractionSta
         />
       </mesh>
 
-      <Html position={[0, 1.76, 0]} center distanceFactor={8} transform sprite>
+      <Html position={[0, 1.52, 0]} center distanceFactor={8} transform sprite>
         <span className="world-station-label" aria-hidden="true">
           {station.shortLabel}
         </span>

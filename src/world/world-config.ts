@@ -56,8 +56,8 @@ export const STATIONS: readonly StationConfig[] = [
     shortLabel: "Memory OS",
     kind: "project",
     projectId: "memory-os",
-    position: [0, 0, -4.7],
-    interactionPoint: { x: 0, z: -3.15 },
+    position: [-1.35, 0, -4.7],
+    interactionPoint: { x: -1.35, z: -3.15 },
     accent: "#9a8cff",
   },
   {
