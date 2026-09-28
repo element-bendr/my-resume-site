@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "workflow_id": "portfolio-world-rebuild",
+  "title": "Portfolio World Rebuild",
+  "status": "blocked",
+  "active_stage": "00-bootstrap",
+  "provenance": {
+    "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
+    "validated_commit": null
+  },
+  "execution": {
+    "mode": "implementation",
+    "branch": "feat/portfolio-world-icm-rebuild",
+    "worktree": "local worktree when executing locally",
+    "owner": "coordinator",
+    "write_paths": [
+      "AGENTS.md","BOOTSTRAP.md","CONTEXT.md","HANDOFF.md","PROVENANCE.md","VERSION",
+      "decisions/**","docs/**","scripts/**","templates/**","workflow/**",".github/**",
+      "src/**","public/**","tests/**","package.json","package-lock.json","tsconfig*.json",
+      "vite.config.*","wrangler.*","index.html"
+    ]
+  },
+  "stages": [
+    {"id":"00-bootstrap","status":"blocked","block_reason":"bootstrap_validation_pending","context":"workflow/active/portfolio-world-rebuild/CONTEXT.md","depends_on_stages":[],"depends_on":[],"outputs":["CONTEXT.md","HANDOFF.md","decisions/2026-09-28-portfolio-world-architecture.md","docs/portfolio-world/ARCHITECTURE.md","docs/portfolio-world/ASSET-BUDGET.md"],"completion_report":"workflow/active/portfolio-world-rebuild/output/completion-report.md"},
+    {"id":"01-content-contract","status":"blocked","block_reason":"awaiting_00-bootstrap","context":"workflow/active/portfolio-world-rebuild/CONTEXT.md","depends_on_stages":["00-bootstrap"],"depends_on":[],"outputs":["docs/portfolio-world/CONTENT-CONTRACT.md"],"completion_report":"workflow/active/portfolio-world-rebuild/output/completion-report.md"},
+    {"id":"02-app-foundation","status":"blocked","block_reason":"awaiting_01-content-contract","context":"workflow/active/portfolio-world-rebuild/CONTEXT.md","depends_on_stages":["01-content-contract"],"depends_on":[],"outputs":[],"completion_report":"workflow/active/portfolio-world-rebuild/output/completion-report.md"},
+    {"id":"03-command-center-slice","status":"blocked","block_reason":"awaiting_02-app-foundation","context":"workflow/active/portfolio-world-rebuild/CONTEXT.md","depends_on_stages":["02-app-foundation"],"depends_on":[],"outputs":[],"completion_report":"workflow/active/portfolio-world-rebuild/output/completion-report.md"},
+    {"id":"04-world-zones","status":"blocked","block_reason":"awaiting_03-command-center-slice","context":"workflow/active/portfolio-world-rebuild/CONTEXT.md","depends_on_stages":["03-command-center-slice"],"depends_on":[],"outputs":[],"completion_report":"workflow/active/portfolio-world-rebuild/output/completion-report.md"},
+    {"id":"05-integration","status":"blocked","block_reason":"awaiting_04-world-zones","context":"workflow/active/portfolio-world-rebuild/CONTEXT.md","depends_on_stages":["04-world-zones"],"depends_on":[],"outputs":[],"completion_report":"workflow/active/portfolio-world-rebuild/output/completion-report.md"},
+    {"id":"06-performance-accessibility","status":"blocked","block_reason":"awaiting_05-integration","context":"workflow/active/portfolio-world-rebuild/CONTEXT.md","depends_on_stages":["05-integration"],"depends_on":[],"outputs":[],"completion_report":"workflow/active/portfolio-world-rebuild/output/completion-report.md"},
+    {"id":"07-certification-promotion","status":"blocked","block_reason":"awaiting_06-performance-accessibility","context":"workflow/active/portfolio-world-rebuild/CONTEXT.md","depends_on_stages":["06-performance-accessibility"],"depends_on":[],"outputs":[],"completion_report":"workflow/active/portfolio-world-rebuild/output/completion-report.md"}
+  ]
+}
