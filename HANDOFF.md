@@ -13,7 +13,7 @@ implementation
 - repository: element-bendr/my-resume-site
 - canonical branch: main
 - working branch/worktree: feat/portfolio-world-icm-rebuild
-- active workflow/stage: workflow/active/portfolio-world-rebuild / 00-bootstrap
+- active workflow/stage: workflow/active/portfolio-world-rebuild / 01-content-contract
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
