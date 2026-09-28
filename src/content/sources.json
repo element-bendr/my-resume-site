@@ -1,0 +1,8 @@
+[
+  {"id":"public-engineering-profile","label":"Public engineering profile","visibility":"public","href":"https://github.com/element-bendr"},
+  {"id":"public-sanitized-case-studies","label":"Public sanitized case studies","visibility":"public","href":"https://github.com/element-bendr/ai-automation-case-studies"},
+  {"id":"consulting-positioning","label":"Approved consulting positioning","visibility":"internal-reference"},
+  {"id":"structured-profile-history","label":"Verified structured employment history","visibility":"internal-reference"},
+  {"id":"current-ask-portfolio","label":"Current portfolio presentation reference","visibility":"public","href":"https://vijay-kumaran-portfolio-ask.pages.dev/"},
+  {"id":"user-approved-hobbies","label":"Direct user-approved hobby content","visibility":"internal-reference"}
+]

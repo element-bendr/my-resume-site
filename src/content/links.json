@@ -1,0 +1,5 @@
+[
+  {"id":"email","label":"Email","href":"mailto:element.bendr@gmail.com","kind":"email"},
+  {"id":"github","label":"GitHub","href":"https://github.com/element-bendr","kind":"github"},
+  {"id":"case-studies","label":"Public case studies","href":"https://github.com/element-bendr/ai-automation-case-studies","kind":"proof"}
+]
