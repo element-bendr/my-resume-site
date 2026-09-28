@@ -1,7 +1,7 @@
 name: Stage 02 App Foundation Certification
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 permissions:
   contents: read
