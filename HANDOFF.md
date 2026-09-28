@@ -17,7 +17,7 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00 and 01 are certified. Stage 02 is blocked only for contract activation. The next implementation is the conventional React/TypeScript/Vite/Cloudflare foundation and typed content layer; Three.js remains explicitly deferred to Stage 03.
+Stages 00 and 01 are certified. Stage 02 application foundation is implemented through the offline-verifiable boundary. Content, route/renderer-boundary, Cloudflare configuration, security headers, and no-JavaScript fallback checks are green. Stage 02 remains active and uncertified because the execution environment cannot resolve the npm registry and has no cached Cloudflare Vite plugin, so the lockfile/install/build/preview gates cannot yet run.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -32,10 +32,15 @@ Stages 00 and 01 are certified. Stage 02 is blocked only for contract activation
 ## Validation evidence
 - Stage 00 certified candidate: 6b093fc74a3729018259beefd74bf16388ef98c4
 - Stage 01 certified candidate: 2eb0a1dbbed64555902aa38a44a2d46bcce920fa
-- Stage 01 ICM certification: PASS
-- Stage 02 Cloudflare/React/Vite architecture research: COMPLETE
-- Stage 02 dependency installation/build: PENDING network-enabled environment
-- Stage 02 certification: PENDING
+- Stage 02 content check: PASS (10 projects / 3 experience / 15 skills / 5 hobbies / 6 sources)
+- Stage 02 renderer boundary: PASS (14 source files; 0 Three/R3F/Drei imports/dependencies)
+- Stage 02 conventional routes: PASS
+- Stage 02 Cloudflare/security config: PASS
+- frozen package versions: publicly verified
+- Node/npm baseline: 22.16.0 / 10.9.2
+- package-lock generation: BLOCKED by unavailable registry/cache
+- npm ci / TS7 typecheck / Vitest / production build / asset budget / Worker preview: PENDING
+- Stage 02 certification: BLOCKED until those gates are green
 
 ## Protected state
 - main / production baseline: UNCHANGED
@@ -47,10 +52,11 @@ Stages 00 and 01 are certified. Stage 02 is blocked only for contract activation
 - education is intentionally unresolved and excluded until verified;
 - LinkedIn URL is excluded until directly verified;
 - client testimonials/outcome claims require evidence before inclusion;
-- hosted Actions confirmation remains optional/deferred while account minutes are constrained.
+- package-lock and full build evidence are absent because this execution environment has no npm registry access/cache;
+- hosted Actions remain unsuitable while account minutes are constrained.
 
 ## Next atomic action
-Activate the Stage 02 contract, scaffold the typed React/Vite/Cloudflare foundation, and run all deterministic checks available without registry access. Do not certify Stage 02 until package-lock, npm ci, typecheck, tests, build, preview/API smoke, and asset-budget checks are green.
+In the first network-enabled execution environment, run `npm install --package-lock-only`, commit the lockfile, then run `npm ci && npm run verify`, `npm run preview`, and smoke `/api/health`. Fix any failures before Stage 02 certification. Do not begin Stage 03 until Stage 02 is certified.
 
 ## Minimum resume context
 1. `AGENTS.md`
