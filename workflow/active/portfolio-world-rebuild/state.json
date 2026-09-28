@@ -76,12 +76,31 @@
     {
       "id": "02-app-foundation",
       "status": "blocked",
-      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "context": "workflow/active/portfolio-world-rebuild/02-app-foundation-CONTEXT.md",
       "depends_on_stages": [
         "01-content-contract"
       ],
       "depends_on": [],
-      "outputs": [],
+      "outputs": [
+        "decisions/2026-09-28-app-foundation-stack.md",
+        "package.json",
+        "package-lock.json",
+        ".nvmrc",
+        "vite.config.ts",
+        "wrangler.jsonc",
+        "tsconfig.json",
+        "tsconfig.app.json",
+        "tsconfig.node.json",
+        "tsconfig.worker.json",
+        "index.html",
+        "worker",
+        "src/app",
+        "src/content",
+        "src/styles",
+        "tests",
+        "scripts/check-content.mjs",
+        "scripts/check-asset-budget.mjs"
+      ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/02-app-foundation-completion-report.md",
       "block_reason": "awaiting_activation"
     },

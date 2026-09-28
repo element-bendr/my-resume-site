@@ -4,7 +4,7 @@
 Replace the static resume site with a production-ready gamified 3D portfolio while preserving a fast conventional portfolio/resume path and keeping `main` untouched until certification.
 
 ## Phase
-STAGE_01_CONTENT_CONTRACT
+STAGE_02_APP_FOUNDATION
 
 ## Execution mode
 implementation
@@ -13,11 +13,11 @@ implementation
 - repository: element-bendr/my-resume-site
 - canonical branch: main
 - working branch/worktree: feat/portfolio-world-icm-rebuild
-- active workflow/stage: workflow/active/portfolio-world-rebuild / 01-content-contract
+- active workflow/stage: workflow/active/portfolio-world-rebuild / 02-app-foundation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stage 00 is certified. Stage 01 content reconciliation is complete pending certification. The content authority model is frozen: project evidence governs technical facts, sanitized case studies govern disclosure, current profile sources govern positioning, structured profile content governs employment history, and legacy resume HTML is historical input only.
+Stages 00 and 01 are certified. Stage 02 is blocked only for contract activation. The next implementation is the conventional React/TypeScript/Vite/Cloudflare foundation and typed content layer; Three.js remains explicitly deferred to Stage 03.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -31,12 +31,11 @@ Stage 00 is certified. Stage 01 content reconciliation is complete pending certi
 
 ## Validation evidence
 - Stage 00 certified candidate: 6b093fc74a3729018259beefd74bf16388ef98c4
-- Stage 00 bootstrap/workflow/status/activation/certification: PASS
-- Stage 01 source snapshot resolution: PASS
-- Stage 01 category-specific authority reconciliation: PASS
-- Stage 01 legacy preserve/replace/reject classification: PASS
-- Stage 01 protected-state review: PASS
-- Stage 01 certification: PENDING
+- Stage 01 certified candidate: 2eb0a1dbbed64555902aa38a44a2d46bcce920fa
+- Stage 01 ICM certification: PASS
+- Stage 02 Cloudflare/React/Vite architecture research: COMPLETE
+- Stage 02 dependency installation/build: PENDING network-enabled environment
+- Stage 02 certification: PENDING
 
 ## Protected state
 - main / production baseline: UNCHANGED
@@ -51,7 +50,7 @@ Stage 00 is certified. Stage 01 content reconciliation is complete pending certi
 - hosted Actions confirmation remains optional/deferred while account minutes are constrained.
 
 ## Next atomic action
-Certify Stage 01 against its completion evidence. If green, activate Stage 02 application foundation and create the typed content + React/Vite/Worker shell while preserving the legacy main branch.
+Activate the Stage 02 contract, scaffold the typed React/Vite/Cloudflare foundation, and run all deterministic checks available without registry access. Do not certify Stage 02 until package-lock, npm ci, typecheck, tests, build, preview/API smoke, and asset-budget checks are green.
 
 ## Minimum resume context
 1. `AGENTS.md`
