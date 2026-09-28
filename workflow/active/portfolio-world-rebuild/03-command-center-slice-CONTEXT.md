@@ -68,6 +68,7 @@ The slice must demonstrate that a visitor can enter /play, understand where they
 ## Dependencies
 
 - Stage 02 must remain certified;
+- Node 22.22.0 is the minimum Stage 03 runtime baseline; this satisfies React Router 8.4.0's declared engine requirement;
 - package-lock must remain deterministic after adding the Stage 03 dependencies;
 - React Three Fiber 9.8.0 is selected specifically for React 19.3 compatibility;
 - Drei 10.7.8 peer contract supports R3F 9 / React 19 / Three >=0.159.

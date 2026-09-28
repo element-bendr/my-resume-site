@@ -18,7 +18,7 @@ on:
       - "scripts/check-foundation-config.mjs"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: stage03-command-center
@@ -34,23 +34,20 @@ jobs:
       - name: Checkout candidate
         uses: actions/checkout@v4
 
-      - name: Use Node 22.16.0
+      - name: Use Node 22.22.0
         uses: actions/setup-node@v4
         with:
-          node-version: 22.16.0
+          node-version: 22.22.0
 
       - name: Use npm 11.20.0
         run: |
           npm install --global npm@11.20.0
           npm --version
 
-      - name: Generate or verify lockfile
+      - name: Generate candidate Stage 03 lockfile
         shell: bash
         run: |
           set -euo pipefail
-          if [ -f package-lock.json ]; then
-            cp package-lock.json /tmp/package-lock.before.json
-          fi
           npm install --package-lock-only --ignore-scripts
           test -s package-lock.json
 
@@ -111,17 +108,11 @@ jobs:
           curl --fail --silent http://127.0.0.1:4173/play > /tmp/play.html
           grep -q '<div id="root"></div>' /tmp/play.html
 
-      - name: Commit updated Stage 03 lockfile
-        if: success()
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -z "$(git status --porcelain -- package-lock.json)" ]; then
-            echo "package-lock.json already matches package.json."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package-lock.json
-          git commit -m "chore(deps): freeze Stage 03 3D lockfile [skip ci]"
-          git push origin HEAD:feat/portfolio-world-icm-rebuild
+      - name: Upload generated Stage 03 lockfile
+        if: ${{ always() && hashFiles('package-lock.json') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage03-package-lock
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 3

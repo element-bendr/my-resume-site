@@ -36,7 +36,7 @@ Stages 00, 01, and 02 are certified. Stage 03 Command Center contract is frozen 
 - Stage 02 app CI run 36423770301: PASS
 - Stage 02 ICM candidate: 0f2ef77df68fdd28674b50bfe83c183770adf890
 - Stage 02 ICM run 36424566049: PASS
-- Stage 03 contract/activation: PENDING
+- Stage 03 contract/activation: ACTIVE
 
 ## Protected state
 - main / production baseline: UNCHANGED
@@ -49,10 +49,10 @@ Stages 00, 01, and 02 are certified. Stage 03 Command Center contract is frozen 
 - LinkedIn URL is excluded until directly verified;
 - client testimonials/outcome claims require evidence before inclusion;
 - Ask backend remains deferred to Stage 05;
-- 3D renderer/world behavior remains deferred to Stage 03.
+- Stage 03 renderer/world behavior is under active certification; the initial Command Center slice is implemented.
 
 ## Next atomic action
-Activate Stage 03, pin/install Three 0.186.0, R3F 9.8.0, Drei 10.7.8, and @types/three 0.186.0, then implement the procedural Command Center and movement/camera vertical slice before any additional district work.
+Complete Stage 03 exact-head certification under Node 22.22.0, commit the CI-generated lockfile, perform visual inspection of the Command Center, and only then certify the slice.
 
 ## Minimum resume context
 1. `AGENTS.md`

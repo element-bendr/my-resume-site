@@ -48,6 +48,7 @@ The initial slice consists of:
 - R3F 9.8.0 release notes explicitly cite React 19.3 compatibility;
 - Drei 10.7.8 peers on R3F 9, React 19, and Three >=0.159;
 - Stage 03 clean install/build evidence is still required.
+- Node 22.22.0 is the Stage 03 runtime baseline because React Router 8.4.0 declares Node >=22.22.0.
 
 ## Revisit when
 
