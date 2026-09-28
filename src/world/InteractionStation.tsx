@@ -1,4 +1,5 @@
 import type { ThreeEvent } from "@react-three/fiber";
+import { Html } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { Group } from "three";
@@ -63,6 +64,12 @@ export function InteractionStation({ station, nearby, onSelect }: InteractionSta
           roughness={0.38}
         />
       </mesh>
+
+      <Html position={[0, 2.06, 0]} center distanceFactor={8} transform sprite>
+        <span className="world-station-label" aria-hidden="true">
+          {station.shortLabel}
+        </span>
+      </Html>
 
       <group ref={animated} position={[0, 1.52, 0]}>
         <mesh rotation={[Math.PI / 2, 0, 0]} onClick={select}>

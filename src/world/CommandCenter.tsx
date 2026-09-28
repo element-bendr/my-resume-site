@@ -26,12 +26,12 @@ function CoreHologram() {
   });
 
   return (
-    <group position={[0, 0, -0.4]}>
-      <mesh position={[0, 0.16, 0]}>
-        <cylinderGeometry args={[1.65, 1.9, 0.3, 32]} />
+    <group position={[0, 0, -0.7]}>
+      <mesh position={[0, 0.09, 0]}>
+        <cylinderGeometry args={[1.25, 1.5, 0.16, 32]} />
         <meshStandardMaterial color="#0b1b31" metalness={0.65} roughness={0.32} />
       </mesh>
-      <group ref={ring} position={[0, 1.55, 0]}>
+      <group ref={ring} position={[0, 1.82, 0]}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
           <torusGeometry args={[0.95, 0.035, 12, 48]} />
           <meshStandardMaterial color="#58d7ff" emissive="#1f94bd" emissiveIntensity={1.4} />

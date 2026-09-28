@@ -81,7 +81,7 @@ export default function WorldEntry() {
             <Canvas
               camera={{
                 position: [CAMERA.position[0], CAMERA.position[1], CAMERA.position[2]],
-                fov: 50,
+                fov: 52,
                 near: 0.1,
                 far: 60,
               }}

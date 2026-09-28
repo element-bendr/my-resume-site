@@ -8,9 +8,10 @@ import {
 import { clampPoint } from "../src/world/movement";
 
 describe("command-center world contract", () => {
-  it("contains exactly three distinct interaction stations", () => {
+  it("contains exactly three distinct, visibly labelled interaction stations", () => {
     expect(STATIONS).toHaveLength(3);
     expect(new Set(STATIONS.map((station) => station.id)).size).toBe(3);
+    for (const station of STATIONS) expect(station.shortLabel.trim().length).toBeGreaterThan(0);
   });
 
   it("keeps spawn and every interaction point inside legal bounds", () => {

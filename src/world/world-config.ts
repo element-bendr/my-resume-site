@@ -6,6 +6,7 @@ export type StationKind = "project" | "ask";
 export interface StationConfig {
   id: StationId;
   title: string;
+  shortLabel: string;
   kind: StationKind;
   projectId?: string;
   position: readonly [number, number, number];
@@ -29,10 +30,10 @@ export const INTERACTION_RADIUS = 1.45;
 export const TARGET_EPSILON = 0.08;
 
 export const CAMERA = {
-  position: [0, 5.5, 8] as const,
+  position: [0, 6.4, 10.2] as const,
   targetHeight: 1,
-  minDistance: 6,
-  maxDistance: 9,
+  minDistance: 7,
+  maxDistance: 11,
   minPolarAngle: 0.7,
   maxPolarAngle: 0.98,
   maxAzimuthAngle: Math.PI / 3,
@@ -42,6 +43,7 @@ export const STATIONS: readonly StationConfig[] = [
   {
     id: "newsharness",
     title: "Newsharness Signal Console",
+    shortLabel: "Newsharness",
     kind: "project",
     projectId: "newsharness",
     position: [-5.2, 0, -2.7],
@@ -51,6 +53,7 @@ export const STATIONS: readonly StationConfig[] = [
   {
     id: "memory-os",
     title: "Memory OS Vault",
+    shortLabel: "Memory OS",
     kind: "project",
     projectId: "memory-os",
     position: [0, 0, -4.7],
@@ -60,6 +63,7 @@ export const STATIONS: readonly StationConfig[] = [
   {
     id: "ask-terminal",
     title: "Ask Terminal",
+    shortLabel: "Ask",
     kind: "ask",
     position: [5.2, 0, -2.7],
     interactionPoint: { x: 4.4, z: -1.45 },
