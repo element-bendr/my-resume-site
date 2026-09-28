@@ -20,7 +20,7 @@ on:
       - "index.html"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: stage02-app-foundation
@@ -40,28 +40,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.16.0
+          cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Use npm 11.20.0
         run: |
           npm install --global npm@11.20.0
           npm --version
 
-      - name: Generate or verify frozen lockfile
+      - name: Verify frozen lockfile
         shell: bash
         run: |
           set -euo pipefail
-          if [ -f package-lock.json ]; then
-            cp package-lock.json /tmp/package-lock.before.json
-            npm install --package-lock-only --ignore-scripts
-            cmp --silent /tmp/package-lock.before.json package-lock.json || {
-              echo "Committed package-lock.json is not deterministic for package.json"
-              git diff -- package-lock.json
-              exit 1
-            }
-          else
-            npm install --package-lock-only --ignore-scripts
-          fi
           test -s package-lock.json
+          cp package-lock.json /tmp/package-lock.before.json
+          npm install --package-lock-only --ignore-scripts
+          cmp --silent /tmp/package-lock.before.json package-lock.json || {
+            echo "Committed package-lock.json is not deterministic for package.json"
+            git diff -- package-lock.json
+            exit 1
+          }
 
       - name: Clean install
         run: npm ci
@@ -139,17 +137,3 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-      - name: Commit generated lockfile
-        if: success()
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -z "$(git status --porcelain -- package-lock.json)" ]; then
-            echo "package-lock.json already committed and unchanged."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package-lock.json
-          git commit -m "chore(deps): freeze Stage 02 package lock [skip ci]"
-          git push origin HEAD:feat/portfolio-world-icm-rebuild
