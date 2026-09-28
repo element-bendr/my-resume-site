@@ -99,7 +99,8 @@
         "src/styles",
         "tests",
         "scripts/check-content.mjs",
-        "scripts/check-asset-budget.mjs"
+        "scripts/check-asset-budget.mjs",
+        "scripts/check-foundation-config.mjs"
       ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/02-app-foundation-completion-report.md"
     },
