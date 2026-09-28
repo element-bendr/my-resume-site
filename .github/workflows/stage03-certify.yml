@@ -123,7 +123,19 @@ jobs:
           fi
 
           mkdir -p .ci-artifacts
-          "$CHROME_BIN"             --headless=new             --no-sandbox             --disable-dev-shm-usage             --use-gl=swiftshader             --enable-webgl             --window-size=1440,1000             --virtual-time-budget=5000             --screenshot=.ci-artifacts/command-center.png             http://127.0.0.1:4173/play
+
+          "$CHROME_BIN"             --headless=new             --no-sandbox             --disable-dev-shm-usage             --use-gl=swiftshader             --enable-webgl             --window-size=1440,1000             --virtual-time-budget=5000             --enable-logging=stderr             --dump-dom             http://127.0.0.1:4173/play             > .ci-artifacts/play-dom.html             2> .ci-artifacts/chrome.log || true
+
+          if ! grep -q 'Command Center' .ci-artifacts/play-dom.html; then
+            echo "Rendered DOM is missing Command Center UI."
+            echo "---- rendered DOM ----"
+            cat .ci-artifacts/play-dom.html || true
+            echo "---- chrome log ----"
+            cat .ci-artifacts/chrome.log || true
+            exit 1
+          fi
+
+          "$CHROME_BIN"             --headless=new             --no-sandbox             --disable-dev-shm-usage             --use-gl=swiftshader             --enable-webgl             --window-size=1440,1000             --virtual-time-budget=5000             --screenshot=.ci-artifacts/command-center.png             http://127.0.0.1:4173/play             >> .ci-artifacts/chrome.log             2>&1
 
           test -s .ci-artifacts/command-center.png
 
@@ -136,11 +148,11 @@ jobs:
           if-no-files-found: error
           retention-days: 3
 
-      - name: Upload Command Center screenshot
-        if: success()
+      - name: Upload Command Center browser evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: stage03-command-center-screenshot
-          path: .ci-artifacts/command-center.png
-          if-no-files-found: error
+          name: stage03-command-center-browser-evidence
+          path: .ci-artifacts/
+          if-no-files-found: warn
           retention-days: 3
