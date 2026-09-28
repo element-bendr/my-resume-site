@@ -10,6 +10,7 @@ The world and movement contracts are defined in:
 - `docs/portfolio-world/WORLD-SPEC.md`
 - `docs/portfolio-world/MOVEMENT-ARCHITECTURE.md`
 - `docs/portfolio-world/ASSET-BUDGET.md`
+- `docs/portfolio-world/RENDERING-TECHNOLOGY.md`
 
 ## World zones
 
@@ -28,6 +29,8 @@ Browser
   ├─ React / TypeScript / Vite
   ├─ HTML portfolio/resume routes
   ├─ React Three Fiber / Three.js / Drei
+  │    ├─ WebGL 2 production renderer
+  │    ├─ WebGPU-ready renderer boundary
   │    ├─ PlayerController
   │    ├─ NavigationController
   │    ├─ Character
@@ -58,6 +61,16 @@ The command-center vertical slice must prove this controller before additional z
 Resume and project facts live in structured content, not scene components. The 3D world renders verified content; it does not become a second factual source.
 
 Substantive text and forms render as HTML overlays or normal routes, not texture-bound 3D paragraphs.
+
+## Rendering technology
+
+- WebGL 2 is the v1 production renderer;
+- WebGPU is architecture-ready but optional and experimental until a post-vertical-slice comparison proves material benefit;
+- WebAssembly is allowed selectively for mature codecs/helpers with measured benefit;
+- movement, navigation, content, interaction, and UI remain renderer-independent;
+- conventional HTML remains the final fallback tier.
+
+See `docs/portfolio-world/RENDERING-TECHNOLOGY.md`.
 
 ## Rendering rules
 

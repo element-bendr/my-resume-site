@@ -53,7 +53,9 @@
         "docs/portfolio-world/ASSET-BUDGET.md",
         "decisions/2026-09-28-movement-navigation.md",
         "docs/portfolio-world/WORLD-SPEC.md",
-        "docs/portfolio-world/MOVEMENT-ARCHITECTURE.md"
+        "docs/portfolio-world/MOVEMENT-ARCHITECTURE.md",
+        "decisions/2026-09-28-rendering-technology.md",
+        "docs/portfolio-world/RENDERING-TECHNOLOGY.md"
       ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
     },
