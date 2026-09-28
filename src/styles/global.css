@@ -494,3 +494,34 @@ li {
     animation-iteration-count: 1 !important;
   }
 }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.world-route {
+  min-height: 75vh;
+}
+
+.world-direct-fallback {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  width: min(calc(100% - 2rem), 72rem);
+  margin: -2rem auto 4rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.world-direct-fallback a {
+  color: var(--accent);
+}
