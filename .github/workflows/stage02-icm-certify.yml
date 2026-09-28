@@ -1,0 +1,29 @@
+name: Stage 02 ICM Certification Check
+
+on:
+  push:
+    branches:
+      - feat/portfolio-world-icm-rebuild
+    paths:
+      - ".github/workflows/stage02-icm-certify.yml"
+      - "workflow/active/portfolio-world-rebuild/output/02-app-foundation-completion-report.md"
+      - "workflow/active/portfolio-world-rebuild/state.json"
+      - "workflow/active/portfolio-world-rebuild/02-app-foundation-CONTEXT.md"
+      - "HANDOFF.md"
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    if: startsWith(github.event.head_commit.message, 'docs(icm): record stage 02')
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Workflow integrity
+        run: |
+          python3 scripts/workflow_check.py
+          python3 scripts/workflow_status.py --strict
+      - name: Stage 02 certification check
+        run: python3 scripts/workflow_certify_check.py --workflow portfolio-world-rebuild --stage 02-app-foundation

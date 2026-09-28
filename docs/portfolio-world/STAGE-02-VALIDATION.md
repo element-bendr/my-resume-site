@@ -2,9 +2,9 @@
 
 date: 2026-09-28
 stage: 02-app-foundation
-status: BLOCKED_FOR_CERTIFICATION
+status: READY_FOR_ICM_CERTIFICATION
 branch: feat/portfolio-world-icm-rebuild
-candidate_head: 9e2d178f19492b8aadfbdb39af15071243e7e85d
+candidate_head: 62df9c82a1e4860de777803bfdc259b8ab65b3af
 
 ## Green evidence
 
@@ -106,3 +106,20 @@ Stage 02 remains **active** and must not be certified or hand authority to Stage
 - Cloudflare persistence products: not introduced
 - Three.js/R3F/Drei: not introduced
 - Stage 00/01 certified decisions: unchanged
+
+## Exact-head green run
+
+GitHub Actions run 36423770301 certified the committed candidate `62df9c82a1e4860de777803bfdc259b8ab65b3af`:
+
+- committed lockfile deterministic: PASS
+- npm ci: PASS
+- offline content/boundary/config checks: PASS
+- TypeScript 7 typecheck: PASS
+- Vitest: 3 files / 10 tests PASS
+- production build: PASS
+- asset budget: PASS
+- critical shell: 87.0 KiB gzip
+- Cloudflare preview: PASS
+- /api/health: `{"ok":true,"service":"vijay-kumaran-portfolio-world","stage":"app-foundation"}`
+
+The prior network and preview blockers are resolved. Stage 02 is awaiting only ICM certification.

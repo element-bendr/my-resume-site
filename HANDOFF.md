@@ -17,7 +17,7 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00 and 01 are certified. Stage 02 application foundation is implemented through the offline-verifiable boundary. Content, route/renderer-boundary, Cloudflare configuration, security headers, and no-JavaScript fallback checks are green. Stage 02 remains active and uncertified because the execution environment cannot resolve the npm registry and has no cached Cloudflare Vite plugin, so the lockfile/install/build/preview gates cannot yet run.
+Stages 00 and 01 are certified. Stage 02 application foundation is functionally complete and exact-head CI is green at `62df9c82a1e4860de777803bfdc259b8ab65b3af`: deterministic lockfile, npm ci, content/boundary/config checks, TypeScript, 10/10 tests, production build, 87.0 KiB critical gzip, and Cloudflare preview /api/health all pass. Only the repository ICM certification transition remains before Stage 03.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -32,15 +32,16 @@ Stages 00 and 01 are certified. Stage 02 application foundation is implemented t
 ## Validation evidence
 - Stage 00 certified candidate: 6b093fc74a3729018259beefd74bf16388ef98c4
 - Stage 01 certified candidate: 2eb0a1dbbed64555902aa38a44a2d46bcce920fa
-- Stage 02 content check: PASS (10 projects / 3 experience / 15 skills / 5 hobbies / 6 sources)
-- Stage 02 renderer boundary: PASS (14 source files; 0 Three/R3F/Drei imports/dependencies)
-- Stage 02 conventional routes: PASS
-- Stage 02 Cloudflare/security config: PASS; compatibility date corrected to tested workerd maximum `2026-09-18`
-- frozen package versions: publicly verified
-- Node/npm baseline: 22.16.0 / 11.20.0
-- package-lock generation: BLOCKED by unavailable registry/cache
-- npm ci / TS7 typecheck / Vitest / production build / asset budget / Worker preview: PENDING
-- Stage 02 certification: BLOCKED until those gates are green
+- Stage 02 exact application candidate: 62df9c82a1e4860de777803bfdc259b8ab65b3af
+- Stage 02 CI run 36423770301: PASS
+- deterministic lockfile / npm ci: PASS
+- content/boundary/config gates: PASS
+- TypeScript typecheck: PASS
+- Vitest: 10/10 PASS
+- production build: PASS
+- asset budget: PASS; critical shell 87.0 KiB gzip
+- Cloudflare preview /api/health: PASS
+- Stage 02 ICM certification: PENDING
 
 ## Protected state
 - main / production baseline: UNCHANGED
@@ -52,11 +53,11 @@ Stages 00 and 01 are certified. Stage 02 application foundation is implemented t
 - education is intentionally unresolved and excluded until verified;
 - LinkedIn URL is excluded until directly verified;
 - client testimonials/outcome claims require evidence before inclusion;
-- local package-lock/build evidence remains unavailable because this execution environment has no npm registry access/cache; remote CI is now the certification runner.
-- hosted Actions remain unsuitable while account minutes are constrained.
+- Ask backend remains deferred to Stage 05;
+- 3D renderer/world behavior remains deferred to Stage 03.
 
 ## Next atomic action
-In the first network-enabled execution environment, run `npm install --package-lock-only`, commit the lockfile, then run `npm ci && npm run verify`, `npm run preview`, and smoke `/api/health`. Fix any failures before Stage 02 certification. Do not begin Stage 03 until Stage 02 is certified.
+Run Stage 02 ICM certification. If green, mark Stage 02 certified, activate Stage 03, freeze the Command Center vertical-slice contract, then add the stable Three.js / React Three Fiber stack.
 
 ## Minimum resume context
 1. `AGENTS.md`
