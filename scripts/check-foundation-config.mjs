@@ -24,7 +24,7 @@ try {
 if (wrangler) {
   if (wrangler.main !== "./worker/index.ts") failures.push("wrangler main must be ./worker/index.ts");
   if (wrangler.compatibility_date !== "2026-09-18") {
-    failures.push("wrangler compatibility_date must remain frozen at 2026-09-18 during Stage 02");
+    failures.push("wrangler compatibility_date must remain frozen at the tested 2026-09-18 runtime date");
   }
   if (wrangler.assets?.not_found_handling !== "single-page-application") {
     failures.push("SPA not_found_handling must be single-page-application");
@@ -34,7 +34,7 @@ if (wrangler) {
     failures.push("run_worker_first must contain only /api/* in Stage 02");
   }
   for (const key of ["d1_databases", "kv_namespaces", "r2_buckets", "durable_objects"]) {
-    if (key in wrangler) failures.push(`Stage 02 must not configure Cloudflare persistence: ${key}`);
+    if (key in wrangler) failures.push(`Portfolio v1 must not configure unapproved Cloudflare persistence: ${key}`);
   }
 }
 

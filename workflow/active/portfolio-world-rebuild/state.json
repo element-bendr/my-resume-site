@@ -128,7 +128,8 @@
         "tests/world-config.test.ts",
         "scripts/check-world-boundary.mjs",
         "package.json",
-        "package-lock.json"
+        "package-lock.json",
+        "scripts/check-world-budget.mjs"
       ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/03-command-center-slice-completion-report.md"
     },
