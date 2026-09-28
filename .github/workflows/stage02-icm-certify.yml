@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   certify:
-    if: startsWith(github.event.head_commit.message, 'docs(icm): record stage 02')
+    if: ${{ startsWith(github.event.head_commit.message, 'docs(icm):') }}
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
