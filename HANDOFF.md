@@ -4,7 +4,7 @@
 Replace the static resume site with a production-ready gamified 3D portfolio while preserving a fast conventional portfolio/resume path and keeping `main` untouched until certification.
 
 ## Phase
-ICM_ADOPTION_AND_ARCHITECTURE
+STAGE_00_CERTIFICATION
 
 ## Execution mode
 implementation
@@ -17,7 +17,7 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-The production baseline is untouched. ICM 2.1.0 project canon is being adopted before application implementation.
+The production baseline is untouched. Stage 00 ICM adoption and architecture work is complete and active; deterministic bootstrap/workflow/status and activation checks passed in a scoped control-surface checkout. Stage certification is the remaining gate before Stage 01.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -30,9 +30,14 @@ The production baseline is untouched. ICM 2.1.0 project canon is being adopted b
 
 ## Validation evidence
 - branch base: 63d25e7dbc3169cb41aaa181a513ca7af5860ba4
-- bootstrap validation: PENDING
-- workflow validation: PENDING
-- validated commit: not yet certified
+- `python3 scripts/bootstrap_check.py`: PASS
+- `python3 scripts/workflow_check.py`: PASS
+- `python3 scripts/workflow_status.py --strict`: PASS
+- `workflow_activate.py` dry-run/write: PASS
+- post-activation workflow/status checks: PASS
+- remote Stage 00 output existence: PASS
+- full-tree clean clone proof: NOT CLAIMED; scoped checkout limitation retained
+- validated commit: pending Stage 00 certification
 
 ## Protected state
 - main / production baseline: UNCHANGED
@@ -45,7 +50,7 @@ The production baseline is untouched. ICM 2.1.0 project canon is being adopted b
 - Hosted Actions may remain unavailable until minutes reset; deterministic local certification may be used where the workflow contract permits it.
 
 ## Next atomic action
-Run the three deterministic Python ICM checks in a real checkout. If green, activate stage 00 and advance to the content-source contract before scaffolding the application.
+Run Stage 00 certification against the evidence candidate. If green, advance to Stage 01 content reconciliation before any React/3D implementation.
 
 ## Minimum resume context
 1. `AGENTS.md`
