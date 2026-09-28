@@ -38,7 +38,13 @@ export function InteractionStation({ station, nearby, onSelect }: InteractionSta
     <group position={[station.position[0], station.position[1], station.position[2]]}>
       <mesh position={[0, 0.42, 0]} onClick={select}>
         <cylinderGeometry args={[0.72, 0.88, 0.84, 8]} />
-        <meshStandardMaterial color="#0d1d32" metalness={0.65} roughness={0.4} />
+        <meshStandardMaterial
+          color="#17314e"
+          emissive="#071522"
+          emissiveIntensity={0.42}
+          metalness={0.58}
+          roughness={0.42}
+        />
       </mesh>
 
       <mesh
@@ -65,7 +71,7 @@ export function InteractionStation({ station, nearby, onSelect }: InteractionSta
         />
       </mesh>
 
-      <Html position={[0, 2.06, 0]} center distanceFactor={8} transform sprite>
+      <Html position={[0, 1.76, 0]} center distanceFactor={8} transform sprite>
         <span className="world-station-label" aria-hidden="true">
           {station.shortLabel}
         </span>
