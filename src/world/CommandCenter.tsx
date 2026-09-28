@@ -1,7 +1,7 @@
 import type { ThreeEvent } from "@react-three/fiber";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { Group, Vector3 } from "three";
+import { Group } from "three";
 import { InteractionStation } from "./InteractionStation";
 import type { OptionalVectorRef, StationRef } from "./WorldEntry";
 import {

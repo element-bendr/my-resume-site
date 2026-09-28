@@ -74,7 +74,7 @@ export default function WorldEntry() {
       <div className="world-canvas" aria-label="Interactive Command Center portfolio world">
         <Canvas
           camera={{
-            position: [...CAMERA.position],
+            position: [CAMERA.position[0], CAMERA.position[1], CAMERA.position[2]],
             fov: 50,
             near: 0.1,
             far: 60,

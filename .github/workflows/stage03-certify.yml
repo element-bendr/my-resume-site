@@ -1,0 +1,127 @@
+name: Stage 03 Command Center Certification
+
+on:
+  push:
+    branches:
+      - feat/portfolio-world-icm-rebuild
+    paths:
+      - ".github/workflows/stage03-certify.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "src/world/**"
+      - "src/app/pages/PlayPage.tsx"
+      - "src/styles/global.css"
+      - "public/_headers"
+      - "tests/movement.test.ts"
+      - "tests/world-config.test.ts"
+      - "scripts/check-world-*.mjs"
+      - "scripts/check-foundation-config.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stage03-command-center
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+
+      - name: Use Node 22.16.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+
+      - name: Use npm 11.20.0
+        run: |
+          npm install --global npm@11.20.0
+          npm --version
+
+      - name: Generate or verify lockfile
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f package-lock.json ]; then
+            cp package-lock.json /tmp/package-lock.before.json
+          fi
+          npm install --package-lock-only --ignore-scripts
+          test -s package-lock.json
+
+      - name: Clean install
+        run: npm ci
+
+      - name: Contract and boundary checks
+        run: |
+          npm run verify:content
+          npm run verify:config
+          npm run verify:world
+
+      - name: Typecheck and tests
+        run: |
+          npm run typecheck
+          npm test
+
+      - name: Production build
+        run: npm run build
+
+      - name: Asset budgets
+        run: |
+          npm run verify:assets
+          npm run verify:world-assets
+
+      - name: Preview smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          cleanup() { kill "$PREVIEW_PID" 2>/dev/null || true; }
+          trap cleanup EXIT
+
+          READY=0
+          for attempt in {1..30}; do
+            if ! kill -0 "$PREVIEW_PID" 2>/dev/null; then
+              break
+            fi
+            if curl --fail --silent http://127.0.0.1:4173/api/health > /tmp/health.json; then
+              READY=1
+              break
+            fi
+            sleep 1
+          done
+
+          if [ "$READY" -ne 1 ]; then
+            cat /tmp/portfolio-preview.log
+            exit 1
+          fi
+
+          node -e '
+            const fs = require("fs");
+            const body = JSON.parse(fs.readFileSync("/tmp/health.json", "utf8"));
+            if (body.ok !== true || body.service !== "vijay-kumaran-portfolio-world") process.exit(1);
+          '
+
+          curl --fail --silent http://127.0.0.1:4173/play > /tmp/play.html
+          grep -q '<div id="root"></div>' /tmp/play.html
+
+      - name: Commit updated Stage 03 lockfile
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- package-lock.json)" ]; then
+            echo "package-lock.json already matches package.json."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "chore(deps): freeze Stage 03 3D lockfile [skip ci]"
+          git push origin HEAD:feat/portfolio-world-icm-rebuild

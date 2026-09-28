@@ -56,7 +56,6 @@ export function PlayerController({
   const nearestRef = useRef<StationId | null>(null);
   const camera = useThree((state) => state.camera);
   const cameraForward = useRef(new Vector3());
-  const walking = useRef(false);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -87,7 +86,6 @@ export function PlayerController({
     if (controlsEnabled) return;
     pressed.current.clear();
     heldSeconds.current = 0;
-    walking.current = false;
   }, [controlsEnabled]);
 
   useFrame((state, delta) => {
@@ -160,7 +158,6 @@ export function PlayerController({
       }
     }
 
-    walking.current = isWalking;
 
     if (avatar.current) {
       const bob = isWalking ? Math.sin(state.clock.elapsedTime * 9) * 0.035 : 0;

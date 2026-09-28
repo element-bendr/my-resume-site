@@ -34,7 +34,7 @@ export function InteractionStation({ station, nearby, onSelect }: InteractionSta
   };
 
   return (
-    <group position={station.position}>
+    <group position={[station.position[0], station.position[1], station.position[2]]}>
       <mesh position={[0, 0.42, 0]} onClick={select}>
         <cylinderGeometry args={[0.72, 0.88, 0.84, 8]} />
         <meshStandardMaterial color="#0d1d32" metalness={0.65} roughness={0.4} />
