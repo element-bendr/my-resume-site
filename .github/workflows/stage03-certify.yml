@@ -18,7 +18,7 @@ on:
       - "scripts/check-foundation-config.mjs"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: stage03-command-center
@@ -38,18 +38,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.22.0
+          cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Use npm 11.20.0
         run: |
           npm install --global npm@11.20.0
           npm --version
 
-      - name: Generate candidate Stage 03 lockfile
+      - name: Verify frozen Stage 03 lockfile
         shell: bash
         run: |
           set -euo pipefail
-          npm install --package-lock-only --ignore-scripts
           test -s package-lock.json
+          cp package-lock.json /tmp/package-lock.before.json
+          npm install --package-lock-only --ignore-scripts
+          cmp --silent /tmp/package-lock.before.json package-lock.json || {
+            echo "Committed Stage 03 lockfile is not deterministic for package.json"
+            git diff -- package-lock.json
+            exit 1
+          }
 
       - name: Clean install
         run: npm ci
@@ -114,9 +122,10 @@ jobs:
             exit 1
           fi
 
-          "$CHROME_BIN"             --headless=new             --no-sandbox             --disable-dev-shm-usage             --use-gl=swiftshader             --enable-webgl             --window-size=1440,1000             --virtual-time-budget=5000             --screenshot=/tmp/command-center.png             http://127.0.0.1:4173/play
+          mkdir -p .ci-artifacts
+          "$CHROME_BIN"             --headless=new             --no-sandbox             --disable-dev-shm-usage             --use-gl=swiftshader             --enable-webgl             --window-size=1440,1000             --virtual-time-budget=5000             --screenshot=.ci-artifacts/command-center.png             http://127.0.0.1:4173/play
 
-          test -s /tmp/command-center.png
+          test -s .ci-artifacts/command-center.png
 
       - name: Upload generated Stage 03 lockfile
         if: ${{ always() && hashFiles('package-lock.json') != '' }}
@@ -128,27 +137,10 @@ jobs:
           retention-days: 3
 
       - name: Upload Command Center screenshot
-        if: ${{ always() && hashFiles('/tmp/command-center.png') != '' }}
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: stage03-command-center-screenshot
-          path: /tmp/command-center.png
+          path: .ci-artifacts/command-center.png
           if-no-files-found: error
           retention-days: 3
-
-      - name: Commit generated Stage 03 lockfile
-        if: success()
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -z "$(git status --porcelain -- package-lock.json)" ]; then
-            echo "package-lock.json already matches package.json."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package-lock.json
-          git commit -m "chore(deps): freeze Stage 03 3D lockfile [skip ci]"
-          git fetch origin feat/portfolio-world-icm-rebuild
-          git rebase origin/feat/portfolio-world-icm-rebuild
-          git push origin HEAD:feat/portfolio-world-icm-rebuild
