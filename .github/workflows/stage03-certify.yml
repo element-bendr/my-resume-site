@@ -18,7 +18,7 @@ on:
       - "scripts/check-foundation-config.mjs"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: stage03-command-center
@@ -108,6 +108,16 @@ jobs:
           curl --fail --silent http://127.0.0.1:4173/play > /tmp/play.html
           grep -q '<div id="root"></div>' /tmp/play.html
 
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$CHROME_BIN" ]; then
+            echo "No headless Chrome/Chromium binary available for visual evidence."
+            exit 1
+          fi
+
+          "$CHROME_BIN"             --headless=new             --no-sandbox             --disable-dev-shm-usage             --use-gl=swiftshader             --enable-webgl             --window-size=1440,1000             --virtual-time-budget=5000             --screenshot=/tmp/command-center.png             http://127.0.0.1:4173/play
+
+          test -s /tmp/command-center.png
+
       - name: Upload generated Stage 03 lockfile
         if: ${{ always() && hashFiles('package-lock.json') != '' }}
         uses: actions/upload-artifact@v4
@@ -116,3 +126,29 @@ jobs:
           path: package-lock.json
           if-no-files-found: error
           retention-days: 3
+
+      - name: Upload Command Center screenshot
+        if: ${{ always() && hashFiles('/tmp/command-center.png') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage03-command-center-screenshot
+          path: /tmp/command-center.png
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Commit generated Stage 03 lockfile
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain -- package-lock.json)" ]; then
+            echo "package-lock.json already matches package.json."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "chore(deps): freeze Stage 03 3D lockfile [skip ci]"
+          git fetch origin feat/portfolio-world-icm-rebuild
+          git rebase origin/feat/portfolio-world-icm-rebuild
+          git push origin HEAD:feat/portfolio-world-icm-rebuild
