@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "vijay-kumaran-portfolio-world",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2026-09-28",
+  "assets": {
+    "not_found_handling": "single-page-application",
+    "run_worker_first": [
+      "/api/*"
+    ]
+  }
+}

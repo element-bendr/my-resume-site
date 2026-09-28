@@ -1,179 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vijay Kumaran - Web Developer & AI Content Creator</title>
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Theme Toggle -->
-  <div class="theme-toggle">
-    <input type="checkbox" id="theme-switch" class="theme-switch">
-    <label for="theme-switch" class="theme-label">
-      <span class="theme-icon">🌙</span>
-      <span class="theme-icon">☀️</span>
-    </label>
-  </div>
-  
-  <!-- Progress Bar -->
-  <div id="progress-bar"></div>
-
-  <!-- Background Container -->
-  <div id="particles-js"></div>
-  
-  <!-- Main Content -->
-  <main>
-    <!-- Header Section -->
-    <section class="section-container">
-      <header style="text-align: center;">
-        <h1>Vijay Kumaran</h1>
-        <p class="title">🚀 Web Developer | AI-Powered Content Creator | Cybersecurity Enthusiast</p>
-        <p class="contact-info">
-          <i class="fas fa-location-dot"></i> Mumbai, India | 
-          <a href="mailto:vijju83@gmail.com"><i class="fas fa-envelope"></i> vijju83@gmail.com</a> | 
-          <i class="fas fa-phone"></i> +91 9819688738 | 
-          <a href="https://linkedin.com/in/vijaykumaran"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
-        </p>
-      </header>
-    </section>
-
-    <!-- Professional Summary -->
-    <section class="section-container">
-      <h2 class="section-header"><i class="fas fa-user-tie"></i> Professional Summary</h2>
-      <p>
-        Innovative and results-driven Web Developer, AI-Powered Content Creator, and Cybersecurity Enthusiast with 10+ years of experience in WordPress development, JavaScript, SEO-driven content strategy, Python automation, and IT security. Proven ability to create user-friendly websites, craft high-impact digital content, and drive social media engagement. Passionate about leveraging AI for content automation and cybersecurity best practices. Seeking remote opportunities to contribute expertise in web development, digital marketing, AI-driven automation, and security consulting.
-      </p>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="section-container">
-      <h2 class="section-header"><i class="fas fa-briefcase"></i> Work Experience</h2>
-      
-      <div class="experience-item">
-        <h3><i class="fas fa-building"></i> V-Infinity</h3>
-        <p class="job-title"><i class="fas fa-user-tie"></i> Web Developer & Digital Content Strategist</p>
-        <p class="duration"><i class="far fa-calendar-alt"></i> September 2014 - Present (Remote-Friendly Role)</p>
-        <ul class="achievement-list">
-          <li><i class="fas fa-check-circle"></i> Designed and developed custom WordPress websites with optimized UX/UI, increasing client engagement by 40%</li>
-          <li><i class="fas fa-check-circle"></i> Created high-performing AI-generated content, improving organic traffic by 60% using ChatGPT & Claude</li>
-          <li><i class="fas fa-check-circle"></i> Led SEO strategy and content optimization, boosting search rankings and driving audience growth</li>
-          <li><i class="fas fa-check-circle"></i> Developed a Python-based AI content generator, automating content creation and reducing manual effort by 70%</li>
-          <li><i class="fas fa-check-circle"></i> Integrated web scraping and LLMs to fetch real-time data for AI-powered articles</li>
-          <li><i class="fas fa-check-circle"></i> Managed end-to-end content execution for client websites, ensuring alignment with SEO and branding goals</li>
-        </ul>
-      </div>
-
-      <div class="experience-item">
-        <h3><i class="fas fa-building"></i> HCL COMNET LTD</h3>
-        <p class="job-title"><i class="fas fa-shield-alt"></i> Cybersecurity & IT Incident Management Specialist</p>
-        <p class="duration"><i class="far fa-calendar-alt"></i> December 2009 - May 2013</p>
-        <ul class="achievement-list">
-          <li><i class="fas fa-check-circle"></i> Monitored and resolved IT security incidents using ArcSight Console, reducing response time by 30%</li>
-          <li><i class="fas fa-check-circle"></i> Handled zero-day threat alerts and escalations, ensuring swift mitigation of security vulnerabilities</li>
-          <li><i class="fas fa-check-circle"></i> Provided technical support to global clients, achieving a 98% satisfaction rate</li>
-          <li><i class="fas fa-check-circle"></i> Managed BladeLogic application suite, streamlining ticket resolution and server performance monitoring</li>
-        </ul>
-      </div>
-
-      <div class="experience-item">
-        <h3><i class="fas fa-building"></i> NIIT LIMITED</h3>
-        <p class="job-title"><i class="fas fa-chalkboard-teacher"></i> E-Learning & Content Development Executive</p>
-        <p class="duration"><i class="far fa-calendar-alt"></i> March 2007 - August 2007</p>
-        <ul class="achievement-list">
-          <li><i class="fas fa-check-circle"></i> Created and edited global e-learning content for corporate training programs</li>
-          <li><i class="fas fa-check-circle"></i> Ensured quality control and streamlined content workflows for international projects</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Tech Stack Section -->
-    <section class="section-container">
-      <h2 class="section-header"><i class="fas fa-laptop-code"></i> Tech Stack</h2>
-      <div class="tech-categories">
-        <div>
-          <h3><i class="fas fa-code"></i> Web Development</h3>
-          <span class="badge" data-percentage="90">HTML5</span>
-          <span class="badge" data-percentage="85">CSS3</span>
-          <span class="badge" data-percentage="80">JavaScript</span>
-          <span class="badge" data-percentage="85">WordPress</span>
-        </div>
-        <div>
-          <h3><i class="fas fa-robot"></i> AI & Automation</h3>
-          <span class="badge" data-percentage="85">Python</span>
-          <span class="badge" data-percentage="90">ChatGPT</span>
-          <span class="badge" data-percentage="85">Claude</span>
-          <span class="badge" data-percentage="80">Google Gemini</span>
-        </div>
-        <div>
-          <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
-          <span class="badge" data-percentage="75">AWS</span>
-          <span class="badge" data-percentage="70">GCP</span>
-          <span class="badge" data-percentage="75">Docker</span>
-        </div>
-        <div>
-          <h3><i class="fas fa-shield-alt"></i> Cybersecurity</h3>
-          <span class="badge" data-percentage="80">ArcSight</span>
-          <span class="badge" data-percentage="75">BladeLogic</span>
-        </div>
-        <div>
-          <h3><i class="fas fa-palette"></i> Design & Media</h3>
-          <span class="badge" data-percentage="70">Photoshop</span>
-          <span class="badge" data-percentage="65">After Effects</span>
-          <span class="badge" data-percentage="85">Canva</span>
-          <span class="badge" data-percentage="75">DaVinci Resolve</span>
-        </div>
-        <div>
-          <h3><i class="fas fa-database"></i> Databases</h3>
-          <span class="badge" data-percentage="80">MySQL</span>
-          <span class="badge" data-percentage="75">MongoDB</span>
-          <span class="badge" data-percentage="70">PostgreSQL</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Education Section -->
-    <section class="section-container">
-      <h2 class="section-header"><i class="fas fa-graduation-cap"></i> Education</h2>
-      <div class="education-item">
-        <h3><i class="fas fa-university"></i> Bachelor of Science in Computer Science</h3>
-        <p><i class="fas fa-map-marker-alt"></i> Maharashtra State Board, Mumbai</p>
-        <p><i class="far fa-calendar-alt"></i> 2004-2005</p>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section-container">
-      <h2 class="section-header"><i class="fas fa-address-card"></i> Contact</h2>
-      <ul class="contact-list">
-        <li>
-          <a href="mailto:vijju83@gmail.com"><i class="fas fa-envelope"></i> Gmail: vijju83@gmail.com</a>
-        </li>
-        <li>
-          <a href="https://linkedin.com/in/vijaykumaran"><i class="fab fa-linkedin"></i> LinkedIn: linkedin.com/in/vijaykumaran</a>
-        </li>
-      </ul>
-    </section>
-  </main>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="particles-config.js"></script>
-  <script src="script.js"></script>
-  <script>
-    // Scroll Progress Bar Script
-    window.addEventListener('scroll', function() {
-      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var scrollTop = document.documentElement.scrollTop;
-      var progress = (scrollTop / scrollHeight) * 100;
-      document.getElementById('progress-bar').style.height = progress + '%';
-    });
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Vijay Kumaran — AI Automation & Web Systems Consultant. Production web systems, agentic infrastructure, and AI automation."
+    />
+    <meta name="theme-color" content="#07101f" />
+    <title>Vijay Kumaran · Portfolio World</title>
+  </head>
+  <body>
+    <noscript>
+      This portfolio requires JavaScript for the interactive application. Project and
+      contact information remains available through the public GitHub profile and case studies.
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

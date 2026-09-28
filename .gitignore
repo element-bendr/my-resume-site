@@ -1,5 +1,12 @@
 node_modules/
+dist/
+coverage/
+.wrangler/
+.dev.vars*
+.env
+.env.*
+!.env.example
 .DS_Store
 .vscode/
-.env
 *.log
+*.tsbuildinfo
