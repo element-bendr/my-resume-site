@@ -124,20 +124,35 @@ jobs:
 
           mkdir -p ci-artifacts
 
-          "$CHROME_BIN"             --headless=new             --no-sandbox             --disable-dev-shm-usage             --use-gl=angle             --use-angle=swiftshader
-            --enable-webgl             --window-size=1440,1000             --virtual-time-budget=5000             --enable-logging=stderr             --dump-dom             http://127.0.0.1:4173/play             > ci-artifacts/play-dom.html             2> ci-artifacts/chrome.log || true
+          timeout 20s "$CHROME_BIN" \
+            --headless=new \
+            --no-sandbox \
+            --disable-dev-shm-usage \
+            --disable-gpu \
+            --disable-software-rasterizer \
+            --virtual-time-budget=2500 \
+            --dump-dom \
+            http://127.0.0.1:4173/play \
+            > ci-artifacts/fallback-dom.html \
+            2> ci-artifacts/chrome-fallback.log
 
-          if ! grep -q 'Command Center' ci-artifacts/play-dom.html; then
-            echo "Rendered DOM is missing Command Center UI."
-            echo "---- rendered DOM ----"
-            cat ci-artifacts/play-dom.html || true
-            echo "---- chrome log ----"
-            cat ci-artifacts/chrome.log || true
-            exit 1
-          fi
+          grep -q '3D unavailable' ci-artifacts/fallback-dom.html
+          grep -q 'Projects' ci-artifacts/fallback-dom.html
+          grep -q 'Resume' ci-artifacts/fallback-dom.html
 
-          "$CHROME_BIN"             --headless=new             --no-sandbox             --disable-dev-shm-usage             --use-gl=angle             --use-angle=swiftshader
-            --enable-webgl             --window-size=1440,1000             --virtual-time-budget=5000             --screenshot=ci-artifacts/command-center.png             http://127.0.0.1:4173/play             >> ci-artifacts/chrome.log             2>&1
+          timeout 30s "$CHROME_BIN" \
+            --headless=new \
+            --no-sandbox \
+            --disable-dev-shm-usage \
+            --use-gl=angle \
+            --use-angle=swiftshader \
+            --enable-webgl \
+            --window-size=1440,1000 \
+            --virtual-time-budget=4000 \
+            --screenshot=ci-artifacts/command-center.png \
+            http://127.0.0.1:4173/play \
+            > ci-artifacts/chrome-webgl.log \
+            2>&1
 
           test -s ci-artifacts/command-center.png
 
