@@ -2,11 +2,11 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "active",
-  "active_stage": "00-bootstrap",
+  "status": "blocked",
+  "active_stage": "01-content-contract",
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
-    "validated_commit": null
+    "validated_commit": "6b093fc74a3729018259beefd74bf16388ef98c4"
   },
   "execution": {
     "mode": "implementation",
@@ -40,7 +40,7 @@
   "stages": [
     {
       "id": "00-bootstrap",
-      "status": "active",
+      "status": "certified",
       "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
       "depends_on_stages": [],
       "depends_on": [],
@@ -60,7 +60,7 @@
     },
     {
       "id": "01-content-contract",
-      "status": "pending",
+      "status": "blocked",
       "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
       "depends_on_stages": [
         "00-bootstrap"
@@ -69,7 +69,8 @@
       "outputs": [
         "docs/portfolio-world/CONTENT-CONTRACT.md"
       ],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md",
+      "block_reason": "awaiting_activation"
     },
     {
       "id": "02-app-foundation",
