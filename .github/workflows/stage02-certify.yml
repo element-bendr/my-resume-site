@@ -1,0 +1,106 @@
+name: Stage 02 App Foundation Certification
+
+on:
+  push:
+    branches:
+      - feat/portfolio-world-icm-rebuild
+    paths:
+      - ".github/workflows/stage02-certify.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "src/**"
+      - "worker/**"
+      - "tests/**"
+      - "scripts/check-*.mjs"
+      - "vite.config.ts"
+      - "vitest.config.ts"
+      - "tsconfig*.json"
+      - "wrangler.jsonc"
+      - "public/_headers"
+      - "index.html"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stage02-app-foundation
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+
+      - name: Use Node 22.16.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+          cache: npm
+
+      - name: Generate frozen lockfile
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Verify lockfile exists
+        run: test -s package-lock.json
+
+      - name: Clean install
+        run: npm ci
+
+      - name: Offline contract checks
+        run: npm run verify:offline
+
+      - name: Typecheck and tests
+        run: |
+          npm run typecheck
+          npm test
+
+      - name: Production build
+        run: npm run build
+
+      - name: Asset budget
+        run: npm run verify:assets
+
+      - name: Preview smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          cleanup() {
+            kill "$PREVIEW_PID" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4173/api/health > /tmp/health.json; then
+              break
+            fi
+            sleep 1
+          done
+
+          cat /tmp/health.json
+          node -e '
+            const fs = require("fs");
+            const body = JSON.parse(fs.readFileSync("/tmp/health.json", "utf8"));
+            if (
+              body.ok !== true ||
+              body.service !== "vijay-kumaran-portfolio-world" ||
+              body.stage !== "app-foundation"
+            ) {
+              console.error("Unexpected health payload", body);
+              process.exit(1);
+            }
+          '
+
+      - name: Upload generated lockfile
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage02-package-lock
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 3
