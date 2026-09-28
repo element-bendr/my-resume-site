@@ -43,7 +43,7 @@ The production baseline is untouched. ICM 2.1.0 project canon is being adopted b
 - Hosted Actions may remain unavailable until minutes reset; deterministic local certification may be used where the workflow contract permits it.
 
 ## Next atomic action
-Finish ICM workflow scaffolding, run bootstrap/workflow checks, then freeze the content source of truth before scaffolding the app.
+Run the three deterministic Python ICM checks in a real checkout. If green, activate stage 00 and advance to the content-source contract before scaffolding the application.
 
 ## Minimum resume context
 1. `AGENTS.md`
