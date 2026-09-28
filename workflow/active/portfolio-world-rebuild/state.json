@@ -71,7 +71,7 @@
         "docs/portfolio-world/CONTENT-SOURCES.json",
         "decisions/2026-09-28-content-authority.md"
       ],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/01-content-contract-completion-report.md"
     },
     {
       "id": "02-app-foundation",
@@ -82,7 +82,7 @@
       ],
       "depends_on": [],
       "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/02-app-foundation-completion-report.md"
     },
     {
       "id": "03-command-center-slice",
@@ -93,7 +93,7 @@
       ],
       "depends_on": [],
       "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/03-command-center-slice-completion-report.md"
     },
     {
       "id": "04-world-zones",
@@ -104,7 +104,7 @@
       ],
       "depends_on": [],
       "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/04-world-zones-completion-report.md"
     },
     {
       "id": "05-integration",
@@ -115,7 +115,7 @@
       ],
       "depends_on": [],
       "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md"
     },
     {
       "id": "06-performance-accessibility",
@@ -126,7 +126,7 @@
       ],
       "depends_on": [],
       "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md"
     },
     {
       "id": "07-certification-promotion",
@@ -137,7 +137,7 @@
       ],
       "depends_on": [],
       "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md"
     }
   ]
 }

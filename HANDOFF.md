@@ -17,7 +17,7 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stage 00 is certified. Stage 01 is active. Content sources have been reconciled into a category-specific authority model: project repos/certification for technical facts, sanitized case studies for public disclosure, current profile repos for positioning, structured profile content for employment history, and direct user approval for hobbies. The legacy resume site is historical input only.
+Stage 00 is certified. Stage 01 content reconciliation is complete pending certification. The content authority model is frozen: project evidence governs technical facts, sanitized case studies govern disclosure, current profile sources govern positioning, structured profile content governs employment history, and legacy resume HTML is historical input only.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -30,15 +30,13 @@ Stage 00 is certified. Stage 01 is active. Content sources have been reconciled 
 - Content authority is category-specific: current project evidence for technical facts, sanitized case studies for disclosure, current profile sources for positioning, structured profile content for employment history, and user approval for hobbies.
 
 ## Validation evidence
-- branch base: 63d25e7dbc3169cb41aaa181a513ca7af5860ba4
-- `python3 scripts/bootstrap_check.py`: PASS
-- `python3 scripts/workflow_check.py`: PASS
-- `python3 scripts/workflow_status.py --strict`: PASS
-- `workflow_activate.py` dry-run/write: PASS
-- post-activation workflow/status checks: PASS
-- remote Stage 00 output existence: PASS
-- full-tree clean clone proof: NOT CLAIMED; scoped checkout limitation retained
-- validated commit: pending Stage 00 certification
+- Stage 00 certified candidate: 6b093fc74a3729018259beefd74bf16388ef98c4
+- Stage 00 bootstrap/workflow/status/activation/certification: PASS
+- Stage 01 source snapshot resolution: PASS
+- Stage 01 category-specific authority reconciliation: PASS
+- Stage 01 legacy preserve/replace/reject classification: PASS
+- Stage 01 protected-state review: PASS
+- Stage 01 certification: PENDING
 
 ## Protected state
 - main / production baseline: UNCHANGED
@@ -47,11 +45,13 @@ Stage 00 is certified. Stage 01 is active. Content sources have been reconciled 
 - unrelated repositories: UNCHANGED
 
 ## Stale / uncertain state
-- This repo is an older static portfolio baseline; current deployed Ask-site content must be reconciled explicitly before implementation.
-- Hosted Actions may remain unavailable until minutes reset; deterministic local certification may be used where the workflow contract permits it.
+- education is intentionally unresolved and excluded until verified;
+- LinkedIn URL is excluded until directly verified;
+- client testimonials/outcome claims require evidence before inclusion;
+- hosted Actions confirmation remains optional/deferred while account minutes are constrained.
 
 ## Next atomic action
-Validate the Stage 01 content contract against the pinned sources and certification requirements. If green, certify Stage 01 and advance to Stage 02 application foundation.
+Certify Stage 01 against its completion evidence. If green, activate Stage 02 application foundation and create the typed content + React/Vite/Worker shell while preserving the legacy main branch.
 
 ## Minimum resume context
 1. `AGENTS.md`
