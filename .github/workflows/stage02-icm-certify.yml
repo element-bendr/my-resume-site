@@ -1,7 +1,7 @@
 name: Stage 02 ICM Certification Check
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 permissions:
   contents: read
