@@ -17,7 +17,7 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00, 01, and 02 are certified. Stage 02 exact-head application CI and repository ICM certification are green. Stage 03 Command Center is now the blocked next stage pending its explicit contract and activation. No 3D dependency has been introduced yet.
+Stages 00, 01, and 02 are certified. Stage 03 Command Center contract is frozen and awaits activation. The slice is intentionally one procedural room with constrained movement/camera/interactions; full world districts and external 3D assets remain blocked.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -52,7 +52,7 @@ Stages 00, 01, and 02 are certified. Stage 02 exact-head application CI and repo
 - 3D renderer/world behavior remains deferred to Stage 03.
 
 ## Next atomic action
-Freeze the Stage 03 Command Center vertical-slice contract, verify current stable Three.js / React Three Fiber / Drei versions, activate Stage 03, then implement only the first playable room and its movement/camera/interactions.
+Activate Stage 03, pin/install Three 0.186.0, R3F 9.8.0, Drei 10.7.8, and @types/three 0.186.0, then implement the procedural Command Center and movement/camera vertical slice before any additional district work.
 
 ## Minimum resume context
 1. `AGENTS.md`

@@ -107,12 +107,29 @@
     {
       "id": "03-command-center-slice",
       "status": "blocked",
-      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "context": "workflow/active/portfolio-world-rebuild/03-command-center-slice-CONTEXT.md",
       "depends_on_stages": [
         "02-app-foundation"
       ],
       "depends_on": [],
-      "outputs": [],
+      "outputs": [
+        "decisions/2026-09-28-command-center-stack.md",
+        "src/world/WorldEntry.tsx",
+        "src/world/CommandCenter.tsx",
+        "src/world/PlayerController.tsx",
+        "src/world/CameraRig.tsx",
+        "src/world/InteractionStation.tsx",
+        "src/world/world-config.ts",
+        "src/world/movement.ts",
+        "src/world/world.css",
+        "src/world/WorldHud.tsx",
+        "src/world/InteractionOverlay.tsx",
+        "tests/movement.test.ts",
+        "tests/world-config.test.ts",
+        "scripts/check-world-boundary.mjs",
+        "package.json",
+        "package-lock.json"
+      ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/03-command-center-slice-completion-report.md",
       "block_reason": "awaiting_activation"
     },
