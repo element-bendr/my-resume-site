@@ -79,3 +79,34 @@ export function cameraRelativeDirection(
 export function withinRadius(a: Point2, b: Point2, radius: number): boolean {
   return distanceSquared(a, b) <= radius * radius;
 }
+
+export function pointInBounds(point: Point2, bounds: WorldBounds): boolean {
+  return (
+    point.x >= bounds.minX &&
+    point.x <= bounds.maxX &&
+    point.z >= bounds.minZ &&
+    point.z <= bounds.maxZ
+  );
+}
+
+export function constrainPointToAreas(
+  point: Point2,
+  areas: readonly WorldBounds[],
+): Point2 {
+  if (areas.length === 0) return point;
+  if (areas.some((area) => pointInBounds(point, area))) return point;
+
+  let nearest = clampPoint(point, areas[0]);
+  let bestDistance = distanceSquared(point, nearest);
+
+  for (let index = 1; index < areas.length; index += 1) {
+    const candidate = clampPoint(point, areas[index]);
+    const distance = distanceSquared(point, candidate);
+    if (distance < bestDistance) {
+      nearest = candidate;
+      bestDistance = distance;
+    }
+  }
+
+  return nearest;
+}
