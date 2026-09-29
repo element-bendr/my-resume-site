@@ -39,7 +39,7 @@ Validation rules:
 - reject an empty normalized question;
 - reject questions longer than 500 Unicode code points after normalization;
 - reject request bodies over 4096 bytes;
-- use the `invalid_request` response shape for malformed JSON, invalid shape, empty/oversized questions, and other request validation failures;
+- use the stable non-echoing error envelope below with these codes: `method_not_allowed` (405), `unsupported_media_type` (415), `invalid_json` (400), `invalid_request` (400 for structural or empty-question failures), `question_too_long` (400), `payload_too_large` (413), and `internal_error` (500);
 - do not echo the question in error messages or log raw questions.
 
 ### Grounded response
@@ -81,7 +81,7 @@ Below-threshold retrieval returns no matches. Do not guess, broaden to private s
 
 ### Invalid request
 
-Use HTTP 400 for invalid JSON shape or question validation and HTTP 415 for a non-JSON content type. HTTP 405 is reserved for unsupported methods. All use this non-echoing body shape:
+Use HTTP 400 for invalid JSON (including a missing/empty body), invalid shape, empty question, or an overlong normalized question; HTTP 413 for bodies over 4096 bytes; HTTP 415 for a non-JSON content type; HTTP 405 with `Allow: POST` for unsupported methods; and HTTP 500 for an unexpected internal failure. Use the matching stable error code and generic non-echoing message in this body shape:
 
 ```json
 {
@@ -90,7 +90,7 @@ Use HTTP 400 for invalid JSON shape or question validation and HTTP 415 for a no
   "matches": [],
   "support": "invalid_request",
   "error": {
-    "code": "invalid_request",
+    "code": "invalid_json",
     "message": "The request must contain a valid question."
   }
 }
