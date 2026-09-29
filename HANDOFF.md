@@ -66,6 +66,7 @@ Begin Stage 05 implementation from this contract: implement deterministic eviden
 
 ## Stage 05 setup / validation
 - remote integration head fetched: `fbbb08e84a9455655f3ac5fb92f496faa538f747`
+- latest docs/contract commit: `a795a7c40095bd71c4044b8417b75db45f504c95` (workflow check and strict status PASS)
 - local runtime: Node 22.22.0, npm 11.20.0; `npm ci` PASS
 - inherited baseline: bootstrap, workflow check/status, offline verification, typecheck, tests (7 files / 31 tests), build, conventional asset budget, and world asset budget all PASS
 - contract/local-loop docs only; application implementation has not started
