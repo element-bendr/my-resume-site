@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "blocked",
+  "status": "active",
   "active_stage": "05-integration",
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
@@ -10,9 +10,9 @@
   },
   "execution": {
     "mode": "implementation",
-    "branch": "feat/portfolio-world-icm-rebuild",
-    "worktree": "local worktree when executing locally",
-    "owner": "coordinator",
+    "branch": "stage05/local-integration",
+    "worktree": ".worktrees/stage05-integration",
+    "owner": "Luna",
     "write_paths": [
       "AGENTS.md",
       "BOOTSTRAP.md",
@@ -164,15 +164,23 @@
     },
     {
       "id": "05-integration",
-      "status": "blocked",
-      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "status": "active",
+      "context": "workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md",
       "depends_on_stages": [
         "04-world-zones"
       ],
       "depends_on": [],
-      "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md",
-      "block_reason": "awaiting_activation"
+      "outputs": [
+        "docs/portfolio-world/ASK-CONTRACT.md",
+        "docs/portfolio-world/LOCAL-DEVELOPMENT.md",
+        "src/ask",
+        "worker",
+        "src/app/pages/AskPage.tsx",
+        "src/world/InteractionOverlay.tsx",
+        "tests",
+        "docs/portfolio-world/STAGE-05-VALIDATION.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md"
     },
     {
       "id": "06-performance-accessibility",

@@ -1,10 +1,10 @@
 # Current Handoff
 
 ## Goal
-Replace the static resume site with a production-ready gamified 3D portfolio while preserving a fast conventional portfolio/resume path and keeping `main` untouched until certification.
+Implement Stage 05 integration: one grounded Ask experience shared by `/ask` and the in-world Command Center terminal, preserving all certified Stage 00–04 behavior and keeping `main` untouched.
 
 ## Phase
-STAGE_04_WORLD_ZONES_CERTIFICATION
+STAGE_05_INTEGRATION
 
 ## Execution mode
 implementation
@@ -12,12 +12,12 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: feat/portfolio-world-icm-rebuild
-- active workflow/stage: workflow/active/portfolio-world-rebuild / 04-world-zones
+- working branch/worktree: stage05/local-integration / .worktrees/stage05-integration
+- active workflow/stage: workflow/active/portfolio-world-rebuild / 05-integration
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00-03 are formally certified. Stage 04 world-zone implementation is complete and green on exact-head CI run 36521705441 against f404ce032000e3d7c86f5e29748a9e1b634df3a1. All six browser screenshots and the non-WebGL fallback have been visually/technically inspected. Formal ICM Stage 04 certification is the remaining gate before Stage 05.
+Stages 00–04 are certified in the fetched integration state. Stage 05 contract is frozen in `docs/portfolio-world/ASK-CONTRACT.md` and `workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md`; local-first runbook is updated in `docs/portfolio-world/LOCAL-DEVELOPMENT.md`. No Stage 05 application code has been changed. Inherited baseline passed on `fbbb08e84a9455655f3ac5fb92f496faa538f747` before documentation changes.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -51,17 +51,26 @@ Stages 00-03 are formally certified. Stage 04 world-zone implementation is compl
 - LinkedIn URL is excluded until directly verified;
 - client testimonials/outcome claims require evidence before inclusion;
 - Ask backend remains deferred to Stage 05;
-- Stage 03 Command Center is certified. Stage 04 may expand topology but must preserve the certified controller, browser fallback, and direct-route behavior.
+- Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Run formal ICM certification for Stage 04. If green, hand authority to Stage 05 integration and freeze the Ask/integration contract before changing backend behavior.
+Begin Stage 05 implementation from this contract: implement deterministic evidence/retrieval first, then focused retrieval tests; do not add an LLM or storage dependency. Continue with Worker API, `/ask`, terminal route integration, local browser checks, and independent Terra review.
 
 ## Minimum resume context
 1. `AGENTS.md`
 2. `CONTEXT.md`
 3. `HANDOFF.md`
-4. `workflow/active/portfolio-world-rebuild/CONTEXT.md`
-5. `decisions/2026-09-28-portfolio-world-architecture.md`
+4. `workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md`
+5. `docs/portfolio-world/ASK-CONTRACT.md`
+6. `decisions/2026-09-28-portfolio-world-architecture.md`
+
+## Stage 05 setup / validation
+- remote integration head fetched: `fbbb08e84a9455655f3ac5fb92f496faa538f747`
+- local runtime: Node 22.22.0, npm 11.20.0; `npm ci` PASS
+- inherited baseline: bootstrap, workflow check/status, offline verification, typecheck, tests (7 files / 31 tests), build, conventional asset budget, and world asset budget all PASS
+- contract/local-loop docs only; application implementation has not started
+- blockers: none; no deploy or push performed
+- protected state: `main`, production, and certified Stage 00–04 stage records unchanged
 
 
 ## Stage 04 evidence
