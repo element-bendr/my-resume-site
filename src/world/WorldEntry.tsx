@@ -13,7 +13,6 @@ import { WebGLFallback } from "./WebGLFallback";
 import { detectWebGLSupport } from "./webgl";
 import {
   CAMERA,
-  PLAYER_SPAWN,
   STATION_BY_ID,
   type StationConfig,
   type StationId,
