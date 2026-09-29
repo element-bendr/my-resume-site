@@ -2,11 +2,11 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "active",
-  "active_stage": "04-world-zones",
+  "status": "blocked",
+  "active_stage": "05-integration",
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
-    "validated_commit": "32d43aed13a91815007a0d29f384a31fe2246974"
+    "validated_commit": "df4dd1100afd7e6ac21c3f4d2c5e616535cd0fc4"
   },
   "execution": {
     "mode": "implementation",
@@ -140,7 +140,7 @@
     },
     {
       "id": "04-world-zones",
-      "status": "active",
+      "status": "certified",
       "context": "workflow/active/portfolio-world-rebuild/04-world-zones-CONTEXT.md",
       "depends_on_stages": [
         "03-command-center-slice"
@@ -164,14 +164,15 @@
     },
     {
       "id": "05-integration",
-      "status": "pending",
+      "status": "blocked",
       "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
       "depends_on_stages": [
         "04-world-zones"
       ],
       "depends_on": [],
       "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md",
+      "block_reason": "awaiting_activation"
     },
     {
       "id": "06-performance-accessibility",
