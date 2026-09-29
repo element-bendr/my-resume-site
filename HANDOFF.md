@@ -4,7 +4,7 @@
 Replace the static resume site with a production-ready gamified 3D portfolio while preserving a fast conventional portfolio/resume path and keeping `main` untouched until certification.
 
 ## Phase
-STAGE_03_COMMAND_CENTER_SLICE
+STAGE_04_WORLD_ZONES
 
 ## Execution mode
 implementation
@@ -13,11 +13,11 @@ implementation
 - repository: element-bendr/my-resume-site
 - canonical branch: main
 - working branch/worktree: feat/portfolio-world-icm-rebuild
-- active workflow/stage: workflow/active/portfolio-world-rebuild / 03-command-center-slice
+- active workflow/stage: workflow/active/portfolio-world-rebuild / 04-world-zones
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00, 01, and 02 are certified. Stage 03 Command Center implementation is complete and green on exact-head CI run 36444089676; the generated WebGL screenshot has been visually inspected. Formal ICM Stage 03 certification is the remaining gate before Stage 04.
+Stages 00-03 are formally certified. Stage 04 is blocked awaiting activation with its world-zone contract now frozen. The next implementation expands the certified Command Center controller into Build Lab, Automation Lab, Client Street, Timeline Corridor, and Hobby District using one shared topology and lazy district modules.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -51,10 +51,10 @@ Stages 00, 01, and 02 are certified. Stage 03 Command Center implementation is c
 - LinkedIn URL is excluded until directly verified;
 - client testimonials/outcome claims require evidence before inclusion;
 - Ask backend remains deferred to Stage 05;
-- Stage 03 renderer/world behavior is under active certification; the initial Command Center slice is implemented.
+- Stage 03 Command Center is certified. Stage 04 may expand topology but must preserve the certified controller, browser fallback, and direct-route behavior.
 
 ## Next atomic action
-Run formal ICM certification for Stage 03 against the completed evidence. If green, hand authority to Stage 04 world-zones and freeze the district expansion contract before implementation.
+Activate Stage 04, generalize movement to the legal-area union, add world topology + fast travel, then implement district modules and content interactions. Do not begin Stage 05 Ask/backend integration.
 
 ## Minimum resume context
 1. `AGENTS.md`

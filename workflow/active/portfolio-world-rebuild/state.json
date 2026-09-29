@@ -141,12 +141,24 @@
     {
       "id": "04-world-zones",
       "status": "blocked",
-      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "context": "workflow/active/portfolio-world-rebuild/04-world-zones-CONTEXT.md",
       "depends_on_stages": [
         "03-command-center-slice"
       ],
       "depends_on": [],
-      "outputs": [],
+      "outputs": [
+        "decisions/2026-09-29-world-zones.md",
+        "src/world/world-topology.ts",
+        "src/world/WorldTopology.tsx",
+        "src/world/WorldDistricts.tsx",
+        "src/world/districts/BuildLab.tsx",
+        "src/world/districts/AutomationLab.tsx",
+        "src/world/districts/ClientStreet.tsx",
+        "src/world/districts/TimelineCorridor.tsx",
+        "src/world/districts/HobbyDistrict.tsx",
+        "tests/world-topology.test.ts",
+        "scripts/check-world-zones.mjs"
+      ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/04-world-zones-completion-report.md",
       "block_reason": "awaiting_activation"
     },
