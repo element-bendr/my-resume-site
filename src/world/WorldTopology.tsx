@@ -1,8 +1,9 @@
 import { Html } from "@react-three/drei";
 import type { ThreeEvent } from "@react-three/fiber";
-import { BRIDGES, ZONES } from "./world-topology";
+import { BRIDGES, ZONES, type ZoneId } from "./world-topology";
 
 interface WorldTopologyProps {
+  currentZone: ZoneId;
   onRequestMove: (x: number, z: number) => void;
 }
 
@@ -15,7 +16,7 @@ function boundsGeometry(bounds: { minX: number; maxX: number; minZ: number; maxZ
   };
 }
 
-export function WorldTopology({ onRequestMove }: WorldTopologyProps) {
+export function WorldTopology({ currentZone, onRequestMove }: WorldTopologyProps) {
   const handleMove = (event: ThreeEvent<MouseEvent>) => {
     if (event.delta > 5) return;
     event.stopPropagation();
@@ -41,7 +42,7 @@ export function WorldTopology({ onRequestMove }: WorldTopologyProps) {
                 roughness={0.78}
               />
             </mesh>
-            {zone.id !== "command-center" ? (
+            {zone.id !== "command-center" && zone.id !== currentZone ? (
               <Html
                 position={[geometry.centerX, 0.22, zone.bounds.minZ + 0.7]}
                 center

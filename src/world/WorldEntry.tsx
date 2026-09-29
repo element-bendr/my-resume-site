@@ -149,7 +149,10 @@ export default function WorldEntry() {
               gl={{ antialias: true, powerPreference: "high-performance" }}
               fallback={<WebGLFallback />}
             >
-              <WorldTopology onRequestMove={(x, z) => requestMove(x, z)} />
+              <WorldTopology
+                currentZone={currentZone}
+                onRequestMove={(x, z) => requestMove(x, z)}
+              />
               <CommandCenter
                 movementTarget={movementTarget}
                 nearbyStation={nearbyStation}
