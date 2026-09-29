@@ -23,6 +23,7 @@
     "verify:world": "node scripts/check-world-boundary.mjs",
     "verify:world-assets": "node scripts/check-world-budget.mjs",
     "verify:ask-disclosure": "node scripts/check-ask-client-disclosure.mjs",
+    "verify:world-ask": "node scripts/check-world-ask-boundary.mjs",
     "verify:world-zones": "node scripts/check-world-zones.mjs"
   },
   "dependencies": {

@@ -105,18 +105,26 @@ export function InteractionOverlay({ station, onClose }: InteractionOverlayProps
               invented rankings, achievements, or biographical claims are attached to it.
             </p>
           </>
-        ) : (
+        ) : station.kind === "ask" ? (
           <>
             <p>
-              The grounded Ask backend arrives in Stage 05. The conventional Ask route already
-              preserves the direct, non-3D path to project evidence.
+              Ask about verified portfolio evidence from the projects, experience, and skills shown
+              across this portfolio.
             </p>
             <div className="action-row">
               <Link className="button button-primary" to="/ask" onClick={onClose}>
                 Open Ask
               </Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <p>
+              Additional details are not available for this station.
+            </p>
+            <div className="action-row">
               <Link className="button button-secondary" to="/projects" onClick={onClose}>
-                Browse evidence
+                Browse projects
               </Link>
             </div>
           </>
