@@ -6,17 +6,22 @@ import { CommandCenter } from "./CommandCenter";
 import { InteractionOverlay } from "./InteractionOverlay";
 import { PlayerController } from "./PlayerController";
 import { WorldCanvasBoundary } from "./WorldCanvasBoundary";
-import { WebGLFallback } from "./WebGLFallback";
+import { WorldDistricts } from "./WorldDistricts";
 import { WorldHud } from "./WorldHud";
+import { WorldTopology } from "./WorldTopology";
+import { WebGLFallback } from "./WebGLFallback";
 import { detectWebGLSupport } from "./webgl";
 import {
   CAMERA,
-  COMMAND_CENTER_BOUNDS,
   PLAYER_SPAWN,
   STATION_BY_ID,
+  type StationConfig,
   type StationId,
 } from "./world-config";
-import { clampPoint } from "./movement";
+import {
+  ZONE_BY_ID,
+  type ZoneId,
+} from "./world-topology";
 import "./world.css";
 
 export interface VectorRef {
@@ -51,15 +56,58 @@ export default function WorldEntry() {
   const pendingInteraction = useRef<StationId | null>(null);
   const [nearbyStation, setNearbyStation] = useState<StationId | null>(null);
   const [activeStation, setActiveStation] = useState<StationId | null>(null);
+  const [currentZone, setCurrentZone] = useState<ZoneId>("command-center");
+  const [loadedZones, setLoadedZones] = useState<Set<ZoneId>>(
+    () => new Set<ZoneId>(["command-center"]),
+  );
   const [mapOpen, setMapOpen] = useState(false);
   const reducedMotion = useReducedMotion();
   const [webglAvailable] = useState(() => detectWebGLSupport());
 
+  const loadZone = useCallback((zone: ZoneId) => {
+    setLoadedZones((current) => {
+      if (current.has(zone)) return current;
+      const next = new Set(current);
+      next.add(zone);
+      return next;
+    });
+  }, []);
+
   const requestMove = useCallback((x: number, z: number, stationId: StationId | null = null) => {
-    const point = clampPoint({ x, z }, COMMAND_CENTER_BOUNDS);
-    movementTarget.current = new Vector3(point.x, 0, point.z);
+    movementTarget.current = new Vector3(x, 0, z);
     pendingInteraction.current = stationId;
   }, []);
+
+  const selectStation = useCallback(
+    (station: StationConfig) => {
+      loadZone(station.zoneId);
+      requestMove(station.interactionPoint.x, station.interactionPoint.z, station.id);
+    },
+    [loadZone, requestMove],
+  );
+
+  const handleZoneChange = useCallback(
+    (zone: ZoneId) => {
+      setCurrentZone(zone);
+      loadZone(zone);
+    },
+    [loadZone],
+  );
+
+  const fastTravel = useCallback(
+    (zone: ZoneId) => {
+      const target = ZONE_BY_ID[zone].fastTravelPoint;
+      loadZone(zone);
+      movementTarget.current = null;
+      pendingInteraction.current = null;
+      playerPosition.current.set(target.x, 0, target.z);
+      setNearbyStation(null);
+      setActiveStation(null);
+      setCurrentZone(zone);
+      setMapOpen(false);
+    },
+    [loadZone],
+  );
 
   const closeOverlay = useCallback(() => setActiveStation(null), []);
 
@@ -75,7 +123,7 @@ export default function WorldEntry() {
 
   return (
     <div className="world-shell">
-      <div className="world-canvas" aria-label="Interactive Command Center portfolio world">
+      <div className="world-canvas" aria-label="Interactive Portfolio World">
         {webglAvailable ? (
           <WorldCanvasBoundary fallback={<WebGLFallback />}>
             <Canvas
@@ -83,17 +131,22 @@ export default function WorldEntry() {
                 position: [CAMERA.position[0], CAMERA.position[1], CAMERA.position[2]],
                 fov: 52,
                 near: 0.1,
-                far: 60,
+                far: 90,
               }}
               dpr={[1, 1.5]}
               gl={{ antialias: true, powerPreference: "high-performance" }}
               fallback={<WebGLFallback />}
             >
+              <WorldTopology onRequestMove={(x, z) => requestMove(x, z)} />
               <CommandCenter
                 movementTarget={movementTarget}
-                pendingInteraction={pendingInteraction}
                 nearbyStation={nearbyStation}
-                onRequestMove={requestMove}
+                onSelectStation={selectStation}
+              />
+              <WorldDistricts
+                loadedZones={loadedZones}
+                nearbyStationId={nearbyStation}
+                onSelectStation={selectStation}
               />
               <PlayerController
                 playerPosition={playerPosition}
@@ -102,6 +155,7 @@ export default function WorldEntry() {
                 controlsEnabled={!activeStation && !mapOpen}
                 onInteract={setActiveStation}
                 onNearestChange={setNearbyStation}
+                onZoneChange={handleZoneChange}
               />
               <CameraRig playerPosition={playerPosition} reducedMotion={reducedMotion} />
             </Canvas>
@@ -113,9 +167,11 @@ export default function WorldEntry() {
 
       <WorldHud
         nearbyStation={nearbyStation ? STATION_BY_ID[nearbyStation] : null}
+        currentZone={currentZone}
         mapOpen={mapOpen}
         onToggleMap={() => setMapOpen((open) => !open)}
         onCloseMap={() => setMapOpen(false)}
+        onFastTravel={fastTravel}
       />
 
       {activeStation ? (

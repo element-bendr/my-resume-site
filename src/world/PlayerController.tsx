@@ -5,7 +5,6 @@ import type { OptionalVectorRef, StationRef, VectorRef } from "./WorldEntry";
 import {
   BRISK_WALK_SPEED,
   CLICK_WALK_SPEED,
-  COMMAND_CENTER_BOUNDS,
   INTERACTION_RADIUS,
   STATIONS,
   TARGET_EPSILON,
@@ -15,11 +14,15 @@ import {
 } from "./world-config";
 import {
   cameraRelativeDirection,
-  clampPoint,
   distanceSquared,
   stepToward,
   withinRadius,
 } from "./movement";
+import {
+  constrainToWalkableWorld,
+  zoneAtPoint,
+  type ZoneId,
+} from "./world-topology";
 
 interface PlayerControllerProps {
   playerPosition: VectorRef;
@@ -28,6 +31,7 @@ interface PlayerControllerProps {
   controlsEnabled: boolean;
   onInteract: (station: StationId) => void;
   onNearestChange: (station: StationId | null) => void;
+  onZoneChange: (zone: ZoneId) => void;
 }
 
 const MOVEMENT_KEYS = new Set([
@@ -48,12 +52,14 @@ export function PlayerController({
   controlsEnabled,
   onInteract,
   onNearestChange,
+  onZoneChange,
 }: PlayerControllerProps) {
   const avatar = useRef<Group>(null);
   const pressed = useRef(new Set<string>());
   const interactionRequested = useRef(false);
   const heldSeconds = useRef(0);
   const nearestRef = useRef<StationId | null>(null);
+  const zoneRef = useRef<ZoneId>("command-center");
   const camera = useThree((state) => state.camera);
   const cameraForward = useRef(new Vector3());
 
@@ -113,13 +119,10 @@ export function PlayerController({
         heldSeconds.current += delta;
         const acceleration = Math.min(1, heldSeconds.current / WALK_ACCELERATION_SECONDS);
         const speed = WALK_SPEED + (BRISK_WALK_SPEED - WALK_SPEED) * acceleration;
-        const next = clampPoint(
-          {
-            x: position.x + direction.x * speed * delta,
-            z: position.z + direction.z * speed * delta,
-          },
-          COMMAND_CENTER_BOUNDS,
-        );
+        const next = constrainToWalkableWorld({
+          x: position.x + direction.x * speed * delta,
+          z: position.z + direction.z * speed * delta,
+        });
         movedX = next.x - position.x;
         movedZ = next.z - position.z;
         position.set(next.x, 0, next.z);
@@ -133,7 +136,7 @@ export function PlayerController({
             { x: target.x, z: target.z },
             CLICK_WALK_SPEED * delta,
           );
-          const next = clampPoint(result.point, COMMAND_CENTER_BOUNDS);
+          const next = constrainToWalkableWorld(result.point);
           movedX = next.x - position.x;
           movedZ = next.z - position.z;
           position.set(next.x, 0, next.z);
@@ -158,13 +161,18 @@ export function PlayerController({
       }
     }
 
-
     if (avatar.current) {
       const bob = isWalking ? Math.sin(state.clock.elapsedTime * 9) * 0.035 : 0;
       avatar.current.position.set(position.x, bob, position.z);
       if (Math.abs(movedX) + Math.abs(movedZ) > 0.0001) {
         avatar.current.rotation.y = Math.atan2(movedX, movedZ);
       }
+    }
+
+    const zone = zoneAtPoint({ x: position.x, z: position.z });
+    if (zone && zoneRef.current !== zone) {
+      zoneRef.current = zone;
+      onZoneChange(zone);
     }
 
     let nearest: StationId | null = null;
