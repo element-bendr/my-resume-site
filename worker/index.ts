@@ -1,3 +1,5 @@
+import { handleAskRequest } from "./ask";
+
 const json = (body: unknown, status = 200) =>
   Response.json(body, {
     status,
@@ -7,7 +9,7 @@ const json = (body: unknown, status = 200) =>
   });
 
 const worker = {
-  fetch(request: Request): Response {
+  async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/health") {
@@ -16,6 +18,10 @@ const worker = {
         service: "vijay-kumaran-portfolio-world",
         stage: "app-foundation",
       });
+    }
+
+    if (url.pathname === "/api/ask") {
+      return handleAskRequest(request);
     }
 
     if (url.pathname.startsWith("/api/")) {

@@ -1,10 +1,10 @@
 # Current Handoff
 
 ## Goal
-Replace the static resume site with a production-ready gamified 3D portfolio while preserving a fast conventional portfolio/resume path and keeping `main` untouched until certification.
+Implement Stage 05 integration: one grounded Ask experience shared by `/ask` and the in-world Command Center terminal, preserving all certified Stage 00–04 behavior and keeping `main` untouched.
 
 ## Phase
-STAGE_04_WORLD_ZONES_CERTIFICATION
+STAGE_05_INTEGRATION
 
 ## Execution mode
 implementation
@@ -12,12 +12,12 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: feat/portfolio-world-icm-rebuild
-- active workflow/stage: workflow/active/portfolio-world-rebuild / 04-world-zones
+- working branch/worktree: stage05/local-integration / .worktrees/stage05-integration
+- active workflow/stage: workflow/active/portfolio-world-rebuild / 05-integration
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00-03 are formally certified. Stage 04 world-zone implementation is complete and green on exact-head CI run 36521705441 against f404ce032000e3d7c86f5e29748a9e1b634df3a1. All six browser screenshots and the non-WebGL fallback have been visually/technically inspected. Formal ICM Stage 04 certification is the remaining gate before Stage 05.
+Stages 00–04 are certified in the fetched integration state. Stage 05 contract is frozen in `docs/portfolio-world/ASK-CONTRACT.md` and `workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md`; local-first runbook is updated in `docs/portfolio-world/LOCAL-DEVELOPMENT.md`. The deterministic public-safe evidence registry, retrieval, and evidence-only answer composer are implemented in `src/ask/`. `POST /api/ask` is implemented in `worker/ask.ts` and routed beside the preserved health endpoint. The conventional `/ask` UI calls the shared API and shows answers, evidence, and public source labels. The Command Center Ask Terminal links to canonical `/ask` through the accessible HTML interaction overlay; it has no API/client dependency and does not change world state architecture. Inherited baseline passed on `fbbb08e84a9455655f3ac5fb92f496faa538f747` before documentation changes.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -50,18 +50,34 @@ Stages 00-03 are formally certified. Stage 04 world-zone implementation is compl
 - education is intentionally unresolved and excluded until verified;
 - LinkedIn URL is excluded until directly verified;
 - client testimonials/outcome claims require evidence before inclusion;
-- Ask backend remains deferred to Stage 05;
-- Stage 03 Command Center is certified. Stage 04 may expand topology but must preserve the certified controller, browser fallback, and direct-route behavior.
+- Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Run formal ICM certification for Stage 04. If green, hand authority to Stage 05 integration and freeze the Ask/integration contract before changing backend behavior.
+Perform independent Terra review of the complete local Stage 05 candidate, then address only demonstrated findings. Keep world state independent of API availability; do not add an LLM or storage dependency. Do not push or deploy before review and exact-head certification gates complete.
 
 ## Minimum resume context
 1. `AGENTS.md`
 2. `CONTEXT.md`
 3. `HANDOFF.md`
-4. `workflow/active/portfolio-world-rebuild/CONTEXT.md`
-5. `decisions/2026-09-28-portfolio-world-architecture.md`
+4. `workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md`
+5. `docs/portfolio-world/ASK-CONTRACT.md`
+6. `decisions/2026-09-28-portfolio-world-architecture.md`
+
+## Stage 05 setup / validation
+- remote integration head fetched: `fbbb08e84a9455655f3ac5fb92f496faa538f747`
+- latest local contract commit: `dbadd02f47d99687a3712374ffd07a7b2132ec45` (stable transport error codes; workflow check and strict status PASS)
+- local runtime: Node 22.22.0, npm 11.20.0; `npm ci` PASS
+- inherited baseline: bootstrap, workflow check/status, offline verification, typecheck, tests (7 files / 31 tests), build, conventional asset budget, and world asset budget all PASS
+- `49f81c37992700c2a74803efba5f5c81833a218f`: deterministic public-safe evidence registry, normalization, retrieval, and evidence-only answer composer; focused Ask tests, typecheck, and full test suite PASS (9 files / 42 tests)
+- retrieval uses certified technology phrases with maximal-phrase filtering, so a nested generic term cannot broaden exact project-tech matching
+- `5a32eb210da5a23a86c17cd22aac109906408d5a`: added explicit public-safe/fact invariants, verified source-reference shape, conservative unsupported-intent fail-closed gate, hobby-category scoping, and exact project status composition; focused Ask tests PASS (14), typecheck PASS, full suite PASS (9 files / 45 tests)
+- `974842d6b30be532465ae9f00b66d09167d46e2a`: source validator now enforces the existing visibility enum and hobby evidence requires exact `user-approved` provenance; malformed-value regression tests added. Focused Ask tests PASS (14), typecheck PASS, full suite PASS (9 files / 45 tests)
+- `3af9ddf8bac017c722152aee690e4d8d03584a93`: added bounded, non-logging `POST /api/ask` transport with stable error envelope/codes, 500-code-point and 4096-byte limits, strict JSON shape/content type, method handling, and no-store/security headers; health and unknown API routes preserved. Worker tests PASS (15), Ask tests PASS (29), typecheck PASS, full suite PASS (9 files / 58 tests), offline/workflow checks PASS, build and both asset budgets PASS. Local Vite/Worker HTTP smoke PASS for health, grounded, insufficient-evidence, malformed JSON, oversized body, wrong method, and unknown API route.
+- `b389a666d1ffc2eac0cf2423925628931b980e80`: built the accessible conventional Ask UI and typed client; shared API limits/error types live in `src/ask/types.ts`. The client validates the frozen response envelope, bounds normalized question length, and preserves aborts. `/ask` presents loading/error/insufficient states, grounded answers, matched evidence, and public source labels only. Focused client/Worker tests PASS (21); typecheck PASS; full suite PASS (10 files / 64 tests); workflow/bootstrap/offline checks, production build, and both asset budgets PASS. Browser matrix PASS for PCAS, Cloudflare Workers projects, HCL experience, Python, hobbies, metric, AWS certifications, prompt injection, oversized local input, and network-offline error. Browser-side strict comparison confirmed the visible PCAS answer equals `POST /api/ask` answer exactly. `/ask` has no horizontal overflow at 1440, 768, and 390 px. Shared mobile header containment was fixed with a two-rule media-query change; `/projects` and `/resume` remain 390 px wide without overflow. `/` retains an unrelated pre-existing 34 px hero-heading overflow at 390 px; left out of scope.
+- `98a6b07`: addressed Terra's Ask disclosure/accessibility findings. `/ask` now imports a browser-safe map containing only approved public source labels and uses a neutral label for other refs. The unused content `sourceIds` export was removed so the full source registry is tree-shaken from client JS. Added `npm run verify:ask-disclosure` to reject internal labels and `internal-reference` in built client bundles. Error alert has a stable ID conditionally included in the textarea description. Ask/Worker/content tests PASS (27), typecheck/build PASS, disclosure scan PASS (8 client bundles). Browser smoke at 390 px confirmed no horizontal overflow, matching `aria-describedby`/alert association, and neutral labeling for an internal-only hobby source.
+- `07b7253`: connected Ask Terminal to `/ask` with a dedicated accessible overlay action; added typed legal-area/essential-route assertions and `npm run verify:world-ask` boundary guard (22 world source files, no Ask API/client coupling). Focused world/routes/WebGL tests PASS (14); typecheck, bootstrap/workflow/strict status, offline checks, full suite (11 files / 66 tests), build, conventional/world asset budgets, and Ask disclosure scan PASS. Browser: desktop station activation, Escape close/resumed movement/reopen, Open Ask navigation, direct `/ask`, and exact equality between visible PCAS answer and raw API response PASS; at 390×844 dialog/action remained visible. Forced WebGL context failure preserved the conventional fallback with Ask route. Browser artifacts are in `/tmp/.playwright-cli/`.
+- blockers: none; no deploy or push performed
+- protected state: `main`, production, and certified Stage 00–04 stage records unchanged
 
 
 ## Stage 04 evidence
