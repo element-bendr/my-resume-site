@@ -1,25 +1,6 @@
 import { answerQuestion } from "../src/ask/answer";
-import type { AskResponse } from "../src/ask/types";
-
-const MAX_BODY_BYTES = 4096;
-const MAX_QUESTION_CODE_POINTS = 500;
-
-type AskErrorCode =
-  | "method_not_allowed"
-  | "unsupported_media_type"
-  | "invalid_json"
-  | "invalid_request"
-  | "question_too_long"
-  | "payload_too_large"
-  | "internal_error";
-
-interface AskErrorResponse {
-  ok: false;
-  answer: "";
-  matches: [];
-  support: "invalid_request";
-  error: { code: AskErrorCode; message: string };
-}
+import { ASK_MAX_QUESTION_CODE_POINTS, ASK_MAX_REQUEST_BYTES } from "../src/ask/types";
+import type { AskErrorCode, AskErrorResponse, AskResponse } from "../src/ask/types";
 
 const messages: Record<AskErrorCode, string> = {
   method_not_allowed: "Use POST to submit a question.",
@@ -56,7 +37,7 @@ function failure(code: AskErrorCode, status: number, headers?: HeadersInit): Res
 
 async function readBoundedBody(request: Request): Promise<Uint8Array | null> {
   const contentLength = request.headers.get("content-length");
-  if (contentLength !== null && Number(contentLength) > MAX_BODY_BYTES) {
+  if (contentLength !== null && Number(contentLength) > ASK_MAX_REQUEST_BYTES) {
     await request.body?.cancel();
     return null;
   }
@@ -70,7 +51,7 @@ async function readBoundedBody(request: Request): Promise<Uint8Array | null> {
     const { done, value } = await reader.read();
     if (done) break;
     size += value.byteLength;
-    if (size > MAX_BODY_BYTES) {
+    if (size > ASK_MAX_REQUEST_BYTES) {
       await reader.cancel();
       return null;
     }
@@ -124,7 +105,7 @@ export async function handleAskRequest(request: Request): Promise<Response> {
 
     const question = normalizeQuestion((payload as { question: string }).question);
     if (!question) return failure("invalid_request", 400);
-    if ([...question].length > MAX_QUESTION_CODE_POINTS) {
+    if ([...question].length > ASK_MAX_QUESTION_CODE_POINTS) {
       return failure("question_too_long", 400);
     }
 
