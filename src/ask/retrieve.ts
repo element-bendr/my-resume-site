@@ -1,4 +1,5 @@
 import { evidenceRegistry, type EvidenceRecord } from "./evidence";
+import { hasUnsupportedIntent } from "./intent";
 import { normalizeText, tokenize } from "./normalize";
 
 const MIN_SCORE = 2;
@@ -54,13 +55,15 @@ function scoreEvidence(query: string, queryTokens: Set<string>, record: Evidence
 export function retrieveEvidence(question: string): EvidenceRecord[] {
   const query = normalizeText(question);
   const queryTokens = new Set(tokenize(question));
-  if (queryTokens.size === 0) return [];
+  if (queryTokens.size === 0 || hasUnsupportedIntent(question)) return [];
   const hasProjectIntent = queryTokens.has("project") || queryTokens.has("projects");
+  const hasHobbyIntent = queryTokens.has("hobby") || queryTokens.has("hobbies");
   const technologies = requestedTechnologies(query);
 
   return evidenceRegistry
     .filter((record) => !hasProjectIntent || record.kind === "project")
     .filter((record) => !hasProjectIntent || matchesRequestedTechnologies(record, technologies))
+    .filter((record) => !hasHobbyIntent || record.kind === "hobby")
     .map((record) => ({ record, score: scoreEvidence(query, queryTokens, record) }))
     .filter(({ score }) => score >= MIN_SCORE)
     .sort((left, right) => right.score - left.score || (left.record.id < right.record.id ? -1 : left.record.id > right.record.id ? 1 : 0))

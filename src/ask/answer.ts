@@ -16,7 +16,7 @@ function sentenceFor(record: EvidenceRecord): string {
       const technologies = record.facts.technologies.length
         ? ` Technologies include ${record.facts.technologies.join(", ")}.`
         : "";
-      return `${record.title}: ${record.facts.summary}${technologies}`;
+      return `${record.title} (${record.facts.status}): ${record.facts.summary}${technologies}`;
     }
     case "experience":
       return `${record.facts.role} at ${record.facts.organization} (${record.facts.period}). ${record.facts.summary}`;

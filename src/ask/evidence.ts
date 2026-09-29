@@ -1,23 +1,28 @@
-import { experience, hobbies, identity, links, projects, skills, sourceIds } from "../content";
+import { experience, hobbies, identity, links, projects, skills, sources } from "../content";
 import type { EvidenceKind } from "./types";
 
 type EvidenceFacts =
   | { type: "identity"; consultingTitle: string; engineeringPositioning: string; summary: string }
-  | { type: "project"; summary: string; technologies: string[] }
+  | { type: "project"; status: string; summary: string; technologies: string[] }
   | { type: "experience"; role: string; organization: string; period: string; summary: string; highlights: string[] }
   | { type: "skill"; category: string }
   | { type: "hobby" }
   | { type: "link"; href: string };
 
 export interface EvidenceRecord {
+  publicSafe: true;
   kind: EvidenceKind;
   id: string;
   title: string;
   sourceRefs: string[];
   aliases: string[];
   searchText: string;
+  factStatements: string[];
   facts: EvidenceFacts;
 }
+
+const sourceById = new Map(sources.map((source) => [source.id, source]));
+if (sourceById.size !== sources.length) throw new Error("Source IDs must be unique");
 
 const projectAliases: Record<string, string[]> = {
   pcas: ["PCAS", "Personal Career Acquisition", "career acquisition system"],
@@ -32,10 +37,30 @@ const projectSummaries: Record<string, string> = {
 };
 
 function checkedRefs(owner: string, refs: string[]): string[] {
-  if (refs.length === 0 || refs.some((ref) => !sourceIds.has(ref))) {
+  if (refs.length === 0 || refs.some((ref) => {
+    const source = sourceById.get(ref);
+    return !source || [source.id, source.label, source.visibility].some((value) => !value.trim());
+  })) {
     throw new Error(`Evidence source references are invalid for ${owner}`);
   }
   return [...new Set(refs)];
+}
+
+function factStatements(facts: EvidenceFacts, title: string): string[] {
+  switch (facts.type) {
+    case "identity":
+      return [facts.summary, `Consulting positioning: ${facts.consultingTitle}.`, `Engineering positioning: ${facts.engineeringPositioning}.`];
+    case "project":
+      return [`${title} status: ${facts.status}.`, `${title}: ${facts.summary}`, ...facts.technologies.map((technology) => `Technology: ${technology}.`)];
+    case "experience":
+      return [`${facts.role} at ${facts.organization}.`, `Period: ${facts.period}.`, facts.summary, ...facts.highlights];
+    case "skill":
+      return [`${title} is listed under ${facts.category}.`];
+    case "hobby":
+      return [`${title} is an approved hobby.`];
+    case "link":
+      return [`${title}: ${facts.href}`];
+  }
 }
 
 function record(
@@ -47,13 +72,19 @@ function record(
   searchable: string[],
   facts: EvidenceFacts,
 ): EvidenceRecord {
+  const statements = factStatements(facts, title);
+  if (statements.length === 0 || statements.some((statement) => !statement.trim())) {
+    throw new Error(`Evidence facts are empty for ${kind}:${id}`);
+  }
   return {
+    publicSafe: true,
     kind,
     id,
     title,
     sourceRefs: checkedRefs(`${kind}:${id}`, sourceRefs),
     aliases,
     searchText: [title, ...aliases, ...searchable].join(" "),
+    factStatements: statements,
     facts,
   };
 }
@@ -65,8 +96,8 @@ const projectRecords = projects.map((project) =>
     project.title,
     project.sourceRefs,
     projectAliases[project.id] ?? [],
-    [projectSummaries[project.id] ?? project.shortSummary, ...project.technologies],
-    { type: "project", summary: projectSummaries[project.id] ?? project.shortSummary, technologies: [...project.technologies] },
+    [project.status, projectSummaries[project.id] ?? project.shortSummary, ...project.technologies],
+    { type: "project", status: project.status, summary: projectSummaries[project.id] ?? project.shortSummary, technologies: [...project.technologies] },
   ),
 );
 
@@ -94,7 +125,7 @@ const skillRecords = skills.map((skill) =>
 );
 
 const hobbyRecords = hobbies.map((hobby) =>
-  record("hobby", hobby.id, hobby.label, ["user-approved-hobbies"], [], [], { type: "hobby" }),
+  record("hobby", hobby.id, hobby.label, ["user-approved-hobbies"], ["hobby", "hobbies"], ["hobby", "hobbies"], { type: "hobby" }),
 );
 
 const linkSourceRefs: Record<string, string[]> = {
