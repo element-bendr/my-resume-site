@@ -1,0 +1,198 @@
+name: Stage 05 Exact-Head Certification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/portfolio-world-icm-rebuild
+    paths:
+      - ".github/certification/**"
+      - ".github/workflows/stage05-certify.yml"
+      - "HANDOFF.md"
+      - "docs/portfolio-world/ASK-CONTRACT.md"
+      - "docs/portfolio-world/LOCAL-DEVELOPMENT.md"
+      - "package.json"
+      - "package-lock.json"
+      - "scripts/**"
+      - "src/**"
+      - "public/**"
+      - "index.html"
+      - "tests/**"
+      - "vite.config.ts"
+      - "worker/**"
+      - "workflow/active/portfolio-world-rebuild/**"
+      - "wrangler.jsonc"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stage05-exact-head-certification-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Require integration branch and record candidate
+        env:
+          EXPECTED_REF: refs/heads/feat/portfolio-world-icm-rebuild
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "$EXPECTED_REF" || {
+            echo "Stage 05 certification must run on $EXPECTED_REF; got $GITHUB_REF" >&2
+            exit 1
+          }
+          printf 'Stage 05 candidate SHA: %s\n' "$GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+          printf 'Stage 05 candidate ref: %s\n' "$GITHUB_REF" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Set up Node 22.22.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Pin npm 11.20.0
+        run: |
+          set -euo pipefail
+          npm install --global npm@11.20.0
+          test "$(node --version)" = "v22.22.0"
+          test "$(npm --version)" = "11.20.0"
+          node --version
+          npm --version
+
+      - name: Verify deterministic lockfile
+        run: |
+          set -euo pipefail
+          cp package-lock.json "$RUNNER_TEMP/package-lock.before.json"
+          npm install --package-lock-only --ignore-scripts
+          cmp --silent "$RUNNER_TEMP/package-lock.before.json" package-lock.json || {
+            git diff -- package-lock.json
+            exit 1
+          }
+
+      - name: Install committed dependencies
+        run: |
+          npm ci
+          git diff --exit-code -- package-lock.json
+
+      - name: ICM workflow checks
+        run: |
+          python3 scripts/bootstrap_check.py
+          python3 scripts/workflow_check.py
+          python3 scripts/workflow_status.py --strict
+
+      - name: Offline architecture and content checks
+        run: npm run verify:offline
+
+      - name: Stage 05 disclosure and world boundary checks
+        run: |
+          npm run verify:ask-disclosure
+          npm run verify:world-ask
+
+      - name: Typecheck and full tests
+        run: |
+          npm run typecheck
+          npm test
+
+      - name: Production build and asset budgets
+        run: |
+          npm run build
+          npm run verify:assets
+          npm run verify:world-assets
+
+      - name: Start local production preview
+        run: |
+          set -euo pipefail
+          nohup npm run preview -- --host 127.0.0.1 --port 4173 \
+            > "$RUNNER_TEMP/stage05-preview.log" 2>&1 &
+          echo "$!" > "$RUNNER_TEMP/stage05-preview.pid"
+          ready=false
+          for attempt in {1..45}; do
+            if curl --silent --fail http://127.0.0.1:4173/api/health \
+              > "$RUNNER_TEMP/stage05-health.json"; then
+              ready=true
+              break
+            fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then
+            cat "$RUNNER_TEMP/stage05-preview.log"
+            exit 1
+          fi
+
+      - name: Assert real HTTP Ask contract
+        run: |
+          set -euo pipefail
+          node --input-type=module - "$RUNNER_TEMP/stage05-health.json" <<'NODE'
+          import { readFileSync } from "node:fs";
+          const health = JSON.parse(readFileSync(process.argv[2], "utf8"));
+          if (health.ok !== true) throw new Error("health endpoint did not return ok=true");
+          NODE
+
+          curl --silent --show-error --fail \
+            -H 'content-type: application/json' \
+            --data '{"question":"What is PCAS?"}' \
+            http://127.0.0.1:4173/api/ask > "$RUNNER_TEMP/stage05-grounded.json"
+          node --input-type=module - "$RUNNER_TEMP/stage05-grounded.json" <<'NODE'
+          import { readFileSync } from "node:fs";
+          const result = JSON.parse(readFileSync(process.argv[2], "utf8"));
+          if (result.ok !== true || result.support !== "grounded" ||
+              !result.matches.some((match) => match.id === "pcas")) {
+            throw new Error("PCAS request did not return grounded PCAS evidence");
+          }
+          NODE
+
+          curl --silent --show-error --fail \
+            -H 'content-type: application/json' \
+            --data '{"question":"What revenue increase did SteelMade achieve?"}' \
+            http://127.0.0.1:4173/api/ask > "$RUNNER_TEMP/stage05-unsupported.json"
+          node --input-type=module - "$RUNNER_TEMP/stage05-unsupported.json" <<'NODE'
+          import { readFileSync } from "node:fs";
+          const result = JSON.parse(readFileSync(process.argv[2], "utf8"));
+          if (result.ok !== true || result.support !== "insufficient_evidence" ||
+              result.matches.length !== 0) {
+            throw new Error("unsupported revenue request did not fail closed");
+          }
+          NODE
+
+      - name: Install pinned transient Playwright and Chromium
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/playwright-browsers
+        run: |
+          set -euo pipefail
+          npm install --prefix "$RUNNER_TEMP/stage05-playwright" \
+            --no-save --no-package-lock playwright@1.63.0
+          "$RUNNER_TEMP/stage05-playwright/node_modules/.bin/playwright" \
+            install --with-deps chromium
+
+      - name: Verify browser Ask, terminal, and fallback paths
+        env:
+          PLAYWRIGHT_PACKAGE_PATH: ${{ runner.temp }}/stage05-playwright/node_modules/playwright
+          PLAYWRIGHT_BROWSERS_PATH: ${{ runner.temp }}/playwright-browsers
+          STAGE05_BASE_URL: http://127.0.0.1:4173
+          STAGE05_EVIDENCE_DIR: ${{ runner.temp }}/stage05-browser-evidence
+        run: node .github/certification/stage05-browser.pw.mjs
+
+      - name: Upload compact browser evidence
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage05-browser-evidence-${{ github.sha }}
+          path: ${{ runner.temp }}/stage05-browser-evidence/browser-evidence.json
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Stop local preview
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/stage05-preview.pid" ]; then
+            kill "$(cat "$RUNNER_TEMP/stage05-preview.pid")" 2>/dev/null || true
+          fi
