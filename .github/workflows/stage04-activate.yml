@@ -1,56 +1,13 @@
 name: Stage 04 Activation
 
 on:
-  push:
-    branches:
-      - feat/portfolio-world-icm-rebuild
-    paths:
-      - ".github/workflows/stage04-activate.yml"
-      - "workflow/active/portfolio-world-rebuild/04-world-zones-CONTEXT.md"
-      - "workflow/active/portfolio-world-rebuild/state.json"
-      - "decisions/2026-09-29-world-zones.md"
+  workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: stage04-activation
-  cancel-in-progress: true
+  contents: read
 
 jobs:
-  activate:
-    if: github.actor != 'github-actions[bot]'
+  retired:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
-      - name: Checkout candidate
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Validate workflow before activation
-        run: |
-          python3 scripts/bootstrap_check.py
-          python3 scripts/workflow_check.py
-          python3 scripts/workflow_status.py --strict
-
-      - name: Dry-run activation
-        run: python3 scripts/workflow_activate.py --workflow portfolio-world-rebuild
-
-      - name: Activate Stage 04
-        run: python3 scripts/workflow_activate.py --workflow portfolio-world-rebuild --write
-
-      - name: Verify active state
-        run: |
-          python3 scripts/workflow_check.py
-          python3 scripts/workflow_status.py --strict
-
-      - name: Commit activation
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add workflow/active/portfolio-world-rebuild/state.json
-          git commit -m "chore(icm): activate Stage 04 world zones [skip ci]"
-          git push origin HEAD:feat/portfolio-world-icm-rebuild
+      - run: echo "Stage 04 is active. This activation workflow is retained for historical/manual inspection only."

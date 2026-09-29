@@ -1,0 +1,120 @@
+name: Stage 04 World Zones Certification
+
+on:
+  push:
+    branches:
+      - feat/portfolio-world-icm-rebuild
+    paths:
+      - ".github/workflows/stage04-certify.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "src/world/**"
+      - "tests/world-config.test.ts"
+      - "tests/world-topology.test.ts"
+      - "scripts/check-world-*.mjs"
+      - "src/styles/global.css"
+      - "public/_headers"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: stage04-world-zones
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+
+      - name: Use Node 22.22.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Use npm 11.20.0
+        run: |
+          npm install --global npm@11.20.0
+          npm --version
+
+      - name: Verify deterministic lockfile
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp package-lock.json /tmp/package-lock.before.json
+          npm install --package-lock-only --ignore-scripts
+          cmp --silent /tmp/package-lock.before.json package-lock.json || {
+            git diff -- package-lock.json
+            exit 1
+          }
+
+      - name: Clean install
+        run: npm ci
+
+      - name: Contract checks
+        run: |
+          npm run verify:content
+          npm run verify:config
+          npm run verify:world
+          npm run verify:world-zones
+
+      - name: Typecheck and tests
+        run: |
+          npm run typecheck
+          npm test
+
+      - name: Production build and budgets
+        run: |
+          npm run build
+          npm run verify:assets
+          npm run verify:world-assets
+
+      - name: Browser proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/portfolio-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          cleanup() { kill "$PREVIEW_PID" 2>/dev/null || true; }
+          trap cleanup EXIT
+
+          READY=0
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4173/api/health > /tmp/health.json; then
+              READY=1
+              break
+            fi
+            sleep 1
+          done
+          test "$READY" -eq 1
+
+          CHROME_BIN="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_BIN"
+          mkdir -p stage04-browser-evidence
+
+          timeout 20s "$CHROME_BIN"             --headless=new             --no-sandbox             --disable-dev-shm-usage             --disable-gpu             --disable-software-rasterizer             --virtual-time-budget=2500             --dump-dom             http://127.0.0.1:4173/play             > stage04-browser-evidence/fallback-dom.html             2> stage04-browser-evidence/chrome-fallback.log
+          grep -q '3D unavailable' stage04-browser-evidence/fallback-dom.html
+          grep -q 'Projects' stage04-browser-evidence/fallback-dom.html
+          grep -q 'Resume' stage04-browser-evidence/fallback-dom.html
+
+          for zone in command-center build-lab automation-lab client-street timeline hobby-district; do
+            URL="http://127.0.0.1:4173/play"
+            if [ "$zone" != "command-center" ]; then URL="$URL?zone=$zone"; fi
+            timeout 30s "$CHROME_BIN"               --headless=new               --no-sandbox               --disable-dev-shm-usage               --use-gl=angle               --use-angle=swiftshader               --enable-webgl               --window-size=1440,1000               --virtual-time-budget=4000               --screenshot="stage04-browser-evidence/$zone.png"               "$URL"               > "stage04-browser-evidence/$zone.log" 2>&1
+            test -s "stage04-browser-evidence/$zone.png"
+          done
+
+      - name: Upload Stage 04 browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage04-world-browser-evidence
+          path: stage04-browser-evidence/
+          if-no-files-found: warn
+          retention-days: 3
