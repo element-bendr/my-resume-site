@@ -129,7 +129,12 @@
         "scripts/check-world-boundary.mjs",
         "package.json",
         "package-lock.json",
-        "scripts/check-world-budget.mjs"
+        "scripts/check-world-budget.mjs",
+        "docs/portfolio-world/STAGE-03-VALIDATION.md",
+        "src/world/webgl.ts",
+        "src/world/WorldCanvasBoundary.tsx",
+        "src/world/WebGLFallback.tsx",
+        "tests/webgl.test.ts"
       ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/03-command-center-slice-completion-report.md"
     },

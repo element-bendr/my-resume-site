@@ -17,7 +17,7 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00, 01, and 02 are certified. Stage 03 Command Center contract is frozen and awaits activation. The slice is intentionally one procedural room with constrained movement/camera/interactions; full world districts and external 3D assets remain blocked.
+Stages 00, 01, and 02 are certified. Stage 03 Command Center implementation is complete and green on exact-head CI run 36444089676; the generated WebGL screenshot has been visually inspected. Formal ICM Stage 03 certification is the remaining gate before Stage 04.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -37,6 +37,8 @@ Stages 00, 01, and 02 are certified. Stage 03 Command Center contract is frozen 
 - Stage 02 ICM candidate: 0f2ef77df68fdd28674b50bfe83c183770adf890
 - Stage 02 ICM run 36424566049: PASS
 - Stage 03 contract/activation: ACTIVE
+- Stage 03 application candidate: 30740ed443f6f20d0432d0d07d530ebdab2fe321
+- Stage 03 exact-head CI run 36444089676: PASS (6 test files / 21 tests, build, budgets, browser fallback, WebGL screenshot)
 
 ## Protected state
 - main / production baseline: UNCHANGED
@@ -52,7 +54,7 @@ Stages 00, 01, and 02 are certified. Stage 03 Command Center contract is frozen 
 - Stage 03 renderer/world behavior is under active certification; the initial Command Center slice is implemented.
 
 ## Next atomic action
-Complete Stage 03 exact-head certification under Node 22.22.0, commit the CI-generated lockfile, perform visual inspection of the Command Center, and only then certify the slice.
+Run formal ICM certification for Stage 03 against the completed evidence. If green, hand authority to Stage 04 world-zones and freeze the district expansion contract before implementation.
 
 ## Minimum resume context
 1. `AGENTS.md`
