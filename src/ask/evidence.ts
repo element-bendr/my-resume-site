@@ -1,4 +1,5 @@
 import { experience, hobbies, identity, links, projects, skills, sources } from "../content";
+import type { HobbyContent, SourceContent } from "../content/types";
 import type { EvidenceKind } from "./types";
 
 type EvidenceFacts =
@@ -19,6 +20,23 @@ export interface EvidenceRecord {
   searchText: string;
   factStatements: string[];
   facts: EvidenceFacts;
+}
+
+export function isValidSourceRecord(value: unknown): value is SourceContent {
+  if (typeof value !== "object" || value === null) return false;
+  const source = value as Partial<Record<keyof SourceContent, unknown>>;
+  const isNonEmptyString = (field: unknown): field is string => typeof field === "string" && field.trim().length > 0;
+  return isNonEmptyString(source.id) && isNonEmptyString(source.label) &&
+    (source.visibility === "public" || source.visibility === "internal-reference");
+}
+
+export function hasUserApprovedHobbySource(value: unknown): value is HobbyContent["source"] {
+  return value === "user-approved";
+}
+
+if (sources.some((source) => !isValidSourceRecord(source))) throw new Error("Source registry records are malformed");
+if (hobbies.some((hobby) => !hasUserApprovedHobbySource(hobby.source))) {
+  throw new Error("Hobby evidence must be user-approved");
 }
 
 const sourceById = new Map(sources.map((source) => [source.id, source]));

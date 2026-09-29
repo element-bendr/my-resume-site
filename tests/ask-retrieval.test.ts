@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { evidenceRegistry } from "../src/ask/evidence";
+import { evidenceRegistry, hasUserApprovedHobbySource, isValidSourceRecord } from "../src/ask/evidence";
 import { normalizeText, tokenize } from "../src/ask/normalize";
 import { retrieveEvidence } from "../src/ask/retrieve";
 import { sources } from "../src/content";
@@ -57,7 +57,11 @@ describe("grounded Ask evidence retrieval", () => {
       expect(source.id.trim()).not.toBe("");
       expect(source.label.trim()).not.toBe("");
       expect(source.visibility.trim()).not.toBe("");
+      expect(isValidSourceRecord(source)).toBe(true);
     }
+    expect(isValidSourceRecord({ id: "bad", label: "Malformed", visibility: "private" })).toBe(false);
+    expect(hasUserApprovedHobbySource("user-approved")).toBe(true);
+    expect(hasUserApprovedHobbySource("unverified-import")).toBe(false);
     for (const record of evidenceRegistry) {
       expect(record.publicSafe).toBe(true);
       expect(record.title.trim()).not.toBe("");
