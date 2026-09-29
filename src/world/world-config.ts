@@ -186,8 +186,8 @@ export const STATIONS: readonly StationConfig[] = [
     kind: "experience",
     zoneId: "timeline",
     experienceId: "vinfinity-ai-systems-architect",
-    position: [-4.1, 0, 18],
-    interactionPoint: { x: -4.1, z: 16.6 },
+    position: [-4.1, 0, 16.5],
+    interactionPoint: { x: -4.1, z: 17.7 },
     accent: "#f4d06f",
   },
   {
@@ -197,8 +197,8 @@ export const STATIONS: readonly StationConfig[] = [
     kind: "experience",
     zoneId: "timeline",
     experienceId: "hcl-cybersecurity-incident-management",
-    position: [0, 0, 19],
-    interactionPoint: { x: 0, z: 17.5 },
+    position: [0, 0, 17.3],
+    interactionPoint: { x: 0, z: 18.5 },
     accent: "#e9c85d",
   },
   {
@@ -208,8 +208,8 @@ export const STATIONS: readonly StationConfig[] = [
     kind: "experience",
     zoneId: "timeline",
     experienceId: "niit-elearning-content-development",
-    position: [4.1, 0, 18],
-    interactionPoint: { x: 4.1, z: 16.6 },
+    position: [4.1, 0, 16.5],
+    interactionPoint: { x: 4.1, z: 17.7 },
     accent: "#d9b84d",
   },
   {

@@ -43,7 +43,7 @@ export function WorldTopology({ onRequestMove }: WorldTopologyProps) {
             </mesh>
             {zone.id !== "command-center" ? (
               <Html
-                position={[geometry.centerX, 0.22, zone.bounds.maxZ - 0.7]}
+                position={[geometry.centerX, 0.22, zone.bounds.minZ + 0.7]}
                 center
                 distanceFactor={14}
                 transform

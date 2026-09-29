@@ -64,7 +64,7 @@ export const ZONES: readonly ZoneConfig[] = [
     shortLabel: "Timeline",
     accent: "#f4d06f",
     bounds: { minX: -7, maxX: 7, minZ: 12, maxZ: 22 },
-    fastTravelPoint: { x: 0, z: 14.2 },
+    fastTravelPoint: { x: 0, z: 21 },
   },
   {
     id: "build-lab",
