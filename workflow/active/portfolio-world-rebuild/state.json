@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "blocked",
+  "status": "active",
   "active_stage": "04-world-zones",
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
@@ -140,7 +140,7 @@
     },
     {
       "id": "04-world-zones",
-      "status": "blocked",
+      "status": "active",
       "context": "workflow/active/portfolio-world-rebuild/04-world-zones-CONTEXT.md",
       "depends_on_stages": [
         "03-command-center-slice"
@@ -159,8 +159,7 @@
         "tests/world-topology.test.ts",
         "scripts/check-world-zones.mjs"
       ],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/04-world-zones-completion-report.md",
-      "block_reason": "awaiting_activation"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/04-world-zones-completion-report.md"
     },
     {
       "id": "05-integration",
