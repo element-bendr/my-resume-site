@@ -4,7 +4,7 @@
 Replace the static resume site with a production-ready gamified 3D portfolio while preserving a fast conventional portfolio/resume path and keeping `main` untouched until certification.
 
 ## Phase
-STAGE_04_WORLD_ZONES
+STAGE_04_WORLD_ZONES_CERTIFICATION
 
 ## Execution mode
 implementation
@@ -17,7 +17,7 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00-03 are formally certified. Stage 04 is blocked awaiting activation with its world-zone contract now frozen. The next implementation expands the certified Command Center controller into Build Lab, Automation Lab, Client Street, Timeline Corridor, and Hobby District using one shared topology and lazy district modules.
+Stages 00-03 are formally certified. Stage 04 world-zone implementation is complete and green on exact-head CI run 36521705441 against f404ce032000e3d7c86f5e29748a9e1b634df3a1. All six browser screenshots and the non-WebGL fallback have been visually/technically inspected. Formal ICM Stage 04 certification is the remaining gate before Stage 05.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -54,7 +54,7 @@ Stages 00-03 are formally certified. Stage 04 is blocked awaiting activation wit
 - Stage 03 Command Center is certified. Stage 04 may expand topology but must preserve the certified controller, browser fallback, and direct-route behavior.
 
 ## Next atomic action
-Activate Stage 04, generalize movement to the legal-area union, add world topology + fast travel, then implement district modules and content interactions. Do not begin Stage 05 Ask/backend integration.
+Run formal ICM certification for Stage 04. If green, hand authority to Stage 05 integration and freeze the Ask/integration contract before changing backend behavior.
 
 ## Minimum resume context
 1. `AGENTS.md`
@@ -62,3 +62,11 @@ Activate Stage 04, generalize movement to the legal-area union, add world topolo
 3. `HANDOFF.md`
 4. `workflow/active/portfolio-world-rebuild/CONTEXT.md`
 5. `decisions/2026-09-28-portfolio-world-architecture.md`
+
+
+## Stage 04 evidence
+- application candidate: f404ce032000e3d7c86f5e29748a9e1b634df3a1
+- GitHub Actions run: 36521705441
+- tests: 7 files / 31 tests PASS
+- total client JS: 333.3 KiB gzip
+- browser proof: Command Center + five districts + non-WebGL fallback PASS

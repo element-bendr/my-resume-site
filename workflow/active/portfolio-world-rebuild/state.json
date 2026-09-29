@@ -157,7 +157,8 @@
         "src/world/districts/TimelineCorridor.tsx",
         "src/world/districts/HobbyDistrict.tsx",
         "tests/world-topology.test.ts",
-        "scripts/check-world-zones.mjs"
+        "scripts/check-world-zones.mjs",
+        "docs/portfolio-world/STAGE-04-VALIDATION.md"
       ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/04-world-zones-completion-report.md"
     },
