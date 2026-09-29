@@ -20,6 +20,14 @@
 - docs/portfolio-world/RENDERING-TECHNOLOGY.md
 - docs/portfolio-world/STAGE-03-VALIDATION.md
 
+## Dependencies
+
+- Stage 03 must remain certified and current;
+- package-lock.json must remain deterministic;
+- the Stage 03 PlayerController, CameraRig, WebGL fallback, and conventional routes remain protected interfaces;
+- all new professional/personal content must already exist in the certified typed content layer;
+- no Stage 05 backend capability is required for Stage 04.
+
 ## Objective
 
 Expand the certified Command Center into the complete explorable Portfolio World without changing the proven locomotion, renderer, accessibility, or content-authority contracts.
