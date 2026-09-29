@@ -5,6 +5,7 @@ import {
   constrainToWalkableWorld,
   isWalkablePoint,
   overlaps,
+  parseZoneId,
   reachableZones,
   zoneAtPoint,
 } from "../src/world/world-topology";
@@ -52,5 +53,12 @@ describe("Portfolio World topology", () => {
     const projected = constrainToWalkableWorld({ x: -10, z: 8 });
     expect(isWalkablePoint(projected)).toBe(true);
     expect(projected).not.toEqual({ x: -10, z: 8 });
+  });
+
+  it("accepts only known zone ids for deep links", () => {
+    expect(parseZoneId("automation-lab")).toBe("automation-lab");
+    expect(parseZoneId("hobby-district")).toBe("hobby-district");
+    expect(parseZoneId("moon-base")).toBeNull();
+    expect(parseZoneId(null)).toBeNull();
   });
 });

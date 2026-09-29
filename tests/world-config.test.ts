@@ -1,33 +1,57 @@
 import { describe, expect, it } from "vitest";
+import experienceData from "../src/content/experience.json";
+import hobbiesData from "../src/content/hobbies.json";
 import projectsData from "../src/content/projects.json";
 import {
-  COMMAND_CENTER_BOUNDS,
   PLAYER_SPAWN,
   STATIONS,
+  stationsForZone,
 } from "../src/world/world-config";
-import { clampPoint } from "../src/world/movement";
+import {
+  isWalkablePoint,
+  zoneAtPoint,
+} from "../src/world/world-topology";
 
-describe("command-center world contract", () => {
-  it("contains exactly three distinct, visibly labelled interaction stations", () => {
-    expect(STATIONS).toHaveLength(3);
-    expect(new Set(STATIONS.map((station) => station.id)).size).toBe(3);
-    for (const station of STATIONS) expect(station.shortLabel.trim().length).toBeGreaterThan(0);
-    expect(STATIONS.find((station) => station.id === "memory-os")?.position[0]).not.toBe(0);
-  });
-
-  it("keeps spawn and every interaction point inside legal bounds", () => {
-    expect(clampPoint(PLAYER_SPAWN, COMMAND_CENTER_BOUNDS)).toEqual(PLAYER_SPAWN);
+describe("world interaction registry", () => {
+  it("keeps every station id unique and visibly labelled", () => {
+    expect(STATIONS.length).toBeGreaterThanOrEqual(19);
+    expect(new Set(STATIONS.map((station) => station.id)).size).toBe(STATIONS.length);
     for (const station of STATIONS) {
-      expect(clampPoint(station.interactionPoint, COMMAND_CENTER_BOUNDS)).toEqual(
-        station.interactionPoint,
-      );
+      expect(station.shortLabel.trim().length).toBeGreaterThan(0);
+      expect(isWalkablePoint(station.interactionPoint)).toBe(true);
+      expect(zoneAtPoint(station.interactionPoint)).toBe(station.zoneId);
     }
   });
 
-  it("links project stations only to source-backed project records", () => {
-    const projectIds = new Set(projectsData.map((project) => project.id));
-    for (const station of STATIONS) {
-      if (station.kind === "project") expect(projectIds.has(station.projectId ?? "")).toBe(true);
+  it("keeps the original spawn in the Command Center", () => {
+    expect(zoneAtPoint(PLAYER_SPAWN)).toBe("command-center");
+  });
+
+  it("keeps project stations source-backed", () => {
+    const ids = new Set(projectsData.map((project) => project.id));
+    for (const station of STATIONS.filter((item) => item.kind === "project")) {
+      expect(ids.has(station.projectId ?? "")).toBe(true);
     }
+  });
+
+  it("keeps timeline stations tied to structured experience", () => {
+    const ids = new Set(experienceData.map((entry) => entry.id));
+    for (const station of STATIONS.filter((item) => item.kind === "experience")) {
+      expect(ids.has(station.experienceId ?? "")).toBe(true);
+    }
+  });
+
+  it("keeps hobby stations tied only to user-approved hobby records", () => {
+    const ids = new Set(hobbiesData.map((entry) => entry.id));
+    for (const station of STATIONS.filter((item) => item.kind === "hobby")) {
+      expect(ids.has(station.hobbyId ?? "")).toBe(true);
+    }
+  });
+
+  it("keeps Ask in the Command Center and project detail in districts", () => {
+    expect(stationsForZone("command-center").map((station) => station.id)).toEqual(["ask-terminal"]);
+    expect(stationsForZone("build-lab").length).toBeGreaterThan(0);
+    expect(stationsForZone("automation-lab").length).toBeGreaterThan(0);
+    expect(stationsForZone("client-street").length).toBeGreaterThan(0);
   });
 });

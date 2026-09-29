@@ -19,9 +19,10 @@
     "deploy": "npm run verify && wrangler deploy",
     "verify:boundary": "node scripts/check-foundation-boundary.mjs",
     "verify:config": "node scripts/check-foundation-config.mjs",
-    "verify:offline": "npm run verify:content && npm run verify:config && npm run verify:world",
+    "verify:offline": "npm run verify:content && npm run verify:config && npm run verify:world && npm run verify:world-zones",
     "verify:world": "node scripts/check-world-boundary.mjs",
-    "verify:world-assets": "node scripts/check-world-budget.mjs"
+    "verify:world-assets": "node scripts/check-world-budget.mjs",
+    "verify:world-zones": "node scripts/check-world-zones.mjs"
   },
   "dependencies": {
     "react": "19.3.0",
