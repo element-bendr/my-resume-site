@@ -35,10 +35,10 @@ jobs:
           python3 scripts/workflow_status.py --strict
 
       - name: Dry-run activation
-        run: python3 scripts/workflow_activate.py --workflow portfolio-world-rebuild --stage 04-world-zones
+        run: python3 scripts/workflow_activate.py --workflow portfolio-world-rebuild
 
       - name: Activate Stage 04
-        run: python3 scripts/workflow_activate.py --workflow portfolio-world-rebuild --stage 04-world-zones --write
+        run: python3 scripts/workflow_activate.py --workflow portfolio-world-rebuild --write
 
       - name: Verify active state
         run: |
