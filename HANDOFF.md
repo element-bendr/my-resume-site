@@ -17,7 +17,7 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–04 are certified in the fetched integration state. Stage 05 contract is frozen in `docs/portfolio-world/ASK-CONTRACT.md` and `workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md`; local-first runbook is updated in `docs/portfolio-world/LOCAL-DEVELOPMENT.md`. The deterministic public-safe evidence registry, retrieval, and evidence-only answer composer are implemented in `src/ask/`; Worker/API, conventional `/ask` UI, and world terminal integration remain unimplemented. Inherited baseline passed on `fbbb08e84a9455655f3ac5fb92f496faa538f747` before documentation changes.
+Stages 00–04 are certified in the fetched integration state. Stage 05 contract is frozen in `docs/portfolio-world/ASK-CONTRACT.md` and `workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md`; local-first runbook is updated in `docs/portfolio-world/LOCAL-DEVELOPMENT.md`. The deterministic public-safe evidence registry, retrieval, and evidence-only answer composer are implemented in `src/ask/`. `POST /api/ask` is implemented in `worker/ask.ts` and routed beside the preserved health endpoint; the conventional `/ask` UI and world terminal integration remain unimplemented. Inherited baseline passed on `fbbb08e84a9455655f3ac5fb92f496faa538f747` before documentation changes.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -50,11 +50,11 @@ Stages 00–04 are certified in the fetched integration state. Stage 05 contract
 - education is intentionally unresolved and excluded until verified;
 - LinkedIn URL is excluded until directly verified;
 - client testimonials/outcome claims require evidence before inclusion;
-- Ask backend remains deferred to Stage 05;
+- conventional Ask UI and world terminal integration remain pending Stage 05;
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Implement the Worker `POST /api/ask` contract using the `src/ask/` evidence pipeline; add focused API validation/tests. Do not add an LLM or storage dependency. Then integrate `/ask` and the world terminal, run local browser checks, and request independent Terra review.
+Implement the conventional `/ask` UI against the completed `POST /api/ask` contract, then connect the world Ask Terminal to `/ask`. Keep world state independent of API availability; do not add an LLM or storage dependency. After both entry points, run browser/API checks and request independent Terra review.
 
 ## Minimum resume context
 1. `AGENTS.md`
@@ -66,13 +66,14 @@ Implement the Worker `POST /api/ask` contract using the `src/ask/` evidence pipe
 
 ## Stage 05 setup / validation
 - remote integration head fetched: `fbbb08e84a9455655f3ac5fb92f496faa538f747`
-- latest docs/contract commit: `a795a7c40095bd71c4044b8417b75db45f504c95` (workflow check and strict status PASS)
+- latest local contract commit: `dbadd02f47d99687a3712374ffd07a7b2132ec45` (stable transport error codes; workflow check and strict status PASS)
 - local runtime: Node 22.22.0, npm 11.20.0; `npm ci` PASS
 - inherited baseline: bootstrap, workflow check/status, offline verification, typecheck, tests (7 files / 31 tests), build, conventional asset budget, and world asset budget all PASS
 - `49f81c37992700c2a74803efba5f5c81833a218f`: deterministic public-safe evidence registry, normalization, retrieval, and evidence-only answer composer; focused Ask tests, typecheck, and full test suite PASS (9 files / 42 tests)
 - retrieval uses certified technology phrases with maximal-phrase filtering, so a nested generic term cannot broaden exact project-tech matching
 - `5a32eb210da5a23a86c17cd22aac109906408d5a`: added explicit public-safe/fact invariants, verified source-reference shape, conservative unsupported-intent fail-closed gate, hobby-category scoping, and exact project status composition; focused Ask tests PASS (14), typecheck PASS, full suite PASS (9 files / 45 tests)
 - `974842d6b30be532465ae9f00b66d09167d46e2a`: source validator now enforces the existing visibility enum and hobby evidence requires exact `user-approved` provenance; malformed-value regression tests added. Focused Ask tests PASS (14), typecheck PASS, full suite PASS (9 files / 45 tests)
+- `3af9ddf8bac017c722152aee690e4d8d03584a93`: added bounded, non-logging `POST /api/ask` transport with stable error envelope/codes, 500-code-point and 4096-byte limits, strict JSON shape/content type, method handling, and no-store/security headers; health and unknown API routes preserved. Worker tests PASS (15), Ask tests PASS (29), typecheck PASS, full suite PASS (9 files / 58 tests), offline/workflow checks PASS, build and both asset budgets PASS. Local Vite/Worker HTTP smoke PASS for health, grounded, insufficient-evidence, malformed JSON, oversized body, wrong method, and unknown API route.
 - blockers: none; no deploy or push performed
 - protected state: `main`, production, and certified Stage 00–04 stage records unchanged
 
