@@ -192,3 +192,8 @@ export function reachableZones(start: ZoneId): Set<ZoneId> {
 
   return visited;
 }
+
+export function parseZoneId(value: string | null | undefined): ZoneId | null {
+  if (!value) return null;
+  return ZONES.some((zone) => zone.id === value) ? (value as ZoneId) : null;
+}

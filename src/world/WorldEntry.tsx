@@ -20,6 +20,7 @@ import {
 } from "./world-config";
 import {
   ZONE_BY_ID,
+  parseZoneId,
   type ZoneId,
 } from "./world-topology";
 import "./world.css";
@@ -51,14 +52,20 @@ function useReducedMotion() {
 }
 
 export default function WorldEntry() {
-  const playerPosition = useRef(new Vector3(PLAYER_SPAWN.x, 0, PLAYER_SPAWN.z));
+  const initialZone = parseZoneId(
+    typeof window === "undefined"
+      ? null
+      : new URLSearchParams(window.location.search).get("zone"),
+  ) ?? "command-center";
+  const initialPoint = ZONE_BY_ID[initialZone].fastTravelPoint;
+  const playerPosition = useRef(new Vector3(initialPoint.x, 0, initialPoint.z));
   const movementTarget = useRef<Vector3 | null>(null);
   const pendingInteraction = useRef<StationId | null>(null);
   const [nearbyStation, setNearbyStation] = useState<StationId | null>(null);
   const [activeStation, setActiveStation] = useState<StationId | null>(null);
-  const [currentZone, setCurrentZone] = useState<ZoneId>("command-center");
+  const [currentZone, setCurrentZone] = useState<ZoneId>(initialZone);
   const [loadedZones, setLoadedZones] = useState<Set<ZoneId>>(
-    () => new Set<ZoneId>(["command-center"]),
+    () => new Set<ZoneId>(["command-center", initialZone]),
   );
   const [mapOpen, setMapOpen] = useState(false);
   const reducedMotion = useReducedMotion();
@@ -104,6 +111,12 @@ export default function WorldEntry() {
       setNearbyStation(null);
       setActiveStation(null);
       setCurrentZone(zone);
+      if (typeof window !== "undefined") {
+        const url = new URL(window.location.href);
+        if (zone === "command-center") url.searchParams.delete("zone");
+        else url.searchParams.set("zone", zone);
+        window.history.replaceState(null, "", url);
+      }
       setMapOpen(false);
     },
     [loadZone],
