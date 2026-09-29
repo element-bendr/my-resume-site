@@ -1,23 +1,24 @@
 # Current Handoff
 
 ## Goal
-Implement Stage 05 integration: one grounded Ask experience shared by `/ask` and the in-world Command Center terminal, preserving all certified Stage 00–04 behavior and keeping `main` untouched.
+Complete formal ICM certification handoff for the Stage 05 grounded Ask candidate, preserving certified Stage 00–04 behavior and keeping `main` untouched.
 
 ## Phase
-STAGE_05_INTEGRATION
+STAGE_05_READY_FOR_ICM_CERTIFICATION
 
 ## Execution mode
-implementation
+certification
 
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage05/local-integration / .worktrees/stage05-integration
+- working branch/worktree: stage05/formal-icm-certification / .worktrees/stage05-integration
+- application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
 - active workflow/stage: workflow/active/portfolio-world-rebuild / 05-integration
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–04 are certified in the fetched integration state. Stage 05 contract is frozen in `docs/portfolio-world/ASK-CONTRACT.md` and `workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md`; local-first runbook is updated in `docs/portfolio-world/LOCAL-DEVELOPMENT.md`. The deterministic public-safe evidence registry, retrieval, and evidence-only answer composer are implemented in `src/ask/`. `POST /api/ask` is implemented in `worker/ask.ts` and routed beside the preserved health endpoint. The conventional `/ask` UI calls the shared API and shows answers, evidence, and public source labels. The Command Center Ask Terminal links to canonical `/ask` through the accessible HTML interaction overlay; it has no API/client dependency and does not change world state architecture. Inherited baseline passed on `fbbb08e84a9455655f3ac5fb92f496faa538f747` before documentation changes.
+Stages 00–04 remain certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head Actions run `36568411611`; independent Terra review passed. Completion and validation evidence are in `workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md` and `docs/portfolio-world/STAGE-05-VALIDATION.md`. Formal ICM certification is pending integration of the evidence/workflow commit; `state.json` has not been edited manually.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -39,6 +40,10 @@ Stages 00–04 are certified in the fetched integration state. Stage 05 contract
 - Stage 03 contract/activation: ACTIVE
 - Stage 03 application candidate: 30740ed443f6f20d0432d0d07d530ebdab2fe321
 - Stage 03 exact-head CI run 36444089676: PASS (6 test files / 21 tests, build, budgets, browser fallback, WebGL screenshot)
+- Stage 05 application candidate: `d36e5fb65d40a669e9d260e8356962f4413d922b`
+- Stage 05 exact-head run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611): success; 11 files / 66 tests; build, guards, budgets, HTTP, Ask UI, terminal route, and fallback checks PASS
+- Stage 05 independent Terra review: PASS; protected Stage 00–04 state: PASS
+- Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
 
 ## Protected state
 - main / production baseline: UNCHANGED
@@ -53,7 +58,7 @@ Stages 00–04 are certified in the fetched integration state. Stage 05 contract
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Perform independent Terra review of the complete local Stage 05 candidate, then address only demonstrated findings. Keep world state independent of API availability; do not add an LLM or storage dependency. Do not push or deploy before review and exact-head certification gates complete.
+Integrate the evidence/workflow commit on `feat/portfolio-world-icm-rebuild`; verify the Stage 05 ICM workflow's certification-state commit and strict post-checks; then hand off to deferred Stage 06. Do not deploy or modify `main`.
 
 ## Minimum resume context
 1. `AGENTS.md`
@@ -62,6 +67,8 @@ Perform independent Terra review of the complete local Stage 05 candidate, then 
 4. `workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md`
 5. `docs/portfolio-world/ASK-CONTRACT.md`
 6. `decisions/2026-09-28-portfolio-world-architecture.md`
+7. `docs/portfolio-world/STAGE-05-VALIDATION.md`
+8. `workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md`
 
 ## Stage 05 setup / validation
 - remote integration head fetched: `fbbb08e84a9455655f3ac5fb92f496faa538f747`

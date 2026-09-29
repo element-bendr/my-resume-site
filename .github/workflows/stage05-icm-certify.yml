@@ -1,0 +1,70 @@
+name: Stage 05 ICM Certification
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/portfolio-world-icm-rebuild
+    paths:
+      - ".github/workflows/stage05-icm-certify.yml"
+      - "workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md"
+      - "docs/portfolio-world/STAGE-05-VALIDATION.md"
+      - "HANDOFF.md"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stage05-icm-certification
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout full candidate history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Require integration branch
+        env:
+          EXPECTED_REF: refs/heads/feat/portfolio-world-icm-rebuild
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = "$EXPECTED_REF" || {
+            echo "Stage 05 ICM certification must run on $EXPECTED_REF; got $GITHUB_REF" >&2
+            exit 1
+          }
+
+      - name: Bootstrap ICM check
+        run: python3 scripts/bootstrap_check.py
+
+      - name: Workflow check
+        run: python3 scripts/workflow_check.py
+
+      - name: Strict workflow status
+        run: python3 scripts/workflow_status.py --strict
+
+      - name: Stage 05 certification check
+        run: python3 scripts/workflow_certify_check.py --workflow portfolio-world-rebuild --stage 05-integration
+
+      - name: Certify Stage 05
+        run: python3 scripts/workflow_certify.py --workflow portfolio-world-rebuild --stage 05-integration --write
+
+      - name: Verify post-certification workflow
+        run: |
+          python3 scripts/workflow_check.py
+          python3 scripts/workflow_status.py --strict
+
+      - name: Record certification state
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add workflow/active/portfolio-world-rebuild/state.json
+          git commit -m "chore(icm): certify Stage 05 integration [skip ci]"
+          git push origin HEAD:feat/portfolio-world-icm-rebuild
