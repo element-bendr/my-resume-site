@@ -72,6 +72,7 @@ Implement the Worker `POST /api/ask` contract using the `src/ask/` evidence pipe
 - `49f81c37992700c2a74803efba5f5c81833a218f`: deterministic public-safe evidence registry, normalization, retrieval, and evidence-only answer composer; focused Ask tests, typecheck, and full test suite PASS (9 files / 42 tests)
 - retrieval uses certified technology phrases with maximal-phrase filtering, so a nested generic term cannot broaden exact project-tech matching
 - `5a32eb210da5a23a86c17cd22aac109906408d5a`: added explicit public-safe/fact invariants, verified source-reference shape, conservative unsupported-intent fail-closed gate, hobby-category scoping, and exact project status composition; focused Ask tests PASS (14), typecheck PASS, full suite PASS (9 files / 45 tests)
+- `974842d6b30be532465ae9f00b66d09167d46e2a`: source validator now enforces the existing visibility enum and hobby evidence requires exact `user-approved` provenance; malformed-value regression tests added. Focused Ask tests PASS (14), typecheck PASS, full suite PASS (9 files / 45 tests)
 - blockers: none; no deploy or push performed
 - protected state: `main`, production, and certified Stage 00–04 stage records unchanged
 
