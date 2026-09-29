@@ -278,3 +278,55 @@
   white-space: nowrap;
   user-select: none;
 }
+
+.world-zone-label {
+  display: inline-block;
+  padding: 0.34rem 0.58rem;
+  border: 1px solid rgba(99, 216, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(3, 10, 20, 0.82);
+  color: #dbeaff;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.38);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.world-map-destination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.world-map-destination strong {
+  color: #dcecff;
+}
+
+.world-map-destination span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.world-map-destination:hover,
+.world-map-destination.is-current {
+  border-color: rgba(99, 216, 255, 0.42);
+  background: rgba(99, 216, 255, 0.08);
+}
+
+.world-map-destination.is-current strong,
+.world-map-destination:hover strong {
+  color: var(--accent);
+}
