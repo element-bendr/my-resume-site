@@ -23,6 +23,4 @@ export const hobbies = hobbiesData as HobbyContent[];
 export const links = linksData as LinkContent[];
 export const sources = sourcesData as SourceContent[];
 
-export const sourceIds = new Set(sources.map((source) => source.id));
-
 export const featuredProjects = projects.filter((project) => project.featured);

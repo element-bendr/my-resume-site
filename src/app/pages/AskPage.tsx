@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AskClientError, postAskQuestion } from "../../ask/client";
+import { publicSourceLabels } from "../../ask/public-source-labels";
 import { ASK_MAX_QUESTION_CODE_POINTS, type AskResponse, type EvidenceMatch } from "../../ask/types";
-import { sources } from "../../content";
 
 const examples = [
   "Which projects use Cloudflare Workers?",
@@ -10,15 +10,9 @@ const examples = [
   "What about anime?",
 ];
 
-const publicSourceLabels = new Map(
-  sources.filter((source) => source.visibility === "public").map((source) => [source.id, source.label]),
-);
-
 function sourceLabelsFor(match: EvidenceMatch): string[] {
-  return match.sourceRefs.flatMap((sourceRef) => {
-    const label = publicSourceLabels.get(sourceRef);
-    return label ? [label] : [];
-  });
+  const labels = match.sourceRefs.map((sourceRef) => publicSourceLabels[sourceRef] ?? "Verified portfolio evidence");
+  return [...new Set(labels)];
 }
 
 function normalizedCodePointCount(value: string): number {
@@ -81,7 +75,9 @@ export function AskPage() {
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
             placeholder="For example, which projects use Cloudflare Workers?"
-            aria-describedby="ask-question-hint ask-question-count"
+            aria-describedby={error
+              ? "ask-question-hint ask-question-count ask-error-message"
+              : "ask-question-hint ask-question-count"}
             aria-invalid={Boolean(error)}
             disabled={loading}
             required
@@ -125,7 +121,7 @@ export function AskPage() {
       >
         {loading ? <p className="ask-status" role="status">Looking for verified evidence…</p> : null}
         {error ? (
-          <div className="panel ask-error" role="alert">
+          <div id="ask-error-message" className="panel ask-error" role="alert">
             <h2>Could not answer yet</h2>
             <p>{error}</p>
           </div>
