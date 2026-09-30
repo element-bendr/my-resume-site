@@ -1,6 +1,6 @@
 # Stage 07 — certification and preview validation
 
-Status: **preview and independent review PASS; formal ICM certification pending**
+Status: **FORMALLY CERTIFIED by ICM**
 
 ## Candidate and preview
 
@@ -13,7 +13,7 @@ Status: **preview and independent review PASS; formal ICM certification pending*
 
 ## Local regression
 
-- ICM bootstrap, workflow, and strict status: PASS; Stage 00–06 remain certified and Stage 07 is active.
+- ICM bootstrap, workflow, and strict status: PASS; Stage 00–06 were certified and Stage 07 was active when local gates ran. Current workflow state: Stages 00–07 certified.
 - Offline verification, typecheck, production build, conventional/world asset budgets, Ask disclosure, and world Ask boundary: PASS.
 - Full test suite: **11 files / 66 tests PASS**.
 - Critical conventional shell bundle: **89.6 KiB gzip**; total client JavaScript: **335.3 KiB gzip**.
@@ -31,9 +31,10 @@ Status: **preview and independent review PASS; formal ICM certification pending*
 ## Independent review and protected state
 
 - Terra final Stage 07 preview review: **PASS**, no required fixes.
+- Formal ICM certification: **PASS**, evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`; preview runtime candidate remains `27989cb13b989382df69ef2a376f6314f7b9fb6c`.
 - `main` remains `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`; production deployment/domain remain unchanged.
-- Formal Stage 07 ICM certification has not yet run. This document records evidence, not certification or promotion authority.
+- Certification does not authorize promotion. Separate explicit integration/promotion approval is still required.
 
 ## Next action
 
-Run the repository's read-only exact-head Stage 07 certification check. If green, perform formal ICM certification through existing tooling. Any later merge/promotion or production deployment requires a separate explicit approval; no automatic `main` merge or deployment is authorized.
+Stage 07 is certified. Stop pending separate explicit integration/promotion approval; no automatic `main` merge or production deployment is authorized.

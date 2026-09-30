@@ -12,7 +12,7 @@ handoff_updated: YES
 - execution mode: certification / preview evidence
 - exact preview runtime candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
 - certified Stage 06 root: `fe1d15199f06a8a6a2cae22dbc7fa623e75218f6`
-- formal Stage 07 ICM certification: pending; not claimed by this report
+- formal Stage 07 ICM certification: PASS; evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`
 
 ## Working location
 
@@ -56,23 +56,23 @@ handoff_updated: YES
 - Local gates: PASS.
 - Preview browser/API certification: PASS.
 - Terra independent preview review: PASS, no required fixes.
-- Formal ICM certification: NOT RUN; Stage 07 certification remains pending.
+- Formal ICM certification: PASS against the exact recorded evidence candidate; Stage 07 is certified.
 
 ## Protected state
 
 - `main` remains `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`.
 - Production deployment and production domain remain unchanged.
 - No runtime, dependency, configuration, or secret changes.
-- Stages 00–06 remain certified; Stage 07 remains active pending formal certification.
+- Stages 00–07 are certified; no active stage remains.
 
 ## Stale / uncertain state
 
 - No unresolved preview regression is known. The understood Three.js deprecation warning is documented.
-- Formal ICM certification and any later promotion are not yet complete.
+- Formal Stage 07 ICM certification is complete; separate integration/promotion remains pending.
 
 ## Blockers
 
-None for evidence preparation. Formal certification is the next gated action and must use existing repository tooling.
+None. Stage 07 formal certification passed through existing repository tooling.
 
 ## Closed decisions
 
@@ -81,8 +81,8 @@ None for evidence preparation. Formal certification is the next gated action and
 
 ## Handoff update
 
-`HANDOFF.md` records the exact preview candidate, local/browser evidence, Terra PASS, pending formal certification, and protected main/production state.
+`HANDOFF.md` records the exact preview candidate, local/browser evidence, Terra PASS, completed Stage 07 certification, separate promotion pending, and protected main/production state.
 
 ## Next action
 
-Run the read-only exact-head Stage 07 certification check. If it passes, formally certify Stage 07 through the existing ICM mechanism. After formal certification, stop and request separate explicit integration/promotion approval; do not automatically merge to `main` or deploy production.
+Stop pending separate explicit integration/promotion approval. Do not automatically merge to `main` or deploy production.

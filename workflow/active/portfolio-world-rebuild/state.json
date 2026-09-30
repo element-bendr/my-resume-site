@@ -2,11 +2,11 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "active",
-  "active_stage": "07-certification-promotion",
+  "status": "certified",
+  "active_stage": null,
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
-    "validated_commit": "96a944dba45ea4fe36c9e580eedaa980d4c8d32e"
+    "validated_commit": "9af0df349c721c29ff85c49ecc95cd7f0d63d49d"
   },
   "execution": {
     "mode": "certification",
@@ -200,7 +200,7 @@
     },
     {
       "id": "07-certification-promotion",
-      "status": "active",
+      "status": "certified",
       "context": "workflow/active/portfolio-world-rebuild/07-certification-promotion-CONTEXT.md",
       "depends_on_stages": [
         "06-performance-accessibility"

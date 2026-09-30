@@ -8,8 +8,8 @@ Status: **NOT YET PROMOTED**
 - Preview URL: <https://vijay-kumaran-portfolio-world-stage07-27989cb.random-planzz.workers.dev>
 - Worker version: `e581366f-81ec-4ee3-b0a7-9781fdb6bf19`
 - Terra preview review: PASS, no required fixes.
-- Stage 07 formal ICM certification: pending; this record does not assert certification.
+- Stage 07 formal ICM certification: PASS against evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d` (preview runtime candidate `27989cb13b989382df69ef2a376f6314f7b9fb6c`).
 - `main`: unchanged at `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`.
 - Production deployment/domain: unchanged.
 
-The next action is to run the existing exact-head certification check and, if it passes, formally certify Stage 07 through ICM tooling. After formal certification, any integration into `main` or production deployment requires separate explicit promotion approval. There is no automatic merge or deployment authority in this record.
+Stage 07 is formally certified, but not promoted. The next action is to obtain separate explicit integration/promotion approval. There is no automatic merge or deployment authority in this record.
