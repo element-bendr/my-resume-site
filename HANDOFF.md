@@ -4,10 +4,10 @@
 Prepare Stage 06 performance, accessibility, mobile, and visual hardening from the certified feature head, preserving Stages 00–05 and keeping `main` and production untouched.
 
 ## Phase
-STAGE_06_SETUP_BASELINE_FROZEN
+STAGE_06_ACTIVE_BASELINE_FROZEN
 
 ## Execution mode
-setup / contract-and-baseline
+implementation
 
 ## Authority / location
 - repository: element-bendr/my-resume-site
@@ -18,7 +18,7 @@ setup / contract-and-baseline
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 is blocked/awaiting activation pending the frozen contract and baseline. Stage 07 remains pending. The Stage 05 historical completion evidence is unchanged.
+Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`. Stage 07 remains pending. The Stage 05 historical completion evidence is unchanged.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -44,7 +44,9 @@ Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65
 - Stage 05 exact-head run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611): success; 11 files / 66 tests; build, guards, budgets, HTTP, Ask UI, terminal route, and fallback checks PASS
 - Stage 05 independent Terra review: PASS; protected Stage 00–04 state: PASS
 - Stage 05 formal ICM certification run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413): PASS; certification state commit: `f756316c2826eede6bed2790cb81020f5f34db35`
-- Stage 00–05: certified; Stage 06: blocked/awaiting activation; Stage 07: pending
+- Stage 00–05: certified; Stage 06: active; Stage 07: pending
+- Stage 06 contract/baseline commit: `c0507383025ca191264df1f31b42410624fb259b`
+- Stage 06 activation: completed using existing ICM tooling; active stage 06, Stage 07 pending
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
 
 ## Protected state
@@ -60,7 +62,7 @@ Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Freeze and commit `06-performance-accessibility-CONTEXT.md` plus `docs/portfolio-world/STAGE-06-BASELINE.md`; activate Stage 06 only through existing ICM tooling. Do not deploy, modify `main`, or begin Stage 07.
+Begin only bounded Stage 06 lanes from measured evidence: (1) resolve `/` 34px horizontal overflow at 390px / 32px at 360px, (2) improve mobile world Map/Close map and header/overlay action target sizes, (3) decide and implement accessible map overlay semantics/focus entry/return while preserving Escape and movement behavior. Then profile before any renderer/bundle optimization; keep Three/R3F absent from conventional routes and district loading lazy. Do not deploy, modify `main`, or begin Stage 07.
 
 ## Minimum resume context
 1. `AGENTS.md`
