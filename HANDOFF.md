@@ -30,7 +30,7 @@ Current candidate changes are graphics-only:
 - first-pass environment art for Build Lab, Automation Lab, Client Street, Timeline Corridor, and Hobby District;
 - no movement constants, movement math, topology bounds/graph, station coordinates, Ask/content, dependencies, or production state changed.
 
-The new ICM workflow `portfolio-world-visual-overhaul` is frozen but still blocked with `awaiting_activation`. No further implementation or promotion should occur until the local runner activates it and validates the current candidate.
+The new ICM workflow `portfolio-world-visual-overhaul` is activated for Stage 01 visual foundation. Its dependency is pinned to the certified `portfolio-world-rebuild` state file; no further promotion should occur until the local runner completes the inherited validation and visual evidence review.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -107,7 +107,7 @@ The new ICM workflow `portfolio-world-visual-overhaul` is frozen but still block
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Local executor: fetch `origin/visual/rendering-overhaul-v1`, create/use `.worktrees/visual-rendering-overhaul-v1`, and inspect the exact branch head.
+Local executor: use `.worktrees/visual-overhaul` on `visual/rendering-overhaul-v1` at exact candidate `d289f774ad0eb13a4f03a21a1e5c74d9f5537ac2`.
 
 Read:
 1. `AGENTS.md`
@@ -119,7 +119,7 @@ Read:
 
 Then:
 1. run bootstrap/workflow/strict status;
-2. dry-run and write ICM activation for `portfolio-world-visual-overhaul`;
+2. activation for `portfolio-world-visual-overhaul` is complete; dependency pin and strict status are green;
 3. commit/push activation state before further implementation;
 4. run `npm ci`, typecheck, tests, build, asset/world budgets and Ask/world guards against the current candidate;
 5. if compile/runtime errors exist, make the smallest visual-lane repair only;

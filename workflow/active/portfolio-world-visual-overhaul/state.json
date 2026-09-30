@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-visual-overhaul",
   "title": "Portfolio World Visual Overhaul",
-  "status": "blocked",
+  "status": "active",
   "active_stage": "01-visual-foundation",
   "provenance": {
     "started_from_commit": "5f4de7ace37bfd843ef13f035a3b16ddb61f28d7",
@@ -25,12 +25,14 @@
   "stages": [
     {
       "id": "01-visual-foundation",
-      "status": "blocked",
-      "block_reason": "awaiting_activation",
+      "status": "active",
       "context": "workflow/active/portfolio-world-visual-overhaul/CONTEXT.md",
       "depends_on_stages": [],
       "depends_on": [
-        "portfolio-world-rebuild"
+        {
+          "path": "workflow/active/portfolio-world-rebuild/state.json",
+          "blob": "e4bfb2b8415e3bab17ed21ab277b422173ae0a10"
+        }
       ],
       "outputs": [
         "docs/portfolio-world/VISUAL-OVERHAUL-V1.md",
