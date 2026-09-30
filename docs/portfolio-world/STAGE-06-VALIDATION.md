@@ -1,8 +1,55 @@
 # Stage 06 validation — cumulative evidence
 
-Status: **IN PROGRESS**
+Status: **BLOCKED**
 
 Stage 06 remains active. This file records completed bounded lanes and does not certify Stage 06 as a whole.
+
+## Final acceptance audit — blocked
+
+PR: #10 — `stage06/final-acceptance-audit`
+
+Audited pickup head: `79ccc4f3210e2bdb71b3867484578ae7928da437`
+
+Passed evidence before the mandatory stop:
+
+- Node `22.22.0` and npm `11.20.0`
+- clean `npm ci`
+- ICM bootstrap/workflow/strict status: PASS
+- offline verification and typecheck: PASS
+- full suite: 66/66 PASS
+- production build: PASS
+- critical conventional JS: 89.2 KiB gzip
+- total client JS: 334.8 KiB gzip
+- `WorldEntry`: 956.62 kB raw / 254.81 KiB gzip
+- conventional and world asset budgets: PASS
+- Ask disclosure and world Ask boundary guards: PASS
+- 360/390/768/1024/1440 route matrix: no horizontal overflow
+- conventional routes do not load `WorldEntry`
+- initial `/play` load retains five lazy district chunks
+- Ask Terminal overlay focus, Escape close, and movement resume: PASS
+- destination routes render after each tested SPA exit
+
+Mandatory runtime failure:
+
+- leaving `/play` through header Ask, Projects, or Resume; world HUD Contact; or Ask Terminal Open Ask emits `NotFoundError: Failed to execute 'removeChild' on 'Node'`
+- instrumentation isolated the operation to React removing a world-zone label wrapper from a disconnected Drei `Html` container during full Canvas teardown
+- the failure is not Ask-specific and is distinct from the previously repaired fast-travel portal lifecycle
+- no failed network request accompanied the error, and each destination route still rendered
+
+Independent review:
+
+- Terra reproduced the failure at 1440px through header Ask and at 390px through world HUD Ask
+- Terra verdict: **FAIL**
+- Stage 06 certification: NOT RUN
+
+Required repair lane:
+
+- coordinate R3F/Drei `Html` portal cleanup during `/play` route unmount
+- preserve world labels, topology, navigation, movement, Ask behavior, and the existing fast-travel repair
+- prove header, world HUD, and Ask Terminal exits have zero page errors
+- rerun fast-travel regression, focused/full tests, build, budgets, and independent review
+
+Protected state remained intact: no application repair was attempted in the audit lane; no content, Ask, dependency, topology, controller, `main`, production, or Stage 07 change occurred.
 
 ## Lane 1 — narrow homepage overflow
 
