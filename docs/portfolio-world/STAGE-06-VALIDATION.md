@@ -1,6 +1,6 @@
 # Stage 06 validation — cumulative evidence
 
-Status: **ACTIVE — integrated re-audit PASS; final independent review/certification pending**
+Status: **CERTIFIED on PR #13 candidate; awaiting Stage 06 root integration**
 
 Stage 06 remains active. This file records completed bounded lanes and does not certify Stage 06 as a whole.
 
@@ -24,7 +24,7 @@ Production-preview browser evidence:
 - Reduced-motion emulation was honored: `prefers-reduced-motion` matched, scroll behavior was `auto`, and nonessential transition/animation durations were reduced. Forced WebGL failure rendered the fallback and working Projects, Resume, Ask, and Contact links; fallback Ask reached `/ask`.
 - Browser checks recorded no app console errors, page errors, failed requests, or unexpected HTTP failures on the tested paths.
 
-Protected state: PASS. Diff from certified Stage 05 contains only Stage 06 contract/evidence/state and scoped Stage 06 implementation/guard files; no package/lock, content, Ask, `main`, or deployment changes. `main` remains `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`; production is unchanged. Stage 06 remains active and Stage 07 pending. PR #12's lane-level Terra review passed; independent Terra review of this integrated re-audit candidate and formal ICM certification remain pending.
+Protected state: PASS. Diff from certified Stage 05 contains only Stage 06 contract/evidence/state and scoped Stage 06 implementation/guard files; no package/lock, content, Ask, `main`, or deployment changes. `main` remains `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`; production is unchanged. Terra returned PASS with no findings for exact candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`. The repository certification check and write passed for that candidate: Stage 06 is certified and Stage 07 is blocked with `awaiting_activation` on this PR branch.
 
 ## Final acceptance audit — blocked
 

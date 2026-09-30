@@ -11,7 +11,7 @@ handoff_updated: YES
 - stage: 06-performance-accessibility
 - execution mode: final acceptance re-audit
 - integrated runtime head: `e11912fe7f366208678b025ad5ae714f98be9df8`
-- formal ICM certification: pending final Terra review and certification write
+- formal ICM certification: PASS for candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`
 
 ## Working location
 
@@ -77,12 +77,12 @@ handoff_updated: YES
 ## Stale / uncertain state
 
 - no known Stage 06 implementation or local acceptance defect remains;
-- formal certification state is intentionally unchanged until final Terra review passes against the evidence candidate;
+- formal certification state records Stage 06 certified and Stage 07 blocked awaiting activation;
 - remote exact-head certification or production deployment is not part of this lane.
 
 ## Blockers
 
-None for final Terra review or local ICM certification.
+None. Terra review and local ICM certification passed.
 
 ## Closed decisions
 
@@ -93,8 +93,8 @@ None for final Terra review or local ICM certification.
 
 ## Handoff update
 
-`HANDOFF.md` records the integrated re-audit result, protected state, and the exact remaining Terra and ICM certification sequence.
+`HANDOFF.md` records the integrated re-audit result, Terra PASS, certification candidate, and Stage 07 blocked state.
 
 ## Next action
 
-Commit this evidence, obtain Terra final PASS against the exact candidate, run the repository Stage 06 certification check/write tools, verify Stage 06 becomes certified and Stage 07 becomes blocked awaiting activation, then stop without touching `main` or production.
+Commit and push the certification state to PR #13 for bounded integration into `stage06/performance-accessibility`, then stop without activating Stage 07, touching `main`, or deploying.

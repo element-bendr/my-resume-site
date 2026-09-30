@@ -20,7 +20,7 @@ implementation
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 and blocked teardown diagnostics from PR #11 are preserved in the Stage 06 root. Lane 6, the persistent `SiteShell`-owned Drei `Html portal` repair, is frozen by merged PR #12 at root merge `7505336fb3ba81f6c3620615a3bf1880c1019ff2`. The fresh integrated final acceptance re-audit at runtime head `e11912fe7f366208678b025ad5ae714f98be9df8` is locally green across all ICM, code, browser, responsive, accessibility, performance, fallback, disclosure, and protected-state gates. Stage 06 remains active pending final Terra review and formal ICM certification. Stage 07 remains pending and MUST NOT start until Stage 06 is formally certified.
+Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 and blocked teardown diagnostics from PR #11 are preserved in the Stage 06 root. Lane 6, the persistent `SiteShell`-owned Drei `Html portal` repair, is frozen by merged PR #12 at root merge `7505336fb3ba81f6c3620615a3bf1880c1019ff2`. The fresh integrated final acceptance re-audit is green, Terra returned PASS with no findings, and formal ICM certification passed for exact candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`. Stage 06 is certified on the PR #13 branch; Stage 07 is blocked with `awaiting_activation`. `main` and production remain untouched.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -64,6 +64,8 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 06 integrated re-audit at `e11912fe7f366208678b025ad5ae714f98be9df8`: local PASS; 66/66 tests; critical shell 89.6 KiB gzip; world total 335.3 KiB gzip
 - final browser matrix: 30 route/viewport combinations without overflow; all five `/play` SPA exits zero page/runtime errors and failed requests; reduced motion, focus, touch targets, fast travel, portal alignment, route isolation, lazy districts, and forced fallback PASS
 - protected-state diff: no dependency/lockfile, content, Ask, main, production, or deployment change
+- Stage 06 final Terra review: PASS, no findings or required fixes
+- formal ICM certification candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`: PASS; Stage 06 certified; Stage 07 blocked `awaiting_activation`
 - Stage 06 lane 6 PR #12 local candidate: persistent host detects lazy `.world-canvas` mount, tracks size/viewport position, and preserves canvas clipping; labels only use the host
 - PR #12 browser: zero page errors/request failures for header Ask/Projects/Resume, HUD Contact, and Ask Terminal Open Ask; exact host/canvas bounds at 1440px and 390px, aligned at 1024px resize; 390px overflow 0
 - PR #12 world regression: Build Lab fast travel loads only BuildLab and shared DistrictStations; current-zone label hidden; Map focus restored; fallback links intact; initial `/play` has no district chunks; `/ask` loads no WorldEntry
@@ -86,7 +88,7 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Commit the final acceptance evidence and obtain Terra's independent PASS against that exact candidate. Then run `scripts/workflow_certify_check.py` and `scripts/workflow_certify.py --write` for `06-performance-accessibility`, verify Stage 06 becomes certified and Stage 07 becomes blocked with `awaiting_activation`, update this handoff with the certification SHA, and stop. Do not activate Stage 07, touch `main`, or deploy.
+Commit and push the PR #13 certification state, verify the remote PR exact head and bounded diff, and mark PR #13 ready for integration into `stage06/performance-accessibility`. Do not activate Stage 07, merge to `main`, or deploy.
 
 ## Minimum resume context
 1. `AGENTS.md`
