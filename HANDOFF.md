@@ -1,23 +1,36 @@
 # Current Handoff
 
 ## Goal
-Activate and execute Stage 07 certification/promotion from the formally certified Stage 06 root. Prove the exact certified application on Cloudflare preview infrastructure, retain full regression/protected-state evidence, and make it eligible for a separate explicit promotion to `main` and production only after Stage 07 certification.
+Rebuild the Portfolio World visual presentation to match the approved floating sci-fi world reference while preserving the already-certified movement, topology, routing, Ask, accessibility, fallback, and Cloudflare architecture.
 ## Phase
-MAIN_PROMOTED_PRODUCTION_DEPLOY_PENDING
+VISUAL_OVERHAUL_V1_AWAITING_ICM_ACTIVATION
 
 ## Execution mode
-certification
+implementation
 
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- promotion branch: promotion/portfolio-world-production
+- working branch/worktree: visual/rendering-overhaul-v1 / .worktrees/visual-rendering-overhaul-v1
 - Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
-- workflow state: workflow/active/portfolio-world-rebuild; Stages 00–07 certified
+- active workflow contract: workflow/active/portfolio-world-visual-overhaul; Stage 01 blocked `awaiting_activation`
+- prior workflow: portfolio-world-rebuild remains formally certified
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–07 are formally certified. PR #15 promoted the certified application to `main` at `0c5131d5eb68dc566ea95422a2d80aef2126c373`. Production has not been deployed. The current ChatGPT environment cannot execute Wrangler against Cloudflare because no authenticated Cloudflare connector/deploy workflow is available and the isolated shell has no external network path. Runtime promotion to `main` is complete; production deployment and post-deploy smoke evidence remain outstanding.
+The prior portfolio-world rebuild remains formally certified and its runtime has been promoted to `main`. Production deployment is intentionally still pending while the world visuals are corrected.
+
+A new post-certification visual-overhaul candidate exists on `visual/rendering-overhaul-v1`. The visual north star is the approved generated floating-island world: dominant Command Center plaza, connected floating districts, sunset/blue-hour atmosphere, strong landmarks, district accents, environmental depth, and a visible stylized player.
+
+Current candidate changes are graphics-only:
+- procedural sky/fog/key-fill lighting and ACES filmic tone mapping;
+- floating-island undersides, bridge rails, atmospheric waterfalls and distant ridge silhouettes;
+- rebuilt Command Center/Central Plaza with pylons and holographic globe;
+- articulated stylized human player rendered by the existing PlayerController;
+- first-pass environment art for Build Lab, Automation Lab, Client Street, Timeline Corridor, and Hobby District;
+- no movement constants, movement math, topology bounds/graph, station coordinates, Ask/content, dependencies, or production state changed.
+
+The new ICM workflow `portfolio-world-visual-overhaul` is frozen but still blocked with `awaiting_activation`. No further implementation or promotion should occur until the local runner activates it and validates the current candidate.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -94,18 +107,27 @@ Stages 00–07 are formally certified. PR #15 promoted the certified application
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-From an authenticated Cloudflare execution environment, check out exact promoted `main` commit `0c5131d5eb68dc566ea95422a2d80aef2126c373` (or a later docs-only main head that preserves the same runtime tree), use Node 22.22.x / npm 11.20.0, run `npm ci`, then run `npm run deploy`.
+Local executor: fetch `origin/visual/rendering-overhaul-v1`, create/use `.worktrees/visual-rendering-overhaul-v1`, and inspect the exact branch head.
 
-Record the resulting production Worker name, version/deployment identifier, and production URL/domain. Then run post-deployment smoke checks for:
-- `/api/health`;
-- `/`, `/projects`, `/resume`, `/ask`, `/contact`, `/play`;
-- grounded and unsupported Ask behavior;
-- the five `/play` SPA exits;
-- map/focus and fast travel;
-- forced no-WebGL fallback;
-- console/page errors, failed requests, and unexpected HTTP errors.
+Read:
+1. `AGENTS.md`
+2. `CONTEXT.md`
+3. this `HANDOFF.md`
+4. `workflow/active/portfolio-world-visual-overhaul/CONTEXT.md`
+5. `docs/portfolio-world/VISUAL-OVERHAUL-V1.md`
+6. frozen world/rendering/asset-budget documents
 
-If production smoke is green, update `docs/portfolio-world/PROMOTION-RECORD.md` to PROMOTED with the exact main/deployment identifiers and smoke result. If deployment or smoke fails, preserve production state and record the exact blocker; do not claim promotion complete.
+Then:
+1. run bootstrap/workflow/strict status;
+2. dry-run and write ICM activation for `portfolio-world-visual-overhaul`;
+3. commit/push activation state before further implementation;
+4. run `npm ci`, typecheck, tests, build, asset/world budgets and Ask/world guards against the current candidate;
+5. if compile/runtime errors exist, make the smallest visual-lane repair only;
+6. render screenshots of Command Center plus all five districts at 1440px and 390px, including reduced-motion and forced no-WebGL checks;
+7. compare against the approved visual direction and return the screenshots/evidence before adding external GLB/KTX2 assets;
+8. obtain Terra review after the browser pass.
+
+Do not change movement/topology/content/dependencies or deploy production in this workflow.
 
 ## Minimum resume context
 1. `AGENTS.md`
