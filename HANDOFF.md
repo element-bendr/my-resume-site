@@ -3,7 +3,7 @@
 ## Goal
 Rebuild the Portfolio World visual presentation to match the approved floating sci-fi world reference while preserving the already-certified movement, topology, routing, Ask, accessibility, fallback, and Cloudflare architecture.
 ## Phase
-VISUAL_ART_V2_ASSET_HERO_AWAITING_ACTIVATION
+VISUAL_ART_V2_ASSET_HERO_ACTIVE
 
 ## Execution mode
 implementation
@@ -13,11 +13,13 @@ implementation
 - canonical branch: main
 - working branch/worktree: visual/world-art-v2 / .worktrees/visual-world-art-v2
 - Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
-- active workflow contract: workflow/active/portfolio-world-art-v2; Stage 01 blocked `awaiting_activation`
+- active workflow contract: workflow/active/portfolio-world-art-v2; Stage 01 active
 - prior workflow: portfolio-world-rebuild remains formally certified
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
+PR #18 asset-based visual production v2 is activated locally at `b96e86b5f095df349af187efcef7a31405d1e0bf`. Workflow pinning, activation, bootstrap, workflow validation, and strict status checks pass. No runtime or asset implementation has started.
+
 PR #17 is technically certified but visually rejected and closed without merge. The supplied screenshot demonstrates the failure clearly: the scene reads as a dark primitive blockout with large flat decks, sparse geometry, weak material response, minimal environmental layering, and an elevated debug-like camera composition. This is materially below the approved generated floating-world reference.
 
 v2 changes the source rule rather than polishing the rejected construction method. The branch `visual/world-art-v2` now has a frozen asset-based contract: curated real CC0 modular glTF environment assets become the primary art substrate; Three.js procedural geometry is limited to glue geometry, islands, holograms, trims and effects. Movement/controller/topology/content remain protected.

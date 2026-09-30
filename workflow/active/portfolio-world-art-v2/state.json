@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-art-v2",
   "title": "Portfolio World Art v2",
-  "status": "blocked",
+  "status": "active",
   "active_stage": "01-asset-hero-scene",
   "provenance": {
     "started_from_commit": "3399ab48e392cbf33b79ad22440075777b12f082",
@@ -28,12 +28,14 @@
   "stages": [
     {
       "id": "01-asset-hero-scene",
-      "status": "blocked",
-      "block_reason": "awaiting_activation",
+      "status": "active",
       "context": "workflow/active/portfolio-world-art-v2/CONTEXT.md",
       "depends_on_stages": [],
       "depends_on": [
-        "portfolio-world-visual-overhaul"
+        {
+          "path": "workflow/active/portfolio-world-visual-overhaul/state.json",
+          "blob": "32673681198990942e47de5eceaf1b7317c65b1e"
+        }
       ],
       "outputs": [
         "docs/portfolio-world/VISUAL-ASSET-MANIFEST.md",
