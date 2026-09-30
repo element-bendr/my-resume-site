@@ -1,5 +1,10 @@
 # Portfolio World Visual Overhaul v2 — Asset-Based Art Production
 
+## Canonical reference authority
+
+The approved generated floating-world image from the controlling project conversation is the primary visual authority. `docs/portfolio-world/VISUAL-REFERENCE-CONTRACT.md` is the binding implementation translation of that image. Current screenshots, procedural blockouts, and asset-pack defaults are not design authorities and must not override it.
+
+
 ## Why v1 was rejected
 
 The Stage 01 procedural visual foundation passed technical validation but failed user visual acceptance. The rendered world still reads as a dark low-poly blockout with sparse primitive geometry and weak environmental richness, materially below the approved visual reference.
