@@ -3,7 +3,7 @@
 ## Authority / ownership
 
 - repository: element-bendr/my-resume-site
-- branch/worktree: `visual/world-art-v2` / `.worktrees/visual-world-art-v2`
+- branch/worktree: `visual/world-art-v2-reference-match` / `.worktrees/visual-world-art-v2-reference-match`
 - owner: Luna implementation; Sol visual acceptance; Terra independent review
 - execution mode: implementation
 - baseline: PR #17 certified visual foundation at `3399ab48e392cbf33b79ad22440075777b12f082`
@@ -12,6 +12,7 @@
 ## Inputs
 
 - approved generated floating-world reference
+- `docs/portfolio-world/VISUAL-REFERENCE-CONTRACT.md` as the canonical implementation translation of that image
 - user-supplied screenshot proving v1 mismatch
 - `docs/portfolio-world/VISUAL-OVERHAUL-V2.md`
 - `docs/portfolio-world/VISUAL-ASSET-SOURCES.md`
@@ -62,8 +63,9 @@ Produce one Central Plaza hero scene that materially approaches the approved vis
 7. Tune camera composition and lighting for the hero screenshot without modifying controller math.
 8. Run typecheck/tests/build/budgets/guards.
 9. Capture 1440px and 390px hero screenshots.
-10. Stop for user visual acceptance before district propagation.
-11. Terra reviews technical/protected-state quality after visual acceptance candidate exists.
+10. Compare the 1440px hero screenshot line-by-line against `VISUAL-REFERENCE-CONTRACT.md`.
+11. Stop for user visual acceptance before district propagation.
+12. Terra reviews technical/protected-state quality after visual acceptance candidate exists.
 
 ## Outputs
 
@@ -145,3 +147,21 @@ Repair constraints:
 - require zero asset 404s/failed requests and visible browser geometry/material output;
 - do not compensate for missing assets with new procedural stand-ins;
 - do not continue district production until the Central Plaza hero asset set visibly renders.
+
+
+## Reference-match lane override
+
+The approved generated world image is the primary visual authority. Asset-library defaults, current procedural screenshots, and prior blockouts must not determine composition.
+
+The current lane must satisfy `docs/portfolio-world/VISUAL-REFERENCE-CONTRACT.md` before Stage 01 can pass. In particular:
+- lower/elevated third-person framing with horizon visible;
+- player in lower third;
+- Central Plaza as layered architecture rather than a slab;
+- at least three district silhouettes visible from spawn;
+- one finished bridge;
+- vegetation/scale props;
+- warm/cool lighting;
+- 70–80% of visible hero architecture asset-driven or deliberately authored equivalent;
+- no dominant primitive pillars/boxes.
+
+A green test suite or Terra PASS cannot override failed user visual acceptance.

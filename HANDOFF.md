@@ -3,7 +3,7 @@
 ## Goal
 Rebuild the Portfolio World visual presentation to match the approved floating sci-fi world reference while preserving the already-certified movement, topology, routing, Ask, accessibility, fallback, and Cloudflare architecture.
 ## Phase
-VISUAL_ART_V2_ASSET_PACKAGING_REPAIR
+VISUAL_ART_V2_REFERENCE_MATCH_ACTIVE
 
 ## Execution mode
 implementation
@@ -11,22 +11,20 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: visual/world-art-v2-asset-packaging-repair / .worktrees/visual-world-art-v2-asset-packaging-repair
+- working branch/worktree: visual/world-art-v2-reference-match / .worktrees/visual-world-art-v2-reference-match
 - Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
 - active workflow contract: workflow/active/portfolio-world-art-v2; Stage 01 active
 - prior workflow: portfolio-world-rebuild remains formally certified
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-PR #19 packaging repair is PASS at candidate `6368eccba3f9506dc01afe4158008350d9d776df`. Terra PASS is recorded for the bounded repair. Production browser proof confirmed `Column_Astra.gltf`, its buffer, and all nine texture dependencies returned HTTP 200 with zero console errors; the proof package was approximately 344 KiB. The complete Central Plaza hero visual acceptance remains pending; expand this exact packaging pattern on `visual/world-art-v2` only after PR #19 integration.
+PR #19 packaging repair has been merged into `visual/world-art-v2` at `97d8030027ffcc379b56cf411b06e99f47c01a0a`. The glTF packaging path is now proven: complete dependency closure, deterministic dependency guard, HTTP 200 delivery, zero console errors, and 66/66 tests. This does not constitute visual acceptance.
 
-PR #19 validation: dependency closure guard, typecheck, production build, 66 tests, asset/world budgets, Ask disclosure, and world-Ask boundary guards all PASS. The three.js world budget reports 361.6 KiB gzip; the nine optimized textures total approximately 315 KiB.
+The active implementation lane is now `visual/world-art-v2-reference-match`. The approved generated floating-world image from the controlling conversation is the primary visual authority. `docs/portfolio-world/VISUAL-REFERENCE-CONTRACT.md` translates that image into measurable implementation constraints covering camera, player scale, plaza proportions, architectural density, bridge framing, visible district silhouettes, vegetation, material balance, lighting, color accents, and asset-driven geometry.
 
-PR #18 Stage 01 remains active but is BLOCKED by the earlier asset packaging failure. The first local correction attempt did not produce a valid browser asset package: selected Quaternius glTF references depended on textures that were not vendored, so the intended asset geometry/material presentation did not appear and the scene continued to resemble the procedural blockout. District silhouettes and vegetation were not visibly rendered. Terra independently confirmed FAIL.
+The current blockout screenshots are evidence of failure only. They must not be used as a design reference. Asset-library defaults are also subordinate to the approved world reference.
 
-Local commits `abec3eb` and `e36d08f` remain intentionally unpushed and are not candidates. The clean remote parent remains `visual/world-art-v2` at `a85cb02fd7a425893e1a6b9a4cc636c4ffae1a13`.
-
-This repair lane is intentionally narrower than Stage 01: prove the complete dependency closure for one selected Quaternius asset, vendor every referenced buffer/image/texture under `public/world/assets/v2/`, prove that asset visibly renders in browser, then expand the exact packaging pattern to the curated Central Plaza hero subset. No new art direction or district work is allowed until that packaging proof passes.
+Stage 01 may not pass until a 1440px spawn screenshot materially matches the reference contract and receives explicit user visual acceptance. Technical PASS or Terra PASS cannot substitute for that gate.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -106,20 +104,21 @@ This repair lane is intentionally narrower than Stage 01: prove the complete dep
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Integrate PR #19 packaging repair candidate `6368eccba3f9506dc01afe4158008350d9d776df` through the bounded review workflow. After integration, continue only on `visual/world-art-v2` by expanding the proven dependency-closure pattern toward the Central Plaza hero acceptance. Do not push local failed commits `abec3eb` or `e36d08f`.
+Local executor: fetch `origin/visual/world-art-v2-reference-match`, create/use `.worktrees/visual-world-art-v2-reference-match`, and read `VISUAL-REFERENCE-CONTRACT.md` before touching scene code.
 
-Repair sequence:
-1. choose exactly one Quaternius glTF intended for the Central Plaza;
-2. inspect the glTF JSON and enumerate every external `buffers[].uri` and `images[].uri` dependency;
-3. copy the glTF plus the complete referenced dependency closure into one stable subtree under `public/world/assets/v2/quaternius/` preserving or intentionally rewriting relative paths;
-4. add a deterministic asset-dependency check that fails when any glTF URI target is missing;
-5. record source, license, original path, vendored path, and bytes in `docs/portfolio-world/VISUAL-ASSET-MANIFEST.md`;
-6. render only that proof asset in the hero scene and capture a 1440px screenshot;
-7. require visible geometry/material output and zero 404/failed requests before adding a second asset;
-8. repeat the same dependency-closure process for the minimum Central Plaza set;
-9. only after the hero asset set visibly renders, restore distant silhouettes/vegetation and rerun the hero visual gate.
+Build only the spawn/Command Center hero composition against the approved reference:
+1. keep simple walkable/collision geometry invisible or visually subordinate;
+2. replace visible primitive plaza/pillars with curated GLTF architecture using the proven PR #19 packaging pattern;
+3. place the player in the lower third with an elevated third-person 3/4 camera, visible horizon, and materially less floor dominance;
+4. build layered plaza levels, real entrances, railings, steps/ramps, planters and scale props;
+5. make one bridge read as finished architecture;
+6. show at least three distinct distant district silhouettes from spawn;
+7. add visible vegetation and environmental scale cues;
+8. balance pale/warm architecture, charcoal metal, glass, vegetation and restrained cyan accents per the reference contract;
+9. keep the hologram proportionate and below roughly one quarter of vertical frame;
+10. capture a 1440px hero screenshot and compare every visual gate in `VISUAL-REFERENCE-CONTRACT.md` before any 390px or district expansion.
 
-Do not add more procedural replacement geometry to compensate for missing assets. Do not rebuild other districts. Do not touch main or production.
+Hard stop: if the 1440px spawn view still reads closer to the rejected blockout than to the approved reference image, revise only the hero scene. Do not continue district production, merge to main, or deploy.
 
 ## Minimum resume context
 1. `AGENTS.md`
