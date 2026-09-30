@@ -10,7 +10,7 @@
   },
   "execution": {
     "mode": "implementation",
-    "branch": "stage06/world-map-touch-targets",
+    "branch": "stage06/map-semantics-focus",
     "worktree": ".worktrees/stage06-performance",
     "owner": "Luna",
     "write_paths": [
