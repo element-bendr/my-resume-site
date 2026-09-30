@@ -10,7 +10,7 @@
   },
   "execution": {
     "mode": "implementation",
-    "branch": "stage06/final-acceptance-audit",
+    "branch": "stage06/canvas-route-teardown",
     "worktree": ".worktrees/stage06-performance",
     "owner": "Luna",
     "write_paths": [
