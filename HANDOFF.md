@@ -66,6 +66,7 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - protected-state diff: no dependency/lockfile, content, Ask, main, production, or deployment change
 - Stage 06 final Terra review: PASS, no findings or required fixes
 - formal ICM certification candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`: PASS; Stage 06 certified; Stage 07 blocked `awaiting_activation`
+- Stage 06 certification state commit: `d8decc56d120cb92aef1778999b7166d44ec2b74`
 - Stage 06 lane 6 PR #12 local candidate: persistent host detects lazy `.world-canvas` mount, tracks size/viewport position, and preserves canvas clipping; labels only use the host
 - PR #12 browser: zero page errors/request failures for header Ask/Projects/Resume, HUD Contact, and Ask Terminal Open Ask; exact host/canvas bounds at 1440px and 390px, aligned at 1024px resize; 390px overflow 0
 - PR #12 world regression: Build Lab fast travel loads only BuildLab and shared DistrictStations; current-zone label hidden; Map focus restored; fallback links intact; initial `/play` has no district chunks; `/ask` loads no WorldEntry
