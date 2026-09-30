@@ -4,7 +4,7 @@
 Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
 
 ## Phase
-STAGE_06_PERSISTENT_HTML_PORTAL_ACTIVE
+STAGE_06_PERSISTENT_HTML_PORTAL_PASS
 
 ## Execution mode
 implementation
@@ -20,7 +20,7 @@ implementation
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 is persisted in the Stage 06 root. PR #11's blocked teardown investigation, including both failed/reverted manual R3F unmount attempts and Terra stop-rule evidence, is frozen at root merge `e343608e1832d2a90cfb879256f5640c8a4dc13a`. Lane 6 on `stage06/persistent-html-portal-host` has a locally green persistent `SiteShell`-hosted Drei `Html portal` candidate at `e0c04b4dde79d212fbfaf5fd65165453bf55d588`; Terra final review returned PASS with no findings/fixes. Stage 06 remains active; certification was not run. Stage 07 remains pending.
+Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 is persisted in the Stage 06 root. PR #11's blocked teardown investigation, including both failed/reverted manual R3F unmount attempts and Terra stop-rule evidence, is frozen at root merge `e343608e1832d2a90cfb879256f5640c8a4dc13a`. Lane 6 on `stage06/persistent-html-portal-host` is green. Runtime repair commit `e0c04b4dde79d212fbfaf5fd65165453bf55d588` is included in exact pushed validation/evidence head `a940cbf9a0859dd048401c749094768e42824d9c`; all five SPA exits, portal/canvas alignment, fast travel, map focus, lazy loading, route isolation, full gates, and Terra independent review PASS with no findings. Stage 06 remains active; certification was not run. Stage 07 remains pending.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -64,7 +64,7 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - PR #12 browser: zero page errors/request failures for header Ask/Projects/Resume, HUD Contact, and Ask Terminal Open Ask; exact host/canvas bounds at 1440px and 390px, aligned at 1024px resize; 390px overflow 0
 - PR #12 world regression: Build Lab fast travel loads only BuildLab and shared DistrictStations; current-zone label hidden; Map focus restored; fallback links intact; initial `/play` has no district chunks; `/ask` loads no WorldEntry
 - PR #12 gates: typecheck/build PASS; tests 66/66; ICM checks/offline/assets PASS (critical 89.6 KiB gzip; world 335.3 KiB); Ask disclosure/world Ask guards PASS
-- PR #12 candidate `e0c04b4dde79d212fbfaf5fd65165453bf55d588`: Terra final review PASS, no findings/fixes; push this exact candidate to PR #12
+- PR #12 exact pushed validation/evidence head `a940cbf9a0859dd048401c749094768e42824d9c`: Terra PASS, no findings/fixes; ready for Stage 06 root integration
 - Stage 06 certification: NOT RUN; Stage 06 remains active and Stage 07 remains pending
 - Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to the current active lane PR before further Stage 06 work
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
@@ -82,7 +82,11 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Push exact candidate `e0c04b4dde79d212fbfaf5fd65165453bf55d588` to PR #12, then merge only into the Stage 06 root and rerun the final Stage 06 acceptance audit. Keep Stage 06 active and Stage 07 pending; do not certify Stage 06, touch `main`, or deploy from this lane.
+Merge PR #12 only into `stage06/performance-accessibility` after repository-side review. Then create a fresh final Stage 06 acceptance/certification audit lane from the resulting exact Stage 06 root head.
+
+The re-audit must rerun the complete Stage 06 contract, not merely the repaired teardown paths: 360/390/768/1024/1440 routes; keyboard/focus; map/overlays; fast travel; reduced motion including world camera/decorative motion; forced no-WebGL fallback; all five `/play` SPA exits; console/page errors and failed requests; conventional-route Three/R3F isolation; lazy districts; portal/canvas alignment and labels; bundle/chunk measurements; asset/world budgets; Ask guards; full tests/build/typecheck; protected-state diff; and final Terra audit.
+
+If any criterion is red, certification remains blocked and the finding becomes another bounded Stage 06 repair lane. If all are green, finalize the validation/completion report and run the repository ICM certification sequence. Do not activate Stage 07, touch `main`, or deploy before Stage 06 certification.
 
 ## Minimum resume context
 1. `AGENTS.md`
