@@ -3,7 +3,7 @@
 ## Goal
 Rebuild the Portfolio World visual presentation to match the approved floating sci-fi world reference while preserving the already-certified movement, topology, routing, Ask, accessibility, fallback, and Cloudflare architecture.
 ## Phase
-VISUAL_OVERHAUL_V1_AWAITING_ICM_ACTIVATION
+VISUAL_OVERHAUL_V1_STAGE_01_VALIDATED_AWAITING_CERTIFICATION
 
 ## Execution mode
 implementation
@@ -13,7 +13,7 @@ implementation
 - canonical branch: main
 - working branch/worktree: visual/rendering-overhaul-v1 / .worktrees/visual-rendering-overhaul-v1
 - Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
-- active workflow contract: workflow/active/portfolio-world-visual-overhaul; Stage 01 blocked `awaiting_activation`
+- active workflow contract: workflow/active/portfolio-world-visual-overhaul; Stage 01 active and locally validated
 - prior workflow: portfolio-world-rebuild remains formally certified
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
@@ -30,7 +30,7 @@ Current candidate changes are graphics-only:
 - first-pass environment art for Build Lab, Automation Lab, Client Street, Timeline Corridor, and Hobby District;
 - no movement constants, movement math, topology bounds/graph, station coordinates, Ask/content, dependencies, or production state changed.
 
-The new ICM workflow `portfolio-world-visual-overhaul` is activated for Stage 01 visual foundation. Its dependency is pinned to the certified `portfolio-world-rebuild` state file; no further promotion should occur until the local runner completes the inherited validation and visual evidence review.
+The new ICM workflow `portfolio-world-visual-overhaul` is activated for Stage 01 visual foundation. Its dependency is pinned to the certified `portfolio-world-rebuild` state file. Candidate `d005cbac5757390bb15711eb9c31edf21d97e9c6` passes the inherited gates, six-zone visual browser matrix, and Terra review.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -43,6 +43,9 @@ The new ICM workflow `portfolio-world-visual-overhaul` is activated for Stage 01
 - Content authority is category-specific: current project evidence for technical facts, sanitized case studies for disclosure, current profile sources for positioning, structured profile content for employment history, and user approval for hobbies.
 
 ## Validation evidence
+- Stage 01 candidate `d005cbac5757390bb15711eb9c31edf21d97e9c6`: ICM checks, offline verification, typecheck, 11 files / 66 tests, build, asset/world budgets, Ask disclosure, and world Ask boundary PASS
+- Visual repair: Drei Sky below-horizon/lower-scattering tuning removes large near-white 1440px horizon regions; six zones captured at 1440px and 390px in `/tmp/pr17-visual-repair-9M6J/`
+- Stage 01 Terra review: PASS, no required fixes
 - Stage 00 certified candidate: 6b093fc74a3729018259beefd74bf16388ef98c4
 - Stage 01 certified candidate: 2eb0a1dbbed64555902aa38a44a2d46bcce920fa
 - Stage 02 application candidate: 62df9c82a1e4860de777803bfdc259b8ab65b3af
