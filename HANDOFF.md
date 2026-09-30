@@ -1,26 +1,23 @@
 # Current Handoff
 
 ## Goal
-Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
-
+Activate and execute Stage 07 certification/promotion from the formally certified Stage 06 root. Prove the exact certified application on Cloudflare preview infrastructure, retain full regression/protected-state evidence, and make it eligible for a separate explicit promotion to `main` and production only after Stage 07 certification.
 ## Phase
-STAGE_06_CERTIFIED_STAGE_07_AWAITING_ACTIVATION
+STAGE_07_CERTIFIED
 
 ## Execution mode
-implementation
+certification
 
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage06/final-acceptance-reaudit / .worktrees/stage06-performance
-- application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
-- workflow state: workflow/active/portfolio-world-rebuild; Stage 06 certified; Stage 07 blocked `awaiting_activation`
+- working branch/worktree: stage07/certification-promotion / .worktrees/stage07-certification-promotion
+- Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
+- workflow state: workflow/active/portfolio-world-rebuild; Stages 00–07 certified
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
-
-Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 and blocked teardown diagnostics from PR #11 are preserved in the Stage 06 root. Lane 6, the persistent `SiteShell`-owned Drei `Html portal` repair, is frozen by merged PR #12 at root merge `7505336fb3ba81f6c3620615a3bf1880c1019ff2`. The fresh integrated final acceptance re-audit is green, Terra returned PASS with no findings, and formal ICM certification passed for exact candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`. Stage 06 is certified; Stage 07 is blocked with `awaiting_activation`. PR #13 now carries the certification state for bounded integration into the Stage 06 root. `main` and production remain untouched.
+Stages 00–07 are formally certified. Stage 06 certification is integrated at `fe1d15199f06a8a6a2cae22dbc7fa623e75218f6`. Stage 07 was formally certified by the existing ICM tooling against evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`; its preview runtime candidate was `27989cb13b989382df69ef2a376f6314f7b9fb6c`. The Stage 07 contract is frozen at `workflow/active/portfolio-world-rebuild/07-certification-promotion-CONTEXT.md`. `main`, production, and the production domain remain untouched.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -67,12 +64,20 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 06 final Terra review: PASS, no findings or required fixes
 - formal ICM certification candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`: PASS; Stage 06 certified; Stage 07 blocked `awaiting_activation`
 - Stage 06 certification state commit: `d8decc56d120cb92aef1778999b7166d44ec2b74`
+- Stage 07 activation: PASS via `scripts/workflow_activate.py --workflow portfolio-world-rebuild --write` at `f5dcbdf7f9c6a9efb568b5650773d8306c0da6b3`; Stage 07 formal ICM certification: PASS via `scripts/workflow_certify.py --workflow portfolio-world-rebuild --stage 07-certification-promotion --write`, validated evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`; Stages 00–07 are certified
+- Stage 07 exact preview candidate `27989cb13b989382df69ef2a376f6314f7b9fb6c`; preview Worker `vijay-kumaran-portfolio-world-stage07-27989cb`, version `e581366f-81ec-4ee3-b0a7-9781fdb6bf19`; preview URL and evidence are recorded in `docs/portfolio-world/STAGE-07-VALIDATION.md`
+- Stage 07 local gates: PASS; 11 test files / 66 tests; critical conventional bundle 89.6 KiB gzip; total client JavaScript 335.3 KiB gzip; asset/world budgets, Ask disclosure, and world Ask boundary PASS
+- Stage 07 preview: 30 route/viewport cases at 360/390/768/1024/1440, grounded/unsupported Ask, five `/play` SPA exits, map/focus/fast-travel, reduced motion, forced no-WebGL fallback, portal alignment, route isolation, lazy districts, and network/runtime checks PASS
+- Stage 07 known warning: existing `THREE.Clock` deprecation warning on world loads; classified understood/non-blocking, with no application console errors
+- Stage 07 Terra final preview review: PASS, no required fixes; formal ICM certification: PASS against evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`
+- Formal certification state: workflow `certified`, all Stages 00–07 certified; no active stage remains
+- `main` remains `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`; production remains unchanged; no runtime, dependency, configuration, merge, or deployment change
 - Stage 06 lane 6 PR #12 local candidate: persistent host detects lazy `.world-canvas` mount, tracks size/viewport position, and preserves canvas clipping; labels only use the host
 - PR #12 browser: zero page errors/request failures for header Ask/Projects/Resume, HUD Contact, and Ask Terminal Open Ask; exact host/canvas bounds at 1440px and 390px, aligned at 1024px resize; 390px overflow 0
 - PR #12 world regression: Build Lab fast travel loads only BuildLab and shared DistrictStations; current-zone label hidden; Map focus restored; fallback links intact; initial `/play` has no district chunks; `/ask` loads no WorldEntry
 - PR #12 gates: typecheck/build PASS; tests 66/66; ICM checks/offline/assets PASS (critical 89.6 KiB gzip; world 335.3 KiB); Ask disclosure/world Ask guards PASS
 - PR #12 exact pushed validation/evidence head `a940cbf9a0859dd048401c749094768e42824d9c`: Terra PASS, no findings/fixes; ready for Stage 06 root integration
-- Stage 06 certification: NOT RUN; Stage 06 remains active and Stage 07 remains pending
+- Stage 07 certification evidence report: `workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md`; preview and Terra evidence: `docs/portfolio-world/STAGE-07-VALIDATION.md`; promotion status remains NOT YET PROMOTED
 - Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to the current active lane PR before further Stage 06 work
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
 
@@ -89,9 +94,7 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Review and merge PR #13 only into `stage06/performance-accessibility` with an exact-head guard. After that merge, verify the Stage 06 root carries `06-performance-accessibility=certified` and `07-certification-promotion=blocked` with `awaiting_activation`.
-
-Only after that verification may Stage 07 be activated through the repository's ICM activation tooling on a separate Stage 07 branch/worktree. Do not merge to `main` or deploy as part of the Stage 06 certification merge.
+Stage 07 is formally certified by ICM against evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`, with preview runtime evidence for `27989cb13b989382df69ef2a376f6314f7b9fb6c`. STOP pending separate explicit integration/promotion approval. Do not merge to `main` or deploy production. `main`, production, and the production domain remain untouched.
 
 ## Minimum resume context
 1. `AGENTS.md`
