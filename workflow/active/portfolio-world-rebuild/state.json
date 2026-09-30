@@ -9,9 +9,9 @@
     "validated_commit": "96a944dba45ea4fe36c9e580eedaa980d4c8d32e"
   },
   "execution": {
-    "mode": "implementation",
-    "branch": "stage06/final-acceptance-reaudit",
-    "worktree": ".worktrees/stage06-performance",
+    "mode": "certification",
+    "branch": "stage07/certification-promotion",
+    "worktree": ".worktrees/stage07-certification-promotion",
     "owner": "Luna",
     "write_paths": [
       "AGENTS.md",
@@ -201,7 +201,7 @@
     {
       "id": "07-certification-promotion",
       "status": "blocked",
-      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "context": "workflow/active/portfolio-world-rebuild/07-certification-promotion-CONTEXT.md",
       "depends_on_stages": [
         "06-performance-accessibility"
       ],
