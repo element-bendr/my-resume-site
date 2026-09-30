@@ -1,6 +1,6 @@
 # Stage 07 promotion record
 
-Status: **NOT YET PROMOTED**
+Status: **APPROVED FOR PROMOTION — pending main merge and production deploy**
 
 - Exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
 - Certified Stage 06 root: `fe1d15199f06a8a6a2cae22dbc7fa623e75218f6`
@@ -12,4 +12,4 @@ Status: **NOT YET PROMOTED**
 - `main`: unchanged at `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`.
 - Production deployment/domain: unchanged.
 
-Stage 07 is formally certified, but not promoted. The next action is to obtain separate explicit integration/promotion approval. There is no automatic merge or deployment authority in this record.
+Stage 07 is formally certified. Explicit integration/promotion approval was granted in the controlling ChatGPT workflow after PR #14 review. The approved sequence is: merge the certified integration state to `main`, verify the exact main head, deploy that exact head to the production Worker using the repository Wrangler deployment path, and run post-deployment smoke checks. Promotion is not complete until production deployment and smoke validation pass.
