@@ -1,5 +1,5 @@
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Group } from "three";
 import { InteractionStation } from "./InteractionStation";
 import type { OptionalVectorRef } from "./WorldEntry";
@@ -8,6 +8,7 @@ import {
   type StationConfig,
   type StationId,
 } from "./world-config";
+import { WorldAsset } from "./WorldAsset";
 
 interface CommandCenterProps {
   movementTarget: OptionalVectorRef;
@@ -113,6 +114,16 @@ function CoreHologram({ reducedMotion }: { reducedMotion: boolean }) {
 function PlazaArchitecture() {
   return (
     <group>
+      <Suspense
+        fallback={
+          <mesh position={[0, 1.2, -2.2]}>
+            <boxGeometry args={[1.5, 2.4, 1.5]} />
+            <meshStandardMaterial color="#23344e" emissive="#163d60" emissiveIntensity={0.3} />
+          </mesh>
+        }
+      >
+        <WorldAsset path="/world/assets/v2/quaternius/Column_Astra.gltf" position={[0, 0.2, -2.2]} scale={2.4} />
+      </Suspense>
       <mesh receiveShadow position={[0, -0.02, 0]}>
         <cylinderGeometry args={[5.2, 5.55, 0.18, 48]} />
         <meshStandardMaterial color="#313a49" metalness={0.28} roughness={0.62} />

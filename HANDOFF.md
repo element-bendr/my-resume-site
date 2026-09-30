@@ -3,7 +3,7 @@
 ## Goal
 Rebuild the Portfolio World visual presentation to match the approved floating sci-fi world reference while preserving the already-certified movement, topology, routing, Ask, accessibility, fallback, and Cloudflare architecture.
 ## Phase
-VISUAL_ART_V2_ASSET_HERO_ACTIVE
+VISUAL_ART_V2_ASSET_PACKAGING_REPAIR
 
 ## Execution mode
 implementation
@@ -11,20 +11,22 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: visual/world-art-v2 / .worktrees/visual-world-art-v2
+- working branch/worktree: visual/world-art-v2-asset-packaging-repair / .worktrees/visual-world-art-v2-asset-packaging-repair
 - Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
 - active workflow contract: workflow/active/portfolio-world-art-v2; Stage 01 active
 - prior workflow: portfolio-world-rebuild remains formally certified
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-PR #18 asset-based visual production v2 is activated locally at `b96e86b5f095df349af187efcef7a31405d1e0bf`. Workflow pinning, activation, bootstrap, workflow validation, and strict status checks pass. No runtime or asset implementation has started.
+PR #19 packaging repair is PASS at candidate `6368eccba3f9506dc01afe4158008350d9d776df`. Terra PASS is recorded for the bounded repair. Production browser proof confirmed `Column_Astra.gltf`, its buffer, and all nine texture dependencies returned HTTP 200 with zero console errors; the proof package was approximately 344 KiB. The complete Central Plaza hero visual acceptance remains pending; expand this exact packaging pattern on `visual/world-art-v2` only after PR #19 integration.
 
-PR #17 is technically certified but visually rejected and closed without merge. The supplied screenshot demonstrates the failure clearly: the scene reads as a dark primitive blockout with large flat decks, sparse geometry, weak material response, minimal environmental layering, and an elevated debug-like camera composition. This is materially below the approved generated floating-world reference.
+PR #19 validation: dependency closure guard, typecheck, production build, 66 tests, asset/world budgets, Ask disclosure, and world-Ask boundary guards all PASS. The three.js world budget reports 361.6 KiB gzip; the nine optimized textures total approximately 315 KiB.
 
-v2 changes the source rule rather than polishing the rejected construction method. The branch `visual/world-art-v2` now has a frozen asset-based contract: curated real CC0 modular glTF environment assets become the primary art substrate; Three.js procedural geometry is limited to glue geometry, islands, holograms, trims and effects. Movement/controller/topology/content remain protected.
+PR #18 Stage 01 remains active but is BLOCKED by the earlier asset packaging failure. The first local correction attempt did not produce a valid browser asset package: selected Quaternius glTF references depended on textures that were not vendored, so the intended asset geometry/material presentation did not appear and the scene continued to resemble the procedural blockout. District silhouettes and vegetation were not visibly rendered. Terra independently confirmed FAIL.
 
-Approved initial sources are Quaternius Modular Sci-Fi MegaKit and Kenney City Kit Industrial/Commercial. Only a small budgeted subset may be vendored, with source/license/size recorded per asset. Stage 01 builds only the Central Plaza hero scene, one bridge and distant district silhouettes. User visual acceptance is mandatory before propagating the style to the other districts.
+Local commits `abec3eb` and `e36d08f` remain intentionally unpushed and are not candidates. The clean remote parent remains `visual/world-art-v2` at `a85cb02fd7a425893e1a6b9a4cc636c4ffae1a13`.
+
+This repair lane is intentionally narrower than Stage 01: prove the complete dependency closure for one selected Quaternius asset, vendor every referenced buffer/image/texture under `public/world/assets/v2/`, prove that asset visibly renders in browser, then expand the exact packaging pattern to the curated Central Plaza hero subset. No new art direction or district work is allowed until that packaging proof passes.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -104,19 +106,20 @@ Approved initial sources are Quaternius Modular Sci-Fi MegaKit and Kenney City K
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Local executor: fetch `origin/visual/world-art-v2`, create/use `.worktrees/visual-world-art-v2`, read the v2 workflow contract and asset-source registry, then activate `portfolio-world-art-v2` through ICM tooling.
+Integrate PR #19 packaging repair candidate `6368eccba3f9506dc01afe4158008350d9d776df` through the bounded review workflow. After integration, continue only on `visual/world-art-v2` by expanding the proven dependency-closure pattern toward the Central Plaza hero acceptance. Do not push local failed commits `abec3eb` or `e36d08f`.
 
-After activation:
-1. download the approved CC0 asset packs locally outside the repository;
-2. inspect available glTF/GLB assets and curate only the minimum Central Plaza / bridge / skyline subset;
-3. record every selected asset, source, license and byte size in `docs/portfolio-world/VISUAL-ASSET-MANIFEST.md`;
-4. vendor only selected assets under `public/world/assets/v2/`;
-5. replace primitive hero architecture with those assets while preserving simple invisible walkable geometry;
-6. tune visual camera composition lower and more cinematic without changing movement/input semantics;
-7. run typecheck/tests/build/budgets/guards;
-8. capture 1440px and 390px spawn screenshots and stop for user visual acceptance.
+Repair sequence:
+1. choose exactly one Quaternius glTF intended for the Central Plaza;
+2. inspect the glTF JSON and enumerate every external `buffers[].uri` and `images[].uri` dependency;
+3. copy the glTF plus the complete referenced dependency closure into one stable subtree under `public/world/assets/v2/quaternius/` preserving or intentionally rewriting relative paths;
+4. add a deterministic asset-dependency check that fails when any glTF URI target is missing;
+5. record source, license, original path, vendored path, and bytes in `docs/portfolio-world/VISUAL-ASSET-MANIFEST.md`;
+6. render only that proof asset in the hero scene and capture a 1440px screenshot;
+7. require visible geometry/material output and zero 404/failed requests before adding a second asset;
+8. repeat the same dependency-closure process for the minimum Central Plaza set;
+9. only after the hero asset set visibly renders, restore distant silhouettes/vegetation and rerun the hero visual gate.
 
-Do not rebuild the remaining districts until the hero screenshot is accepted. Do not touch main or production.
+Do not add more procedural replacement geometry to compensate for missing assets. Do not rebuild other districts. Do not touch main or production.
 
 ## Minimum resume context
 1. `AGENTS.md`
