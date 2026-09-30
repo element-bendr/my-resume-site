@@ -10,7 +10,7 @@
   },
   "execution": {
     "mode": "implementation",
-    "branch": "stage06/canvas-route-teardown",
+    "branch": "stage06/persistent-html-portal-host",
     "worktree": ".worktrees/stage06-performance",
     "owner": "Luna",
     "write_paths": [
