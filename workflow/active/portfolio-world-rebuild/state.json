@@ -2,15 +2,15 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "active",
-  "active_stage": "06-performance-accessibility",
+  "status": "blocked",
+  "active_stage": "07-certification-promotion",
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
-    "validated_commit": "44025d6735024ed2be749179c71a69c4b56db4f8"
+    "validated_commit": "96a944dba45ea4fe36c9e580eedaa980d4c8d32e"
   },
   "execution": {
     "mode": "implementation",
-    "branch": "stage06/persistent-html-portal-host",
+    "branch": "stage06/final-acceptance-reaudit",
     "worktree": ".worktrees/stage06-performance",
     "owner": "Luna",
     "write_paths": [
@@ -184,7 +184,7 @@
     },
     {
       "id": "06-performance-accessibility",
-      "status": "active",
+      "status": "certified",
       "context": "workflow/active/portfolio-world-rebuild/06-performance-accessibility-CONTEXT.md",
       "depends_on_stages": [
         "05-integration"
@@ -200,14 +200,15 @@
     },
     {
       "id": "07-certification-promotion",
-      "status": "pending",
+      "status": "blocked",
       "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
       "depends_on_stages": [
         "06-performance-accessibility"
       ],
       "depends_on": [],
       "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md",
+      "block_reason": "awaiting_activation"
     }
   ]
 }

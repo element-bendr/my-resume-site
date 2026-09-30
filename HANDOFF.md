@@ -4,7 +4,7 @@
 Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
 
 ## Phase
-STAGE_06_PERSISTENT_HTML_PORTAL_PASS
+STAGE_06_CERTIFIED_STAGE_07_AWAITING_ACTIVATION
 
 ## Execution mode
 implementation
@@ -12,15 +12,15 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage06/persistent-html-portal-host / .worktrees/stage06-performance
+- working branch/worktree: stage06/final-acceptance-reaudit / .worktrees/stage06-performance
 - application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
-- active workflow/stage: workflow/active/portfolio-world-rebuild / 06-performance-accessibility
+- workflow state: workflow/active/portfolio-world-rebuild; Stage 06 certified; Stage 07 blocked `awaiting_activation`
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 is persisted in the Stage 06 root. PR #11's blocked teardown investigation, including both failed/reverted manual R3F unmount attempts and Terra stop-rule evidence, is frozen at root merge `e343608e1832d2a90cfb879256f5640c8a4dc13a`. Lane 6 on `stage06/persistent-html-portal-host` is green. Runtime repair commit `e0c04b4dde79d212fbfaf5fd65165453bf55d588` is included in exact pushed validation/evidence head `a940cbf9a0859dd048401c749094768e42824d9c`; all five SPA exits, portal/canvas alignment, fast travel, map focus, lazy loading, route isolation, full gates, and Terra independent review PASS with no findings. Stage 06 remains active; certification was not run. Stage 07 remains pending.
+Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 and blocked teardown diagnostics from PR #11 are preserved in the Stage 06 root. Lane 6, the persistent `SiteShell`-owned Drei `Html portal` repair, is frozen by merged PR #12 at root merge `7505336fb3ba81f6c3620615a3bf1880c1019ff2`. The fresh integrated final acceptance re-audit is green, Terra returned PASS with no findings, and formal ICM certification passed for exact candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`. Stage 06 is certified; Stage 07 is blocked with `awaiting_activation`. PR #13 now carries the certification state for bounded integration into the Stage 06 root. `main` and production remain untouched.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -59,7 +59,14 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 06 final audit blocker: SPA exits from `/play` via header Ask/Projects/Resume, world HUD Contact, and Ask Terminal Open Ask reach their destination but emit `NotFoundError: Failed to execute 'removeChild' on 'Node'`; instrumentation isolated the stale removal to a disconnected Drei `Html` world-label portal during full Canvas teardown
 - Stage 06 final Terra audit: **FAIL**; certification blocked; failed-audit evidence merged by PR #10 at `42f6820072cbc82abda32b10d1ad938eae191273`
 - Stage 06 lane 5 PR #11: BLOCKED diagnostic evidence merged into `stage06/performance-accessibility` at `e343608e1832d2a90cfb879256f5640c8a4dc13a`; no failed runtime repair promoted
-- Stage 06 lane 6: `stage06/persistent-html-portal-host`; active bounded repair using persistent `SiteShell` DOM ownership plus Drei public `Html portal` API
+- Stage 06 lane 6 PR #12: MERGED into `stage06/performance-accessibility` at `7505336fb3ba81f6c3620615a3bf1880c1019ff2`; persistent portal-host repair PASS; Terra PASS; protected state intact
+- Stage 06 final re-audit: `stage06/final-acceptance-reaudit`; active evidence/certification lane, no speculative implementation
+- Stage 06 integrated re-audit at `e11912fe7f366208678b025ad5ae714f98be9df8`: local PASS; 66/66 tests; critical shell 89.6 KiB gzip; world total 335.3 KiB gzip
+- final browser matrix: 30 route/viewport combinations without overflow; all five `/play` SPA exits zero page/runtime errors and failed requests; reduced motion, focus, touch targets, fast travel, portal alignment, route isolation, lazy districts, and forced fallback PASS
+- protected-state diff: no dependency/lockfile, content, Ask, main, production, or deployment change
+- Stage 06 final Terra review: PASS, no findings or required fixes
+- formal ICM certification candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`: PASS; Stage 06 certified; Stage 07 blocked `awaiting_activation`
+- Stage 06 certification state commit: `d8decc56d120cb92aef1778999b7166d44ec2b74`
 - Stage 06 lane 6 PR #12 local candidate: persistent host detects lazy `.world-canvas` mount, tracks size/viewport position, and preserves canvas clipping; labels only use the host
 - PR #12 browser: zero page errors/request failures for header Ask/Projects/Resume, HUD Contact, and Ask Terminal Open Ask; exact host/canvas bounds at 1440px and 390px, aligned at 1024px resize; 390px overflow 0
 - PR #12 world regression: Build Lab fast travel loads only BuildLab and shared DistrictStations; current-zone label hidden; Map focus restored; fallback links intact; initial `/play` has no district chunks; `/ask` loads no WorldEntry
@@ -82,11 +89,9 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Merge PR #12 only into `stage06/performance-accessibility` after repository-side review. Then create a fresh final Stage 06 acceptance/certification audit lane from the resulting exact Stage 06 root head.
+Review and merge PR #13 only into `stage06/performance-accessibility` with an exact-head guard. After that merge, verify the Stage 06 root carries `06-performance-accessibility=certified` and `07-certification-promotion=blocked` with `awaiting_activation`.
 
-The re-audit must rerun the complete Stage 06 contract, not merely the repaired teardown paths: 360/390/768/1024/1440 routes; keyboard/focus; map/overlays; fast travel; reduced motion including world camera/decorative motion; forced no-WebGL fallback; all five `/play` SPA exits; console/page errors and failed requests; conventional-route Three/R3F isolation; lazy districts; portal/canvas alignment and labels; bundle/chunk measurements; asset/world budgets; Ask guards; full tests/build/typecheck; protected-state diff; and final Terra audit.
-
-If any criterion is red, certification remains blocked and the finding becomes another bounded Stage 06 repair lane. If all are green, finalize the validation/completion report and run the repository ICM certification sequence. Do not activate Stage 07, touch `main`, or deploy before Stage 06 certification.
+Only after that verification may Stage 07 be activated through the repository's ICM activation tooling on a separate Stage 07 branch/worktree. Do not merge to `main` or deploy as part of the Stage 06 certification merge.
 
 ## Minimum resume context
 1. `AGENTS.md`
