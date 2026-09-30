@@ -41,7 +41,7 @@ handoff_updated: YES
 - `decisions/2026-09-30-stage06-baseline.md` records the baseline decision;
 - `docs/portfolio-world/STAGE-06-VALIDATION.md` records lane and integrated browser evidence;
 - this completion report records the final local acceptance result;
-- `HANDOFF.md` identifies final Terra review and formal ICM certification as the only remaining gates.
+- `HANDOFF.md` records final Terra PASS, formal ICM certification, and the Stage 07 blocked/awaiting-activation handoff.
 
 ## Evidence
 
@@ -71,7 +71,7 @@ handoff_updated: YES
 - `main` remains `63d25e7dbc3169cb41aaa181a513ca7af5860ba4` and production is unchanged;
 - Stages 00–05 remain certified;
 - content records, deterministic Ask semantics, API contract, dependencies, package lock, movement/controller semantics, and topology data are unchanged;
-- Stage 07 remains pending and was not activated;
+- Stage 07 is blocked with `awaiting_activation` and was not activated;
 - no deployment occurred.
 
 ## Stale / uncertain state
@@ -97,4 +97,4 @@ None. Terra review and local ICM certification passed.
 
 ## Next action
 
-Commit and push the certification state to PR #13 for bounded integration into `stage06/performance-accessibility`, then stop without activating Stage 07, touching `main`, or deploying.
+Integrate PR #13 into `stage06/performance-accessibility`, verify the certified Stage 06 / blocked Stage 07 state on the root branch, then activate Stage 07 only through the repository ICM activation tooling on a separate Stage 07 branch. Do not touch `main` or deploy as part of this Stage 06 merge.
