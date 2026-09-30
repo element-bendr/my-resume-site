@@ -1,24 +1,24 @@
 # Current Handoff
 
 ## Goal
-Complete formal ICM certification handoff for the Stage 05 grounded Ask candidate, preserving certified Stage 00–04 behavior and keeping `main` untouched.
+Prepare Stage 06 performance, accessibility, mobile, and visual hardening from the certified feature head, preserving Stages 00–05 and keeping `main` and production untouched.
 
 ## Phase
-STAGE_05_READY_FOR_ICM_CERTIFICATION
+STAGE_06_SETUP_BASELINE_FROZEN
 
 ## Execution mode
-certification
+setup / contract-and-baseline
 
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage05/formal-icm-certification / .worktrees/stage05-integration
+- working branch/worktree: stage06/performance-accessibility / .worktrees/stage06-performance
 - application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
-- active workflow/stage: workflow/active/portfolio-world-rebuild / 05-integration
+- active workflow/stage: workflow/active/portfolio-world-rebuild / 06-performance-accessibility
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–04 remain certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head Actions run `36568411611`; independent Terra review passed. Completion and validation evidence are in `workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md` and `docs/portfolio-world/STAGE-05-VALIDATION.md`. Formal ICM certification is pending integration of the evidence/workflow commit; `state.json` has not been edited manually.
+Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 is blocked/awaiting activation pending the frozen contract and baseline. Stage 07 remains pending. The Stage 05 historical completion evidence is unchanged.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -43,6 +43,8 @@ Stages 00–04 remain certified. Stage 05 application candidate `d36e5fb65d40a66
 - Stage 05 application candidate: `d36e5fb65d40a669e9d260e8356962f4413d922b`
 - Stage 05 exact-head run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611): success; 11 files / 66 tests; build, guards, budgets, HTTP, Ask UI, terminal route, and fallback checks PASS
 - Stage 05 independent Terra review: PASS; protected Stage 00–04 state: PASS
+- Stage 05 formal ICM certification run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413): PASS; certification state commit: `f756316c2826eede6bed2790cb81020f5f34db35`
+- Stage 00–05: certified; Stage 06: blocked/awaiting activation; Stage 07: pending
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
 
 ## Protected state
@@ -58,7 +60,7 @@ Stages 00–04 remain certified. Stage 05 application candidate `d36e5fb65d40a66
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Integrate the evidence/workflow commit on `feat/portfolio-world-icm-rebuild`; verify the Stage 05 ICM workflow's certification-state commit and strict post-checks; then hand off to deferred Stage 06. Do not deploy or modify `main`.
+Freeze and commit `06-performance-accessibility-CONTEXT.md` plus `docs/portfolio-world/STAGE-06-BASELINE.md`; activate Stage 06 only through existing ICM tooling. Do not deploy, modify `main`, or begin Stage 07.
 
 ## Minimum resume context
 1. `AGENTS.md`

@@ -185,12 +185,17 @@
     {
       "id": "06-performance-accessibility",
       "status": "blocked",
-      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "context": "workflow/active/portfolio-world-rebuild/06-performance-accessibility-CONTEXT.md",
       "depends_on_stages": [
         "05-integration"
       ],
       "depends_on": [],
-      "outputs": [],
+      "outputs": [
+        "docs/portfolio-world/STAGE-06-BASELINE.md",
+        "decisions/2026-09-30-stage06-baseline.md",
+        "docs/portfolio-world/STAGE-06-VALIDATION.md",
+        "workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md"
+      ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md",
       "block_reason": "awaiting_activation"
     },
