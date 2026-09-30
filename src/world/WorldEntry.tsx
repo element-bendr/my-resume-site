@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Vector3 } from "three";
+import { ACESFilmicToneMapping, Vector3 } from "three";
 import { CameraRig } from "./CameraRig";
 import { CommandCenter } from "./CommandCenter";
 import { InteractionOverlay } from "./InteractionOverlay";
@@ -10,6 +10,8 @@ import { WorldDistricts } from "./WorldDistricts";
 import { WorldHud } from "./WorldHud";
 import { WorldTopology } from "./WorldTopology";
 import { WebGLFallback } from "./WebGLFallback";
+import { WorldEnvironment } from "./WorldEnvironment";
+import { WorldScenery } from "./WorldScenery";
 import { detectWebGLSupport } from "./webgl";
 import {
   CAMERA,
@@ -146,9 +148,16 @@ export default function WorldEntry() {
                 far: 90,
               }}
               dpr={[1, 1.5]}
+              shadows
               gl={{ antialias: true, powerPreference: "high-performance" }}
+              onCreated={({ gl }) => {
+                gl.toneMapping = ACESFilmicToneMapping;
+                gl.toneMappingExposure = 1.08;
+              }}
               fallback={<WebGLFallback />}
             >
+              <WorldEnvironment />
+              <WorldScenery />
               <WorldTopology
                 currentZone={currentZone}
                 onRequestMove={(x, z) => requestMove(x, z)}
@@ -157,6 +166,7 @@ export default function WorldEntry() {
                 movementTarget={movementTarget}
                 nearbyStation={nearbyStation}
                 onSelectStation={selectStation}
+                reducedMotion={reducedMotion}
               />
               <WorldDistricts
                 loadedZones={loadedZones}

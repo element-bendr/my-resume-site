@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "workflow_id": "portfolio-world-visual-overhaul",
+  "title": "Portfolio World Visual Overhaul",
+  "status": "certified",
+  "active_stage": null,
+  "provenance": {
+    "started_from_commit": "5f4de7ace37bfd843ef13f035a3b16ddb61f28d7",
+    "validated_commit": "1a05ce3ff882484e7e2a8ed8d0557b359cb8f148"
+  },
+  "execution": {
+    "mode": "implementation",
+    "branch": "visual/rendering-overhaul-v1",
+    "worktree": ".worktrees/visual-rendering-overhaul-v1",
+    "owner": "Luna",
+    "write_paths": [
+      "HANDOFF.md",
+      "docs/portfolio-world/VISUAL-OVERHAUL-V1.md",
+      "docs/portfolio-world/VISUAL-OVERHAUL-V1-VALIDATION.md",
+      "src/world/**",
+      "workflow/active/portfolio-world-visual-overhaul/**",
+      "workflow/index.json"
+    ]
+  },
+  "stages": [
+    {
+      "id": "01-visual-foundation",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-visual-overhaul/CONTEXT.md",
+      "depends_on_stages": [],
+      "depends_on": [
+        {
+          "path": "workflow/active/portfolio-world-rebuild/state.json",
+          "blob": "e4bfb2b8415e3bab17ed21ab277b422173ae0a10"
+        }
+      ],
+      "outputs": [
+        "docs/portfolio-world/VISUAL-OVERHAUL-V1.md",
+        "docs/portfolio-world/VISUAL-OVERHAUL-V1-VALIDATION.md",
+        "src/world/WorldEnvironment.tsx",
+        "src/world/WorldScenery.tsx",
+        "workflow/active/portfolio-world-visual-overhaul/output/completion-report.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-visual-overhaul/output/completion-report.md"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "workflow_id": "portfolio-world-art-v2",
+  "title": "Portfolio World Art v2",
+  "status": "active",
+  "active_stage": "01-asset-hero-scene",
+  "provenance": {
+    "started_from_commit": "3399ab48e392cbf33b79ad22440075777b12f082",
+    "validated_commit": null
+  },
+  "execution": {
+    "mode": "implementation",
+    "branch": "visual/world-art-v2",
+    "worktree": ".worktrees/visual-world-art-v2",
+    "owner": "Luna",
+    "write_paths": [
+      "HANDOFF.md",
+      "docs/portfolio-world/VISUAL-OVERHAUL-V2.md",
+      "docs/portfolio-world/VISUAL-ASSET-SOURCES.md",
+      "docs/portfolio-world/VISUAL-ASSET-MANIFEST.md",
+      "docs/portfolio-world/VISUAL-OVERHAUL-V2-VALIDATION.md",
+      "public/world/assets/v2/**",
+      "src/world/**",
+      "workflow/active/portfolio-world-art-v2/**",
+      "workflow/index.json"
+    ]
+  },
+  "stages": [
+    {
+      "id": "01-asset-hero-scene",
+      "status": "active",
+      "context": "workflow/active/portfolio-world-art-v2/CONTEXT.md",
+      "depends_on_stages": [],
+      "depends_on": [
+        {
+          "path": "workflow/active/portfolio-world-visual-overhaul/state.json",
+          "blob": "32673681198990942e47de5eceaf1b7317c65b1e"
+        }
+      ],
+      "outputs": [
+        "docs/portfolio-world/VISUAL-ASSET-MANIFEST.md",
+        "docs/portfolio-world/VISUAL-OVERHAUL-V2-VALIDATION.md",
+        "workflow/active/portfolio-world-art-v2/output/completion-report.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-art-v2/output/completion-report.md"
+    }
+  ]
+}
