@@ -4,7 +4,7 @@
 Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
 
 ## Phase
-STAGE_06_FINAL_ACCEPTANCE_REAUDIT_ACTIVE
+STAGE_06_CERTIFIED_STAGE_07_AWAITING_ACTIVATION
 
 ## Execution mode
 implementation
@@ -20,7 +20,7 @@ implementation
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 and blocked teardown diagnostics from PR #11 are preserved in the Stage 06 root. Lane 6, the persistent `SiteShell`-owned Drei `Html portal` repair, is frozen by merged PR #12 at root merge `7505336fb3ba81f6c3620615a3bf1880c1019ff2`. The fresh integrated final acceptance re-audit is green, Terra returned PASS with no findings, and formal ICM certification passed for exact candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`. Stage 06 is certified on the PR #13 branch; Stage 07 is blocked with `awaiting_activation`. `main` and production remain untouched.
+Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 and blocked teardown diagnostics from PR #11 are preserved in the Stage 06 root. Lane 6, the persistent `SiteShell`-owned Drei `Html portal` repair, is frozen by merged PR #12 at root merge `7505336fb3ba81f6c3620615a3bf1880c1019ff2`. The fresh integrated final acceptance re-audit is green, Terra returned PASS with no findings, and formal ICM certification passed for exact candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`. Stage 06 is certified; Stage 07 is blocked with `awaiting_activation`. PR #13 now carries the certification state for bounded integration into the Stage 06 root. `main` and production remain untouched.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -89,7 +89,9 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Commit and push the PR #13 certification state, verify the remote PR exact head and bounded diff, and mark PR #13 ready for integration into `stage06/performance-accessibility`. Do not activate Stage 07, merge to `main`, or deploy.
+Review and merge PR #13 only into `stage06/performance-accessibility` with an exact-head guard. After that merge, verify the Stage 06 root carries `06-performance-accessibility=certified` and `07-certification-promotion=blocked` with `awaiting_activation`.
+
+Only after that verification may Stage 07 be activated through the repository's ICM activation tooling on a separate Stage 07 branch/worktree. Do not merge to `main` or deploy as part of the Stage 06 certification merge.
 
 ## Minimum resume context
 1. `AGENTS.md`
