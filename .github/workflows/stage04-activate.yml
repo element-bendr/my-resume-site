@@ -1,0 +1,13 @@
+name: Stage 04 Activation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  retired:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Stage 04 is active. This activation workflow is retained for historical/manual inspection only."

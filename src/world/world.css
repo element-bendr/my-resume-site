@@ -1,0 +1,343 @@
+.world-shell {
+  position: relative;
+  width: min(calc(100% - 2rem), 1320px);
+  min-height: 72vh;
+  margin: 1rem auto 4rem;
+  overflow: hidden;
+  border: 1px solid rgba(99, 216, 255, 0.2);
+  border-radius: 1.35rem;
+  background: #050b15;
+  box-shadow: 0 28px 100px rgba(0, 0, 0, 0.35);
+}
+
+.world-canvas {
+  width: 100%;
+  height: min(76vh, 820px);
+  min-height: 560px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(34, 89, 128, 0.15), transparent 42%),
+    #050b15;
+}
+
+.world-canvas > div,
+.world-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.world-webgl-fallback,
+.world-loading {
+  display: grid;
+  min-height: 560px;
+  place-items: center;
+  padding: 2rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.world-hud {
+  position: absolute;
+  z-index: 5;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  pointer-events: none;
+}
+
+.world-hud-status,
+.world-hud-nav,
+.world-nearby,
+.world-map-panel,
+.world-interaction-panel {
+  border: 1px solid rgba(99, 216, 255, 0.18);
+  background: rgba(5, 13, 25, 0.84);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(16px);
+}
+
+.world-hud-status {
+  display: grid;
+  gap: 0.15rem;
+  max-width: 32rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.8rem;
+}
+
+.world-hud-kicker {
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.world-hud-help {
+  color: #b8c8dc;
+  font-size: 0.72rem;
+}
+
+.world-hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  pointer-events: auto;
+}
+
+.world-hud-nav a,
+.world-hud-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.55rem 0.7rem;
+  background: transparent;
+  color: #d9e7f7;
+  font: inherit;
+  font-size: 0.78rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.world-hud-nav a:hover,
+.world-hud-button:hover {
+  background: rgba(99, 216, 255, 0.1);
+}
+
+.world-nearby {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  padding: 0.6rem 0.8rem;
+  border-radius: 999px;
+  color: #c5d6e9;
+  font-size: 0.78rem;
+  pointer-events: none;
+}
+
+.world-nearby kbd {
+  display: inline-grid;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  margin-right: 0.3rem;
+  place-items: center;
+  border: 1px solid rgba(99, 216, 255, 0.35);
+  border-radius: 0.35rem;
+  background: rgba(99, 216, 255, 0.08);
+  color: var(--accent);
+  font: inherit;
+  font-weight: 800;
+}
+
+.world-map-panel {
+  position: absolute;
+  z-index: 8;
+  top: 5rem;
+  right: 1rem;
+  width: min(30rem, calc(100% - 2rem));
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.world-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.world-panel-heading h2 {
+  margin-top: 0.2rem;
+  font-size: 1.25rem;
+}
+
+.world-close {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.world-map-grid {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.world-map-grid > * {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0.65rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.world-map-grid strong {
+  color: var(--accent);
+}
+
+.world-overlay-backdrop {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(2, 7, 14, 0.58);
+}
+
+.world-interaction-panel {
+  width: min(42rem, 100%);
+  max-height: calc(100% - 2rem);
+  overflow: auto;
+  padding: clamp(1.1rem, 3vw, 1.7rem);
+  border-radius: 1.1rem;
+}
+
+.world-interaction-panel > p {
+  margin-bottom: 0;
+}
+
+.world-interaction-panel .link-row a {
+  color: var(--accent);
+}
+
+@media (max-width: 860px) {
+  .world-shell {
+    width: calc(100% - 1rem);
+    margin-top: 0.5rem;
+  }
+
+  .world-canvas {
+    min-height: 520px;
+    height: 70vh;
+  }
+
+  .world-hud {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .world-hud-status {
+    max-width: min(100%, 28rem);
+  }
+
+  .world-hud-nav {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .world-hud-help {
+    display: none;
+  }
+
+  .world-nearby {
+    width: max-content;
+    max-width: calc(100% - 2rem);
+    text-align: center;
+  }
+}
+
+@media (pointer: coarse) {
+  .world-hud-nav a,
+  .world-hud-button,
+  .world-close,
+  .world-map-destination {
+    min-height: 44px;
+  }
+
+  .world-close {
+    min-width: 44px;
+  }
+
+  .world-hud-help {
+    display: none;
+  }
+
+  .world-hud-status::after {
+    content: "Tap the floor to move · drag to orbit · tap a station to inspect";
+    color: #b8c8dc;
+    font-size: 0.72rem;
+  }
+}
+
+.world-station-label {
+  display: inline-block;
+  padding: 0.32rem 0.52rem;
+  border: 1px solid rgba(99, 216, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(4, 12, 24, 0.84);
+  color: #dcecff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.world-zone-label {
+  display: inline-block;
+  padding: 0.34rem 0.58rem;
+  border: 1px solid rgba(99, 216, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(3, 10, 20, 0.82);
+  color: #dbeaff;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.38);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.world-map-destination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.world-map-destination strong {
+  color: #dcecff;
+}
+
+.world-map-destination span {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.world-map-destination:hover,
+.world-map-destination.is-current {
+  border-color: rgba(99, 216, 255, 0.42);
+  background: rgba(99, 216, 255, 0.08);
+}
+
+.world-map-destination.is-current strong,
+.world-map-destination:hover strong {
+  color: var(--accent);
+}

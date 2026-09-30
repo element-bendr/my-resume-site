@@ -1,0 +1,7 @@
+[
+  {"id":"gaming","label":"Gaming","worldMotif":"Arcade and strategy console","source":"user-approved"},
+  {"id":"anime","label":"Anime","worldMotif":"Neon media archive","source":"user-approved"},
+  {"id":"kettlebells","label":"Kettlebells","worldMotif":"Compact training bay","source":"user-approved"},
+  {"id":"philosophy","label":"Philosophy","worldMotif":"Quiet observatory library","source":"user-approved"},
+  {"id":"tinkering","label":"Tinkering","worldMotif":"Workbench full of half-finished ideas","source":"user-approved"}
+]

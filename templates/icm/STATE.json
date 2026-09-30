@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "workflow_id": "example-workflow",
+  "title": "Example workflow",
+  "status": "blocked",
+  "active_stage": "01-example",
+  "provenance": {
+    "started_from_commit": null,
+    "validated_commit": null
+  },
+  "execution": {
+    "mode": "implementation",
+    "branch": "main",
+    "worktree": ".",
+    "owner": "coordinator",
+    "write_paths": ["*"]
+  },
+  "stages": [
+    {
+      "id": "01-example",
+      "status": "blocked",
+      "block_reason": "contract_incomplete",
+      "context": "workflow/active/example-workflow/CONTEXT.md",
+      "depends_on_stages": [],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/example-workflow/output/completion-report.md"
+    }
+  ]
+}

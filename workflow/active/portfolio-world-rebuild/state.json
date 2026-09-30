@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "workflow_id": "portfolio-world-rebuild",
+  "title": "Portfolio World Rebuild",
+  "status": "certified",
+  "active_stage": null,
+  "provenance": {
+    "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
+    "validated_commit": "9af0df349c721c29ff85c49ecc95cd7f0d63d49d"
+  },
+  "execution": {
+    "mode": "certification",
+    "branch": "stage07/certification-promotion",
+    "worktree": ".worktrees/stage07-certification-promotion",
+    "owner": "Luna",
+    "write_paths": [
+      "AGENTS.md",
+      "BOOTSTRAP.md",
+      "CONTEXT.md",
+      "HANDOFF.md",
+      "PROVENANCE.md",
+      "VERSION",
+      "decisions/**",
+      "docs/**",
+      "scripts/**",
+      "templates/**",
+      "workflow/**",
+      ".github/**",
+      "src/**",
+      "public/**",
+      "tests/**",
+      "package.json",
+      "package-lock.json",
+      "tsconfig*.json",
+      "vite.config.*",
+      "wrangler.*",
+      "index.html"
+    ]
+  },
+  "stages": [
+    {
+      "id": "00-bootstrap",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "depends_on_stages": [],
+      "depends_on": [],
+      "outputs": [
+        "CONTEXT.md",
+        "HANDOFF.md",
+        "decisions/2026-09-28-portfolio-world-architecture.md",
+        "docs/portfolio-world/ARCHITECTURE.md",
+        "docs/portfolio-world/ASSET-BUDGET.md",
+        "decisions/2026-09-28-movement-navigation.md",
+        "docs/portfolio-world/WORLD-SPEC.md",
+        "docs/portfolio-world/MOVEMENT-ARCHITECTURE.md",
+        "decisions/2026-09-28-rendering-technology.md",
+        "docs/portfolio-world/RENDERING-TECHNOLOGY.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/completion-report.md"
+    },
+    {
+      "id": "01-content-contract",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "depends_on_stages": [
+        "00-bootstrap"
+      ],
+      "depends_on": [],
+      "outputs": [
+        "docs/portfolio-world/CONTENT-CONTRACT.md",
+        "docs/portfolio-world/CONTENT-SOURCES.json",
+        "decisions/2026-09-28-content-authority.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/01-content-contract-completion-report.md"
+    },
+    {
+      "id": "02-app-foundation",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/02-app-foundation-CONTEXT.md",
+      "depends_on_stages": [
+        "01-content-contract"
+      ],
+      "depends_on": [],
+      "outputs": [
+        "decisions/2026-09-28-app-foundation-stack.md",
+        "package.json",
+        "package-lock.json",
+        ".nvmrc",
+        "vite.config.ts",
+        "wrangler.jsonc",
+        "tsconfig.json",
+        "tsconfig.app.json",
+        "tsconfig.node.json",
+        "tsconfig.worker.json",
+        "index.html",
+        "worker",
+        "src/app",
+        "src/content",
+        "src/styles",
+        "tests",
+        "scripts/check-content.mjs",
+        "scripts/check-asset-budget.mjs",
+        "scripts/check-foundation-config.mjs"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/02-app-foundation-completion-report.md"
+    },
+    {
+      "id": "03-command-center-slice",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/03-command-center-slice-CONTEXT.md",
+      "depends_on_stages": [
+        "02-app-foundation"
+      ],
+      "depends_on": [],
+      "outputs": [
+        "decisions/2026-09-28-command-center-stack.md",
+        "src/world/WorldEntry.tsx",
+        "src/world/CommandCenter.tsx",
+        "src/world/PlayerController.tsx",
+        "src/world/CameraRig.tsx",
+        "src/world/InteractionStation.tsx",
+        "src/world/world-config.ts",
+        "src/world/movement.ts",
+        "src/world/world.css",
+        "src/world/WorldHud.tsx",
+        "src/world/InteractionOverlay.tsx",
+        "tests/movement.test.ts",
+        "tests/world-config.test.ts",
+        "scripts/check-world-boundary.mjs",
+        "package.json",
+        "package-lock.json",
+        "scripts/check-world-budget.mjs",
+        "docs/portfolio-world/STAGE-03-VALIDATION.md",
+        "src/world/webgl.ts",
+        "src/world/WorldCanvasBoundary.tsx",
+        "src/world/WebGLFallback.tsx",
+        "tests/webgl.test.ts"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/03-command-center-slice-completion-report.md"
+    },
+    {
+      "id": "04-world-zones",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/04-world-zones-CONTEXT.md",
+      "depends_on_stages": [
+        "03-command-center-slice"
+      ],
+      "depends_on": [],
+      "outputs": [
+        "decisions/2026-09-29-world-zones.md",
+        "src/world/world-topology.ts",
+        "src/world/WorldTopology.tsx",
+        "src/world/WorldDistricts.tsx",
+        "src/world/districts/BuildLab.tsx",
+        "src/world/districts/AutomationLab.tsx",
+        "src/world/districts/ClientStreet.tsx",
+        "src/world/districts/TimelineCorridor.tsx",
+        "src/world/districts/HobbyDistrict.tsx",
+        "tests/world-topology.test.ts",
+        "scripts/check-world-zones.mjs",
+        "docs/portfolio-world/STAGE-04-VALIDATION.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/04-world-zones-completion-report.md"
+    },
+    {
+      "id": "05-integration",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md",
+      "depends_on_stages": [
+        "04-world-zones"
+      ],
+      "depends_on": [],
+      "outputs": [
+        "docs/portfolio-world/ASK-CONTRACT.md",
+        "docs/portfolio-world/LOCAL-DEVELOPMENT.md",
+        "src/ask",
+        "worker",
+        "src/app/pages/AskPage.tsx",
+        "src/world/InteractionOverlay.tsx",
+        "tests",
+        "docs/portfolio-world/STAGE-05-VALIDATION.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md"
+    },
+    {
+      "id": "06-performance-accessibility",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/06-performance-accessibility-CONTEXT.md",
+      "depends_on_stages": [
+        "05-integration"
+      ],
+      "depends_on": [],
+      "outputs": [
+        "docs/portfolio-world/STAGE-06-BASELINE.md",
+        "decisions/2026-09-30-stage06-baseline.md",
+        "docs/portfolio-world/STAGE-06-VALIDATION.md",
+        "workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md"
+    },
+    {
+      "id": "07-certification-promotion",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/07-certification-promotion-CONTEXT.md",
+      "depends_on_stages": [
+        "06-performance-accessibility"
+      ],
+      "depends_on": [],
+      "outputs": [
+        "docs/portfolio-world/STAGE-07-VALIDATION.md",
+        "docs/portfolio-world/PROMOTION-RECORD.md",
+        "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md"
+    }
+  ]
+}

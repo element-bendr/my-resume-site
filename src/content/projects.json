@@ -1,0 +1,155 @@
+[
+  {
+    "id": "pcas",
+    "title": "Personal Career Acquisition System",
+    "shortSummary": "Human-gated opportunity discovery and evaluation system built around Cloudflare Workers, Workflows, D1, Workers AI, GitHub Actions, and live Greenhouse data.",
+    "status": "Production-oriented career acquisition system",
+    "visibility": "public-profile-private-implementation",
+    "technologies": ["Cloudflare Workers", "Workflows", "D1", "Workers AI", "GitHub Actions", "Greenhouse"],
+    "publicLinks": [
+      {"label": "Engineering profile", "url": "https://github.com/element-bendr"}
+    ],
+    "proofRefs": ["public-engineering-profile"],
+    "sourceRefs": ["public-engineering-profile"],
+    "worldZone": "automation-lab",
+    "featured": true
+  },
+  {
+    "id": "newsharness",
+    "title": "Newsharness",
+    "shortSummary": "Cloudflare-native daily news intelligence system with inspectable collection, clustering, enrichment, publishing, and reporting workflows.",
+    "status": "Built MVP / Cloudflare-native intelligence system",
+    "visibility": "sanitized-private-work",
+    "technologies": ["Cloudflare Agents SDK", "Durable Objects", "D1", "R2", "Workers AI"],
+    "publicLinks": [
+      {"label": "Public case study", "url": "https://github.com/element-bendr/ai-automation-case-studies"}
+    ],
+    "proofRefs": ["public-sanitized-case-studies", "public-engineering-profile"],
+    "sourceRefs": ["public-sanitized-case-studies", "public-engineering-profile"],
+    "worldZone": "automation-lab",
+    "featured": true
+  },
+  {
+    "id": "memory-os",
+    "title": "Memory OS",
+    "shortSummary": "Governed memory operating system for AI coding agents, separating durable knowledge, task state, retrieval, evidence, and handoffs.",
+    "status": "Built internal AI coding-agent memory system",
+    "visibility": "sanitized-private-work",
+    "technologies": ["PostgreSQL", "pgvector", "Git", "Agent workflows"],
+    "publicLinks": [
+      {"label": "Public case study", "url": "https://github.com/element-bendr/ai-automation-case-studies"}
+    ],
+    "proofRefs": ["public-sanitized-case-studies", "public-engineering-profile"],
+    "sourceRefs": ["public-sanitized-case-studies", "public-engineering-profile"],
+    "worldZone": "build-lab",
+    "featured": true
+  },
+  {
+    "id": "trifecta-kpdc",
+    "title": "Trifecta / KPDC",
+    "shortSummary": "Multi-site institutional publishing system with three public sites, a private admin application, shared packages, publishing workflows, and handover documentation.",
+    "status": "Built institutional publishing system",
+    "visibility": "sanitized-private-work-with-public-sites",
+    "technologies": ["Cloudflare Pages", "R2", "TypeScript", "Monorepo"],
+    "publicLinks": [
+      {"label": "Degree College", "url": "https://www.kpcollege.in/"},
+      {"label": "Law College", "url": "https://kalyanipatillawcollege.in/"},
+      {"label": "Public case study", "url": "https://github.com/element-bendr/ai-automation-case-studies"}
+    ],
+    "proofRefs": ["public-sanitized-case-studies"],
+    "sourceRefs": ["public-sanitized-case-studies"],
+    "worldZone": "client-street",
+    "featured": true
+  },
+  {
+    "id": "steelmade",
+    "title": "SteelMade",
+    "shortSummary": "Production furniture brand website for product discovery, brand presentation, and quote or enquiry flows.",
+    "status": "Production client website",
+    "visibility": "public-live-and-implementation",
+    "technologies": ["Next.js", "TypeScript", "Cloudinary", "Netlify", "Cloudflare"],
+    "publicLinks": [
+      {"label": "Live site", "url": "https://steelmade.co.in/"},
+      {"label": "Public implementation", "url": "https://github.com/element-bendr/steelmade-cloudiary"}
+    ],
+    "proofRefs": ["public-sanitized-case-studies"],
+    "sourceRefs": ["public-sanitized-case-studies"],
+    "worldZone": "client-street",
+    "featured": true
+  },
+  {
+    "id": "chronoquill",
+    "title": "ChronoQuill",
+    "shortSummary": "Local-first WhatsApp publishing automation with deterministic scheduling, duplicate prevention, recovery, CLI operations, and persistent state.",
+    "status": "Built local automation service",
+    "visibility": "public-implementation",
+    "technologies": ["Node.js", "TypeScript", "SQLite", "Baileys", "systemd"],
+    "publicLinks": [
+      {"label": "Public implementation", "url": "https://github.com/element-bendr/chronoquill"}
+    ],
+    "proofRefs": ["public-sanitized-case-studies"],
+    "sourceRefs": ["public-sanitized-case-studies"],
+    "worldZone": "automation-lab",
+    "featured": false
+  },
+  {
+    "id": "artsports-content-os",
+    "title": "ArtSports Content OS",
+    "shortSummary": "Structured content planning and caption-generation workflow with deterministic calendars, schemas, bounded generation, fallbacks, validation, and operator briefs.",
+    "status": "Built content workflow system",
+    "visibility": "sanitized-private-work",
+    "technologies": ["Structured content", "LLM workflows", "Validation", "Deterministic planning"],
+    "publicLinks": [
+      {"label": "Public case study", "url": "https://github.com/element-bendr/ai-automation-case-studies"}
+    ],
+    "proofRefs": ["public-sanitized-case-studies"],
+    "sourceRefs": ["public-sanitized-case-studies"],
+    "worldZone": "automation-lab",
+    "featured": false
+  },
+  {
+    "id": "mnemos",
+    "title": "Mnemos",
+    "shortSummary": "Governed AI memory prototype for reviewable knowledge ingestion, patch-based model changes, audit logs, and health-checked local operation.",
+    "status": "Governed AI memory system / prototype",
+    "visibility": "sanitized-private-work",
+    "technologies": ["Next.js", "Node.js", "Playwright", "PostgreSQL", "Docker"],
+    "publicLinks": [
+      {"label": "Public case study", "url": "https://github.com/element-bendr/ai-automation-case-studies"}
+    ],
+    "proofRefs": ["public-sanitized-case-studies"],
+    "sourceRefs": ["public-sanitized-case-studies"],
+    "worldZone": "build-lab",
+    "featured": false
+  },
+  {
+    "id": "governed-runtime",
+    "title": "Governed Runtime / little-agent",
+    "shortSummary": "Local-first agent runtime architecture using canonical state, graph and semantic projections, append-only authority events, and evidence-gated promotion.",
+    "status": "Governed agent runtime",
+    "visibility": "public-profile-private-implementation",
+    "technologies": ["PostgreSQL", "Apache AGE", "pgvector", "Agent runtime"],
+    "publicLinks": [
+      {"label": "Engineering profile", "url": "https://github.com/element-bendr"}
+    ],
+    "proofRefs": ["public-engineering-profile"],
+    "sourceRefs": ["public-engineering-profile"],
+    "worldZone": "automation-lab",
+    "featured": false
+  },
+  {
+    "id": "palimpsest",
+    "title": "Palimpsest",
+    "shortSummary": "Git-friendly projection layer for durable AI conversation history, provenance, sanitized Markdown, verification, and downstream knowledge use.",
+    "status": "Private engineering system",
+    "visibility": "public-profile-private-implementation",
+    "technologies": ["Git", "Provenance", "Knowledge systems"],
+    "publicLinks": [
+      {"label": "Engineering profile", "url": "https://github.com/element-bendr"}
+    ],
+    "proofRefs": ["public-engineering-profile"],
+    "sourceRefs": ["public-engineering-profile"],
+    "worldZone": "build-lab",
+    "featured": false
+  }
+]

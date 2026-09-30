@@ -1,0 +1,41 @@
+[
+  {
+    "id": "vinfinity-ai-systems-architect",
+    "organization": "V-Infinity",
+    "role": "AI Systems Architect, Workflow Orchestrator and Digital Infrastructure Builder",
+    "period": "Sep 2014 - Present",
+    "summary": "Designed AI-assisted systems across websites, content operations, lead workflows, and client delivery.",
+    "highlights": [
+      "Built reusable workflows combining prompt structure, automation, web tools, and human review.",
+      "Used coding agents and AI-assisted development tools to speed implementation while keeping delivery structured and production-ready.",
+      "Developed websites and landing pages in WordPress and Next.js with focus on clarity, performance, and business use."
+    ],
+    "sourceRefs": ["structured-profile-history"]
+  },
+  {
+    "id": "hcl-cybersecurity-incident-management",
+    "organization": "HCL Comnet Ltd",
+    "role": "Cybersecurity and IT Incident Management Specialist",
+    "period": "Dec 2009 - May 2013",
+    "summary": "Worked in a process-heavy environment where reliability, clear documentation, and steady judgement mattered.",
+    "highlights": [
+      "Monitored and handled security incidents and escalations.",
+      "Managed client-facing issue resolution with consistent documentation.",
+      "Strengthened process discipline useful for modern AI-assisted delivery systems."
+    ],
+    "sourceRefs": ["structured-profile-history"]
+  },
+  {
+    "id": "niit-elearning-content-development",
+    "organization": "NIIT Limited",
+    "role": "E-Learning and Content Development Executive",
+    "period": "Mar 2007 - Aug 2007",
+    "summary": "Supported structured content development, revision cycles, and quality checks for corporate learning programmes.",
+    "highlights": [
+      "Worked in content quality and revision loops.",
+      "Helped maintain structured documentation standards.",
+      "Built foundation for later content-system and workflow design work."
+    ],
+    "sourceRefs": ["structured-profile-history"]
+  }
+]
