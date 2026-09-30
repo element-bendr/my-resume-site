@@ -1,10 +1,10 @@
 # Current Handoff
 
 ## Goal
-Prepare Stage 06 performance, accessibility, mobile, and visual hardening from the certified feature head, preserving Stages 00–05 and keeping `main` and production untouched.
+Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
 
 ## Phase
-STAGE_06_ACTIVE_BASELINE_FROZEN
+STAGE_06_TOUCH_TARGET_LANE_LOCAL_VALIDATION
 
 ## Execution mode
 implementation
@@ -12,13 +12,15 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage06/performance-accessibility / .worktrees/stage06-performance
+- working branch/worktree: stage06/world-map-touch-targets / .worktrees/stage06-performance
 - application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
 - active workflow/stage: workflow/active/portfolio-world-rebuild / 06-performance-accessibility
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`. Stage 07 remains pending. The Stage 05 historical completion evidence is unchanged.
+Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
+
+Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510b8cd99db0e5d39a77d850c3b8e` with the recorded 360/390/768/1024/1440 browser pass, 66/66 tests, build/budgets, and Terra PASS. Stage 06 lane 2 is PR #7, branch `stage06/world-map-touch-targets`, currently based exactly on that certified Stage 06 head. Its implementation commit `a4e58e8a785cc1ed4d9f509e14a6ead88e7a3933` changes only coarse-pointer world/map touch sizing; runtime certification is deliberately delegated to the local worktree. Stage 07 remains pending and MUST NOT start until Stage 06 is fully validated, completed, and certified.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -47,6 +49,9 @@ Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65
 - Stage 00–05: certified; Stage 06: active; Stage 07: pending
 - Stage 06 contract/baseline commit: `c0507383025ca191264df1f31b42410624fb259b`
 - Stage 06 activation: completed using existing ICM tooling; active stage 06, Stage 07 pending
+- Stage 06 lane 1 PR #6: `stage06/performance-accessibility` @ `61900faf6e7510b8cd99db0e5d39a77d850c3b8e`; homepage overflow lane PASS
+- Stage 06 lane 2 PR #7: `stage06/world-map-touch-targets`; implementation commit `a4e58e8a785cc1ed4d9f509e14a6ead88e7a3933`; static diff is one CSS file and coarse-pointer-only; local runtime/browser certification PENDING
+- Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to PR #7 before further Stage 06 work
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
 
 ## Protected state
@@ -62,17 +67,19 @@ Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Begin only bounded Stage 06 lanes from measured evidence: (1) resolve `/` 34px horizontal overflow at 390px / 32px at 360px, (2) improve mobile world Map/Close map and header/overlay action target sizes, (3) decide and implement accessible map overlay semantics/focus entry/return while preserving Escape and movement behavior. Then profile before any renderer/bundle optimization; keep Three/R3F absent from conventional routes and district loading lazy. Do not deploy, modify `main`, or begin Stage 07.
+Local executor: fetch `origin/stage06/world-map-touch-targets`, enter `.worktrees/stage06-performance`, confirm the worktree is clean, and put it on the exact PR #7 head. Run bootstrap/workflow/strict status, offline verification, typecheck, all tests, production build, asset/world budgets, Ask disclosure/world guards, then the required browser matrix with a coarse pointer at 360/390/768/1024/1440. Measure the Map button, world HUD links, Close control, and map destinations; acceptance is at least 44 CSS px in each required touch dimension with no new overflow, target overlap, focus regression, movement/topology change, or desktop/mouse regression.
+
+If any check is red, repair only the evidenced Stage 06 defect on PR #7, rerun the smallest affected proof and then the full Stage 06 gate. If the touch lane is green, perform independent Terra review and record exact-head evidence in Stage 06 validation/handoff. Continue to the remaining Stage 06 map semantics/focus lane only after this lane is frozen. Do not deploy, modify `main`, merge to the integration branch, or begin Stage 07 until Stage 06 completion/certification is green.
 
 ## Minimum resume context
 1. `AGENTS.md`
 2. `CONTEXT.md`
 3. `HANDOFF.md`
-4. `workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md`
-5. `docs/portfolio-world/ASK-CONTRACT.md`
-6. `decisions/2026-09-28-portfolio-world-architecture.md`
-7. `docs/portfolio-world/STAGE-05-VALIDATION.md`
-8. `workflow/active/portfolio-world-rebuild/output/05-integration-completion-report.md`
+4. `workflow/active/portfolio-world-rebuild/06-performance-accessibility-CONTEXT.md`
+5. `docs/portfolio-world/STAGE-06-BASELINE.md`
+6. `docs/portfolio-world/ASK-CONTRACT.md`
+7. `decisions/2026-09-28-portfolio-world-architecture.md`
+8. PR #7 (`stage06/world-map-touch-targets`) exact-head diff and local validation evidence
 
 ## Stage 05 setup / validation
 - remote integration head fetched: `fbbb08e84a9455655f3ac5fb92f496faa538f747`
