@@ -206,7 +206,11 @@
         "06-performance-accessibility"
       ],
       "depends_on": [],
-      "outputs": [],
+      "outputs": [
+        "docs/portfolio-world/STAGE-07-VALIDATION.md",
+        "docs/portfolio-world/PROMOTION-RECORD.md",
+        "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md"
+      ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md",
       "block_reason": "awaiting_activation"
     }
