@@ -3,7 +3,7 @@
 ## Goal
 Activate and execute Stage 07 certification/promotion from the formally certified Stage 06 root. Prove the exact certified application on Cloudflare preview infrastructure, retain full regression/protected-state evidence, and make it eligible for a separate explicit promotion to `main` and production only after Stage 07 certification.
 ## Phase
-STAGE_07_CERTIFIED
+PRODUCTION_PROMOTION_APPROVED
 
 ## Execution mode
 certification
@@ -11,13 +11,13 @@ certification
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage07/certification-promotion / .worktrees/stage07-certification-promotion
+- promotion branch: promotion/portfolio-world-production
 - Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
 - workflow state: workflow/active/portfolio-world-rebuild; Stages 00–07 certified
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–07 are formally certified. Stage 06 certification is integrated at `fe1d15199f06a8a6a2cae22dbc7fa623e75218f6`. Stage 07 was formally certified by the existing ICM tooling against evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`; its preview runtime candidate was `27989cb13b989382df69ef2a376f6314f7b9fb6c`. The Stage 07 contract is frozen at `workflow/active/portfolio-world-rebuild/07-certification-promotion-CONTEXT.md`. `main`, production, and the production domain remain untouched.
+Stages 00–07 are formally certified. Stage 07 certification/evidence is integrated in the certified root at `7c56ad4bb04ed7aa5feeca4ccb3136d3db500ffe`. Explicit production promotion approval has now been granted. The current promotion branch is `promotion/portfolio-world-production`. `main` and production remain unchanged until the promotion PR is merged and the exact resulting main head is deployed.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -94,7 +94,15 @@ Stages 00–07 are formally certified. Stage 06 certification is integrated at `
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Stage 07 is formally certified by ICM against evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`, with preview runtime evidence for `27989cb13b989382df69ef2a376f6314f7b9fb6c`. STOP pending separate explicit integration/promotion approval. Do not merge to `main` or deploy production. `main`, production, and the production domain remain untouched.
+Open a dedicated promotion PR from `promotion/portfolio-world-production` to `main`, inspect the complete diff against the protected main baseline, and merge only if it exactly represents the certified portfolio-world application plus promotion-approval evidence.
+
+After merge:
+1. record the exact new `main` head;
+2. deploy that exact head with the repository production command `npm run deploy` / `wrangler deploy` using the authenticated Cloudflare production environment;
+3. verify the production Worker/domain and run health, conventional-route, Ask, `/play`, SPA-exit, fallback, and console/network smoke checks;
+4. update `docs/portfolio-world/PROMOTION-RECORD.md` to PROMOTED with exact main/deployment identifiers and smoke result.
+
+Do not claim production promotion complete until steps 2–4 are evidenced.
 
 ## Minimum resume context
 1. `AGENTS.md`
