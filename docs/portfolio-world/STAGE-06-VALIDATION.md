@@ -139,3 +139,55 @@ Inherited follow-up discovered during browser validation:
 - defect is therefore isolated to a separate bounded Stage 06 lane before final certification
 
 Protected state remains intact: no CSS/touch-target, content, Ask, dependency, controller, topology, `main`, deployment, or Stage 07 changes.
+
+
+## Lane 4 — headless fast-travel portal lifecycle
+
+PR: #9 — `fix(stage06): isolate headless fast-travel removeChild exception`
+
+Validated implementation head: `82476d6d8afef3e256e9fa4db05465811a27bf06`
+
+Reproduced root cause:
+
+- changing zones conditionally unmounted a Drei `Html` zone-label portal during the first lazy district load
+- React DOM then attempted to remove a wrapper already detached by the portal lifecycle
+- failure had previously been reproduced on untouched Stage 06 root before the PR #8 runtime change
+
+Repair:
+
+- non-Command-Center zone-label portals remain mounted across fast travel
+- only the current-zone label is hidden using CSS `visibility`
+- the existing world-zone guard now enforces the portal-lifecycle invariant
+- fast-travel behavior, topology data, controller/movement semantics, map focus lifecycle, and lazy district loading remain unchanged
+
+Validation:
+
+- ICM bootstrap/workflow/strict status: PASS
+- world-zone guard: PASS
+- focused topology tests: 7/7 PASS
+- full suite: 66/66 PASS
+- typecheck: PASS
+- production build: PASS
+- critical asset budget: PASS, 89.2 KiB gzip
+- world JS budget: PASS, 334.8 KiB gzip
+- Ask disclosure/world boundary guards: PASS
+- production-browser fast travel through Client Street, Build Lab, and Automation Lab: PASS
+- browser runtime exceptions: zero
+- failed browser requests: zero
+- map focus restored to Map after each travel
+- coarse-pointer controls remain 44px
+- 390px viewport retains no horizontal overflow
+
+Independent review:
+
+- Terra verdict: **PASS**
+- no required fixes
+
+Protected state:
+
+- PR #7 touch-target implementation unchanged
+- PR #8 map dialog/focus implementation unchanged
+- no controller or topology-data change
+- no Ask/content/dependency change
+- `main` and production untouched
+- Stage 07 not started
