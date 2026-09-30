@@ -3,7 +3,7 @@
 ## Goal
 Activate and execute Stage 07 certification/promotion from the formally certified Stage 06 root. Prove the exact certified application on Cloudflare preview infrastructure, retain full regression/protected-state evidence, and make it eligible for a separate explicit promotion to `main` and production only after Stage 07 certification.
 ## Phase
-PRODUCTION_PROMOTION_APPROVED
+MAIN_PROMOTED_PRODUCTION_DEPLOY_PENDING
 
 ## Execution mode
 certification
@@ -17,7 +17,7 @@ certification
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–07 are formally certified. Stage 07 certification/evidence is integrated in the certified root at `7c56ad4bb04ed7aa5feeca4ccb3136d3db500ffe`. Explicit production promotion approval has now been granted. The current promotion branch is `promotion/portfolio-world-production`. `main` and production remain unchanged until the promotion PR is merged and the exact resulting main head is deployed.
+Stages 00–07 are formally certified. PR #15 promoted the certified application to `main` at `0c5131d5eb68dc566ea95422a2d80aef2126c373`. Production has not been deployed. The current ChatGPT environment cannot execute Wrangler against Cloudflare because no authenticated Cloudflare connector/deploy workflow is available and the isolated shell has no external network path. Runtime promotion to `main` is complete; production deployment and post-deploy smoke evidence remain outstanding.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -94,15 +94,18 @@ Stages 00–07 are formally certified. Stage 07 certification/evidence is integr
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Open a dedicated promotion PR from `promotion/portfolio-world-production` to `main`, inspect the complete diff against the protected main baseline, and merge only if it exactly represents the certified portfolio-world application plus promotion-approval evidence.
+From an authenticated Cloudflare execution environment, check out exact promoted `main` commit `0c5131d5eb68dc566ea95422a2d80aef2126c373` (or a later docs-only main head that preserves the same runtime tree), use Node 22.22.x / npm 11.20.0, run `npm ci`, then run `npm run deploy`.
 
-After merge:
-1. record the exact new `main` head;
-2. deploy that exact head with the repository production command `npm run deploy` / `wrangler deploy` using the authenticated Cloudflare production environment;
-3. verify the production Worker/domain and run health, conventional-route, Ask, `/play`, SPA-exit, fallback, and console/network smoke checks;
-4. update `docs/portfolio-world/PROMOTION-RECORD.md` to PROMOTED with exact main/deployment identifiers and smoke result.
+Record the resulting production Worker name, version/deployment identifier, and production URL/domain. Then run post-deployment smoke checks for:
+- `/api/health`;
+- `/`, `/projects`, `/resume`, `/ask`, `/contact`, `/play`;
+- grounded and unsupported Ask behavior;
+- the five `/play` SPA exits;
+- map/focus and fast travel;
+- forced no-WebGL fallback;
+- console/page errors, failed requests, and unexpected HTTP errors.
 
-Do not claim production promotion complete until steps 2–4 are evidenced.
+If production smoke is green, update `docs/portfolio-world/PROMOTION-RECORD.md` to PROMOTED with the exact main/deployment identifiers and smoke result. If deployment or smoke fails, preserve production state and record the exact blocker; do not claim promotion complete.
 
 ## Minimum resume context
 1. `AGENTS.md`
