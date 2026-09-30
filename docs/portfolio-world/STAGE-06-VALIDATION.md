@@ -1,6 +1,6 @@
 # Stage 06 validation — cumulative evidence
 
-Status: **ACTIVE — PR #12 Terra PASS; awaiting Stage 06 root integration**
+Status: **ACTIVE — PR #12 PASS; awaiting Stage 06 root integration**
 
 Stage 06 remains active. This file records completed bounded lanes and does not certify Stage 06 as a whole.
 
@@ -148,7 +148,7 @@ Stage 07 remains blocked until Stage 06 is fully completed and certified.
 
 PR: #12 — `fix(stage06): host world labels outside routed canvas`
 
-Candidate: `e0c04b4dde79d212fbfaf5fd65165453bf55d588`; awaiting push to PR #12.
+Runtime repair commit: `e0c04b4dde79d212fbfaf5fd65165453bf55d588`. Exact pushed validation/evidence head: `a940cbf9a0859dd048401c749094768e42824d9c`.
 
 Implementation:
 
@@ -172,7 +172,7 @@ Validation:
 Independent review and next action:
 
 - Terra final review: **PASS**, no findings or required fixes
-- next: push exact candidate `e0c04b4dde79d212fbfaf5fd65165453bf55d588` to PR #12, then merge only into the Stage 06 root and rerun final acceptance audit
+- repository-side review: PASS; next: merge PR #12 only into the Stage 06 root, then rerun the full final Stage 06 acceptance audit from that integrated root
 - Stage 06 certification: NOT RUN; Stage 07 remains pending
 
 Protected state: no dependency/content/Ask/controller/topology change; `main` and production untouched; no deployment.
