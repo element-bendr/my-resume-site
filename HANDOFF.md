@@ -12,7 +12,7 @@ certification
 - repository: element-bendr/my-resume-site
 - canonical branch: main
 - working branch/worktree: stage07/certification-promotion / .worktrees/stage07-certification-promotion
-- application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
+- Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
 - workflow state: workflow/active/portfolio-world-rebuild; Stages 00–06 certified; Stage 07 active
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
@@ -65,6 +65,12 @@ Stages 00–06 are formally certified. Stage 06 certification is integrated into
 - formal ICM certification candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`: PASS; Stage 06 certified; Stage 07 blocked `awaiting_activation`
 - Stage 06 certification state commit: `d8decc56d120cb92aef1778999b7166d44ec2b74`
 - Stage 07 activation: PASS via `scripts/workflow_activate.py --workflow portfolio-world-rebuild --write` at `f5dcbdf7f9c6a9efb568b5650773d8306c0da6b3`; Stages 00–06 remain certified and Stage 07 is active
+- Stage 07 exact preview candidate `27989cb13b989382df69ef2a376f6314f7b9fb6c`; preview Worker `vijay-kumaran-portfolio-world-stage07-27989cb`, version `e581366f-81ec-4ee3-b0a7-9781fdb6bf19`; preview URL and evidence are recorded in `docs/portfolio-world/STAGE-07-VALIDATION.md`
+- Stage 07 local gates: PASS; 11 test files / 66 tests; critical conventional bundle 89.6 KiB gzip; total client JavaScript 335.3 KiB gzip; asset/world budgets, Ask disclosure, and world Ask boundary PASS
+- Stage 07 preview: 30 route/viewport cases at 360/390/768/1024/1440, grounded/unsupported Ask, five `/play` SPA exits, map/focus/fast-travel, reduced motion, forced no-WebGL fallback, portal alignment, route isolation, lazy districts, and network/runtime checks PASS
+- Stage 07 known warning: existing `THREE.Clock` deprecation warning on world loads; classified understood/non-blocking, with no application console errors
+- Stage 07 Terra final preview review: PASS, no required fixes; Stage 07 formal ICM certification has NOT yet run
+- `main` remains `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`; production remains unchanged; no runtime, dependency, configuration, merge, or deployment change in this evidence update
 - Stage 06 lane 6 PR #12 local candidate: persistent host detects lazy `.world-canvas` mount, tracks size/viewport position, and preserves canvas clipping; labels only use the host
 - PR #12 browser: zero page errors/request failures for header Ask/Projects/Resume, HUD Contact, and Ask Terminal Open Ask; exact host/canvas bounds at 1440px and 390px, aligned at 1024px resize; 390px overflow 0
 - PR #12 world regression: Build Lab fast travel loads only BuildLab and shared DistrictStations; current-zone label hidden; Map focus restored; fallback links intact; initial `/play` has no district chunks; `/ask` loads no WorldEntry
@@ -87,7 +93,7 @@ Stages 00–06 are formally certified. Stage 06 certification is integrated into
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Stage 07 is active locally. Next, integrate the certified Stage 06 root into the rebuild integration candidate, then run the contracted local ICM, regression, disclosure, and asset gates on that exact candidate. Only after local gates pass, prepare a Cloudflare preview (never production) and execute the Stage 07 browser/visual/accessibility matrix. Record exact candidate and preview evidence; obtain Terra review before Stage 07 certification. Keep `main`, production, and the production domain untouched; do not perform promotion or production deployment in this checkpoint.
+Stage 07 candidate `27989cb13b989382df69ef2a376f6314f7b9fb6c` has passed local gates, preview certification, and Terra review. Run the repository's read-only Stage 07 certification check, then use the existing ICM certification tooling only if that check passes. Stage 07 is not yet formally certified. After certification, stop for separate explicit integration/promotion approval; do not automatically merge to `main` or deploy production. `main`, production, and the production domain remain untouched.
 
 ## Minimum resume context
 1. `AGENTS.md`
