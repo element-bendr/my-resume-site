@@ -10,7 +10,7 @@
   },
   "execution": {
     "mode": "implementation",
-    "branch": "stage06/persistent-html-portal-host",
+    "branch": "stage06/final-acceptance-reaudit",
     "worktree": ".worktrees/stage06-performance",
     "owner": "Luna",
     "write_paths": [
