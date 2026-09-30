@@ -1,6 +1,6 @@
 # Stage 06 validation — cumulative evidence
 
-Status: **BLOCKED**
+Status: **ACTIVE — PR #12 PASS; awaiting Stage 06 root integration**
 
 Stage 06 remains active. This file records completed bounded lanes and does not certify Stage 06 as a whole.
 
@@ -142,6 +142,40 @@ Protected state:
 - Stage 06 completion report and certification
 
 Stage 07 remains blocked until Stage 06 is fully completed and certified.
+
+
+## Lane 6 — persistent zone-label portal host
+
+PR: #12 — `fix(stage06): host world labels outside routed canvas`
+
+Runtime repair commit: `e0c04b4dde79d212fbfaf5fd65165453bf55d588`. Exact pushed validation/evidence head: `a940cbf9a0859dd048401c749094768e42824d9c`.
+
+Implementation:
+
+- `SiteShell` owns one stable DOM host outside the routed `Outlet`; a typed React context/ref bridge carries it to `WorldTopology` without importing Three, R3F, or Drei.
+- only the existing non-Command-Center zone-label `Html` elements use the host. Station labels, zones, topology, navigation, Ask behavior, and renderer stay unchanged.
+- the host observes lazy `.world-canvas` mount, tracks canvas bounds through resize/scroll/visual viewport changes, is pointer-inert/decorative, and clips at the existing canvas boundary.
+- conventional-route isolation is preserved: `/ask` does not load `WorldEntry`; initial `/play` does not load district chunks.
+
+Validation:
+
+- ICM bootstrap/workflow/strict status and offline verification: PASS
+- typecheck and production build: PASS
+- full tests: 66/66 PASS
+- critical asset budget: PASS, 89.6 KiB gzip; world budget: PASS, 335.3 KiB gzip
+- Ask disclosure and world Ask boundary guards: PASS
+- at 1440px and 390px, persistent host bounds exactly match `.world-canvas`; 1024px resize re-aligns exactly; 390px `scrollWidth - innerWidth = 0`
+- header Ask, Projects, Resume; HUD Contact; Ask Terminal Open Ask: correct destination for all five SPA exits, zero page errors, zero failed requests
+- fast travel to Build Lab loads only BuildLab plus shared DistrictStations; current-zone label is hidden and map focus returns to Map
+- fallback links remain intact
+
+Independent review and next action:
+
+- Terra final review: **PASS**, no findings or required fixes
+- repository-side review: PASS; next: merge PR #12 only into the Stage 06 root, then rerun the full final Stage 06 acceptance audit from that integrated root
+- Stage 06 certification: NOT RUN; Stage 07 remains pending
+
+Protected state: no dependency/content/Ask/controller/topology change; `main` and production untouched; no deployment.
 
 
 ## Lane 3 — map semantics and focus lifecycle
