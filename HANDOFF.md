@@ -4,7 +4,7 @@
 Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
 
 ## Phase
-STAGE_06_TOUCH_TARGET_LANE_PASS
+STAGE_06_MAP_SEMANTICS_FOCUS_ACTIVE
 
 ## Execution mode
 implementation
@@ -12,7 +12,7 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage06/world-map-touch-targets / .worktrees/stage06-performance
+- working branch/worktree: stage06/map-semantics-focus / .worktrees/stage06-performance
 - application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
 - active workflow/stage: workflow/active/portfolio-world-rebuild / 06-performance-accessibility
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
@@ -20,7 +20,7 @@ implementation
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510b8cd99db0e5d39a77d850c3b8e` with the recorded 360/390/768/1024/1440 browser pass, 66/66 tests, build/budgets, and Terra PASS. Stage 06 lane 2 is PR #7, branch `stage06/world-map-touch-targets`, based exactly on that certified Stage 06 head. Runtime/browser validation was completed against exact implementation/evidence head `86c9fe441ceddba0f90d0bb19e1450b581a7fd0a`: bootstrap/workflow/strict status PASS, focused world/topology/movement 17/17 PASS, full suite 66/66 PASS, typecheck/offline/build/budgets/Ask guards PASS, coarse-pointer browser matrix PASS at 360/390/768/1024/1440 with required 44px targets, no overflow, zero application console errors/failed requests, fine-pointer behavior unchanged, focus behavior preserved, and Terra verdict PASS. Stage 07 remains pending and MUST NOT start until Stage 06 is fully validated, completed, and certified.
+Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510b8cd99db0e5d39a77d850c3b8e` with the recorded 360/390/768/1024/1440 browser pass, 66/66 tests, build/budgets, and Terra PASS. Stage 06 lane 2 (world/map touch targets) is frozen by merged PR #7 into the Stage 06 root branch at merge commit `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`; local runtime/browser validation and Terra review passed. Lane 3 is now active on `stage06/map-semantics-focus` and owns only map overlay semantics plus focus entry/return consistency. Stage 07 remains pending and MUST NOT start until Stage 06 is fully validated, completed, and certified.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -50,7 +50,8 @@ Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510
 - Stage 06 contract/baseline commit: `c0507383025ca191264df1f31b42410624fb259b`
 - Stage 06 activation: completed using existing ICM tooling; active stage 06, Stage 07 pending
 - Stage 06 lane 1 PR #6: `stage06/performance-accessibility` @ `61900faf6e7510b8cd99db0e5d39a77d850c3b8e`; homepage overflow lane PASS
-- Stage 06 lane 2 PR #7: `stage06/world-map-touch-targets`; implementation/evidence head `86c9fe441ceddba0f90d0bb19e1450b581a7fd0a`; local runtime/browser certification PASS; Terra PASS; protected state intact
+- Stage 06 lane 2 PR #7: MERGED into `stage06/performance-accessibility` at `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`; local runtime/browser certification PASS; Terra PASS; protected state intact
+- Stage 06 lane 3: `stage06/map-semantics-focus`; active bounded lane for non-modal map dialog semantics and focus entry/return only
 - Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to PR #7 before further Stage 06 work
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
 
@@ -67,7 +68,9 @@ Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Freeze PR #7 after repository-side diff review, merging only into the Stage 06 root branch `stage06/performance-accessibility` if the review is clean. Then create the next bounded Stage 06 lane for map overlay semantics/focus entry/return. Preserve Escape close and focus return, movement/controller/topology behavior, conventional routes, Ask boundaries, dependencies, `main`, integration branch, and deployment. Run targeted accessibility/browser proof followed by the full Stage 06 gate and Terra review. Do not begin Stage 07 until all Stage 06 lanes and final Stage 06 certification are green.
+Local executor: fetch `origin/stage06/map-semantics-focus`, place `.worktrees/stage06-performance` on the exact branch head, and confirm clean state. Implement only the evidenced map overlay semantics/focus defect: the visible map panel must expose consistent non-modal dialog semantics with an explicit accessible label; opening Map must move focus into the panel to a predictable native control; Escape and explicit close must close the panel and restore focus to the Map trigger; fast travel must not strand focus; visible focus indicators and keyboard ordering must remain usable. Do not add a focus trap or `aria-modal=true` unless the UI is also made genuinely modal, and do not change layout, touch-target sizing, movement/controller/topology behavior, Ask, content, dependencies, conventional routes, or world rendering.
+
+Run targeted browser/keyboard checks first, then bootstrap/workflow/strict status, offline verification, typecheck, full tests, production build, asset/world budgets, Ask disclosure/world guards, and the required responsive/browser matrix. If red, repair only the evidenced Stage 06 defect on this lane and rerun. Record exact-head evidence and Terra review back to the PR. Do not modify `main`, deploy, or begin Stage 07.
 
 ## Minimum resume context
 1. `AGENTS.md`
