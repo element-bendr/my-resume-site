@@ -18,7 +18,11 @@ implementation
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-PR #18 Stage 01 remains active but is BLOCKED by asset packaging failure. The first local correction attempt did not produce a valid browser asset package: selected Quaternius glTF references depended on textures that were not vendored, so the intended asset geometry/material presentation did not appear and the scene continued to resemble the procedural blockout. District silhouettes and vegetation were not visibly rendered. Terra independently confirmed FAIL.
+PR #19 packaging repair is PASS at candidate `6368eccba3f9506dc01afe4158008350d9d776df`. Terra PASS is recorded for the bounded repair. Production browser proof confirmed `Column_Astra.gltf`, its buffer, and all nine texture dependencies returned HTTP 200 with zero console errors; the proof package was approximately 344 KiB. The complete Central Plaza hero visual acceptance remains pending; expand this exact packaging pattern on `visual/world-art-v2` only after PR #19 integration.
+
+PR #19 validation: dependency closure guard, typecheck, production build, 66 tests, asset/world budgets, Ask disclosure, and world-Ask boundary guards all PASS. The three.js world budget reports 361.6 KiB gzip; the nine optimized textures total approximately 315 KiB.
+
+PR #18 Stage 01 remains active but is BLOCKED by the earlier asset packaging failure. The first local correction attempt did not produce a valid browser asset package: selected Quaternius glTF references depended on textures that were not vendored, so the intended asset geometry/material presentation did not appear and the scene continued to resemble the procedural blockout. District silhouettes and vegetation were not visibly rendered. Terra independently confirmed FAIL.
 
 Local commits `abec3eb` and `e36d08f` remain intentionally unpushed and are not candidates. The clean remote parent remains `visual/world-art-v2` at `a85cb02fd7a425893e1a6b9a4cc636c4ffae1a13`.
 
@@ -102,7 +106,7 @@ This repair lane is intentionally narrower than Stage 01: prove the complete dep
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Local executor: fetch `origin/visual/world-art-v2-asset-packaging-repair`, create/use `.worktrees/visual-world-art-v2-asset-packaging-repair`, and discard/recreate any local-only failed state rather than pushing commits `abec3eb` or `e36d08f`.
+Integrate PR #19 packaging repair candidate `6368eccba3f9506dc01afe4158008350d9d776df` through the bounded review workflow. After integration, continue only on `visual/world-art-v2` by expanding the proven dependency-closure pattern toward the Central Plaza hero acceptance. Do not push local failed commits `abec3eb` or `e36d08f`.
 
 Repair sequence:
 1. choose exactly one Quaternius glTF intended for the Central Plaza;
