@@ -4,7 +4,7 @@
 Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
 
 ## Phase
-STAGE_06_FINAL_ACCEPTANCE_BLOCKED
+STAGE_06_CANVAS_ROUTE_TEARDOWN_ACTIVE
 
 ## Execution mode
 implementation
@@ -12,7 +12,7 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage06/final-acceptance-audit / .worktrees/stage06-performance
+- working branch/worktree: stage06/canvas-route-teardown / .worktrees/stage06-performance
 - application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
 - active workflow/stage: workflow/active/portfolio-world-rebuild / 06-performance-accessibility
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
@@ -20,7 +20,7 @@ implementation
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510b8cd99db0e5d39a77d850c3b8e`. Stage 06 lane 2 (world/map touch targets) is frozen by merged PR #7 at root merge `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`. Stage 06 lane 3 (map semantics/focus lifecycle) is frozen by merged PR #8 at root merge `6067c3203186819d92dfacfbb4b028aa8655d834`. Stage 06 lane 4 (headless fast-travel portal lifecycle) is frozen by merged PR #9 at root merge `04dfec1a24de9a86cc5f73ec1e3e4f23418e2579`; local exact-head validation and Terra review passed. The final Stage 06 acceptance audit on `stage06/final-acceptance-audit` at pickup head `79ccc4f3210e2bdb71b3867484578ae7928da437` is blocked: every tested SPA exit from `/play` reaches its destination but emits a React DOM `removeChild` `NotFoundError` while the world Canvas and Drei `Html` label portals unmount. Terra independently reproduced the defect and returned FAIL. Stage 06 remains active; certification was not run. Stage 07 remains pending and MUST NOT start until a separate bounded repair lane is green and the final audit is repeated.
+Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 is now persisted in the Stage 06 root at `42f6820072cbc82abda32b10d1ad938eae191273`: all tested SPA exits from `/play` reach their destination but emit React DOM `removeChild` `NotFoundError` during full Canvas teardown, with instrumentation isolating the stale removal to a disconnected Drei `Html` world-label portal. Terra independently reproduced the failure. Stage 06 remains active; certification was not run. Lane 5 is now active on `stage06/canvas-route-teardown` and owns only this `/play` Canvas route-unmount lifecycle defect. Stage 07 remains pending.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -57,7 +57,8 @@ Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510
 - Stage 06 final audit non-browser gates: PASS; ICM checks, offline verification, typecheck, 66/66 tests, build, budgets, Ask disclosure, and world Ask boundary guard
 - Stage 06 final audit browser matrix: PASS for 360/390/768/1024/1440 route overflow, conventional-route world isolation, initial `/play` district laziness, Ask overlay focus/Escape/movement resume, and route rendering
 - Stage 06 final audit blocker: SPA exits from `/play` via header Ask/Projects/Resume, world HUD Contact, and Ask Terminal Open Ask reach their destination but emit `NotFoundError: Failed to execute 'removeChild' on 'Node'`; instrumentation isolated the stale removal to a disconnected Drei `Html` world-label portal during full Canvas teardown
-- Stage 06 final Terra audit: **FAIL**; certification blocked; required next work is a separate bounded world Canvas route-teardown repair lane
+- Stage 06 final Terra audit: **FAIL**; certification blocked; failed-audit evidence merged by PR #10 at `42f6820072cbc82abda32b10d1ad938eae191273`
+- Stage 06 lane 5: `stage06/canvas-route-teardown`; active bounded repair for `/play` full-Canvas/Drei `Html` portal teardown only
 - Stage 06 certification: NOT RUN; Stage 06 remains active and Stage 07 remains pending
 - Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to the current active lane PR before further Stage 06 work
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
@@ -75,15 +76,35 @@ Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Freeze and open a separate bounded Stage 06 repair lane for world Canvas route teardown. Limit the repair to coordinating Drei `Html` portal cleanup when `/play` unmounts; preserve world labels, topology, movement, navigation, Ask behavior, and the already-certified fast-travel fix.
+Local executor: fetch `origin/stage06/canvas-route-teardown`, place `.worktrees/stage06-performance` on the exact branch head, and confirm clean state.
 
-Acceptance must prove zero page errors for:
-- header navigation from `/play` to Ask, Projects, and Resume;
-- world HUD navigation from `/play` to Contact;
-- Ask Terminal Open Ask navigation;
-- existing fast-travel paths and map focus lifecycle.
+Reproduce the Stage 06 blocker before changing runtime code:
+- leave `/play` through header Ask, Projects, and Resume;
+- leave through world HUD Contact;
+- leave through Ask Terminal Open Ask;
+- capture the React DOM `removeChild` error and stack/instrumentation showing the disconnected Drei `Html` world-label portal during full Canvas unmount.
 
-Run focused world guards/tests first, then the full tests, build, budgets, and browser regression. Obtain Terra PASS on the repair before reopening the final Stage 06 acceptance audit. Do not certify Stage 06, activate Stage 07, touch `main`, or deploy until that sequence is green.
+Repair only the route-teardown lifecycle defect. Preserve SPA navigation, world labels, the PR #9 fast-travel portal-lifecycle invariant, lazy district loading, topology, movement/controller behavior, map focus lifecycle, touch sizing, Ask behavior/content, dependencies, conventional routes, and renderer architecture.
+
+Explicitly forbidden shortcuts:
+- no hard reload / `window.location` replacement for internal navigation;
+- no global exception suppression or monkey-patching DOM removal;
+- no deleting/disabling world labels merely to silence teardown;
+- no disabling SPA route transitions;
+- no renderer rewrite unless concrete evidence proves the bounded repair is impossible.
+
+Add or extend the smallest regression guard/harness that fails on the teardown defect and passes after repair.
+
+Acceptance:
+- zero page/runtime errors and zero failed requests when exiting `/play` through header Ask/Projects/Resume, world HUD Contact, and Ask Terminal Open Ask;
+- all destinations still render correctly;
+- existing fast-travel paths remain zero-error;
+- map focus lifecycle remains PASS;
+- labels render correctly while in-world;
+- lazy district loading and conventional-route Three/R3F isolation remain intact;
+- 390px/coarse-pointer behavior from prior lanes remains intact.
+
+Then run focused world/browser regression, bootstrap/workflow/strict, offline verification, typecheck, 66/66 or greater full test suite, production build, asset/world budgets, Ask guards, relevant responsive/browser checks, and independent Terra review. If green, record exact-head evidence and merge only into the Stage 06 root. Then rerun the final Stage 06 acceptance audit from the new root. Do not certify Stage 06, activate Stage 07, touch `main`, or deploy from this repair lane.
 
 ## Minimum resume context
 1. `AGENTS.md`
