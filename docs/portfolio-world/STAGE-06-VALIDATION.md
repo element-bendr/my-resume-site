@@ -1,8 +1,30 @@
 # Stage 06 validation — cumulative evidence
 
-Status: **ACTIVE — PR #12 PASS; awaiting Stage 06 root integration**
+Status: **ACTIVE — integrated re-audit PASS; final independent review/certification pending**
 
 Stage 06 remains active. This file records completed bounded lanes and does not certify Stage 06 as a whole.
+
+## Integrated final acceptance re-audit — local PASS
+
+Candidate: `e11912fe7f366208678b025ad5ae714f98be9df8` on `stage06/final-acceptance-reaudit`.
+
+Inherited and Stage 06 local gates:
+
+- `python3 scripts/bootstrap_check.py`, `python3 scripts/workflow_check.py`, and `python3 scripts/workflow_status.py --strict`: PASS; Stages 00–05 certified, Stage 06 active, Stage 07 pending.
+- `npm run verify:offline`, `npm run typecheck`, `npm test`, `npm run build`, `npm run verify:assets`, `npm run verify:world-assets`, `npm run verify:ask-disclosure`, and `npm run verify:world-ask`: PASS.
+- Tests: 11 files / 66 tests PASS. Disclosure scanned 8 built JavaScript bundles; world Ask boundary scanned 22 world files and found no Ask API/client imports.
+- Critical shell budget: 89.6 KiB gzip. Total client JavaScript/world budget: 335.3 KiB gzip. Build retains the existing advisory for the large optional world renderer chunk; conventional routes remain isolated from it.
+
+Production-preview browser evidence:
+
+- At 360, 390, 768, 1024, and 1440 px, `/`, `/projects`, `/resume`, `/ask`, `/contact`, and `/play` had zero horizontal overflow (30 route/viewport combinations). Conventional routes did not request `WorldEntry`; initial `/play` did not request district chunks.
+- Persistent label-host bounds exactly matched `.world-canvas` at all five widths. At 1440 px, scroll, and viewport resizes through 1024/390/1440, host/canvas bounds remained aligned; the host preserves canvas clipping and remains below the HUD in stacking order.
+- All five `/play` SPA exits (header Ask/Projects/Resume, HUD Contact, Ask Terminal Open Ask) reached the correct route with zero page errors, failed requests, or HTTP errors.
+- At mobile 390 px with coarse pointer, HUD navigation and Map controls were 44 px high, Close was 44×44 px, and six destination rows were 44 px high. Map had non-modal dialog semantics and accessible name “Portfolio world map”; opening focused Close, Escape/Close restored Map focus, and fast travel restored focus while updating the selected zone. Build Lab loaded only its district chunk plus shared `DistrictStations`; its current-zone label was hidden.
+- Reduced-motion emulation was honored: `prefers-reduced-motion` matched, scroll behavior was `auto`, and nonessential transition/animation durations were reduced. Forced WebGL failure rendered the fallback and working Projects, Resume, Ask, and Contact links; fallback Ask reached `/ask`.
+- Browser checks recorded no app console errors, page errors, failed requests, or unexpected HTTP failures on the tested paths.
+
+Protected state: PASS. Diff from certified Stage 05 contains only Stage 06 contract/evidence/state and scoped Stage 06 implementation/guard files; no package/lock, content, Ask, `main`, or deployment changes. `main` remains `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`; production is unchanged. Stage 06 remains active and Stage 07 pending. PR #12's lane-level Terra review passed; independent Terra review of this integrated re-audit candidate and formal ICM certification remain pending.
 
 ## Final acceptance audit — blocked
 

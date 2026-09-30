@@ -20,7 +20,7 @@ implementation
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 and blocked teardown diagnostics from PR #11 are preserved in the Stage 06 root. Lane 6, the persistent `SiteShell`-owned Drei `Html portal` repair, is frozen by merged PR #12 at root merge `7505336fb3ba81f6c3620615a3bf1880c1019ff2`; local exact-head validation and Terra review passed, including all five previously failing SPA exits with zero page/runtime errors and zero failed requests. Stage 06 remains active. A fresh final acceptance/certification re-audit is now active on `stage06/final-acceptance-reaudit`. Stage 07 remains pending and MUST NOT start until the re-audit is fully green and Stage 06 is formally certified.
+Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 and blocked teardown diagnostics from PR #11 are preserved in the Stage 06 root. Lane 6, the persistent `SiteShell`-owned Drei `Html portal` repair, is frozen by merged PR #12 at root merge `7505336fb3ba81f6c3620615a3bf1880c1019ff2`. The fresh integrated final acceptance re-audit at runtime head `e11912fe7f366208678b025ad5ae714f98be9df8` is locally green across all ICM, code, browser, responsive, accessibility, performance, fallback, disclosure, and protected-state gates. Stage 06 remains active pending final Terra review and formal ICM certification. Stage 07 remains pending and MUST NOT start until Stage 06 is formally certified.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -61,6 +61,9 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 06 lane 5 PR #11: BLOCKED diagnostic evidence merged into `stage06/performance-accessibility` at `e343608e1832d2a90cfb879256f5640c8a4dc13a`; no failed runtime repair promoted
 - Stage 06 lane 6 PR #12: MERGED into `stage06/performance-accessibility` at `7505336fb3ba81f6c3620615a3bf1880c1019ff2`; persistent portal-host repair PASS; Terra PASS; protected state intact
 - Stage 06 final re-audit: `stage06/final-acceptance-reaudit`; active evidence/certification lane, no speculative implementation
+- Stage 06 integrated re-audit at `e11912fe7f366208678b025ad5ae714f98be9df8`: local PASS; 66/66 tests; critical shell 89.6 KiB gzip; world total 335.3 KiB gzip
+- final browser matrix: 30 route/viewport combinations without overflow; all five `/play` SPA exits zero page/runtime errors and failed requests; reduced motion, focus, touch targets, fast travel, portal alignment, route isolation, lazy districts, and forced fallback PASS
+- protected-state diff: no dependency/lockfile, content, Ask, main, production, or deployment change
 - Stage 06 lane 6 PR #12 local candidate: persistent host detects lazy `.world-canvas` mount, tracks size/viewport position, and preserves canvas clipping; labels only use the host
 - PR #12 browser: zero page errors/request failures for header Ask/Projects/Resume, HUD Contact, and Ask Terminal Open Ask; exact host/canvas bounds at 1440px and 390px, aligned at 1024px resize; 390px overflow 0
 - PR #12 world regression: Build Lab fast travel loads only BuildLab and shared DistrictStations; current-zone label hidden; Map focus restored; fallback links intact; initial `/play` has no district chunks; `/ask` loads no WorldEntry
@@ -83,37 +86,7 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Local executor: fetch `origin/stage06/final-acceptance-reaudit`, place `.worktrees/stage06-performance` on the exact branch head, and confirm a clean tree. This is an evidence/certification lane, not an implementation lane.
-
-Run the complete Stage 06 acceptance matrix from the integrated Stage 06 root-derived candidate:
-- ICM bootstrap, workflow check, and strict status;
-- offline verification, typecheck, full tests, production build;
-- conventional asset budget, world asset budget, Ask disclosure guard, and world Ask boundary guard;
-- 360/390/768/1024/1440 browser matrix across `/`, `/projects`, `/resume`, `/ask`, `/contact`, and `/play`;
-- keyboard/focus lifecycle, map/overlay interaction, fast travel, and coarse-pointer touch targets;
-- reduced-motion behavior including world camera/decorative motion;
-- forced no-WebGL fallback with essential routes intact;
-- all five `/play` SPA exits that previously failed, each with correct destination, zero page/runtime errors, and zero failed requests;
-- persistent portal-host/canvas bounds, label projection, visibility, clipping, z-order, and resize/scroll alignment;
-- conventional-route isolation from Three/R3F/Drei and preserved lazy district loading;
-- production bundle/chunk measurements against the frozen Stage 06 baseline;
-- protected-state diff confirming no unintended content, Ask, dependency, topology/controller, `main`, or deployment changes;
-- final independent Terra audit.
-
-RED PATH: if any criterion fails, STOP certification, record exact evidence, and return the defect for a separate bounded Stage 06 repair lane. Do not patch unrelated failures inside this audit PR.
-
-GREEN PATH:
-1. finalize `docs/portfolio-world/STAGE-06-VALIDATION.md` with cumulative final PASS evidence;
-2. write `workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md` using the repository's required completion-report schema;
-3. update HANDOFF to final re-audit PASS / awaiting certification;
-4. commit the evidence candidate and keep the tree clean;
-5. obtain Terra final PASS against that exact candidate;
-6. run `python3 scripts/workflow_certify_check.py --workflow portfolio-world-rebuild --stage 06-performance-accessibility`;
-7. run `python3 scripts/workflow_certify.py --workflow portfolio-world-rebuild --stage 06-performance-accessibility --write`;
-8. verify Stage 06 becomes `certified` and Stage 07 becomes `blocked` with `awaiting_activation`;
-9. update HANDOFF to Stage 06 certified / Stage 07 blocked, commit certification state, and rerun workflow/status sanity checks.
-
-Do not activate Stage 07, touch `main`, or deploy in this lane.
+Commit the final acceptance evidence and obtain Terra's independent PASS against that exact candidate. Then run `scripts/workflow_certify_check.py` and `scripts/workflow_certify.py --write` for `06-performance-accessibility`, verify Stage 06 becomes certified and Stage 07 becomes blocked with `awaiting_activation`, update this handoff with the certification SHA, and stop. Do not activate Stage 07, touch `main`, or deploy.
 
 ## Minimum resume context
 1. `AGENTS.md`
