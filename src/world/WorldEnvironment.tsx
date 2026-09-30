@@ -38,11 +38,11 @@ export function WorldEnvironment() {
 
       <Sky
         distance={450000}
-        sunPosition={[18, 9, -24]}
-        turbidity={7}
-        rayleigh={1.8}
-        mieCoefficient={0.006}
-        mieDirectionalG={0.84}
+        sunPosition={[18, -4, -24]}
+        turbidity={10}
+        rayleigh={0.2}
+        mieCoefficient={0.02}
+        mieDirectionalG={0.72}
       />
 
       <hemisphereLight args={["#b8d9ff", "#241d35", 1.45]} />
