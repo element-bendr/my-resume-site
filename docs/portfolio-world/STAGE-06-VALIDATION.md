@@ -2,7 +2,7 @@
 
 Status: **CERTIFIED on PR #13 candidate; awaiting Stage 06 root integration**
 
-Stage 06 remains active. This file records completed bounded lanes and does not certify Stage 06 as a whole.
+Stage 06 is formally certified on the PR #13 branch. This file records the cumulative bounded-lane and integrated acceptance evidence supporting that certification.
 
 ## Integrated final acceptance re-audit — local PASS
 
