@@ -10,8 +10,8 @@
   },
   "execution": {
     "mode": "implementation",
-    "branch": "stage05/local-integration",
-    "worktree": ".worktrees/stage05-integration",
+    "branch": "stage06/world-map-touch-targets",
+    "worktree": ".worktrees/stage06-performance",
     "owner": "Luna",
     "write_paths": [
       "AGENTS.md",
