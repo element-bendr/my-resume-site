@@ -3,7 +3,7 @@
 ## Authority / ownership
 
 - repository: element-bendr/my-resume-site
-- Stage 06 root branch: `stage06/performance-accessibility`; current bounded lane branch/worktree: `stage06/fast-travel-removechild` / `.worktrees/stage06-performance`. `state.json` and `HANDOFF.md` remain authoritative for the active lane.
+- Stage 06 root branch: `stage06/performance-accessibility`; current bounded lane branch/worktree: `stage06/final-acceptance-audit` / `.worktrees/stage06-performance`. This lane is evidence/certification only unless the audit discovers a blocker; `state.json` and `HANDOFF.md` remain authoritative.
 - owner: Sol (architecture/acceptance); Luna (bounded implementation); Terra (independent review)
 - execution mode: implementation after this contract is committed and Stage 06 is activated through ICM tooling
 - authority: certified feature branch `feat/portfolio-world-icm-rebuild` at `f756316c2826eede6bed2790cb81020f5f34db35`; `main` and production are protected
