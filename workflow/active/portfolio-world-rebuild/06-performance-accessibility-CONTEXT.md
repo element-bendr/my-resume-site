@@ -3,7 +3,7 @@
 ## Authority / ownership
 
 - repository: element-bendr/my-resume-site
-- branch/worktree: `stage06/performance-accessibility` / `.worktrees/stage06-performance`
+- Stage 06 root branch: `stage06/performance-accessibility`; current bounded lane branch/worktree: `stage06/world-map-touch-targets` / `.worktrees/stage06-performance`. For later Stage 06 lanes, `state.json` and `HANDOFF.md` are authoritative for the current lane branch.
 - owner: Sol (architecture/acceptance); Luna (bounded implementation); Terra (independent review)
 - execution mode: implementation after this contract is committed and Stage 06 is activated through ICM tooling
 - authority: certified feature branch `feat/portfolio-world-icm-rebuild` at `f756316c2826eede6bed2790cb81020f5f34db35`; `main` and production are protected
@@ -49,7 +49,7 @@ Measure and harden the complete certified portfolio across loading and runtime p
 1. Reconfirm isolated branch/base, protected state, and inherited gates.
 2. Measure baseline before edits: production bundle/chunks, route isolation, world/lazy chunks, responsive/browser/accessibility behavior, reduced motion, fallback, console and network.
 3. Review findings and choose non-overlapping implementation lanes; use Luna for bounded changes and Terra for independent substantial-lane/final review.
-4. For each lane, state evidence and acceptance, make the smallest change, run the smallest relevant check, then required broader regression.
+4. For each lane, state evidence and acceptance, make the smallest change, run the smallest relevant check, then required broader regression. GitHub freezes the lane contract/diff; the local Stage 06 worktree may perform browser/runtime validation and bounded repairs, but must push exact-head evidence back to the lane PR before the lane is frozen.
 5. Preserve conventional routes as first-class accessible HTML equivalents; do not try to make raw geometry screen-reader semantic.
 6. Run complete inherited and Stage 06 regression, inspect the full diff, and update validation/completion/HANDOFF evidence.
 7. Stop for Terra final audit; no deployment or `main` change.
