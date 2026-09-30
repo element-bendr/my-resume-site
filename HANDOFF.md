@@ -14,7 +14,7 @@ implementation
 - canonical branch: main
 - working branch/worktree: stage06/final-acceptance-reaudit / .worktrees/stage06-performance
 - application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
-- active workflow/stage: workflow/active/portfolio-world-rebuild / 06-performance-accessibility
+- workflow state: workflow/active/portfolio-world-rebuild; Stage 06 certified; Stage 07 blocked `awaiting_activation`
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
