@@ -95,3 +95,47 @@ Protected state:
 - Stage 06 completion report and certification
 
 Stage 07 remains blocked until Stage 06 is fully completed and certified.
+
+
+## Lane 3 — map semantics and focus lifecycle
+
+PR: #8 — `fix(stage06): align map semantics and focus lifecycle`
+
+Validated implementation head: `95202d4155c5ac5b829cc4d0f3591def3d6de4d2`
+
+Implementation:
+
+- map panel exposes non-modal `role="dialog"` semantics with explicit accessible label
+- opening Map focuses the native Close control
+- Escape, explicit Close, and fast travel restore focus to the Map trigger
+- initial closed render does not steal focus
+- current-zone visible heading remains unchanged
+- no focus trap and no `aria-modal`
+
+Validation:
+
+- targeted topology tests: 7/7 PASS
+- full suite: 66/66 PASS
+- ICM bootstrap/workflow/strict status: PASS
+- typecheck: PASS
+- offline verification: PASS
+- production build: PASS
+- asset and world budgets: PASS
+- Ask disclosure and world Ask boundary guards: PASS
+- browser focus lifecycle: PASS at 390px and desktop
+- PR #7 touch-target sizing preserved
+- no horizontal overflow
+
+Independent review:
+
+- Terra verdict: **PASS**
+- no required fixes
+
+Inherited follow-up discovered during browser validation:
+
+- headless fast travel emits a React DOM `removeChild` exception
+- reproduced unchanged on untouched Stage 06 root base `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`
+- PR #8 does not alter fast-travel, Canvas, controller, or topology code
+- defect is therefore isolated to a separate bounded Stage 06 lane before final certification
+
+Protected state remains intact: no CSS/touch-target, content, Ask, dependency, controller, topology, `main`, deployment, or Stage 07 changes.
