@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router";
 import type { StationConfig } from "./world-config";
 import { ZONES, ZONE_BY_ID, type ZoneId } from "./world-topology";
@@ -19,6 +20,20 @@ export function WorldHud({
   onCloseMap,
   onFastTravel,
 }: WorldHudProps) {
+  const mapTriggerRef = useRef<HTMLButtonElement>(null);
+  const mapCloseRef = useRef<HTMLButtonElement>(null);
+  const wasMapOpen = useRef(false);
+
+  useEffect(() => {
+    if (mapOpen) {
+      wasMapOpen.current = true;
+      mapCloseRef.current?.focus();
+    } else if (wasMapOpen.current) {
+      wasMapOpen.current = false;
+      mapTriggerRef.current?.focus();
+    }
+  }, [mapOpen]);
+
   return (
     <>
       <div className="world-hud" aria-label="World controls">
@@ -27,7 +42,7 @@ export function WorldHud({
           <span className="world-hud-help">WASD / arrows · click to move · drag to orbit · E to inspect</span>
         </div>
         <nav className="world-hud-nav" aria-label="World navigation">
-          <button type="button" className="world-hud-button" onClick={onToggleMap}>
+          <button ref={mapTriggerRef} type="button" className="world-hud-button" onClick={onToggleMap}>
             Map
           </button>
           <Link to="/projects">Projects</Link>
@@ -48,13 +63,19 @@ export function WorldHud({
       </div>
 
       {mapOpen ? (
-        <section className="world-map-panel" aria-label="Portfolio world map">
+        <section className="world-map-panel" role="dialog" aria-label="Portfolio world map">
           <div className="world-panel-heading">
             <div>
               <span className="world-hud-kicker">World map</span>
               <h2>{ZONE_BY_ID[currentZone].label}</h2>
             </div>
-            <button type="button" className="world-close" onClick={onCloseMap} aria-label="Close map">
+            <button
+              ref={mapCloseRef}
+              type="button"
+              className="world-close"
+              onClick={onCloseMap}
+              aria-label="Close map"
+            >
               ×
             </button>
           </div>

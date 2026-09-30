@@ -4,7 +4,7 @@
 Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
 
 ## Phase
-STAGE_06_TOUCH_TARGET_LANE_PASS
+STAGE_06_MAP_SEMANTICS_FOCUS_PASS
 
 ## Execution mode
 implementation
@@ -12,7 +12,7 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage06/world-map-touch-targets / .worktrees/stage06-performance
+- working branch/worktree: stage06/map-semantics-focus / .worktrees/stage06-performance
 - application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
 - active workflow/stage: workflow/active/portfolio-world-rebuild / 06-performance-accessibility
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
@@ -20,7 +20,7 @@ implementation
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510b8cd99db0e5d39a77d850c3b8e` with the recorded 360/390/768/1024/1440 browser pass, 66/66 tests, build/budgets, and Terra PASS. Stage 06 lane 2 is PR #7, branch `stage06/world-map-touch-targets`, based exactly on that certified Stage 06 head. Runtime/browser validation was completed against exact implementation/evidence head `86c9fe441ceddba0f90d0bb19e1450b581a7fd0a`: bootstrap/workflow/strict status PASS, focused world/topology/movement 17/17 PASS, full suite 66/66 PASS, typecheck/offline/build/budgets/Ask guards PASS, coarse-pointer browser matrix PASS at 360/390/768/1024/1440 with required 44px targets, no overflow, zero application console errors/failed requests, fine-pointer behavior unchanged, focus behavior preserved, and Terra verdict PASS. Stage 07 remains pending and MUST NOT start until Stage 06 is fully validated, completed, and certified.
+Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510b8cd99db0e5d39a77d850c3b8e`. Stage 06 lane 2 (world/map touch targets) is frozen by merged PR #7 at Stage 06 root merge commit `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`. Stage 06 lane 3 (map semantics/focus lifecycle) passed locally at exact implementation head `95202d4155c5ac5b829cc4d0f3591def3d6de4d2` with 66/66 tests, full gates, browser focus lifecycle PASS, and Terra PASS. Browser validation independently reproduced an inherited headless fast-travel React DOM `removeChild` exception on untouched root base `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`; it is isolated for the next bounded Stage 06 lane. Stage 07 remains pending and MUST NOT start until Stage 06 is fully validated, completed, and certified.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -50,8 +50,9 @@ Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510
 - Stage 06 contract/baseline commit: `c0507383025ca191264df1f31b42410624fb259b`
 - Stage 06 activation: completed using existing ICM tooling; active stage 06, Stage 07 pending
 - Stage 06 lane 1 PR #6: `stage06/performance-accessibility` @ `61900faf6e7510b8cd99db0e5d39a77d850c3b8e`; homepage overflow lane PASS
-- Stage 06 lane 2 PR #7: `stage06/world-map-touch-targets`; implementation/evidence head `86c9fe441ceddba0f90d0bb19e1450b581a7fd0a`; local runtime/browser certification PASS; Terra PASS; protected state intact
-- Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to PR #7 before further Stage 06 work
+- Stage 06 lane 2 PR #7: MERGED into `stage06/performance-accessibility` at `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`; local runtime/browser certification PASS; Terra PASS; protected state intact
+- Stage 06 lane 3 PR #8: `stage06/map-semantics-focus`; implementation head `95202d4155c5ac5b829cc4d0f3591def3d6de4d2`; local validation PASS; Terra PASS; inherited fast-travel exception isolated as separate Stage 06 follow-up
+- Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to the current active lane PR before further Stage 06 work
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
 
 ## Protected state
@@ -67,7 +68,7 @@ Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Freeze PR #7 after repository-side diff review, merging only into the Stage 06 root branch `stage06/performance-accessibility` if the review is clean. Then create the next bounded Stage 06 lane for map overlay semantics/focus entry/return. Preserve Escape close and focus return, movement/controller/topology behavior, conventional routes, Ask boundaries, dependencies, `main`, integration branch, and deployment. Run targeted accessibility/browser proof followed by the full Stage 06 gate and Terra review. Do not begin Stage 07 until all Stage 06 lanes and final Stage 06 certification are green.
+Freeze PR #8 into the Stage 06 root branch after repository-side diff review. Then create a separate bounded Stage 06 lane for the inherited headless fast-travel React DOM `removeChild` exception. First reproduce it on the current Stage 06 root with a deterministic browser harness and capture the exact stack/event sequence; then identify the smallest root cause and repair only that defect. Preserve fast-travel semantics, zone topology, controller behavior, map focus lifecycle, touch sizing, Ask/content/dependencies, conventional routes, `main`, and deployment. Run focused reproduction/regression first, then the full Stage 06 gate and Terra review. Do not begin Stage 07.
 
 ## Minimum resume context
 1. `AGENTS.md`
