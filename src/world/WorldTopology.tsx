@@ -34,16 +34,26 @@ export function WorldTopology({ currentZone, onRequestMove }: WorldTopologyProps
         return (
           <group key={zone.id}>
             <mesh
-              position={[geometry.centerX, -0.13, geometry.centerZ]}
+              receiveShadow
+              position={[geometry.centerX, -0.1, geometry.centerZ]}
               onClick={handleMove}
             >
-              <boxGeometry args={[geometry.width, 0.24, geometry.depth]} />
+              <boxGeometry args={[geometry.width, 0.18, geometry.depth]} />
               <meshStandardMaterial
-                color="#071426"
+                color={zone.id === "command-center" ? "#454b56" : "#343b47"}
                 emissive={zone.accent}
-                emissiveIntensity={0.035}
-                metalness={0.16}
-                roughness={0.78}
+                emissiveIntensity={0.025}
+                metalness={0.12}
+                roughness={0.72}
+              />
+            </mesh>
+            <mesh position={[geometry.centerX, 0.005, zone.bounds.minZ + 0.12]}>
+              <boxGeometry args={[Math.max(0.8, geometry.width - 0.45), 0.028, 0.055]} />
+              <meshStandardMaterial
+                color={zone.accent}
+                emissive={zone.accent}
+                emissiveIntensity={0.9}
+                toneMapped={false}
               />
             </mesh>
             {zone.id !== "command-center" ? (
@@ -73,16 +83,17 @@ export function WorldTopology({ currentZone, onRequestMove }: WorldTopologyProps
         return (
           <mesh
             key={bridge.id}
-            position={[geometry.centerX, -0.08, geometry.centerZ]}
+            receiveShadow
+            position={[geometry.centerX, -0.04, geometry.centerZ]}
             onClick={handleMove}
           >
-            <boxGeometry args={[geometry.width, 0.14, geometry.depth]} />
+            <boxGeometry args={[geometry.width, 0.12, geometry.depth]} />
             <meshStandardMaterial
-              color="#0a2137"
-              emissive="#153d5c"
-              emissiveIntensity={0.28}
-              metalness={0.35}
-              roughness={0.52}
+              color="#2d3848"
+              emissive="#3a8cc0"
+              emissiveIntensity={0.08}
+              metalness={0.34}
+              roughness={0.48}
             />
           </mesh>
         );
