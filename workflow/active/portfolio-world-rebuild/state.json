@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "blocked",
+  "status": "active",
   "active_stage": "07-certification-promotion",
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
@@ -200,7 +200,7 @@
     },
     {
       "id": "07-certification-promotion",
-      "status": "blocked",
+      "status": "active",
       "context": "workflow/active/portfolio-world-rebuild/07-certification-promotion-CONTEXT.md",
       "depends_on_stages": [
         "06-performance-accessibility"
@@ -211,8 +211,7 @@
         "docs/portfolio-world/PROMOTION-RECORD.md",
         "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md"
       ],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md",
-      "block_reason": "awaiting_activation"
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md"
     }
   ]
 }
