@@ -4,7 +4,7 @@
 Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
 
 ## Phase
-STAGE_06_FAST_TRAVEL_EXCEPTION_PASS
+STAGE_06_FINAL_ACCEPTANCE_AUDIT_ACTIVE
 
 ## Execution mode
 implementation
@@ -12,7 +12,7 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage06/fast-travel-removechild / .worktrees/stage06-performance
+- working branch/worktree: stage06/final-acceptance-audit / .worktrees/stage06-performance
 - application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
 - active workflow/stage: workflow/active/portfolio-world-rebuild / 06-performance-accessibility
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
@@ -20,7 +20,7 @@ implementation
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510b8cd99db0e5d39a77d850c3b8e`. Stage 06 lane 2 (world/map touch targets) is frozen by merged PR #7 at root merge `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`. Stage 06 lane 3 (map semantics/focus lifecycle) is frozen by merged PR #8 at root merge `6067c3203186819d92dfacfbb4b028aa8655d834`. Stage 06 lane 4 (headless fast-travel portal lifecycle) passed locally at exact implementation head `82476d6d8afef3e256e9fa4db05465811a27bf06`: 66/66 tests, full gates, browser fast-travel regression PASS with zero runtime exceptions/failed requests, and Terra PASS. Stage 07 remains pending and MUST NOT start until the final Stage 06 acceptance audit and formal Stage 06 certification are green.
+Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510b8cd99db0e5d39a77d850c3b8e`. Stage 06 lane 2 (world/map touch targets) is frozen by merged PR #7 at root merge `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`. Stage 06 lane 3 (map semantics/focus lifecycle) is frozen by merged PR #8 at root merge `6067c3203186819d92dfacfbb4b028aa8655d834`. Stage 06 lane 4 (headless fast-travel portal lifecycle) is frozen by merged PR #9 at root merge `04dfec1a24de9a86cc5f73ec1e3e4f23418e2579`; local exact-head validation and Terra review passed. The final Stage 06 acceptance/certification audit is now active on `stage06/final-acceptance-audit`. Stage 07 remains pending and MUST NOT start until this audit is fully green and Stage 06 is formally certified.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -52,7 +52,8 @@ Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510
 - Stage 06 lane 1 PR #6: `stage06/performance-accessibility` @ `61900faf6e7510b8cd99db0e5d39a77d850c3b8e`; homepage overflow lane PASS
 - Stage 06 lane 2 PR #7: MERGED into `stage06/performance-accessibility` at `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`; local runtime/browser certification PASS; Terra PASS; protected state intact
 - Stage 06 lane 3 PR #8: MERGED into `stage06/performance-accessibility` at `6067c3203186819d92dfacfbb4b028aa8655d834`; local validation PASS; Terra PASS; protected state intact
-- Stage 06 lane 4 PR #9: `stage06/fast-travel-removechild`; implementation head `82476d6d8afef3e256e9fa4db05465811a27bf06`; local validation PASS; Terra PASS; protected state intact
+- Stage 06 lane 4 PR #9: MERGED into `stage06/performance-accessibility` at `04dfec1a24de9a86cc5f73ec1e3e4f23418e2579`; local validation PASS; Terra PASS; protected state intact
+- Stage 06 final audit: `stage06/final-acceptance-audit`; active evidence/certification lane, no speculative implementation
 - Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to the current active lane PR before further Stage 06 work
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
 
@@ -69,9 +70,35 @@ Stage 06 lane 1 (homepage narrow overflow) is frozen in PR #6 at `61900faf6e7510
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Freeze PR #9 into the Stage 06 root branch after repository-side diff review. Then run a final Stage 06 acceptance/certification audit from the resulting exact root head. The audit must cover every still-open contract criterion rather than assume the lane passes compose automatically: complete 360/390/768/1024/1440 route matrix across conventional routes and `/play`; keyboard/focus; reduced motion including world camera/decorative motion; map/overlay interaction; fast travel; forced no-WebGL fallback; console/runtime errors and failed requests; conventional-route isolation from Three/R3F; lazy district behavior; production bundle/chunk measurements; asset/world budgets; Ask disclosure/world boundary guards; full tests/build/typecheck; protected-state diff; and final independent Terra audit.
+Local executor: fetch `origin/stage06/final-acceptance-audit`, place `.worktrees/stage06-performance` on the exact branch head, and confirm clean state. This is an evidence/certification lane, not a speculative implementation lane.
 
-If any criterion is red, do not certify Stage 06; isolate the defect into another bounded Stage 06 lane. If all criteria are green, complete `docs/portfolio-world/STAGE-06-VALIDATION.md`, write the Stage 06 completion report, update HANDOFF/state through the repository's ICM certification tooling, and only then unblock Stage 07. Do not touch `main` or deploy.
+Run the complete Stage 06 acceptance matrix from the current integrated Stage 06 root-derived candidate:
+- ICM bootstrap, workflow check, and strict status;
+- offline verification, typecheck, full tests, production build;
+- conventional asset budget, world asset budget, Ask disclosure guard, and world Ask boundary guard;
+- 360/390/768/1024/1440 browser matrix across `/`, `/projects`, `/resume`, `/ask`, `/contact`, and `/play`;
+- keyboard/focus lifecycle, map/overlay interaction, fast travel, and touch-target sizing;
+- reduced-motion behavior, including world camera/decorative motion;
+- forced no-WebGL fallback with essential routes intact;
+- console/runtime errors and failed requests;
+- conventional-route isolation from Three/R3F and preserved lazy district loading;
+- production bundle/chunk measurements against the frozen Stage 06 baseline;
+- protected-state diff confirming no unintended content, Ask, dependency, topology/controller, `main`, or deployment changes.
+
+If any criterion is red, STOP certification and report the exact evidence so a new bounded Stage 06 repair lane can be opened. Do not repair unrelated findings inside the final-audit lane.
+
+If all criteria are green:
+1. finalize `docs/portfolio-world/STAGE-06-VALIDATION.md` with cumulative final evidence and status PASS;
+2. write `workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md` with the exact required completion-report fields/sections;
+3. update HANDOFF to Stage 06 final-audit PASS / awaiting certification;
+4. commit those evidence files and keep the tree clean;
+5. obtain independent Terra final audit PASS against that exact candidate commit;
+6. run `python3 scripts/workflow_certify_check.py --workflow portfolio-world-rebuild --stage 06-performance-accessibility`;
+7. run `python3 scripts/workflow_certify.py --workflow portfolio-world-rebuild --stage 06-performance-accessibility --write`;
+8. verify the state transition marks Stage 06 certified and Stage 07 blocked with `awaiting_activation`;
+9. update HANDOFF to Stage 06 certified / Stage 07 blocked, commit the certification state, and rerun workflow/status sanity checks.
+
+Do not activate Stage 07, touch `main`, or deploy in this lane.
 
 ## Minimum resume context
 1. `AGENTS.md`
