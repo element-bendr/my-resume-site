@@ -13,46 +13,143 @@ interface CommandCenterProps {
   movementTarget: OptionalVectorRef;
   nearbyStation: StationId | null;
   onSelectStation: (station: StationConfig) => void;
+  reducedMotion: boolean;
 }
 
-function CoreHologram() {
+function PlazaPylon({ x, z, rotation = 0 }: { x: number; z: number; rotation?: number }) {
+  return (
+    <group position={[x, 0, z]} rotation={[0, rotation, 0]}>
+      <mesh castShadow position={[0, 1.8, 0]}>
+        <boxGeometry args={[0.72, 3.6, 0.72]} />
+        <meshStandardMaterial color="#273247" metalness={0.42} roughness={0.42} />
+      </mesh>
+      <mesh position={[0, 2.15, 0.365]}>
+        <boxGeometry args={[0.38, 1.55, 0.025]} />
+        <meshStandardMaterial
+          color="#9fe9ff"
+          emissive="#4cc8ff"
+          emissiveIntensity={1.15}
+          toneMapped={false}
+        />
+      </mesh>
+      <mesh castShadow position={[0, 3.9, 0]}>
+        <coneGeometry args={[0.45, 1.2, 5]} />
+        <meshStandardMaterial color="#303d55" metalness={0.48} roughness={0.36} />
+      </mesh>
+    </group>
+  );
+}
+
+function CoreHologram({ reducedMotion }: { reducedMotion: boolean }) {
   const ring = useRef<Group>(null);
+  const globe = useRef<Group>(null);
 
   useFrame((_, delta) => {
-    if (ring.current) ring.current.rotation.y += delta * 0.35;
+    if (reducedMotion) return;
+    if (ring.current) ring.current.rotation.y += delta * 0.22;
+    if (globe.current) globe.current.rotation.y -= delta * 0.1;
   });
 
   return (
-    <group position={[0, 0, 0.95]}>
-      <mesh position={[0, 0.09, 0]}>
-        <cylinderGeometry args={[1.25, 1.5, 0.16, 32]} />
+    <group position={[0, 0, 0.65]}>
+      <mesh receiveShadow position={[0, 0.08, 0]}>
+        <cylinderGeometry args={[2.2, 2.55, 0.16, 48]} />
+        <meshStandardMaterial color="#2b3446" metalness={0.42} roughness={0.46} />
+      </mesh>
+      <mesh position={[0, 0.2, 0]}>
+        <torusGeometry args={[1.75, 0.045, 10, 64]} />
         <meshStandardMaterial
-          color="#132943"
-          emissive="#07182a"
-          emissiveIntensity={0.45}
-          metalness={0.58}
-          roughness={0.34}
+          color="#9cecff"
+          emissive="#4ccfff"
+          emissiveIntensity={1.4}
+          toneMapped={false}
         />
       </mesh>
-      <group ref={ring} position={[0, 1.82, 0]}>
+
+      <group ref={ring} position={[0, 2.45, 0]}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[0.95, 0.035, 12, 48]} />
-          <meshStandardMaterial color="#58d7ff" emissive="#1f94bd" emissiveIntensity={1.4} />
-        </mesh>
-        <mesh rotation={[0, Math.PI / 2, Math.PI / 4]}>
-          <torusGeometry args={[0.7, 0.025, 10, 40]} />
-          <meshStandardMaterial color="#9a8cff" emissive="#6957c6" emissiveIntensity={1.2} />
-        </mesh>
-        <mesh>
-          <icosahedronGeometry args={[0.3, 1]} />
+          <torusGeometry args={[1.42, 0.035, 12, 64]} />
           <meshStandardMaterial
-            color="#d9f7ff"
-            emissive="#58d7ff"
-            emissiveIntensity={1.8}
-            wireframe
+            color="#8ce8ff"
+            emissive="#3bbcff"
+            emissiveIntensity={1.5}
+            toneMapped={false}
           />
         </mesh>
+        <mesh rotation={[0.42, 0, 0.25]}>
+          <torusGeometry args={[1.15, 0.025, 10, 56]} />
+          <meshStandardMaterial
+            color="#b9aaff"
+            emissive="#816cff"
+            emissiveIntensity={1.25}
+            toneMapped={false}
+          />
+        </mesh>
+        <group ref={globe}>
+          <mesh>
+            <sphereGeometry args={[0.9, 24, 18]} />
+            <meshStandardMaterial
+              color="#c8f4ff"
+              emissive="#4dcfff"
+              emissiveIntensity={0.95}
+              wireframe
+              transparent
+              opacity={0.9}
+              toneMapped={false}
+            />
+          </mesh>
+          <mesh scale={0.84}>
+            <sphereGeometry args={[0.9, 18, 12]} />
+            <meshBasicMaterial color="#5dcfff" transparent opacity={0.08} />
+          </mesh>
+        </group>
       </group>
+
+      <pointLight position={[0, 2.4, 0]} intensity={6} distance={8} color="#5ad8ff" />
+    </group>
+  );
+}
+
+function PlazaArchitecture() {
+  return (
+    <group>
+      <mesh receiveShadow position={[0, -0.02, 0]}>
+        <cylinderGeometry args={[5.2, 5.55, 0.18, 48]} />
+        <meshStandardMaterial color="#313a49" metalness={0.28} roughness={0.62} />
+      </mesh>
+      <mesh receiveShadow position={[0, 0.04, 0]}>
+        <cylinderGeometry args={[3.8, 4.15, 0.18, 48]} />
+        <meshStandardMaterial color="#e6e0cf" metalness={0.08} roughness={0.72} />
+      </mesh>
+      <mesh position={[0, 0.16, 0]}>
+        <torusGeometry args={[4.45, 0.045, 8, 80]} />
+        <meshStandardMaterial
+          color="#b9eaff"
+          emissive="#53c9ff"
+          emissiveIntensity={0.75}
+          toneMapped={false}
+        />
+      </mesh>
+
+      <PlazaPylon x={-4.5} z={-3.1} rotation={0.16} />
+      <PlazaPylon x={4.5} z={-3.1} rotation={-0.16} />
+      <PlazaPylon x={-4.5} z={3.1} rotation={Math.PI - 0.16} />
+      <PlazaPylon x={4.5} z={3.1} rotation={Math.PI + 0.16} />
+
+      {[-1, 1].flatMap((x) =>
+        [-1, 1].map((z) => (
+          <group key={`${x}-${z}`} position={[x * 3.15, 0, z * 2.35]}>
+            <mesh castShadow position={[0, 0.38, 0]}>
+              <boxGeometry args={[1.25, 0.72, 0.9]} />
+              <meshStandardMaterial color="#4b5564" roughness={0.7} />
+            </mesh>
+            <mesh position={[0, 0.77, 0]}>
+              <boxGeometry args={[1.05, 0.12, 0.7]} />
+              <meshStandardMaterial color="#273448" metalness={0.2} roughness={0.55} />
+            </mesh>
+          </group>
+        )),
+      )}
     </group>
   );
 }
@@ -83,19 +180,14 @@ export function CommandCenter({
   movementTarget,
   nearbyStation,
   onSelectStation,
+  reducedMotion,
 }: CommandCenterProps) {
   const commandStations = stationsForZone("command-center");
 
   return (
     <>
-      <fog attach="fog" args={["#050b15", 18, 52]} />
-      <ambientLight intensity={0.72} />
-      <directionalLight position={[5, 9, 5]} intensity={1.25} color="#cceaff" />
-      <pointLight position={[0, 4, -1]} intensity={20} distance={12} color="#58d7ff" />
-      <pointLight position={[5, 2.5, -3]} intensity={8} distance={7} color="#75f2c8" />
-
-      <gridHelper args={[16, 16, "#173a58", "#0c2138"]} position={[0, 0.012, 0]} />
-      <CoreHologram />
+      <PlazaArchitecture />
+      <CoreHologram reducedMotion={reducedMotion} />
 
       {commandStations.map((station) => (
         <InteractionStation
