@@ -10,8 +10,8 @@
   },
   "execution": {
     "mode": "implementation",
-    "branch": "visual/world-art-v2",
-    "worktree": ".worktrees/visual-world-art-v2",
+    "branch": "visual/world-art-v2-reference-match",
+    "worktree": ".worktrees/visual-world-art-v2-reference-match",
     "owner": "Luna",
     "write_paths": [
       "HANDOFF.md",
@@ -22,7 +22,8 @@
       "public/world/assets/v2/**",
       "src/world/**",
       "workflow/active/portfolio-world-art-v2/**",
-      "workflow/index.json"
+      "workflow/index.json",
+      "docs/portfolio-world/VISUAL-REFERENCE-CONTRACT.md"
     ]
   },
   "stages": [
