@@ -1,5 +1,8 @@
+import { useContext } from "react";
+import type { RefObject } from "react";
 import { Html } from "@react-three/drei";
 import type { ThreeEvent } from "@react-three/fiber";
+import { WorldLabelPortalContext } from "../app/world-label-portal";
 import { BRIDGES, ZONES, type ZoneId } from "./world-topology";
 
 interface WorldTopologyProps {
@@ -17,6 +20,7 @@ function boundsGeometry(bounds: { minX: number; maxX: number; minZ: number; maxZ
 }
 
 export function WorldTopology({ currentZone, onRequestMove }: WorldTopologyProps) {
+  const labelPortal = useContext(WorldLabelPortalContext);
   const handleMove = (event: ThreeEvent<MouseEvent>) => {
     if (event.delta > 5) return;
     event.stopPropagation();
@@ -49,6 +53,7 @@ export function WorldTopology({ currentZone, onRequestMove }: WorldTopologyProps
                 distanceFactor={14}
                 transform
                 sprite
+                portal={(labelPortal as RefObject<HTMLElement> | null) ?? undefined}
               >
                 <span
                   className="world-zone-label"

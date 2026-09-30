@@ -20,7 +20,7 @@ implementation
 ## Current state
 Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
 
-Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 is persisted in the Stage 06 root. PR #11's blocked teardown investigation, including both failed/reverted manual R3F unmount attempts and Terra stop-rule evidence, is frozen at root merge `e343608e1832d2a90cfb879256f5640c8a4dc13a`. Stage 06 remains active; certification was not run. Lane 6 is now active on `stage06/persistent-html-portal-host` and owns only the materially different persistent `SiteShell`-hosted Drei `Html portal` repair. Stage 07 remains pending.
+Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 is persisted in the Stage 06 root. PR #11's blocked teardown investigation, including both failed/reverted manual R3F unmount attempts and Terra stop-rule evidence, is frozen at root merge `e343608e1832d2a90cfb879256f5640c8a4dc13a`. Lane 6 on `stage06/persistent-html-portal-host` now has a locally green persistent `SiteShell`-hosted Drei `Html portal` candidate; the lazy-canvas host lifecycle issue was fixed and its evidence is recorded below and in `docs/portfolio-world/STAGE-06-VALIDATION.md`. Candidate is awaiting Terra review before any PR12 push. Stage 06 remains active; certification was not run. Stage 07 remains pending.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -60,6 +60,11 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 06 final Terra audit: **FAIL**; certification blocked; failed-audit evidence merged by PR #10 at `42f6820072cbc82abda32b10d1ad938eae191273`
 - Stage 06 lane 5 PR #11: BLOCKED diagnostic evidence merged into `stage06/performance-accessibility` at `e343608e1832d2a90cfb879256f5640c8a4dc13a`; no failed runtime repair promoted
 - Stage 06 lane 6: `stage06/persistent-html-portal-host`; active bounded repair using persistent `SiteShell` DOM ownership plus Drei public `Html portal` API
+- Stage 06 lane 6 PR #12 local candidate: persistent host detects lazy `.world-canvas` mount, tracks size/viewport position, and preserves canvas clipping; labels only use the host
+- PR #12 browser: zero page errors/request failures for header Ask/Projects/Resume, HUD Contact, and Ask Terminal Open Ask; exact host/canvas bounds at 1440px and 390px, aligned at 1024px resize; 390px overflow 0
+- PR #12 world regression: Build Lab fast travel loads only BuildLab and shared DistrictStations; current-zone label hidden; Map focus restored; fallback links intact; initial `/play` has no district chunks; `/ask` loads no WorldEntry
+- PR #12 gates: typecheck/build PASS; tests 66/66; ICM checks/offline/assets PASS (critical 89.6 KiB gzip; world 335.3 KiB); Ask disclosure/world Ask guards PASS
+- PR #12 candidate awaits Terra review; push only if Terra PASS. No PR12 commit/push yet
 - Stage 06 certification: NOT RUN; Stage 06 remains active and Stage 07 remains pending
 - Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to the current active lane PR before further Stage 06 work
 - Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
@@ -77,27 +82,7 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Local executor: fetch `origin/stage06/persistent-html-portal-host`, put `.worktrees/stage06-performance` on the exact branch head, and confirm a clean tree.
-
-Implement only the persistent portal-host repair:
-- `SiteShell` owns one dedicated DOM portal host that stays mounted across routed `Outlet` changes;
-- the host is exposed to the lazy world through the smallest typed React ref/context bridge;
-- the shared context/ref module must not import Three, R3F, or Drei, preserving conventional-route bundle isolation;
-- `WorldTopology` passes that persistent ref to the zone-label Drei `Html` components through the public `portal` prop;
-- preserve PR #9's invariant that non-Command-Center zone-label portals stay mounted during fast travel and only the current-zone label is hidden with `visibility`;
-- align the persistent host to the live `.world-canvas` DOM bounds while `/play` is mounted, including resize/viewport changes, so projection remains pixel-correct despite the host living outside the routed subtree;
-- keep the host pointer-inert and decorative, outside focus order, and empty/inert on conventional routes;
-- do not import world renderer modules into `SiteShell`, change dependencies, replace SPA navigation, suppress DOM errors, remove labels, or rewrite the renderer.
-
-Validation order:
-1. typecheck/build and a focused source guard proving SiteShell remains free of Three/R3F/Drei imports;
-2. desktop and 390px visual/browser proof that zone labels retain projection, visibility, z-order, clipping behavior, and resize alignment;
-3. all five `/play` SPA exits: header Ask/Projects/Resume, world HUD Contact, Ask Terminal Open Ask, each with correct destination, zero application page/runtime errors, and zero failed requests;
-4. fast travel through multiple districts with zero errors and current-zone label visibility preserved;
-5. map focus lifecycle, lazy district loading, conventional-route Three/R3F isolation, 390px overflow, coarse-pointer 44px controls;
-6. full Stage 06 gates and independent Terra review.
-
-If this materially different approach fails, stop and return evidence rather than adding another teardown workaround in the same lane. If green, record exact-head evidence and merge only into the Stage 06 root, then rerun the final Stage 06 acceptance audit. Do not certify Stage 06, activate Stage 07, touch `main`, or deploy from this lane.
+Terra: independently review the complete PR #12 lane diff and the browser/full-gate evidence in `docs/portfolio-world/STAGE-06-VALIDATION.md`. If Terra returns PASS, push/open PR #12 into the Stage 06 integration branch and continue the final Stage 06 acceptance audit. If Terra returns FAIL, send only demonstrated findings for a bounded repair. Do not certify Stage 06, activate Stage 07, touch `main`, or deploy from this lane.
 
 ## Minimum resume context
 1. `AGENTS.md`
