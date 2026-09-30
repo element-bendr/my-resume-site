@@ -25,6 +25,31 @@ for (const bridge of ["bridge-client","bridge-hobby","bridge-timeline","bridge-b
   if (!topology.includes(`id: "${bridge}"`)) failures.push(`topology missing bridge: ${bridge}`);
 }
 
+const topologyView = fs.readFileSync(path.join(root, "src/world/WorldTopology.tsx"), "utf8");
+if (!topologyView.includes('zone.id !== "command-center" ?')) {
+  failures.push("non-command-center zone labels must remain mounted during fast travel");
+}
+if (!topologyView.includes('visibility: zone.id === currentZone ? "hidden" : "visible"')) {
+  failures.push("the current zone label must be hidden without removing its Drei Html portal");
+}
+if (!topologyView.includes("portal={(labelPortal as RefObject<HTMLElement> | null)")) {
+  failures.push("zone labels must use the persistent SiteShell portal host");
+}
+const shell = fs.readFileSync(path.join(root, "src/app/SiteShell.tsx"), "utf8");
+if (!shell.includes("WorldLabelPortalContext.Provider") || !shell.includes('className="world-label-portal-host"')) {
+  failures.push("SiteShell must own the persistent zone-label portal host outside the routed outlet");
+}
+if (!shell.includes("new MutationObserver(align)") || !shell.includes("new ResizeObserver(align)") || !shell.includes('window.addEventListener("scroll", align, true)')) {
+  failures.push("the persistent zone-label portal host must track lazy canvas mount, size, and viewport position");
+}
+if (!shell.includes('overflow: "hidden"')) {
+  failures.push("the persistent zone-label portal host must preserve the canvas clipping boundary");
+}
+const portalBridge = fs.readFileSync(path.join(root, "src/app/world-label-portal.ts"), "utf8");
+if (/@react-three\/(fiber|drei)/.test(portalBridge)) {
+  failures.push("the application portal bridge must not import the world renderer");
+}
+
 const districts = fs.readFileSync(path.join(root, "src/world/WorldDistricts.tsx"), "utf8");
 for (const moduleName of ["BuildLab","AutomationLab","ClientStreet","TimelineCorridor","HobbyDistrict"]) {
   if (!districts.includes(`lazy(() => import("./districts/${moduleName}"))`)) {

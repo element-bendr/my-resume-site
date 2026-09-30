@@ -2,16 +2,16 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-rebuild",
   "title": "Portfolio World Rebuild",
-  "status": "blocked",
-  "active_stage": "06-performance-accessibility",
+  "status": "certified",
+  "active_stage": null,
   "provenance": {
     "started_from_commit": "63d25e7dbc3169cb41aaa181a513ca7af5860ba4",
-    "validated_commit": "44025d6735024ed2be749179c71a69c4b56db4f8"
+    "validated_commit": "9af0df349c721c29ff85c49ecc95cd7f0d63d49d"
   },
   "execution": {
-    "mode": "implementation",
-    "branch": "stage05/local-integration",
-    "worktree": ".worktrees/stage05-integration",
+    "mode": "certification",
+    "branch": "stage07/certification-promotion",
+    "worktree": ".worktrees/stage07-certification-promotion",
     "owner": "Luna",
     "write_paths": [
       "AGENTS.md",
@@ -184,25 +184,33 @@
     },
     {
       "id": "06-performance-accessibility",
-      "status": "blocked",
-      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/06-performance-accessibility-CONTEXT.md",
       "depends_on_stages": [
         "05-integration"
       ],
       "depends_on": [],
-      "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md",
-      "block_reason": "awaiting_activation"
+      "outputs": [
+        "docs/portfolio-world/STAGE-06-BASELINE.md",
+        "decisions/2026-09-30-stage06-baseline.md",
+        "docs/portfolio-world/STAGE-06-VALIDATION.md",
+        "workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-rebuild/output/06-performance-accessibility-completion-report.md"
     },
     {
       "id": "07-certification-promotion",
-      "status": "pending",
-      "context": "workflow/active/portfolio-world-rebuild/CONTEXT.md",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-rebuild/07-certification-promotion-CONTEXT.md",
       "depends_on_stages": [
         "06-performance-accessibility"
       ],
       "depends_on": [],
-      "outputs": [],
+      "outputs": [
+        "docs/portfolio-world/STAGE-07-VALIDATION.md",
+        "docs/portfolio-world/PROMOTION-RECORD.md",
+        "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md"
+      ],
       "completion_report": "workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md"
     }
   ]
