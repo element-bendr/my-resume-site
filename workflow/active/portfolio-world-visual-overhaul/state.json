@@ -2,11 +2,11 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-visual-overhaul",
   "title": "Portfolio World Visual Overhaul",
-  "status": "active",
-  "active_stage": "01-visual-foundation",
+  "status": "certified",
+  "active_stage": null,
   "provenance": {
     "started_from_commit": "5f4de7ace37bfd843ef13f035a3b16ddb61f28d7",
-    "validated_commit": null
+    "validated_commit": "1a05ce3ff882484e7e2a8ed8d0557b359cb8f148"
   },
   "execution": {
     "mode": "implementation",
@@ -25,7 +25,7 @@
   "stages": [
     {
       "id": "01-visual-foundation",
-      "status": "active",
+      "status": "certified",
       "context": "workflow/active/portfolio-world-visual-overhaul/CONTEXT.md",
       "depends_on_stages": [],
       "depends_on": [

@@ -3,7 +3,7 @@
 ## Goal
 Rebuild the Portfolio World visual presentation to match the approved floating sci-fi world reference while preserving the already-certified movement, topology, routing, Ask, accessibility, fallback, and Cloudflare architecture.
 ## Phase
-VISUAL_OVERHAUL_V1_STAGE_01_VALIDATED_AWAITING_CERTIFICATION
+VISUAL_OVERHAUL_V1_STAGE_01_CERTIFIED
 
 ## Execution mode
 implementation
@@ -13,7 +13,7 @@ implementation
 - canonical branch: main
 - working branch/worktree: visual/rendering-overhaul-v1 / .worktrees/visual-rendering-overhaul-v1
 - Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
-- active workflow contract: workflow/active/portfolio-world-visual-overhaul; Stage 01 active and locally validated
+- active workflow contract: workflow/active/portfolio-world-visual-overhaul; Stage 01 formally certified
 - prior workflow: portfolio-world-rebuild remains formally certified
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
@@ -30,7 +30,7 @@ Current candidate changes are graphics-only:
 - first-pass environment art for Build Lab, Automation Lab, Client Street, Timeline Corridor, and Hobby District;
 - no movement constants, movement math, topology bounds/graph, station coordinates, Ask/content, dependencies, or production state changed.
 
-The new ICM workflow `portfolio-world-visual-overhaul` is activated for Stage 01 visual foundation. Its dependency is pinned to the certified `portfolio-world-rebuild` state file. Candidate `d005cbac5757390bb15711eb9c31edf21d97e9c6` passes the inherited gates, six-zone visual browser matrix, and Terra review.
+The new ICM workflow `portfolio-world-visual-overhaul` Stage 01 is formally certified against evidence candidate `1a05ce3ff882484e7e2a8ed8d0557b359cb8f148`, with Terra PASS and the visual app candidate `d005cbac5757390bb15711eb9c31edf21d97e9c6`. PR #17 exact head will receive the certification-state commit through bounded review/merge authority. `main` and production remain unchanged.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -110,7 +110,7 @@ The new ICM workflow `portfolio-world-visual-overhaul` is activated for Stage 01
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Local executor: use `.worktrees/visual-overhaul` on `visual/rendering-overhaul-v1` at exact candidate `d289f774ad0eb13a4f03a21a1e5c74d9f5537ac2`.
+Local executor: bounded PR review/merge authority for PR #17 at the resulting certification-state head; no deployment.
 
 Read:
 1. `AGENTS.md`
@@ -121,14 +121,9 @@ Read:
 6. frozen world/rendering/asset-budget documents
 
 Then:
-1. run bootstrap/workflow/strict status;
-2. activation for `portfolio-world-visual-overhaul` is complete; dependency pin and strict status are green;
-3. commit/push activation state before further implementation;
-4. run `npm ci`, typecheck, tests, build, asset/world budgets and Ask/world guards against the current candidate;
-5. if compile/runtime errors exist, make the smallest visual-lane repair only;
-6. render screenshots of Command Center plus all five districts at 1440px and 390px, including reduced-motion and forced no-WebGL checks;
-7. compare against the approved visual direction and return the screenshots/evidence before adding external GLB/KTX2 assets;
-8. obtain Terra review after the browser pass.
+1. review the certification-state commit for PR #17;
+2. preserve `main` and production; do not deploy;
+3. begin any future visual work only through a newly frozen contract.
 
 Do not change movement/topology/content/dependencies or deploy production in this workflow.
 
