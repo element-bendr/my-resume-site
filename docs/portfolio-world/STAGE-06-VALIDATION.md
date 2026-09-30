@@ -238,3 +238,45 @@ Protected state:
 - no Ask/content/dependency change
 - `main` and production untouched
 - Stage 07 not started
+
+
+## Lane 5 — Canvas route teardown investigation — blocked
+
+PR: #11 — `fix(stage06): repair Canvas route teardown lifecycle`
+
+Pickup head: `ecce3e529eee7c3d1fdb7b0e8e699cdbe9ac9163`
+
+Reproduction:
+
+- the Stage 06 `/play` SPA-exit `removeChild` failure reproduced on the exact pickup
+- header Ask, Projects, Resume, world HUD Contact, and the previously evidenced Ask Terminal path remain affected
+- destination routes still render and requests succeed
+- failure remains isolated to Drei `Html` cleanup during full world Canvas teardown
+
+Bounded attempts:
+
+1. `WorldEntry` layout cleanup using public R3F `unmountComponentAtNode(canvas)`
+2. the same cleanup wrapped with R3F `flushSync`
+
+Result:
+
+- both attempts retained the teardown failure
+- both attempts were reverted
+- no runtime candidate exists on this lane
+- branch returned clean to the pickup implementation state
+- Terra confirmed the two-attempt stop rule and returned BLOCKED / no promotable candidate
+
+Next materially different approach:
+
+- move Drei `Html` zone-label output to a dedicated persistent DOM host owned by `SiteShell`, outside the routed `Outlet`
+- pass that persistent host to Drei through its public `Html portal` ref API
+- preserve label projection/stacking, the PR #9 fast-travel portal-lifecycle invariant, SPA navigation, lazy districts, topology/controller behavior, map focus, and route isolation
+- prove portal-host behavior before rerunning the five SPA-exit regression paths
+
+Protected state:
+
+- no failed repair retained
+- no dependency change
+- no `main` or production change
+- Stage 06 remains active
+- Stage 07 remains pending
