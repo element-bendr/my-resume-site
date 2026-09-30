@@ -251,6 +251,17 @@
 }
 
 @media (pointer: coarse) {
+  .world-hud-nav a,
+  .world-hud-button,
+  .world-close,
+  .world-map-destination {
+    min-height: 44px;
+  }
+
+  .world-close {
+    min-width: 44px;
+  }
+
   .world-hud-help {
     display: none;
   }
