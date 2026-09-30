@@ -1,10 +1,9 @@
 # Current Handoff
 
 ## Goal
-Finish Stage 06 performance/accessibility hardening through a GitHub↔local feedback loop: GitHub freezes each bounded lane and review trail; the local Stage 06 worktree executes browser/runtime validation, fixes only evidenced failures, and writes results back before Stage 06 certification. Preserve Stages 00–05 and keep `main` and production untouched.
-
+Activate and execute Stage 07 certification/promotion from the formally certified Stage 06 root. Prove the exact certified application on Cloudflare preview infrastructure, retain full regression/protected-state evidence, and make it eligible for a separate explicit promotion to `main` and production only after Stage 07 certification.
 ## Phase
-STAGE_06_CERTIFIED_STAGE_07_AWAITING_ACTIVATION
+STAGE_07_AWAITING_ICM_ACTIVATION
 
 ## Execution mode
 implementation
@@ -12,15 +11,13 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: stage06/final-acceptance-reaudit / .worktrees/stage06-performance
+- working branch/worktree: stage07/certification-promotion / .worktrees/stage07-certification-promotion
 - application candidate: feat/portfolio-world-icm-rebuild @ d36e5fb65d40a669e9d260e8356962f4413d922b
 - workflow state: workflow/active/portfolio-world-rebuild; Stage 06 certified; Stage 07 blocked `awaiting_activation`
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-Stages 00–05 are formally certified. Stage 05 application candidate `d36e5fb65d40a669e9d260e8356962f4413d922b` passed exact-head GitHub Actions run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611); final Terra review passed; formal ICM certification passed in run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413). Certification state commit is `f756316c2826eede6bed2790cb81020f5f34db35`. Stage 06 contract and measured baseline were committed as `c0507383025ca191264df1f31b42410624fb259b`; Stage 06 was activated using `scripts/workflow_activate.py`.
-
-Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidence from PR #10 and blocked teardown diagnostics from PR #11 are preserved in the Stage 06 root. Lane 6, the persistent `SiteShell`-owned Drei `Html portal` repair, is frozen by merged PR #12 at root merge `7505336fb3ba81f6c3620615a3bf1880c1019ff2`. The fresh integrated final acceptance re-audit is green, Terra returned PASS with no findings, and formal ICM certification passed for exact candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`. Stage 06 is certified; Stage 07 is blocked with `awaiting_activation`. PR #13 now carries the certification state for bounded integration into the Stage 06 root. `main` and production remain untouched.
+Stages 00–06 are formally certified. Stage 06 certification is integrated into `stage06/performance-accessibility` at `fe1d15199f06a8a6a2cae22dbc7fa623e75218f6`. Stage 07 is blocked with `awaiting_activation`. A dedicated Stage 07 contract is frozen at `workflow/active/portfolio-world-rebuild/07-certification-promotion-CONTEXT.md`; execution metadata points to `stage07/certification-promotion` / `.worktrees/stage07-certification-promotion`, but the workflow has not been activated yet. `main`, production, and the production domain remain untouched.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -89,9 +86,21 @@ Stage 06 lanes 1–4 are frozen through merged PR #9. Failed final-audit evidenc
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Review and merge PR #13 only into `stage06/performance-accessibility` with an exact-head guard. After that merge, verify the Stage 06 root carries `06-performance-accessibility=certified` and `07-certification-promotion=blocked` with `awaiting_activation`.
+Local executor: fetch `origin/stage07/certification-promotion`, create/use `.worktrees/stage07-certification-promotion`, place it on the exact remote head, and confirm a clean tree.
 
-Only after that verification may Stage 07 be activated through the repository's ICM activation tooling on a separate Stage 07 branch/worktree. Do not merge to `main` or deploy as part of the Stage 06 certification merge.
+Read `AGENTS.md`, `CONTEXT.md`, this `HANDOFF.md`, `workflow/active/portfolio-world-rebuild/07-certification-promotion-CONTEXT.md`, Stage 06 validation/completion evidence, and the workflow activation/certification scripts.
+
+Then run:
+1. `python3 scripts/bootstrap_check.py`
+2. `python3 scripts/workflow_check.py`
+3. `python3 scripts/workflow_status.py --strict`
+4. `python3 scripts/workflow_activate.py --workflow portfolio-world-rebuild` (dry-run; must PASS)
+5. `python3 scripts/workflow_activate.py --workflow portfolio-world-rebuild --write`
+6. rerun workflow check/status and prove Stage 07 is active while Stages 00–06 remain certified/non-stale
+
+Commit and push only the activation state/handoff to the current PR before any preview/promotion execution. Do not touch `main`, production, or deploy production during activation.
+
+Once activation is remotely frozen, execute Stage 07 exactly as contracted: integrate certified Stage 06 into the rebuild integration candidate, run local gates, create Cloudflare preview only, perform final preview/browser/visual/accessibility/regression checks, obtain Terra review, write Stage 07 evidence/completion/promotion record, certify Stage 07, and stop before any explicit `main`/production promotion action.
 
 ## Minimum resume context
 1. `AGENTS.md`
