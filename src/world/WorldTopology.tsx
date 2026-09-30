@@ -42,7 +42,7 @@ export function WorldTopology({ currentZone, onRequestMove }: WorldTopologyProps
                 roughness={0.78}
               />
             </mesh>
-            {zone.id !== "command-center" && zone.id !== currentZone ? (
+            {zone.id !== "command-center" ? (
               <Html
                 position={[geometry.centerX, 0.22, zone.bounds.minZ + 0.7]}
                 center
@@ -50,7 +50,11 @@ export function WorldTopology({ currentZone, onRequestMove }: WorldTopologyProps
                 transform
                 sprite
               >
-                <span className="world-zone-label" aria-hidden="true">
+                <span
+                  className="world-zone-label"
+                  aria-hidden="true"
+                  style={{ visibility: zone.id === currentZone ? "hidden" : "visible" }}
+                >
                   {zone.label}
                 </span>
               </Html>

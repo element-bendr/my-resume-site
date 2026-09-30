@@ -25,6 +25,14 @@ for (const bridge of ["bridge-client","bridge-hobby","bridge-timeline","bridge-b
   if (!topology.includes(`id: "${bridge}"`)) failures.push(`topology missing bridge: ${bridge}`);
 }
 
+const topologyView = fs.readFileSync(path.join(root, "src/world/WorldTopology.tsx"), "utf8");
+if (!topologyView.includes('zone.id !== "command-center" ?')) {
+  failures.push("non-command-center zone labels must remain mounted during fast travel");
+}
+if (!topologyView.includes('visibility: zone.id === currentZone ? "hidden" : "visible"')) {
+  failures.push("the current zone label must be hidden without removing its Drei Html portal");
+}
+
 const districts = fs.readFileSync(path.join(root, "src/world/WorldDistricts.tsx"), "utf8");
 for (const moduleName of ["BuildLab","AutomationLab","ClientStreet","TimelineCorridor","HobbyDistrict"]) {
   if (!districts.includes(`lazy(() => import("./districts/${moduleName}"))`)) {
