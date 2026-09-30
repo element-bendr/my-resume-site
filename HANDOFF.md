@@ -3,7 +3,7 @@
 ## Goal
 Rebuild the Portfolio World visual presentation to match the approved floating sci-fi world reference while preserving the already-certified movement, topology, routing, Ask, accessibility, fallback, and Cloudflare architecture.
 ## Phase
-VISUAL_OVERHAUL_V1_STAGE_01_CERTIFIED
+VISUAL_ART_V2_ASSET_HERO_AWAITING_ACTIVATION
 
 ## Execution mode
 implementation
@@ -11,26 +11,18 @@ implementation
 ## Authority / location
 - repository: element-bendr/my-resume-site
 - canonical branch: main
-- working branch/worktree: visual/rendering-overhaul-v1 / .worktrees/visual-rendering-overhaul-v1
+- working branch/worktree: visual/world-art-v2 / .worktrees/visual-world-art-v2
 - Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
-- active workflow contract: workflow/active/portfolio-world-visual-overhaul; Stage 01 formally certified
+- active workflow contract: workflow/active/portfolio-world-art-v2; Stage 01 blocked `awaiting_activation`
 - prior workflow: portfolio-world-rebuild remains formally certified
 - template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
 
 ## Current state
-The prior portfolio-world rebuild remains formally certified and its runtime has been promoted to `main`. Production deployment is intentionally still pending while the world visuals are corrected.
+PR #17 is technically certified but visually rejected and closed without merge. The supplied screenshot demonstrates the failure clearly: the scene reads as a dark primitive blockout with large flat decks, sparse geometry, weak material response, minimal environmental layering, and an elevated debug-like camera composition. This is materially below the approved generated floating-world reference.
 
-A new post-certification visual-overhaul candidate exists on `visual/rendering-overhaul-v1`. The visual north star is the approved generated floating-island world: dominant Command Center plaza, connected floating districts, sunset/blue-hour atmosphere, strong landmarks, district accents, environmental depth, and a visible stylized player.
+v2 changes the source rule rather than polishing the rejected construction method. The branch `visual/world-art-v2` now has a frozen asset-based contract: curated real CC0 modular glTF environment assets become the primary art substrate; Three.js procedural geometry is limited to glue geometry, islands, holograms, trims and effects. Movement/controller/topology/content remain protected.
 
-Current candidate changes are graphics-only:
-- procedural sky/fog/key-fill lighting and ACES filmic tone mapping;
-- floating-island undersides, bridge rails, atmospheric waterfalls and distant ridge silhouettes;
-- rebuilt Command Center/Central Plaza with pylons and holographic globe;
-- articulated stylized human player rendered by the existing PlayerController;
-- first-pass environment art for Build Lab, Automation Lab, Client Street, Timeline Corridor, and Hobby District;
-- no movement constants, movement math, topology bounds/graph, station coordinates, Ask/content, dependencies, or production state changed.
-
-The new ICM workflow `portfolio-world-visual-overhaul` Stage 01 is formally certified against evidence candidate `1a05ce3ff882484e7e2a8ed8d0557b359cb8f148`, with Terra PASS and the visual app candidate `d005cbac5757390bb15711eb9c31edf21d97e9c6`. PR #17 exact head will receive the certification-state commit through bounded review/merge authority. `main` and production remain unchanged.
+Approved initial sources are Quaternius Modular Sci-Fi MegaKit and Kenney City Kit Industrial/Commercial. Only a small budgeted subset may be vendored, with source/license/size recorded per asset. Stage 01 builds only the Central Plaza hero scene, one bridge and distant district silhouettes. User visual acceptance is mandatory before propagating the style to the other districts.
 
 ## Canonical decisions
 - `main` remains untouched until certification and explicit promotion.
@@ -110,22 +102,19 @@ The new ICM workflow `portfolio-world-visual-overhaul` Stage 01 is formally cert
 - Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
 
 ## Next atomic action
-Local executor: bounded PR review/merge authority for PR #17 at the resulting certification-state head; no deployment.
+Local executor: fetch `origin/visual/world-art-v2`, create/use `.worktrees/visual-world-art-v2`, read the v2 workflow contract and asset-source registry, then activate `portfolio-world-art-v2` through ICM tooling.
 
-Read:
-1. `AGENTS.md`
-2. `CONTEXT.md`
-3. this `HANDOFF.md`
-4. `workflow/active/portfolio-world-visual-overhaul/CONTEXT.md`
-5. `docs/portfolio-world/VISUAL-OVERHAUL-V1.md`
-6. frozen world/rendering/asset-budget documents
+After activation:
+1. download the approved CC0 asset packs locally outside the repository;
+2. inspect available glTF/GLB assets and curate only the minimum Central Plaza / bridge / skyline subset;
+3. record every selected asset, source, license and byte size in `docs/portfolio-world/VISUAL-ASSET-MANIFEST.md`;
+4. vendor only selected assets under `public/world/assets/v2/`;
+5. replace primitive hero architecture with those assets while preserving simple invisible walkable geometry;
+6. tune visual camera composition lower and more cinematic without changing movement/input semantics;
+7. run typecheck/tests/build/budgets/guards;
+8. capture 1440px and 390px spawn screenshots and stop for user visual acceptance.
 
-Then:
-1. review the certification-state commit for PR #17;
-2. preserve `main` and production; do not deploy;
-3. begin any future visual work only through a newly frozen contract.
-
-Do not change movement/topology/content/dependencies or deploy production in this workflow.
+Do not rebuild the remaining districts until the hero screenshot is accepted. Do not touch main or production.
 
 ## Minimum resume context
 1. `AGENTS.md`
