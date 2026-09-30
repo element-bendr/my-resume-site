@@ -21,7 +21,7 @@
     "verify:config": "node scripts/check-foundation-config.mjs",
     "verify:offline": "npm run verify:content && npm run verify:config && npm run verify:world && npm run verify:world-zones",
     "verify:world": "node scripts/check-world-boundary.mjs",
-    "verify:world-assets": "node scripts/check-world-budget.mjs",
+    "verify:world-assets": "node scripts/check-world-asset-deps.mjs && node scripts/check-world-budget.mjs",
     "verify:ask-disclosure": "node scripts/check-ask-client-disclosure.mjs",
     "verify:world-ask": "node scripts/check-world-ask-boundary.mjs",
     "verify:world-zones": "node scripts/check-world-zones.mjs"
