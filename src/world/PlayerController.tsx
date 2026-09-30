@@ -55,6 +55,10 @@ export function PlayerController({
   onZoneChange,
 }: PlayerControllerProps) {
   const avatar = useRef<Group>(null);
+  const leftArm = useRef<Group>(null);
+  const rightArm = useRef<Group>(null);
+  const leftLeg = useRef<Group>(null);
+  const rightLeg = useRef<Group>(null);
   const pressed = useRef(new Set<string>());
   const interactionRequested = useRef(false);
   const heldSeconds = useRef(0);
@@ -162,11 +166,19 @@ export function PlayerController({
     }
 
     if (avatar.current) {
-      const bob = isWalking ? Math.sin(state.clock.elapsedTime * 9) * 0.035 : 0;
+      const gait = Math.sin(state.clock.elapsedTime * 8.5);
+      const bob = isWalking ? Math.abs(gait) * 0.045 : 0;
       avatar.current.position.set(position.x, bob, position.z);
       if (Math.abs(movedX) + Math.abs(movedZ) > 0.0001) {
         avatar.current.rotation.y = Math.atan2(movedX, movedZ);
       }
+
+      const armSwing = isWalking ? gait * 0.48 : 0;
+      const legSwing = isWalking ? gait * 0.58 : 0;
+      if (leftArm.current) leftArm.current.rotation.x = armSwing;
+      if (rightArm.current) rightArm.current.rotation.x = -armSwing;
+      if (leftLeg.current) leftLeg.current.rotation.x = -legSwing;
+      if (rightLeg.current) rightLeg.current.rotation.x = legSwing;
     }
 
     const zone = zoneAtPoint({ x: position.x, z: position.z });
@@ -201,29 +213,93 @@ export function PlayerController({
 
   return (
     <group ref={avatar} position={[playerPosition.current.x, 0, playerPosition.current.z]}>
-      <mesh position={[-0.14, 0.28, 0]}>
-        <boxGeometry args={[0.18, 0.55, 0.22]} />
-        <meshStandardMaterial color="#163552" />
-      </mesh>
-      <mesh position={[0.14, 0.28, 0]}>
-        <boxGeometry args={[0.18, 0.55, 0.22]} />
-        <meshStandardMaterial color="#163552" />
-      </mesh>
-      <mesh position={[0, 0.78, 0]}>
-        <cylinderGeometry args={[0.3, 0.36, 0.72, 8]} />
-        <meshStandardMaterial color="#2d5d82" metalness={0.18} roughness={0.55} />
-      </mesh>
-      <mesh position={[0, 1.28, 0]}>
-        <sphereGeometry args={[0.27, 16, 12]} />
-        <meshStandardMaterial color="#d6e6f3" roughness={0.7} />
-      </mesh>
-      <mesh position={[0, 1.28, 0.235]}>
-        <boxGeometry args={[0.28, 0.08, 0.035]} />
-        <meshStandardMaterial color="#63d8ff" emissive="#2fa7d4" emissiveIntensity={1.2} />
-      </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.018, 0]}>
-        <ringGeometry args={[0.38, 0.43, 24]} />
-        <meshBasicMaterial color="#63d8ff" transparent opacity={0.45} />
+        <ringGeometry args={[0.4, 0.47, 28]} />
+        <meshBasicMaterial color="#63d8ff" transparent opacity={0.34} />
+      </mesh>
+
+      <group ref={leftLeg} position={[-0.17, 0.66, 0]}>
+        <mesh position={[0, -0.28, 0]}>
+          <boxGeometry args={[0.22, 0.58, 0.28]} />
+          <meshStandardMaterial color="#151c2a" roughness={0.72} />
+        </mesh>
+        <mesh position={[0, -0.59, 0.07]}>
+          <boxGeometry args={[0.26, 0.12, 0.42]} />
+          <meshStandardMaterial color="#0b1019" roughness={0.8} />
+        </mesh>
+      </group>
+
+      <group ref={rightLeg} position={[0.17, 0.66, 0]}>
+        <mesh position={[0, -0.28, 0]}>
+          <boxGeometry args={[0.22, 0.58, 0.28]} />
+          <meshStandardMaterial color="#151c2a" roughness={0.72} />
+        </mesh>
+        <mesh position={[0, -0.59, 0.07]}>
+          <boxGeometry args={[0.26, 0.12, 0.42]} />
+          <meshStandardMaterial color="#0b1019" roughness={0.8} />
+        </mesh>
+      </group>
+
+      <mesh castShadow position={[0, 1.06, 0]}>
+        <boxGeometry args={[0.68, 0.76, 0.36]} />
+        <meshStandardMaterial color="#202b3b" metalness={0.08} roughness={0.68} />
+      </mesh>
+      <mesh position={[0, 1.12, 0.19]}>
+        <boxGeometry args={[0.5, 0.42, 0.025]} />
+        <meshStandardMaterial color="#26374c" roughness={0.5} />
+      </mesh>
+      <mesh position={[0, 1.18, -0.25]}>
+        <boxGeometry args={[0.48, 0.6, 0.2]} />
+        <meshStandardMaterial color="#111923" metalness={0.2} roughness={0.58} />
+      </mesh>
+      <mesh position={[0, 1.2, -0.36]}>
+        <boxGeometry args={[0.08, 0.28, 0.025]} />
+        <meshStandardMaterial
+          color="#9aeaff"
+          emissive="#39bfff"
+          emissiveIntensity={1.7}
+          toneMapped={false}
+        />
+      </mesh>
+
+      <group ref={leftArm} position={[-0.46, 1.28, 0]}>
+        <mesh position={[0, -0.28, 0]}>
+          <capsuleGeometry args={[0.105, 0.42, 4, 8]} />
+          <meshStandardMaterial color="#202b3b" roughness={0.68} />
+        </mesh>
+        <mesh position={[0, -0.57, 0.02]}>
+          <sphereGeometry args={[0.115, 10, 8]} />
+          <meshStandardMaterial color="#b9876f" roughness={0.82} />
+        </mesh>
+      </group>
+
+      <group ref={rightArm} position={[0.46, 1.28, 0]}>
+        <mesh position={[0, -0.28, 0]}>
+          <capsuleGeometry args={[0.105, 0.42, 4, 8]} />
+          <meshStandardMaterial color="#202b3b" roughness={0.68} />
+        </mesh>
+        <mesh position={[0, -0.57, 0.02]}>
+          <sphereGeometry args={[0.115, 10, 8]} />
+          <meshStandardMaterial color="#b9876f" roughness={0.82} />
+        </mesh>
+      </group>
+
+      <mesh castShadow position={[0, 1.66, 0]}>
+        <sphereGeometry args={[0.28, 18, 14]} />
+        <meshStandardMaterial color="#b9876f" roughness={0.82} />
+      </mesh>
+      <mesh position={[0, 1.82, -0.02]} scale={[1.04, 0.62, 1.02]}>
+        <dodecahedronGeometry args={[0.29, 0]} />
+        <meshStandardMaterial color="#10141d" roughness={0.86} />
+      </mesh>
+      <mesh position={[0, 1.65, 0.265]}>
+        <boxGeometry args={[0.29, 0.055, 0.025]} />
+        <meshStandardMaterial
+          color="#bfefff"
+          emissive="#55cfff"
+          emissiveIntensity={1.05}
+          toneMapped={false}
+        />
       </mesh>
     </group>
   );
