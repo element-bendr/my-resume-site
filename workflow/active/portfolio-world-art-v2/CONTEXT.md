@@ -130,3 +130,18 @@ Technical:
 - navigation becomes obstructed;
 - controller/topology/content drift occurs;
 - second materially similar hero attempt is visually rejected.
+
+
+## Active bounded repair — asset dependency closure
+
+Stage 01 is currently blocked by incomplete glTF packaging, not by a proved failure of the asset-based art direction.
+
+Repair constraints:
+- do not push local failed commits `abec3eb` or `e36d08f`;
+- prove one selected Quaternius glTF end-to-end before expanding;
+- enumerate and vendor every external `buffers[].uri` and `images[].uri` dependency;
+- preserve or intentionally rewrite relative paths so browser fetches resolve;
+- add a deterministic repository check for missing glTF dependencies;
+- require zero asset 404s/failed requests and visible browser geometry/material output;
+- do not compensate for missing assets with new procedural stand-ins;
+- do not continue district production until the Central Plaza hero asset set visibly renders.
