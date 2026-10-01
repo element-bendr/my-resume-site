@@ -1,10 +1,10 @@
 # Blender art-direction upgrade
 
-Status: **STAGE 01 ACTIVE — baseline asset bake not yet certified**
+Status: **STAGE 01 CERTIFIED AS PIPELINE PROOF — AUTHORED ART NOT YET ACCEPTED**
 
 ## Goal
 
-Replace the current primitive-heavy visual scenery with Blender-authored GLB assets while preserving the certified world controls and application behavior.
+Replace the current primitive-heavy visual scenery with genuinely authored Blender scenes exported as GLB, while preserving the certified world controls and application behavior. Stage 01's procedural GLBs are pipeline-proof assets only.
 
 The generated concept image remains the art-direction target. The existing React world remains the interaction, content and fallback authority.
 
@@ -38,7 +38,7 @@ concept/reference
       ↓
 Blender 4.5 LTS
       ↓
-authored geometry + PBR material intent
+editable Blender source + authored geometry/materials
       ↓
 GLB per district
       ↓
@@ -61,8 +61,8 @@ separate production deployment
 
 ## Stage sequence
 
-1. **Art contract and bake** — source/export rules, six GLBs, hashes/sizes.
-2. **Command Center integration** — first production-camera proof.
+1. **Pipeline proof and bake** — source/export rules, six procedurally generated GLBs, hashes/sizes. This proves export/integrity only.
+2. **Command Center authored-source gate + integration** — create/obtain an editable Command Center `.blend`, visually approve it against the concept, then integrate its exported GLB.
 3. **District rollout** — remaining five lazy zones.
 4. **Lighting/materials/post** — quality improvements after geometry stabilizes.
 5. **Performance/accessibility** — full device/runtime/fallback matrix.
@@ -84,6 +84,4 @@ Hobby District: rounded central stage with gaming, kettlebell, display/anime and
 
 ## Current gate
 
-The source pipeline exists, but the binary GLBs are not yet certified.
-
-Do not integrate or remove existing scenery until Stage 01 produces a measured six-asset candidate.
+Stage 01 is certified only as a procedural Blender/export pipeline proof. The six GLBs are valid runtime files but are not accepted as final visual assets. Do not replace existing scenery with them merely because they passed structural checks.
