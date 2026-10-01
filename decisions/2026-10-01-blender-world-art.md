@@ -1,4 +1,4 @@
-# Decision: Blender-authored scenery is the canonical 3D art pipeline
+# Decision: Blender is the canonical 3D asset toolchain; authored source is required for visual acceptance
 
 date: 2026-10-01
 status: accepted
@@ -14,7 +14,7 @@ The art upgrade must improve visual fidelity without invalidating the certified 
 
 ## Decision
 
-Blender 4.5 LTS is the canonical authoring tool for district scenery and static visual props.
+Blender 4.5 LTS is the canonical toolchain for district scenery and static visual props. Stage 01 used Blender headlessly on GitHub Actions to execute `tools/blender/generate_world.py` and export GLBs. That proves the Blender export pipeline, not interactive or hand-authored Blender art, and it did not connect to the user's local Blender installation.
 
 The browser runtime remains React + TypeScript + React Three Fiber / Three.js. Blender exports one GLB per district. GLBs are visual scenery only.
 
@@ -29,9 +29,9 @@ React remains authoritative for:
 - accessibility;
 - fallback behavior.
 
-Blender remains authoritative for:
+Blender asset source remains authoritative for:
 
-- authored geometry;
+- geometry generated or authored in Blender;
 - bevels and curved forms;
 - scene-local prop placement;
 - material intent;
@@ -48,7 +48,7 @@ The generated concept/reference art is art direction, not executable geometry an
 - Each district can be lazy-loaded and replaced independently.
 - A failed or missing GLB must not make Resume, Projects, Ask or Contact unreachable.
 - Art files and textures are subject to explicit transfer, decode and frame-time budgets.
-- Blender source must be reproducible through committed scripts or committed source files; opaque one-off binary editing is insufficient for a production dependency.
+- Procedural Blender output may prove the export/runtime pipeline, but visual acceptance requires editable Blender source (`.blend` or equivalent governed source) for the approved scene. Opaque GLB-only output is insufficient as the final art source.
 - Runtime lighting/post-processing changes remain separate from the geometry-authoring lane.
 - The existing certified primitive scenery remains the rollback/fallback reference until each GLB lane passes visual and performance certification.
 
@@ -57,7 +57,7 @@ The generated concept/reference art is art direction, not executable geometry an
 - Certified runtime baseline: `main` at `5f4de7ace37bfd843ef13f035a3b16ddb61f28d7`.
 - Existing primitive-heavy scenery is located in `src/world/CommandCenter.tsx` and `src/world/districts/*`.
 - Blender pipeline implementation is isolated in draft PR #21 on `feat/blender-world-art-pipeline`.
-- Asset generation is defined by `tools/blender/generate_world.py`.
+- Stage 01 procedural asset generation is defined by `tools/blender/generate_world.py`; this is baseline/proof geometry, not the approved final art source.
 - Runtime loading boundary is `src/world/art/BlenderDistrictArt.tsx`.
 
 ## Revisit when
