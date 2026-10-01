@@ -1,4 +1,4 @@
-# Blender Authoring Guide
+# Blender Generation and Authoring Guide
 
 ## Toolchain
 
@@ -8,7 +8,7 @@ Pinned authoring target:
 - initial automated bake: Blender 4.5.14;
 - glTF/GLB exporter shipped with that Blender release.
 
-The repository generator is:
+Stage 01 uses procedural headless Blender generation. It does not create hand-authored final art and it does not require a local Blender connection. The repository generator is:
 
 `tools/blender/generate_world.py`
 
@@ -29,6 +29,10 @@ blender -b --python tools/blender/generate_world.py
 ```
 
 A manual GitHub Actions bake exists at `.github/workflows/blender-assets.yml`. It is deliberately `workflow_dispatch` only so ordinary commits do not burn Actions minutes downloading Blender.
+
+## Authored-source requirement
+
+Before any zone is accepted as final scenery, keep an editable Blender source file for that zone (or a governed master `.blend`) and render review images from the same source that produces the production GLB. A GLB alone is a delivery artifact, not the editable art source.
 
 ## Authoring order
 
@@ -114,9 +118,9 @@ Do not create three LOD variants of an object that was only 200 triangles to beg
 
 ## Source-control policy
 
-Textual/procedural Blender generation belongs in Git.
+Textual/procedural Blender generation belongs in Git as pipeline/prototyping source. It is not automatically equivalent to approved authored art.
 
-If hand-authored `.blend` files are later required:
+For visually accepted authored zones, `.blend` source is required:
 
 - keep them in a clearly named source directory;
 - document Blender version;
