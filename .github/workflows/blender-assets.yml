@@ -1,0 +1,46 @@
+name: Blender world assets
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.22.0
+          cache: npm
+
+      - name: Install repository dependencies
+        run: npm ci
+
+      - name: Download pinned Blender 4.5.14
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://download.blender.org/release/Blender4.5"
+          curl -fsSLO "$base/blender-4.5.14-linux-x64.tar.xz"
+          curl -fsSLO "$base/blender-4.5.14.sha256"
+          grep "blender-4.5.14-linux-x64.tar.xz" blender-4.5.14.sha256 | sha256sum -c -
+          tar -xf blender-4.5.14-linux-x64.tar.xz
+
+      - name: Generate GLB scenery
+        run: ./blender-4.5.14-linux-x64/blender -b --python tools/blender/generate_world.py
+
+      - name: Verify asset budget
+        run: npm run art:verify
+
+      - name: Upload generated world art
+        uses: actions/upload-artifact@v4
+        with:
+          name: blender-world-art
+          path: public/world/art/*.glb
+          if-no-files-found: error
+          retention-days: 7
