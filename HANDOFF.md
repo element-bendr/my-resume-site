@@ -1,142 +1,115 @@
 # Current Handoff
 
 ## Goal
-Activate and execute Stage 07 certification/promotion from the formally certified Stage 06 root. Prove the exact certified application on Cloudflare preview infrastructure, retain full regression/protected-state evidence, and make it eligible for a separate explicit promotion to `main` and production only after Stage 07 certification.
+
+Upgrade the certified Portfolio World from primitive-heavy Three.js scenery to Blender-authored GLB scenery while preserving all certified runtime, content, accessibility and fallback contracts.
+
 ## Phase
-MAIN_PROMOTED_PRODUCTION_DEPLOY_PENDING
+
+BLENDER_ART_STAGE_01_ACTIVE
 
 ## Execution mode
-certification
+
+implementation
 
 ## Authority / location
-- repository: element-bendr/my-resume-site
-- canonical branch: main
-- promotion branch: promotion/portfolio-world-production
-- Stage 07 exact preview candidate: `27989cb13b989382df69ef2a376f6314f7b9fb6c`
-- workflow state: workflow/active/portfolio-world-rebuild; Stages 00–07 certified
-- template source: ICM 2.1.0 @ 90322a2441539f24eafdbd2c8a36bc6392192af4
+
+- repository: `element-bendr/my-resume-site`
+- canonical branch: `main`
+- protected baseline: `5f4de7ace37bfd843ef13f035a3b16ddb61f28d7`
+- implementation branch: `feat/blender-world-art-pipeline`
+- draft PR: #21
+- primary workflow: `workflow/active/portfolio-world-blender-art`
+- active stage: `01-art-contract-bake`
+- template: ICM 2.1.0 @ `90322a2441539f24eafdbd2c8a36bc6392192af4`
 
 ## Current state
-Stages 00–07 are formally certified. PR #15 promoted the certified application to `main` at `0c5131d5eb68dc566ea95422a2d80aef2126c373`. Production has not been deployed. The current ChatGPT environment cannot execute Wrangler against Cloudflare because no authenticated Cloudflare connector/deploy workflow is available and the isolated shell has no external network path. Runtime promotion to `main` is complete; production deployment and post-deploy smoke evidence remain outstanding.
+
+The certified React/R3F world is already on `main`. The visual upgrade is isolated from it.
+
+Implemented on the Blender branch:
+
+- deterministic Blender source generator for six zones;
+- typed R3F GLB loader boundary;
+- manual-only pinned Blender asset workflow;
+- GLB byte-budget gate;
+- accepted Blender/runtime authority decision;
+- Blender asset contract;
+- authoring guide;
+- visual/runtime certification checklist;
+- dedicated six-stage ICM workflow.
+
+The six production GLB binaries have **not** yet been generated or certified. Runtime scenery replacement has **not** begun. Therefore Stage 01 is still active and PR #21 remains draft.
+
+The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
 
 ## Canonical decisions
-- `main` remains untouched until certification and explicit promotion.
-- 3D is optional; conventional portfolio/resume navigation remains first-class.
-- Cloudflare Workers Static Assets is the initial delivery target.
-- A second Cloudflare account is not justified by the 25 MiB individual static-asset limit.
-- R2/D1/KV/Durable Objects stay out until evidence demonstrates a need.
-- World locomotion is guided third-person: WASD/click-to-move desktop, tap-to-move mobile, constrained navigation, context interactions, and map fast travel; no jumping/combat/falling in v1.
-- WebGL 2 is the v1 production renderer; WebGPU remains architecture-ready and is evaluated only after the Command Center vertical slice; WebAssembly is permitted selectively for mature performance/codec helpers, not as the application architecture.
-- Content authority is category-specific: current project evidence for technical facts, sanitized case studies for disclosure, current profile sources for positioning, structured profile content for employment history, and user approval for hobbies.
 
-## Validation evidence
-- Stage 00 certified candidate: 6b093fc74a3729018259beefd74bf16388ef98c4
-- Stage 01 certified candidate: 2eb0a1dbbed64555902aa38a44a2d46bcce920fa
-- Stage 02 application candidate: 62df9c82a1e4860de777803bfdc259b8ab65b3af
-- Stage 02 app CI run 36423770301: PASS
-- Stage 02 ICM candidate: 0f2ef77df68fdd28674b50bfe83c183770adf890
-- Stage 02 ICM run 36424566049: PASS
-- Stage 03 contract/activation: ACTIVE
-- Stage 03 application candidate: 30740ed443f6f20d0432d0d07d530ebdab2fe321
-- Stage 03 exact-head CI run 36444089676: PASS (6 test files / 21 tests, build, budgets, browser fallback, WebGL screenshot)
-- Stage 05 application candidate: `d36e5fb65d40a669e9d260e8356962f4413d922b`
-- Stage 05 exact-head run [36568411611](https://github.com/element-bendr/my-resume-site/actions/runs/36568411611): success; 11 files / 66 tests; build, guards, budgets, HTTP, Ask UI, terminal route, and fallback checks PASS
-- Stage 05 independent Terra review: PASS; protected Stage 00–04 state: PASS
-- Stage 05 formal ICM certification run [36569532413](https://github.com/element-bendr/my-resume-site/actions/runs/36569532413): PASS; certification state commit: `f756316c2826eede6bed2790cb81020f5f34db35`
-- Stage 00–05: certified; Stage 06: active; Stage 07: pending
-- Stage 06 contract/baseline commit: `c0507383025ca191264df1f31b42410624fb259b`
-- Stage 06 activation: completed using existing ICM tooling; active stage 06, Stage 07 pending
-- Stage 06 lane 1 PR #6: `stage06/performance-accessibility` @ `61900faf6e7510b8cd99db0e5d39a77d850c3b8e`; homepage overflow lane PASS
-- Stage 06 lane 2 PR #7: MERGED into `stage06/performance-accessibility` at `16ae381aa1bbf7f04da1873993dbf8378bc0be7d`; local runtime/browser certification PASS; Terra PASS; protected state intact
-- Stage 06 lane 3 PR #8: MERGED into `stage06/performance-accessibility` at `6067c3203186819d92dfacfbb4b028aa8655d834`; local validation PASS; Terra PASS; protected state intact
-- Stage 06 lane 4 PR #9: MERGED into `stage06/performance-accessibility` at `04dfec1a24de9a86cc5f73ec1e3e4f23418e2579`; local validation PASS; Terra PASS; protected state intact
-- Stage 06 final audit pickup: `stage06/final-acceptance-audit` @ `79ccc4f3210e2bdb71b3867484578ae7928da437`
-- Stage 06 final audit non-browser gates: PASS; ICM checks, offline verification, typecheck, 66/66 tests, build, budgets, Ask disclosure, and world Ask boundary guard
-- Stage 06 final audit browser matrix: PASS for 360/390/768/1024/1440 route overflow, conventional-route world isolation, initial `/play` district laziness, Ask overlay focus/Escape/movement resume, and route rendering
-- Stage 06 final audit blocker: SPA exits from `/play` via header Ask/Projects/Resume, world HUD Contact, and Ask Terminal Open Ask reach their destination but emit `NotFoundError: Failed to execute 'removeChild' on 'Node'`; instrumentation isolated the stale removal to a disconnected Drei `Html` world-label portal during full Canvas teardown
-- Stage 06 final Terra audit: **FAIL**; certification blocked; failed-audit evidence merged by PR #10 at `42f6820072cbc82abda32b10d1ad938eae191273`
-- Stage 06 lane 5 PR #11: BLOCKED diagnostic evidence merged into `stage06/performance-accessibility` at `e343608e1832d2a90cfb879256f5640c8a4dc13a`; no failed runtime repair promoted
-- Stage 06 lane 6 PR #12: MERGED into `stage06/performance-accessibility` at `7505336fb3ba81f6c3620615a3bf1880c1019ff2`; persistent portal-host repair PASS; Terra PASS; protected state intact
-- Stage 06 final re-audit: `stage06/final-acceptance-reaudit`; active evidence/certification lane, no speculative implementation
-- Stage 06 integrated re-audit at `e11912fe7f366208678b025ad5ae714f98be9df8`: local PASS; 66/66 tests; critical shell 89.6 KiB gzip; world total 335.3 KiB gzip
-- final browser matrix: 30 route/viewport combinations without overflow; all five `/play` SPA exits zero page/runtime errors and failed requests; reduced motion, focus, touch targets, fast travel, portal alignment, route isolation, lazy districts, and forced fallback PASS
-- protected-state diff: no dependency/lockfile, content, Ask, main, production, or deployment change
-- Stage 06 final Terra review: PASS, no findings or required fixes
-- formal ICM certification candidate `96a944dba45ea4fe36c9e580eedaa980d4c8d32e`: PASS; Stage 06 certified; Stage 07 blocked `awaiting_activation`
-- Stage 06 certification state commit: `d8decc56d120cb92aef1778999b7166d44ec2b74`
-- Stage 07 activation: PASS via `scripts/workflow_activate.py --workflow portfolio-world-rebuild --write` at `f5dcbdf7f9c6a9efb568b5650773d8306c0da6b3`; Stage 07 formal ICM certification: PASS via `scripts/workflow_certify.py --workflow portfolio-world-rebuild --stage 07-certification-promotion --write`, validated evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`; Stages 00–07 are certified
-- Stage 07 exact preview candidate `27989cb13b989382df69ef2a376f6314f7b9fb6c`; preview Worker `vijay-kumaran-portfolio-world-stage07-27989cb`, version `e581366f-81ec-4ee3-b0a7-9781fdb6bf19`; preview URL and evidence are recorded in `docs/portfolio-world/STAGE-07-VALIDATION.md`
-- Stage 07 local gates: PASS; 11 test files / 66 tests; critical conventional bundle 89.6 KiB gzip; total client JavaScript 335.3 KiB gzip; asset/world budgets, Ask disclosure, and world Ask boundary PASS
-- Stage 07 preview: 30 route/viewport cases at 360/390/768/1024/1440, grounded/unsupported Ask, five `/play` SPA exits, map/focus/fast-travel, reduced motion, forced no-WebGL fallback, portal alignment, route isolation, lazy districts, and network/runtime checks PASS
-- Stage 07 known warning: existing `THREE.Clock` deprecation warning on world loads; classified understood/non-blocking, with no application console errors
-- Stage 07 Terra final preview review: PASS, no required fixes; formal ICM certification: PASS against evidence candidate `9af0df349c721c29ff85c49ecc95cd7f0d63d49d`
-- Formal certification state: workflow `certified`, all Stages 00–07 certified; no active stage remains
-- `main` remains `63d25e7dbc3169cb41aaa181a513ca7af5860ba4`; production remains unchanged; no runtime, dependency, configuration, merge, or deployment change
-- Stage 06 lane 6 PR #12 local candidate: persistent host detects lazy `.world-canvas` mount, tracks size/viewport position, and preserves canvas clipping; labels only use the host
-- PR #12 browser: zero page errors/request failures for header Ask/Projects/Resume, HUD Contact, and Ask Terminal Open Ask; exact host/canvas bounds at 1440px and 390px, aligned at 1024px resize; 390px overflow 0
-- PR #12 world regression: Build Lab fast travel loads only BuildLab and shared DistrictStations; current-zone label hidden; Map focus restored; fallback links intact; initial `/play` has no district chunks; `/ask` loads no WorldEntry
-- PR #12 gates: typecheck/build PASS; tests 66/66; ICM checks/offline/assets PASS (critical 89.6 KiB gzip; world 335.3 KiB); Ask disclosure/world Ask guards PASS
-- PR #12 exact pushed validation/evidence head `a940cbf9a0859dd048401c749094768e42824d9c`: Terra PASS, no findings/fixes; ready for Stage 06 root integration
-- Stage 07 certification evidence report: `workflow/active/portfolio-world-rebuild/output/07-certification-promotion-completion-report.md`; preview and Terra evidence: `docs/portfolio-world/STAGE-07-VALIDATION.md`; promotion status remains NOT YET PROMOTED
-- Feedback-loop rule: GitHub is canonical contract/review state; local `.worktrees/stage06-performance` executes exact-head validation and bounded repairs; results are committed/pushed back to the current active lane PR before further Stage 06 work
-- Superseded workflow-order run [36568111222](https://github.com/element-bendr/my-resume-site/actions/runs/36568111222): failure because disclosure scan ran before build; corrected run 36568411611 passed
+- Blender 4.5 LTS is the canonical authored scenery pipeline for this upgrade.
+- GLBs are visual scenery only.
+- React remains authoritative for topology, movement, station positions, camera, routes, content, accessibility and fallback.
+- WebGL 2 remains the production renderer.
+- conventional HTML remains first-class and complete for essential portfolio access.
+- one GLB is produced per world zone.
+- production lights remain runtime-owned by default.
+- assets are integrated and certified incrementally, starting with Command Center.
+- no uncertified art reaches `main` or production.
 
-## Protected state
-- main / production baseline: UNCHANGED
-- secrets/credentials: UNCHANGED
-- current production deployment/domain: UNCHANGED
-- unrelated repositories: UNCHANGED
+## Documentation map
 
-## Stale / uncertain state
-- education is intentionally unresolved and excluded until verified;
-- LinkedIn URL is excluded until directly verified;
-- client testimonials/outcome claims require evidence before inclusion;
-- Stage 03 Command Center and Stage 04 six-zone world are certified. Stage 05 must preserve the certified controller, browser fallback, direct-route behavior, and shared world architecture.
+- architecture decision: `decisions/2026-10-01-blender-world-art.md`
+- high-level pipeline: `docs/portfolio-world/BLENDER-ART-PIPELINE.md`
+- hard asset interface: `docs/portfolio-world/BLENDER-ASSET-CONTRACT.md`
+- modeling/export workflow: `docs/portfolio-world/BLENDER-AUTHORING-GUIDE.md`
+- visual/runtime gates: `docs/portfolio-world/BLENDER-QA-CERTIFICATION.md`
+- global transfer budgets: `docs/portfolio-world/ASSET-BUDGET.md`
+- renderer policy: `docs/portfolio-world/RENDERING-TECHNOLOGY.md`
+
+## Validation
+
+No Stage 01 certification exists yet.
+
+Current proof is structural only:
+
+- source and contracts are committed on the isolated branch;
+- `main` has not been modified;
+- binary GLB output has not yet been produced;
+- the manual Blender workflow has not been run;
+- full repository/browser validation is intentionally deferred until an actual asset candidate exists.
+
+Do not describe the Blender world as complete, integrated, or production-ready yet.
+
+## Protected-state status
+
+Expected intact:
+
+- `main`;
+- production deployment/domain;
+- content and Ask contracts;
+- topology/movement/camera behavior;
+- interaction station data;
+- historical workflow evidence.
+
+## Blockers
+
+No architectural blocker.
+
+Immediate technical gate: normalize intended runtime X/Y/Z placement through Blender Z-up → glTF Y-up export, then produce the first real six-GLB bake and measure it.
 
 ## Next atomic action
-From an authenticated Cloudflare execution environment, check out exact promoted `main` commit `0c5131d5eb68dc566ea95422a2d80aef2126c373` (or a later docs-only main head that preserves the same runtime tree), use Node 22.22.x / npm 11.20.0, run `npm ci`, then run `npm run deploy`.
 
-Record the resulting production Worker name, version/deployment identifier, and production URL/domain. Then run post-deployment smoke checks for:
-- `/api/health`;
-- `/`, `/projects`, `/resume`, `/ask`, `/contact`, `/play`;
-- grounded and unsupported Ask behavior;
-- the five `/play` SPA exits;
-- map/focus and fast travel;
-- forced no-WebGL fallback;
-- console/page errors, failed requests, and unexpected HTTP errors.
-
-If production smoke is green, update `docs/portfolio-world/PROMOTION-RECORD.md` to PROMOTED with the exact main/deployment identifiers and smoke result. If deployment or smoke fails, preserve production state and record the exact blocker; do not claim promotion complete.
+1. finalize coordinate conversion in `tools/blender/generate_world.py`;
+2. bake all six GLBs with Blender 4.5.14;
+3. run `npm run art:verify`;
+4. record hashes/sizes and Stage 01 evidence;
+5. only then begin Command Center runtime integration.
 
 ## Minimum resume context
+
 1. `AGENTS.md`
 2. `CONTEXT.md`
 3. `HANDOFF.md`
-4. `workflow/active/portfolio-world-rebuild/06-performance-accessibility-CONTEXT.md`
-5. `docs/portfolio-world/STAGE-06-BASELINE.md`
-6. `docs/portfolio-world/ASK-CONTRACT.md`
-7. `decisions/2026-09-28-portfolio-world-architecture.md`
-8. PR #7 (`stage06/world-map-touch-targets`) exact-head diff and local validation evidence
-
-## Stage 05 setup / validation
-- remote integration head fetched: `fbbb08e84a9455655f3ac5fb92f496faa538f747`
-- latest local contract commit: `dbadd02f47d99687a3712374ffd07a7b2132ec45` (stable transport error codes; workflow check and strict status PASS)
-- local runtime: Node 22.22.0, npm 11.20.0; `npm ci` PASS
-- inherited baseline: bootstrap, workflow check/status, offline verification, typecheck, tests (7 files / 31 tests), build, conventional asset budget, and world asset budget all PASS
-- `49f81c37992700c2a74803efba5f5c81833a218f`: deterministic public-safe evidence registry, normalization, retrieval, and evidence-only answer composer; focused Ask tests, typecheck, and full test suite PASS (9 files / 42 tests)
-- retrieval uses certified technology phrases with maximal-phrase filtering, so a nested generic term cannot broaden exact project-tech matching
-- `5a32eb210da5a23a86c17cd22aac109906408d5a`: added explicit public-safe/fact invariants, verified source-reference shape, conservative unsupported-intent fail-closed gate, hobby-category scoping, and exact project status composition; focused Ask tests PASS (14), typecheck PASS, full suite PASS (9 files / 45 tests)
-- `974842d6b30be532465ae9f00b66d09167d46e2a`: source validator now enforces the existing visibility enum and hobby evidence requires exact `user-approved` provenance; malformed-value regression tests added. Focused Ask tests PASS (14), typecheck PASS, full suite PASS (9 files / 45 tests)
-- `3af9ddf8bac017c722152aee690e4d8d03584a93`: added bounded, non-logging `POST /api/ask` transport with stable error envelope/codes, 500-code-point and 4096-byte limits, strict JSON shape/content type, method handling, and no-store/security headers; health and unknown API routes preserved. Worker tests PASS (15), Ask tests PASS (29), typecheck PASS, full suite PASS (9 files / 58 tests), offline/workflow checks PASS, build and both asset budgets PASS. Local Vite/Worker HTTP smoke PASS for health, grounded, insufficient-evidence, malformed JSON, oversized body, wrong method, and unknown API route.
-- `b389a666d1ffc2eac0cf2423925628931b980e80`: built the accessible conventional Ask UI and typed client; shared API limits/error types live in `src/ask/types.ts`. The client validates the frozen response envelope, bounds normalized question length, and preserves aborts. `/ask` presents loading/error/insufficient states, grounded answers, matched evidence, and public source labels only. Focused client/Worker tests PASS (21); typecheck PASS; full suite PASS (10 files / 64 tests); workflow/bootstrap/offline checks, production build, and both asset budgets PASS. Browser matrix PASS for PCAS, Cloudflare Workers projects, HCL experience, Python, hobbies, metric, AWS certifications, prompt injection, oversized local input, and network-offline error. Browser-side strict comparison confirmed the visible PCAS answer equals `POST /api/ask` answer exactly. `/ask` has no horizontal overflow at 1440, 768, and 390 px. Shared mobile header containment was fixed with a two-rule media-query change; `/projects` and `/resume` remain 390 px wide without overflow. `/` retains an unrelated pre-existing 34 px hero-heading overflow at 390 px; left out of scope.
-- `98a6b07`: addressed Terra's Ask disclosure/accessibility findings. `/ask` now imports a browser-safe map containing only approved public source labels and uses a neutral label for other refs. The unused content `sourceIds` export was removed so the full source registry is tree-shaken from client JS. Added `npm run verify:ask-disclosure` to reject internal labels and `internal-reference` in built client bundles. Error alert has a stable ID conditionally included in the textarea description. Ask/Worker/content tests PASS (27), typecheck/build PASS, disclosure scan PASS (8 client bundles). Browser smoke at 390 px confirmed no horizontal overflow, matching `aria-describedby`/alert association, and neutral labeling for an internal-only hobby source.
-- `07b7253`: connected Ask Terminal to `/ask` with a dedicated accessible overlay action; added typed legal-area/essential-route assertions and `npm run verify:world-ask` boundary guard (22 world source files, no Ask API/client coupling). Focused world/routes/WebGL tests PASS (14); typecheck, bootstrap/workflow/strict status, offline checks, full suite (11 files / 66 tests), build, conventional/world asset budgets, and Ask disclosure scan PASS. Browser: desktop station activation, Escape close/resumed movement/reopen, Open Ask navigation, direct `/ask`, and exact equality between visible PCAS answer and raw API response PASS; at 390×844 dialog/action remained visible. Forced WebGL context failure preserved the conventional fallback with Ask route. Browser artifacts are in `/tmp/.playwright-cli/`.
-- blockers: none; no deploy or push performed
-- protected state: `main`, production, and certified Stage 00–04 stage records unchanged
-
-
-## Stage 04 evidence
-- application candidate: f404ce032000e3d7c86f5e29748a9e1b634df3a1
-- GitHub Actions run: 36521705441
-- tests: 7 files / 31 tests PASS
-- total client JS: 333.3 KiB gzip
-- browser proof: Command Center + five districts + non-WebGL fallback PASS
+4. `workflow/active/portfolio-world-blender-art/CONTEXT.md`
+5. `workflow/active/portfolio-world-blender-art/01-art-contract-bake-CONTEXT.md`
+6. `decisions/2026-10-01-blender-world-art.md`
+7. `docs/portfolio-world/BLENDER-ASSET-CONTRACT.md`
