@@ -2,6 +2,13 @@ name: Blender world assets
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - "feat/blender-world-art-pipeline"
+    paths:
+      - "tools/blender/**"
+      - "scripts/check-blender-assets.mjs"
+      - ".github/workflows/blender-assets.yml"
   pull_request:
     paths:
       - "tools/blender/**"
