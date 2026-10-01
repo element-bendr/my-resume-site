@@ -39,7 +39,7 @@ Implemented on the Blender branch:
 - visual/runtime certification checklist;
 - dedicated six-stage ICM workflow.
 
-The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Exact-head GitHub bake/CI run `36816140894` passed against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Runtime scenery replacement has **not** begun. Stage 01 remains active pending formal certification; Stage 02 remains inactive.
+The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Exact-head GitHub bake/CI run `36816140894` passed against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Stage 01 is formally certified by state commit `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`; Stage 02 is blocked awaiting activation. Runtime scenery replacement has **not** begun.
 
 The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
 
@@ -61,8 +61,8 @@ The prior certified `main` production deployment/smoke record remains pending. T
 
 ## Stale / uncertain state
 
-- Stage 01 is not formally certified yet.
-- Stage 02 remains pending and inactive.
+- Stage 01 certification state is recorded at `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
+- Stage 02 is blocked with `awaiting_activation` and remains inactive.
 - Browser/runtime visual acceptance is deferred until the Stage 01 artifact is independently reviewed and certified.
 
 ## Canonical decisions
@@ -122,12 +122,12 @@ Expected intact:
 
 No architectural blocker.
 
-Immediate technical gate: run formal Stage 01 ICM certification against exact-head candidate `549d35838ddc4d048af83102001a9be00d3e66f1` before any runtime scenery integration.
+Immediate technical gate: freeze and activate Stage 02 separately through the existing ICM tooling; no runtime scenery integration occurs before that activation.
 
 ## Next atomic action
 
-1. run formal Stage 01 ICM certification against exact-head candidate `549d35838ddc4d048af83102001a9be00d3e66f1`;
-2. record certification state and keep Stage 02 inactive until separately activated;
+1. freeze the Stage 02 contract;
+2. activate Stage 02 through the existing ICM tooling;
 3. only then activate Stage 02 Command Center runtime integration.
 
 ## Minimum resume context
