@@ -2,7 +2,7 @@
 
 ## Goal
 
-Upgrade the certified Portfolio World from primitive-heavy Three.js scenery to Blender-authored GLB scenery while preserving all certified runtime, content, accessibility and fallback contracts.
+Upgrade the certified Portfolio World from primitive-heavy Three.js scenery to genuinely authored Blender scenery exported as GLB while preserving all certified runtime, content, accessibility and fallback contracts.
 
 ## Phase
 
@@ -67,7 +67,7 @@ The prior certified `main` production deployment/smoke record remains pending. T
 
 ## Canonical decisions
 
-- Blender 4.5 LTS is the canonical authored scenery pipeline for this upgrade.
+- Blender 4.5 LTS is the canonical 3D asset/export toolchain. Stage 01 used headless Blender on GitHub Actions with a Python generator; it did not connect to the user's local Blender installation and does not count as final authored art.
 - GLBs are visual scenery only.
 - React remains authoritative for topology, movement, station positions, camera, routes, content, accessibility and fallback.
 - WebGL 2 remains the production renderer.
@@ -122,7 +122,7 @@ Expected intact:
 
 No architectural blocker.
 
-Immediate technical gate: freeze and activate Stage 02 separately through the existing ICM tooling; no runtime scenery integration occurs before that activation.
+Immediate technical gate: Stage 02 must first produce or receive an editable authored Command Center `.blend` and pass visual review. The Stage 01 procedural GLB is pipeline evidence only and must not be integrated as the final visual asset.
 
 ## Next atomic action
 
