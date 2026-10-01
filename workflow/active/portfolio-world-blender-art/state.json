@@ -49,7 +49,9 @@
         "public/world/art/client-street.glb",
         "public/world/art/timeline.glb",
         "public/world/art/hobby-district.glb",
-        "docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md"
+        "docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md",
+        "src/world/art/blender-art-config.ts",
+        "tests/blender-art-contract.test.ts"
       ],
       "completion_report": "workflow/active/portfolio-world-blender-art/output/01-art-contract-bake-completion-report.md"
     },
