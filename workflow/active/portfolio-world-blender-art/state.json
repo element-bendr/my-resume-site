@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "workflow_id": "portfolio-world-blender-art",
+  "title": "Portfolio World Blender Art Upgrade",
+  "status": "active",
+  "active_stage": "01-art-contract-bake",
+  "provenance": {
+    "started_from_commit": "5f4de7ace37bfd843ef13f035a3b16ddb61f28d7",
+    "validated_commit": null
+  },
+  "execution": {
+    "mode": "implementation",
+    "branch": "feat/blender-world-art-pipeline",
+    "worktree": ".",
+    "owner": "ChatGPT coordinator",
+    "write_paths": [
+      "tools/blender/**",
+      "public/world/art/**",
+      "src/world/**",
+      "scripts/check-blender-assets.mjs",
+      "docs/portfolio-world/**",
+      "decisions/**",
+      "workflow/**",
+      "HANDOFF.md",
+      "CONTEXT.md",
+      "package.json",
+      ".github/workflows/blender-assets.yml"
+    ]
+  },
+  "stages": [
+    {
+      "id": "01-art-contract-bake",
+      "status": "active",
+      "context": "workflow/active/portfolio-world-blender-art/01-art-contract-bake-CONTEXT.md",
+      "depends_on_stages": [],
+      "depends_on": [],
+      "outputs": [
+        "tools/blender/generate_world.py",
+        "tools/blender/README.md",
+        "src/world/art/BlenderDistrictArt.tsx",
+        "scripts/check-blender-assets.mjs",
+        "docs/portfolio-world/BLENDER-ART-PIPELINE.md",
+        "docs/portfolio-world/BLENDER-ASSET-CONTRACT.md",
+        "docs/portfolio-world/BLENDER-AUTHORING-GUIDE.md",
+        "decisions/2026-10-01-blender-world-art.md",
+        "public/world/art/command-center.glb",
+        "public/world/art/build-lab.glb",
+        "public/world/art/automation-lab.glb",
+        "public/world/art/client-street.glb",
+        "public/world/art/timeline.glb",
+        "public/world/art/hobby-district.glb"
+      ],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/01-art-contract-bake-completion-report.md"
+    },
+    {
+      "id": "02-command-center-integration",
+      "status": "pending",
+      "context": "workflow/active/portfolio-world-blender-art/02-command-center-integration-CONTEXT.md",
+      "depends_on_stages": [
+        "01-art-contract-bake"
+      ],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/02-command-center-integration-completion-report.md"
+    },
+    {
+      "id": "03-district-rollout",
+      "status": "pending",
+      "context": "workflow/active/portfolio-world-blender-art/03-district-rollout-CONTEXT.md",
+      "depends_on_stages": [
+        "02-command-center-integration"
+      ],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/03-district-rollout-completion-report.md"
+    },
+    {
+      "id": "04-lighting-materials-post",
+      "status": "pending",
+      "context": "workflow/active/portfolio-world-blender-art/04-lighting-materials-post-CONTEXT.md",
+      "depends_on_stages": [
+        "03-district-rollout"
+      ],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/04-lighting-materials-post-completion-report.md"
+    },
+    {
+      "id": "05-performance-accessibility",
+      "status": "pending",
+      "context": "workflow/active/portfolio-world-blender-art/05-performance-accessibility-CONTEXT.md",
+      "depends_on_stages": [
+        "04-lighting-materials-post"
+      ],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/05-performance-accessibility-completion-report.md"
+    },
+    {
+      "id": "06-certification-promotion",
+      "status": "pending",
+      "context": "workflow/active/portfolio-world-blender-art/06-certification-promotion-CONTEXT.md",
+      "depends_on_stages": [
+        "05-performance-accessibility"
+      ],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/06-certification-promotion-completion-report.md"
+    }
+  ]
+}
