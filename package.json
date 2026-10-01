@@ -13,6 +13,8 @@
     "test": "vitest run",
     "build": "tsc -b --pretty false && vite build",
     "preview": "vite preview",
+    "art:blender": "blender -b --python tools/blender/generate_world.py",
+    "art:verify": "node scripts/check-blender-assets.mjs",
     "verify:content": "node scripts/check-content.mjs",
     "verify:assets": "node scripts/check-asset-budget.mjs",
     "verify": "npm run verify:offline && npm test && npm run build && npm run verify:assets && npm run verify:world-assets",
