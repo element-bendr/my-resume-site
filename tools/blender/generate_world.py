@@ -276,6 +276,7 @@ def export_zone(zone: str) -> None:
         export_cameras=False,
         export_lights=False,
         export_extras=False,
+        export_animations=False,
     )
     print(f"[portfolio-art] exported {zone}: {path}")
 
