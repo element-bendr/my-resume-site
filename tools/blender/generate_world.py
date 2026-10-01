@@ -70,8 +70,18 @@ def finish(obj, material=None, bevel=0.0, smooth=False):
     return obj
 
 
+def world_to_blender(location):
+    """Convert runtime-authored (world X, world Z, world Y) into Blender (X, Y, Z).
+
+    Blender is Z-up while glTF is Y-up. Using this convention keeps intended
+    runtime depth stable after Blender's glTF coordinate conversion.
+    """
+    world_x, world_z, world_y = location
+    return (world_x, -world_z, world_y)
+
+
 def box(name, location, scale, material, bevel=0.08):
-    bpy.ops.mesh.primitive_cube_add(location=location)
+    bpy.ops.mesh.primitive_cube_add(location=world_to_blender(location))
     obj = bpy.context.object
     obj.name = name
     obj.scale = (scale[0] / 2, scale[1] / 2, scale[2] / 2)
@@ -80,7 +90,12 @@ def box(name, location, scale, material, bevel=0.08):
 
 
 def cyl(name, location, radius, depth, material, vertices=48, bevel=0.05):
-    bpy.ops.mesh.primitive_cylinder_add(vertices=vertices, radius=radius, depth=depth, location=location)
+    bpy.ops.mesh.primitive_cylinder_add(
+        vertices=vertices,
+        radius=radius,
+        depth=depth,
+        location=world_to_blender(location),
+    )
     obj = bpy.context.object
     obj.name = name
     return finish(obj, material, bevel, smooth=True)
@@ -92,7 +107,7 @@ def torus(name, location, major, minor, material, rotation=(0, 0, 0)):
         minor_radius=minor,
         major_segments=64,
         minor_segments=12,
-        location=location,
+        location=world_to_blender(location),
         rotation=rotation,
     )
     obj = bpy.context.object
@@ -101,7 +116,11 @@ def torus(name, location, major, minor, material, rotation=(0, 0, 0)):
 
 
 def sphere(name, location, radius, material):
-    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=2, radius=radius, location=location)
+    bpy.ops.mesh.primitive_ico_sphere_add(
+        subdivisions=2,
+        radius=radius,
+        location=world_to_blender(location),
+    )
     obj = bpy.context.object
     obj.name = name
     return finish(obj, material, 0.0, smooth=True)
