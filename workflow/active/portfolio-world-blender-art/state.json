@@ -2,11 +2,11 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-blender-art",
   "title": "Portfolio World Blender Art Upgrade",
-  "status": "active",
-  "active_stage": "01-art-contract-bake",
+  "status": "blocked",
+  "active_stage": "02-command-center-integration",
   "provenance": {
     "started_from_commit": "5f4de7ace37bfd843ef13f035a3b16ddb61f28d7",
-    "validated_commit": null
+    "validated_commit": "532b1047d6a2c8dc43b30f085462db759454cadc"
   },
   "execution": {
     "mode": "implementation",
@@ -30,7 +30,7 @@
   "stages": [
     {
       "id": "01-art-contract-bake",
-      "status": "active",
+      "status": "certified",
       "context": "workflow/active/portfolio-world-blender-art/01-art-contract-bake-CONTEXT.md",
       "depends_on_stages": [],
       "depends_on": [],
@@ -57,14 +57,15 @@
     },
     {
       "id": "02-command-center-integration",
-      "status": "pending",
+      "status": "blocked",
       "context": "workflow/active/portfolio-world-blender-art/02-command-center-integration-CONTEXT.md",
       "depends_on_stages": [
         "01-art-contract-bake"
       ],
       "depends_on": [],
       "outputs": [],
-      "completion_report": "workflow/active/portfolio-world-blender-art/output/02-command-center-integration-completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/02-command-center-integration-completion-report.md",
+      "block_reason": "awaiting_activation"
     },
     {
       "id": "03-district-rollout",
