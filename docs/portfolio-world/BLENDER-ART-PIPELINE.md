@@ -1,27 +1,35 @@
 # Blender art-direction upgrade
 
-Status: **IMPLEMENTATION STARTED — asset-authoring lane**
+Status: **STAGE 01 ACTIVE — baseline asset bake not yet certified**
 
 ## Goal
 
-Replace the current primitive-heavy visual scenery with Blender-authored GLB assets while preserving
-the certified world controls and application behavior.
+Replace the current primitive-heavy visual scenery with Blender-authored GLB assets while preserving the certified world controls and application behavior.
 
-The generated concept image remains the art-direction target. The existing Three.js world remains the
-interaction/collision contract.
+The generated concept image remains the art-direction target. The existing React world remains the interaction, content and fallback authority.
+
+## Documentation map
+
+- decision: `decisions/2026-10-01-blender-world-art.md`
+- asset interface: `BLENDER-ASSET-CONTRACT.md`
+- modeling/export workflow: `BLENDER-AUTHORING-GUIDE.md`
+- QA/certification: `BLENDER-QA-CERTIFICATION.md`
+- transfer budgets: `ASSET-BUDGET.md`
+- renderer policy: `RENDERING-TECHNOLOGY.md`
+- active workflow: `workflow/active/portfolio-world-blender-art/`
 
 ## Non-negotiable preserved behavior
 
-- world bounds, bridges and zone topology
-- keyboard/click movement and fast travel
-- camera rig
-- interaction station coordinates and content
-- lazy district loading
-- route isolation
-- Ask Terminal behavior
-- accessibility/focus contracts
-- no-WebGL fallback
-- Cloudflare deployment model
+- world bounds, bridges and zone topology;
+- keyboard/click/tap movement and fast travel;
+- camera rig;
+- interaction station coordinates and content;
+- lazy district loading;
+- route isolation;
+- Ask Terminal behavior;
+- accessibility/focus contracts;
+- no-WebGL fallback;
+- Cloudflare deployment model.
 
 ## Pipeline
 
@@ -30,32 +38,41 @@ concept/reference
       ↓
 Blender 4.5 LTS
       ↓
-authored geometry + PBR materials
+authored geometry + PBR material intent
       ↓
 GLB per district
       ↓
-asset budget gate
+asset budget / integrity gate
       ↓
-R3F BlenderDistrictArt
+R3F BlenderDistrictArt boundary
       ↓
-district-by-district visual replacement
+Command Center vertical slice
       ↓
-visual + performance certification
+district-by-district replacement
+      ↓
+lighting / textures / post-processing
+      ↓
+visual + performance + accessibility certification
+      ↓
+reviewed merge
+      ↓
+separate production deployment
 ```
 
-## Initial asset budget
+## Stage sequence
 
-- six GLBs
-- <= 900 KiB per district for the untextured first pass
-- <= 4 MiB total GLB payload
-- no textures in pass 1
-- later textures must use KTX2/Basis and explicit mobile LODs
+1. **Art contract and bake** — source/export rules, six GLBs, hashes/sizes.
+2. **Command Center integration** — first production-camera proof.
+3. **District rollout** — remaining five lazy zones.
+4. **Lighting/materials/post** — quality improvements after geometry stabilizes.
+5. **Performance/accessibility** — full device/runtime/fallback matrix.
+6. **Certification/promotion** — exact-candidate review and controlled merge.
 
 ## First-pass visual language
 
 Command Center: circular layered dais, holographic rings, radial consoles, illuminated pylons.
 
-Build Lab: beveled archive wall, review chamber, framed display bays, purple-violet emissive trim.
+Build Lab: beveled archive wall, review chamber, framed display bays, violet emissive trim.
 
 Automation Lab: agent pods, linked data rails, runtime wall and green-cyan emissive nodes.
 
@@ -63,16 +80,10 @@ Client Street: architectural storefront shells, glazing, awnings, lit signs, bol
 
 Timeline Corridor: continuous luminous rail, milestone pillars, plaques and crown rings.
 
-Hobby District: rounded central stage with gaming, kettlebell, anime/display and philosophy props.
+Hobby District: rounded central stage with gaming, kettlebell, display/anime and philosophy props.
 
-## Promotion sequence
+## Current gate
 
-1. Generate and budget-check the six GLBs.
-2. Add scenery to the Command Center only.
-3. Browser QA desktop/mobile and verify no control/collision regression.
-4. Replace decorative primitive scenery district by district.
-5. Add lighting/post-processing only after the authored geometry is stable.
-6. Add texture baking/compression and LODs.
-7. Run the repository's full verification and visual QA before merge.
+The source pipeline exists, but the binary GLBs are not yet certified.
 
-Main stays untouched until that chain is green.
+Do not integrate or remove existing scenery until Stage 01 produces a measured six-asset candidate.
