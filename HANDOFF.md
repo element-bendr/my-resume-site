@@ -72,9 +72,13 @@ No Stage 01 certification exists yet.
 Current proof is structural only:
 
 - source and contracts are committed on the isolated branch;
+- all managed stage contracts pass required-section/placeholder checks;
+- pure config tests lock GLB names and art anchors to the certified six-zone topology;
+- protected runtime/content/deployment files are absent from the branch diff;
+- the GLB verifier now validates binary GLB structure, budgets and SHA-256;
 - `main` has not been modified;
 - binary GLB output has not yet been produced;
-- the manual Blender workflow has not been run;
+- no real Blender bake has run yet;
 - full repository/browser validation is intentionally deferred until an actual asset candidate exists.
 
 Do not describe the Blender world as complete, integrated, or production-ready yet.
