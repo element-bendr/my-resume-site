@@ -43,6 +43,25 @@ runtime (X, Y, Z)
 
 This correction must be included in the first bake candidate.
 
+
+## Exporter API verification
+
+Blender 4.5 LTS documentation confirms the production exporter capabilities used by the generator:
+
+- glTF 2.0 / GLB output;
+- Selected Objects export;
+- Y Up conversion;
+- Apply Modifiers;
+- Metal/Rough Principled-BSDF material export;
+- cameras and punctual lights can be excluded.
+
+Reference:
+
+- <https://docs.blender.org/manual/en/4.5/addons/import_export/scene_gltf2.html>
+- <https://docs.blender.org/api/main/bpy.ops.export_scene.html>
+
+The generator also explicitly disables animation export because these district assets are static scenery.
+
 ## Required asset outputs
 
 Not yet produced:
