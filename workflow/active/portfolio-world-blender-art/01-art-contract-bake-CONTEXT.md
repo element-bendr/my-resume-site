@@ -65,9 +65,15 @@ Produce a reproducible, bounded six-zone Blender asset set and freeze the source
 
 ## Verify
 
-- `${x}`
-- `${x}`
-- `${x}`
+- `npm run art:verify`
+- `npm run typecheck`
+- `npm test`
+- `npm run verify:offline`
+- `npm run build`
+- `npm run verify:assets`
+- `npm run verify:world-assets`
+- `npm run verify:ask-disclosure`
+- `npm run verify:world-ask`
 
 ## Protected State
 

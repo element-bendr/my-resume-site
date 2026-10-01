@@ -12,6 +12,7 @@ handoff_updated: YES
 - execution mode: implementation
 - branch: `feat/blender-world-art-pipeline`
 - base: `982f3c4f797638cfdb4db1e467b7ae3f25172608`
+- exact artifact/evidence candidate under review: `94f0ec5976778d8abf80bad35aa7a743526cf1d7`
 
 ## Provenance
 

@@ -13,7 +13,8 @@ PR: #21
 - Blender artifact: `/tmp/pr21-blender-artifact`
 - Blender version: 4.5.14 LTS
 - artifact SHA/size verification: PASS against `public/world/art/SHA256SUMS.txt`
-- exact candidate commit: pending this evidence commit; runtime integration remains disabled
+- exact artifact/evidence candidate under review: `94f0ec5976778d8abf80bad35aa7a743526cf1d7`
+- runtime integration remains disabled
 
 ## Objective
 
