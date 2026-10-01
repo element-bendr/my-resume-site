@@ -3,9 +3,17 @@
 date: 2026-10-01  
 workflow: `portfolio-world-blender-art`  
 stage: `01-art-contract-bake`  
-status: **BLOCKED_PENDING_REAL_BLENDER_BAKE**  
-branch: `feat/blender-world-art-pipeline`  
+status: **BAKE_VALIDATED_PENDING_STAGE_CERTIFICATION**
+branch: `feat/blender-world-art-pipeline`
 PR: #21
+
+## Exact bake evidence
+
+- GitHub bake run: `36815004861`
+- Blender artifact: `/tmp/pr21-blender-artifact`
+- Blender version: 4.5.14 LTS
+- artifact SHA/size verification: PASS against `public/world/art/SHA256SUMS.txt`
+- exact candidate commit: pending this evidence commit; runtime integration remains disabled
 
 ## Objective
 
@@ -64,14 +72,19 @@ The generator also explicitly disables animation export because these district a
 
 ## Required asset outputs
 
-Not yet produced:
+All six outputs are present under `public/world/art/` and match the independent
+artifact hashes:
 
-- `public/world/art/command-center.glb`
-- `public/world/art/build-lab.glb`
-- `public/world/art/automation-lab.glb`
-- `public/world/art/client-street.glb`
-- `public/world/art/timeline.glb`
-- `public/world/art/hobby-district.glb`
+| Asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `command-center.glb` | 432,336 | `31d750fc9bf8da5fb6cb28d3fc47b651ac874565731bec5a813086c842e1065a` |
+| `build-lab.glb` | 311,848 | `c04531432535e6b9a480a9a02a2540fdec03a183e774d14f1793a7f9791ae879` |
+| `automation-lab.glb` | 400,088 | `784285daac1b576fd1eec2955bc08c9bf24f3d513de234832580d6ace1577d2e` |
+| `client-street.glb` | 305,952 | `970010d41b53fbd41e9549da44cb589ea9c374d6327785bfce69d270b643c778` |
+| `timeline.glb` | 259,308 | `84cc312d02042292e24bf65e27b3728ee80dd2409a4cac6e1270ad4d41de36b5` |
+| `hobby-district.glb` | 231,812 | `8b2139dc7f8e7a777fd3c22181d68b30bd401fdd5ae3b130ef361d0cd7b8dd01` |
+
+Total GLB payload: 1,941,344 bytes (1,895.8 KiB).
 
 
 ## Repository structural audit
@@ -102,25 +115,18 @@ Source-contract hardening:
 
 ## Required Stage 01 evidence
 
-Pending:
+- Blender 4.5.14 LTS artifact bake: PASS, run `36815004861`;
+- six expected files and SHA-256/size checks: PASS;
+- `npm run art:verify`: PASS, six files, 1,895.8 KiB total;
+- GLB parse proof: PASS; all six files are GLB version 2 with valid JSON chunks
+  and parsed node/mesh/material tables;
+- runtime integration remains intentionally disabled pending Stage 02.
 
-- Blender version output;
-- successful generator exit;
-- six expected files;
-- per-file bytes;
-- total bytes;
-- SHA-256 for every GLB;
-- `npm run art:verify` PASS;
-- basic loader/parse proof;
-- exact candidate commit.
+## Current execution status
 
-## Current execution blocker
-
-The current isolated shell cannot resolve external hosts, so Blender cannot be downloaded/executed locally.
-
-The repository-side workflow exists, but connector-authored commits do not self-dispatch GitHub Actions. No successful bake run exists yet.
-
-This is an execution-environment blocker only. It is **not** evidence that the generator or assets pass.
+The pinned remote bake artifact has been independently hash-checked and copied
+without modification. Local structural verification and GLB parse proof pass.
+No runtime scenery replacement has been enabled.
 
 ## Promotion state
 
@@ -136,4 +142,6 @@ Do not:
 
 ## Next gate
 
-Run the pinned Blender 4.5.14 bake from an execution environment that can execute Blender, then record the required hashes/sizes/verification result here.
+Complete the Stage 01 evidence commit and independent review. Do not activate
+Stage 02 or integrate the GLBs into runtime scenery until Stage 01 is formally
+certified.

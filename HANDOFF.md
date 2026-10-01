@@ -39,9 +39,30 @@ Implemented on the Blender branch:
 - visual/runtime certification checklist;
 - dedicated six-stage ICM workflow.
 
-The six production GLB binaries have **not** yet been generated or certified. Runtime scenery replacement has **not** begun. Therefore Stage 01 is still active and PR #21 remains draft.
+The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Runtime scenery replacement has **not** begun. Stage 01 remains active pending independent review and formal certification; PR #21 is not yet ready to merge.
 
 The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
+
+## Validation evidence
+
+- GitHub bake run `36815004861`: Blender 4.5.14 LTS artifact PASS.
+- Six GLB SHA-256/size checks and `npm run art:verify`: PASS.
+- Basic GLB version/JSON/node/mesh/material parse proof: PASS.
+- Full inherited repository gates are rerunning for the exact evidence candidate.
+- Detailed sizes, hashes, and stage evidence: `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`.
+
+## Protected state
+
+- `main`: unchanged.
+- production/deployment: unchanged.
+- runtime scenery integration: not started.
+- movement, topology, camera, routes, Ask, content, dependencies: unchanged.
+
+## Stale / uncertain state
+
+- Stage 01 is not formally certified yet.
+- Stage 02 remains pending and inactive.
+- Browser/runtime visual acceptance is deferred until the Stage 01 artifact is independently reviewed and certified.
 
 ## Canonical decisions
 
@@ -77,9 +98,10 @@ Current proof is structural only:
 - protected runtime/content/deployment files are absent from the branch diff;
 - the GLB verifier now validates binary GLB structure, budgets and SHA-256;
 - `main` has not been modified;
-- binary GLB output has not yet been produced;
-- no real Blender bake has run yet;
-- full repository/browser validation is intentionally deferred until an actual asset candidate exists.
+- six binary GLB outputs are present under `public/world/art/`;
+- bake artifact and SHA-256 verification pass;
+- basic GLB loader/parse proof passes;
+- runtime/browser scenery validation is intentionally deferred until Stage 02.
 
 Do not describe the Blender world as complete, integrated, or production-ready yet.
 
@@ -98,15 +120,13 @@ Expected intact:
 
 No architectural blocker.
 
-Immediate technical gate: normalize intended runtime X/Y/Z placement through Blender Z-up → glTF Y-up export, then produce the first real six-GLB bake and measure it.
+Immediate technical gate: obtain Terra review of the exact six-GLB artifact/evidence candidate, then formally certify Stage 01 before any runtime scenery integration.
 
 ## Next atomic action
 
-1. finalize coordinate conversion in `tools/blender/generate_world.py`;
-2. bake all six GLBs with Blender 4.5.14;
-3. run `npm run art:verify`;
-4. record hashes/sizes and Stage 01 evidence;
-5. only then begin Command Center runtime integration.
+1. run the inherited repository validation gates for this artifact/evidence commit;
+2. obtain independent Terra review and formal Stage 01 certification;
+3. only then activate Stage 02 Command Center runtime integration.
 
 ## Minimum resume context
 

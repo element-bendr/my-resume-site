@@ -86,8 +86,10 @@ const collectMedia = (dir) => {
   }
 };
 collectMedia(publicRoot);
-if (media.length) {
-  failures.push(`Stage 03 must use procedural geometry only; found: ${media.map((x) => path.relative(root, x)).join(", ")}`);
+const stagedBlenderArtRoot = path.join(publicRoot, "world", "art") + path.sep;
+const runtimeMedia = media.filter((file) => !file.startsWith(stagedBlenderArtRoot));
+if (runtimeMedia.length) {
+  failures.push(`Stage 03 runtime must use procedural geometry only; found: ${runtimeMedia.map((x) => path.relative(root, x)).join(", ")}`);
 }
 
 if (failures.length) {
@@ -99,4 +101,5 @@ console.log("WORLD BOUNDARY: PASS");
 console.log(`source_files_checked=${files.length}`);
 console.log("direct_physics_dependencies=0");
 console.log("webgpu_imports=0");
-console.log("external_3d_assets=0");
+console.log(`staged_blender_art_assets=${media.length - runtimeMedia.length}`);
+console.log(`external_3d_assets=${runtimeMedia.length}`);
