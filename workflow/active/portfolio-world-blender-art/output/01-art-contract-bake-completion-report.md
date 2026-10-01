@@ -14,6 +14,14 @@ handoff_updated: YES
 - base: `982f3c4f797638cfdb4db1e467b7ae3f25172608`
 - exact artifact/evidence candidate under review: `94f0ec5976778d8abf80bad35aa7a743526cf1d7`
 
+## Independent review
+
+- reviewer: Terra
+- verdict: PASS
+- reviewed documentation head: `f27c70b6e45e0770e12789fde523f023ffdd8d85`
+- critical findings: none
+- required fixes: none
+
 ## Provenance
 
 - Blender bake workflow run: `36815004861`
@@ -66,6 +74,6 @@ Total: 1,941,344 bytes / 1,895.8 KiB.
 
 ## Next action
 
-Obtain independent Terra review of this Stage 01 artifact/evidence checkpoint.
-Do not integrate the GLBs into runtime scenery or activate Stage 02 before formal
-Stage 01 certification.
+Push PR #21 at the reviewed exact head, confirm GitHub bake/CI against that head,
+then run formal Stage 01 ICM certification. Do not integrate the GLBs into runtime
+scenery or activate Stage 02 before formal Stage 01 certification.

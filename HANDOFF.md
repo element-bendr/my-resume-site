@@ -39,7 +39,7 @@ Implemented on the Blender branch:
 - visual/runtime certification checklist;
 - dedicated six-stage ICM workflow.
 
-The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Runtime scenery replacement has **not** begun. Stage 01 remains active pending independent review and formal certification; PR #21 is not yet ready to merge.
+The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Runtime scenery replacement has **not** begun. Stage 01 remains active pending remote bake/CI confirmation and formal certification; PR #21 is not yet ready to merge.
 
 The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
 
@@ -101,6 +101,7 @@ Current proof is structural only:
 - six binary GLB outputs are present under `public/world/art/`;
 - bake artifact and SHA-256 verification pass;
 - basic GLB loader/parse proof passes;
+- Terra independent Stage 01 review: PASS; no required fixes;
 - runtime/browser scenery validation is intentionally deferred until Stage 02.
 
 Do not describe the Blender world as complete, integrated, or production-ready yet.
@@ -120,12 +121,12 @@ Expected intact:
 
 No architectural blocker.
 
-Immediate technical gate: obtain Terra review of the exact six-GLB artifact/evidence candidate, then formally certify Stage 01 before any runtime scenery integration.
+Immediate technical gate: push PR #21 at reviewed head `f27c70b6e45e0770e12789fde523f023ffdd8d85`, confirm GitHub bake/CI against that exact head, then formally certify Stage 01 before any runtime scenery integration.
 
 ## Next atomic action
 
-1. run the inherited repository validation gates for this artifact/evidence commit;
-2. obtain independent Terra review and formal Stage 01 certification;
+1. push PR #21 exact head `f27c70b6e45e0770e12789fde523f023ffdd8d85`;
+2. confirm GitHub bake/CI against that exact head and formally certify Stage 01;
 3. only then activate Stage 02 Command Center runtime integration.
 
 ## Minimum resume context
