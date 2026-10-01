@@ -1,4 +1,4 @@
-import { Clone, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import type { ZoneId } from "../world-topology";
 
 export const BLENDER_ART_ASSETS: Record<ZoneId, string> = {
@@ -25,7 +25,7 @@ export function BlenderDistrictArt({
 
   return (
     <group position={position} rotation={rotation}>
-      <Clone object={scene} deep />
+      <primitive object={scene.clone(true)} />
     </group>
   );
 }
