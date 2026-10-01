@@ -39,13 +39,14 @@ Implemented on the Blender branch:
 - visual/runtime certification checklist;
 - dedicated six-stage ICM workflow.
 
-The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Runtime scenery replacement has **not** begun. Stage 01 remains active pending remote bake/CI confirmation and formal certification; PR #21 is not yet ready to merge.
+The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Exact-head GitHub bake/CI run `36816140894` passed against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Runtime scenery replacement has **not** begun. Stage 01 remains active pending formal certification; Stage 02 remains inactive.
 
 The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
 
 ## Validation evidence
 
 - GitHub bake run `36815004861`: Blender 4.5.14 LTS artifact PASS.
+- exact-head GitHub bake/CI run `36816140894`: PASS against `549d35838ddc4d048af83102001a9be00d3e66f1`.
 - Six GLB SHA-256/size checks and `npm run art:verify`: PASS.
 - Basic GLB version/JSON/node/mesh/material parse proof: PASS.
 - Full inherited repository gates are rerunning for the exact evidence candidate.
@@ -121,12 +122,12 @@ Expected intact:
 
 No architectural blocker.
 
-Immediate technical gate: push PR #21 at reviewed head `f27c70b6e45e0770e12789fde523f023ffdd8d85`, confirm GitHub bake/CI against that exact head, then formally certify Stage 01 before any runtime scenery integration.
+Immediate technical gate: run formal Stage 01 ICM certification against exact-head candidate `549d35838ddc4d048af83102001a9be00d3e66f1` before any runtime scenery integration.
 
 ## Next atomic action
 
-1. push PR #21 exact head `f27c70b6e45e0770e12789fde523f023ffdd8d85`;
-2. confirm GitHub bake/CI against that exact head and formally certify Stage 01;
+1. run formal Stage 01 ICM certification against exact-head candidate `549d35838ddc4d048af83102001a9be00d3e66f1`;
+2. record certification state and keep Stage 02 inactive until separately activated;
 3. only then activate Stage 02 Command Center runtime integration.
 
 ## Minimum resume context

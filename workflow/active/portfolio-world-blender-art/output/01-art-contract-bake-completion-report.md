@@ -14,6 +14,13 @@ handoff_updated: YES
 - base: `982f3c4f797638cfdb4db1e467b7ae3f25172608`
 - exact artifact/evidence candidate under review: `94f0ec5976778d8abf80bad35aa7a743526cf1d7`
 
+## Working location
+
+- repository: `element-bendr/my-resume-site`
+- branch: `feat/blender-world-art-pipeline-local`
+- worktree: `.worktrees/blender-world-art`
+- canonical branch: `main` (unchanged)
+
 ## Independent review
 
 - reviewer: Terra
@@ -21,6 +28,7 @@ handoff_updated: YES
 - reviewed documentation head: `f27c70b6e45e0770e12789fde523f023ffdd8d85`
 - critical findings: none
 - required fixes: none
+- exact-head GitHub bake/CI run: `36816140894` PASS against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`
 
 ## Provenance
 
@@ -29,7 +37,13 @@ handoff_updated: YES
 - source artifact: `/tmp/pr21-blender-artifact`
 - runtime integration: intentionally not started
 
-## Outputs
+## State changed
+
+- vendored the six exact hash-verified GLB artifacts and checksum manifest;
+- recorded bake, parse, budget, Terra, and exact-head CI evidence;
+- preserved runtime scenery integration as disabled.
+
+## Files / outputs
 
 Six GLBs and `SHA256SUMS.txt` are vendored under `public/world/art/`.
 
@@ -72,8 +86,28 @@ Total: 1,941,344 bytes / 1,895.8 KiB.
 - certified runtime, topology, movement, routes, Ask, content, dependencies: unchanged
 - Stage 02: remains pending and inactive
 
+## Stale / uncertain state
+
+- Stage 01 is not formally certified yet.
+- Runtime/browser visual acceptance belongs to Stage 02 and has not started.
+
+## Blockers
+
+None for the Stage 01 artifact/evidence scope. Formal ICM certification remains the next gate.
+
+## Closed decisions
+
+- GLBs are visual scenery only.
+- React remains authoritative for topology, movement, stations, routes, content, accessibility, and fallback.
+- No runtime integration or Stage 02 activation occurs before Stage 01 certification.
+
+## Handoff update
+
+`HANDOFF.md` records the exact artifact candidate, Terra PASS, exact-head bake/CI PASS,
+protected state, and next certification action.
+
 ## Next action
 
-Push PR #21 at the reviewed exact head, confirm GitHub bake/CI against that head,
-then run formal Stage 01 ICM certification. Do not integrate the GLBs into runtime
+Run formal Stage 01 ICM certification against exact-head candidate
+`549d35838ddc4d048af83102001a9be00d3e66f1`. Do not integrate the GLBs into runtime
 scenery or activate Stage 02 before formal Stage 01 certification.
