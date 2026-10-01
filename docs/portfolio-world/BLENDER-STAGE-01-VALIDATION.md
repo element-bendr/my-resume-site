@@ -73,6 +73,33 @@ Not yet produced:
 - `public/world/art/timeline.glb`
 - `public/world/art/hobby-district.glb`
 
+
+## Repository structural audit
+
+Compared with certified base `5f4de7ace37bfd843ef13f035a3b16ddb61f28d7`:
+
+- branch is ahead only; merge base is the certified base;
+- changes are limited to Blender/art source, art config/test, scoped documentation/workflow files, the Blender Actions workflow, and two package scripts;
+- `src/world/world-topology.ts`: unchanged;
+- `src/world/world-config.ts`: unchanged;
+- player/camera/movement/interaction components: unchanged;
+- Ask implementation/content registry: unchanged;
+- `package-lock.json`: unchanged;
+- Wrangler/production configuration: unchanged.
+
+Workflow contract audit:
+
+- all six stage contexts contain every required ICM section;
+- no unresolved template placeholders are present;
+- exactly one stage is active;
+- workflow primary is `portfolio-world-blender-art`.
+
+Source-contract hardening:
+
+- GLB file paths and zone anchors are isolated in a pure TypeScript config;
+- a Vitest contract test requires exactly one GLB per certified zone and requires each anchor to equal the zone center;
+- the GLB verifier checks magic, version 2, declared file length, initial JSON chunk, per-file/total budgets, and SHA-256.
+
 ## Required Stage 01 evidence
 
 Pending:
