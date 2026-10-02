@@ -1,18 +1,40 @@
 {
   "task": "Stage 05 Grounded Ask integration",
-  "basis": "workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md",
+  "basis": "Same Stage 05 contract and frozen source SHA; legacy uses broad whole-file context, Bedrock uses contract/range-first source retrieval and does not load passing test bodies.",
   "phases": [
     {
       "name": "contract-and-grounding",
-      "paths": [
+      "legacy_reads": [
         "docs/portfolio-world/ASK-CONTRACT.md",
         "docs/portfolio-world/CONTENT-CONTRACT.md",
         "docs/portfolio-world/LOCAL-DEVELOPMENT.md"
+      ],
+      "graph_reads": [
+        {
+          "path": "docs/portfolio-world/ASK-CONTRACT.md",
+          "start_line": 21,
+          "end_line": 132
+        },
+        {
+          "path": "docs/portfolio-world/CONTENT-CONTRACT.md",
+          "start_line": 28,
+          "end_line": 66
+        },
+        {
+          "path": "docs/portfolio-world/CONTENT-CONTRACT.md",
+          "start_line": 252,
+          "end_line": 335
+        },
+        {
+          "path": "docs/portfolio-world/CONTENT-CONTRACT.md",
+          "start_line": 344,
+          "end_line": 382
+        }
       ]
     },
     {
       "name": "ask-runtime",
-      "paths": [
+      "legacy_reads": [
         "src/ask/answer.ts",
         "src/ask/client.ts",
         "src/ask/evidence.ts",
@@ -25,18 +47,66 @@
         "worker/index.ts",
         "src/app/pages/AskPage.tsx",
         "src/world/InteractionOverlay.tsx"
+      ],
+      "graph_reads": [
+        {
+          "path": "src/ask/answer.ts",
+          "start_line": 7,
+          "end_line": 50
+        },
+        {
+          "path": "src/ask/client.ts",
+          "start_line": 28,
+          "end_line": 107
+        },
+        {
+          "path": "src/ask/evidence.ts",
+          "start_line": 25,
+          "end_line": 187
+        },
+        "src/ask/intent.ts",
+        "src/ask/normalize.ts",
+        "src/ask/public-source-labels.ts",
+        "src/ask/retrieve.ts",
+        "src/ask/types.ts",
+        {
+          "path": "worker/ask.ts",
+          "start_line": 38,
+          "end_line": 117
+        },
+        {
+          "path": "worker/index.ts",
+          "start_line": 1,
+          "end_line": 22
+        },
+        {
+          "path": "src/app/pages/AskPage.tsx",
+          "start_line": 23,
+          "end_line": 55
+        },
+        {
+          "path": "src/app/pages/AskPage.tsx",
+          "start_line": 117,
+          "end_line": 161
+        },
+        {
+          "path": "src/world/InteractionOverlay.tsx",
+          "start_line": 100,
+          "end_line": 121
+        }
       ]
     },
     {
       "name": "focused-validation",
-      "paths": [
+      "legacy_reads": [
         "tests/ask-client.test.ts",
         "tests/ask-answer.test.ts",
         "tests/ask-retrieval.test.ts",
         "tests/world-ask-integration.test.ts",
         "tests/worker.test.ts",
         "docs/portfolio-world/STAGE-05-VALIDATION.md"
-      ]
+      ],
+      "graph_reads": []
     }
   ]
 }
