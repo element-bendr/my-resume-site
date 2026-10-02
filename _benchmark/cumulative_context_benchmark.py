@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -16,29 +17,34 @@ from context_benchmark import (
 )
 
 
-def _path_hash(root: Path, relative: str) -> str:
-    path = (root / relative).resolve()
+def _safe_file(root: Path, relative: str) -> Path:
     root = root.resolve()
+    path = (root / relative).resolve()
     if path != root and root not in path.parents:
         raise ValueError(f"path escapes repository: {relative!r}")
     if not path.is_file():
         raise FileNotFoundError(relative)
-    return str(source_metric(path)["sha256"])
+    return path
 
 
-def _seed_hashes(root: Path, paths: list[str]) -> set[str]:
-    return {_path_hash(root, value) for value in paths}
+def _normalize_read(raw: Any, *, phase: int, read_index: int) -> dict[str, Any]:
+    if isinstance(raw, str) and raw:
+        return {"path": raw}
+    if not isinstance(raw, dict):
+        raise ValueError(f"phase {phase} read {read_index}: expected path string or object")
+    path = raw.get("path")
+    if not isinstance(path, str) or not path:
+        raise ValueError(f"phase {phase} read {read_index}: non-empty path required")
 
-
-def _graph_seed_hashes(root: Path, graph: dict[str, Any], ambient: list[str]) -> set[str]:
-    hashes = _seed_hashes(root, ambient)
-    for source in graph.get("bootstrap_sources", []):
-        if not isinstance(source, dict):
-            continue
-        digest = source.get("sha256")
-        if isinstance(digest, str):
-            hashes.add(digest)
-    return hashes
+    start = raw.get("start_line")
+    end = raw.get("end_line")
+    if start is None and end is None:
+        return {"path": path}
+    if not isinstance(start, int) or not isinstance(end, int):
+        raise ValueError(f"phase {phase} read {read_index}: start_line/end_line must both be integers")
+    if start < 1 or end < start:
+        raise ValueError(f"phase {phase} read {read_index}: invalid line range {start}-{end}")
+    return {"path": path, "start_line": start, "end_line": end}
 
 
 def load_trace(payload: Any) -> list[dict[str, Any]]:
@@ -49,56 +55,167 @@ def load_trace(payload: Any) -> list[dict[str, Any]]:
         if not isinstance(raw, dict):
             raise ValueError(f"phase {index}: expected object")
         name = raw.get("name")
-        paths = raw.get("paths")
         if not isinstance(name, str) or not name:
             raise ValueError(f"phase {index}: non-empty name required")
-        if not isinstance(paths, list) or not all(isinstance(p, str) and p for p in paths):
-            raise ValueError(f"phase {index}: paths[] must contain non-empty strings")
-        phases.append({"name": name, "paths": list(dict.fromkeys(paths))})
+
+        values = raw.get("reads")
+        if values is None:
+            values = raw.get("paths")
+        if not isinstance(values, list):
+            raise ValueError(f"phase {index}: reads[] or paths[] required")
+
+        reads = [
+            _normalize_read(value, phase=index, read_index=read_index)
+            for read_index, value in enumerate(values, 1)
+        ]
+        phases.append({"name": name, "reads": reads})
     if not phases:
         raise ValueError("trace requires at least one phase")
     return phases
+
+
+def _seed_state(root: Path, paths: list[str]) -> tuple[dict[str, None | set[int]], set[str]]:
+    coverage: dict[str, None | set[int]] = {}
+    hashes: set[str] = set()
+    for relative in paths:
+        path = _safe_file(root, relative)
+        coverage[relative] = None
+        hashes.add(str(source_metric(path)["sha256"]))
+    return coverage, hashes
+
+
+def _graph_seed_paths(graph: dict[str, Any], ambient: list[str]) -> list[str]:
+    paths = list(dict.fromkeys(ambient))
+    for source in graph.get("bootstrap_sources", []):
+        if not isinstance(source, dict):
+            continue
+        path = source.get("path")
+        if isinstance(path, str) and path:
+            paths.append(path)
+    return list(dict.fromkeys(paths))
+
+
+def _read_delta(
+    root: Path,
+    read: dict[str, Any],
+    *,
+    coverage: dict[str, None | set[int]],
+    seen_content_hashes: set[str],
+) -> tuple[int, dict[str, Any]]:
+    relative = read["path"]
+    path = _safe_file(root, relative)
+    lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
+    current = coverage.get(relative, set())
+
+    if "start_line" not in read:
+        if current is None:
+            return 0, {"path": relative, "kind": "whole", "duplicate_or_preloaded": True}
+
+        if not lines:
+            content = ""
+            new_line_numbers: list[int] = []
+        else:
+            covered = current if isinstance(current, set) else set()
+            new_line_numbers = [idx for idx in range(1, len(lines) + 1) if idx not in covered]
+            content = "".join(lines[idx - 1] for idx in new_line_numbers)
+
+        full_digest = hashlib.sha256("".join(lines).encode()).hexdigest()
+        coverage[relative] = None
+        if full_digest in seen_content_hashes:
+            return 0, {"path": relative, "kind": "whole", "duplicate_or_preloaded": True}
+        seen_content_hashes.add(full_digest)
+
+        tokens = (len(content) + 3) // 4
+        return tokens, {
+            "path": relative,
+            "kind": "whole",
+            "lines": len(new_line_numbers),
+            "estimated_tokens": tokens,
+            "duplicate_or_preloaded": False,
+        }
+
+    start = int(read["start_line"])
+    end = int(read["end_line"])
+    if end > len(lines):
+        raise ValueError(f"{relative}: line range {start}-{end} exceeds {len(lines)} lines")
+    if current is None:
+        return 0, {
+            "path": relative,
+            "kind": "range",
+            "start_line": start,
+            "end_line": end,
+            "duplicate_or_preloaded": True,
+        }
+
+    covered = current if isinstance(current, set) else set()
+    new_line_numbers = [idx for idx in range(start, end + 1) if idx not in covered]
+    content = "".join(lines[idx - 1] for idx in new_line_numbers)
+    snippet_digest = hashlib.sha256(content.encode()).hexdigest()
+
+    covered.update(range(start, end + 1))
+    coverage[relative] = covered
+
+    if not new_line_numbers or snippet_digest in seen_content_hashes:
+        return 0, {
+            "path": relative,
+            "kind": "range",
+            "start_line": start,
+            "end_line": end,
+            "duplicate_or_preloaded": True,
+        }
+
+    seen_content_hashes.add(snippet_digest)
+    tokens = (len(content) + 3) // 4
+    return tokens, {
+        "path": relative,
+        "kind": "range",
+        "start_line": start,
+        "end_line": end,
+        "new_lines": len(new_line_numbers),
+        "estimated_tokens": tokens,
+        "duplicate_or_preloaded": False,
+    }
 
 
 def phase_additions(
     root: Path,
     phases: list[dict[str, Any]],
     *,
-    seed_hashes: set[str],
+    seed_paths: list[str],
 ) -> tuple[list[dict[str, Any]], int]:
-    seen = set(seed_hashes)
+    coverage, hashes = _seed_state(root, seed_paths)
     results: list[dict[str, Any]] = []
     cumulative = 0
+
     for phase in phases:
         tokens = 0
-        files = 0
-        skipped_duplicate = 0
-        loaded: list[str] = []
-        for relative in phase["paths"]:
-            path = (root / relative).resolve()
-            if not path.is_file():
-                raise FileNotFoundError(relative)
-            metric = source_metric(path)
-            digest = str(metric["sha256"])
-            if digest in seen:
-                skipped_duplicate += 1
-                continue
-            seen.add(digest)
-            value = metric["estimated_tokens"]
-            if value is None:
-                raise ValueError(f"cannot estimate text tokens for {relative}")
-            tokens += int(value)
-            files += 1
-            loaded.append(relative)
+        loaded_reads = 0
+        duplicate_reads = 0
+        details: list[dict[str, Any]] = []
+
+        for read in phase["reads"]:
+            added, detail = _read_delta(
+                root,
+                read,
+                coverage=coverage,
+                seen_content_hashes=hashes,
+            )
+            tokens += added
+            if added:
+                loaded_reads += 1
+            else:
+                duplicate_reads += 1
+            details.append(detail)
+
         cumulative += tokens
         results.append(
             {
                 "name": phase["name"],
-                "new_files": files,
-                "duplicate_or_preloaded_files": skipped_duplicate,
+                "new_reads": loaded_reads,
+                "duplicate_or_preloaded_reads": duplicate_reads,
                 "new_estimated_tokens": tokens,
                 "cumulative_added_estimated_tokens": cumulative,
-                "loaded_paths": loaded,
+                "reads": details,
             }
         )
     return results, cumulative
@@ -121,22 +238,22 @@ def compare_cumulative(
     legacy_phase_results, legacy_added = phase_additions(
         root,
         phases,
-        seed_hashes=_seed_hashes(root, legacy_paths),
+        seed_paths=legacy_paths,
     )
     graph_phase_results, graph_added = phase_additions(
         root,
         phases,
-        seed_hashes=_graph_seed_hashes(root, graph, ambient),
+        seed_paths=_graph_seed_paths(graph, ambient),
     )
 
     legacy_total = int(legacy_initial["estimated_tokens"]) + legacy_added
     graph_total = int(graph_initial["model_visible_estimated_tokens"]) + graph_added
 
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "measurement": (
-            "cumulative introduced model-visible context: initial context plus exact-hash-deduped "
-            "source deltas from an explicit task trace; unchanged context is not re-injected"
+            "cumulative introduced model-visible context: initial context plus source deltas from an explicit "
+            "task trace; whole-file and exact line-range reads are supported; unchanged covered content is not re-injected"
         ),
         "graph_subject": graph.get("subject"),
         "graph_base_sha": graph.get("base_sha"),
@@ -155,7 +272,7 @@ def compare_cumulative(
         "estimated_cumulative_reduction_percent": reduction_percent(legacy_total, graph_total),
         "note": (
             "This is a deterministic task-trace proxy, not measured ChatGPT Plus quota or an LLM execution transcript. "
-            "The trace must be tied to a real repository task/contract and frozen with the result."
+            "Line ranges must come from a real task's targeted retrieval plan and remain frozen with the result."
         ),
     }
 
