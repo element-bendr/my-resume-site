@@ -6,7 +6,7 @@ Upgrade the certified Portfolio World from primitive-heavy Three.js scenery to g
 
 ## Phase
 
-BLENDER_ART_STAGE_02_AUTHORED_PASS_01_VISUAL_BLOCKED
+BLENDER_ART_STAGE_02_AUTHORED_PASS_02_VISUAL_BLOCKED
 
 ## Execution mode
 
@@ -41,7 +41,7 @@ Implemented on the Blender branch:
 
 The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Exact-head GitHub bake/CI run `36816140894` passed against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Stage 01 is formally certified by state commit `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
 
-Stage 02 is active. User-authorized local Blender is 5.2.1 LTS; the repository target remains 4.5.14. The first editable Command Center pass is saved and structurally validates: 260 meshes, 97,580 triangles, six materials, zero textures. Its canonical preview is visually FAIL: floor-dominant, hero cropped, skyline outside the frame, foreground Timeline lintel obscuring the plaza. The exact prescribed camera is unchanged. Evidence and exact next action are in `art/blender/command-center/visual-pass-01.md`. No export or runtime integration occurred.
+Stage 02 is active. User-authorized local Blender is 5.2.1 LTS; the repository target remains 4.5.14. Second editable pass structurally validates: 296 meshes, 105,600 triangles, six materials, zero textures. The approved camera frames the scene, and five supported portal frames replace detached lintels. Visual acceptance remains FAIL because massing/environment still fall short of the finalized reference. Evidence is in `art/blender/command-center/visual-pass-02.md`. Two-approach stop rule applies. No export or runtime integration occurred.
 
 The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
 
@@ -52,7 +52,7 @@ The prior certified `main` production deployment/smoke record remains pending. T
 - Stage 02 activation: PASS via existing workflow tooling; active stage is `02-command-center-integration`.
 - `npm run art:cc:bootstrap`: PASS under Blender 5.2.1 after compatibility fix.
 - Existing validation entrypoint via the single MCP Blender instance: PASS, zero errors; triangles exceed preferred range but remain below the soft ceiling.
-- Existing preview entrypoint via the same MCP Blender instance: PASS; canonical 1600 x 900 image saved. Visual outcome: FAIL / camera-composition conflict.
+- Existing preview entrypoint via the same MCP Blender instance: PASS; canonical 1600 x 900 image saved with approved composition. Visual outcome: FAIL / architecture and environment richness.
 - Six GLB SHA-256/size checks and `npm run art:verify`: PASS.
 - Basic GLB version/JSON/node/mesh/material parse proof: PASS.
 - Full inherited repository gates are rerunning for the exact evidence candidate.
@@ -70,7 +70,7 @@ The prior certified `main` production deployment/smoke record remains pending. T
 - Stage 01 certification state is recorded at `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
 - Stage 02 is active; authored source and preview are saved. Visual acceptance is blocked.
 - Stage 02 now has a frozen authored-scene specification, local bootstrap/validator/render/export scripts, and a local Codex handoff.
-- Visual review must resolve canonical-camera framing before a second authored pass. Browser/runtime integration has not begun.
+- Camera composition is approved and frozen; second pass remains visually FAIL. Stop further similar passes and obtain independent review. Browser/runtime integration has not begun.
 
 ## Canonical decisions
 
@@ -127,7 +127,7 @@ Expected intact:
 
 ## Blockers
 
-Current blocker: the first canonical preview fails visual composition. The fixed camera excludes skyline/horizon and crops the hero. A separately recorded camera/composition decision is needed before another pass. Structural validation is green; no export or runtime integration is claimed.
+Current blocker: second authored preview remains visually FAIL despite the approved camera resolving framing. See `art/blender/command-center/visual-pass-02.md`: 296 meshes, 105,600 triangles, six materials; structural PASS. Camera decision is frozen in `79ea3fc`; preview uses `(0,-21,10)` toward `(0,0,1.6)` at FOV 52, runtime unchanged. Two-approach stop rule applies. Next action is independent review and a new massing/environment plan, not another similar geometry pass. Stage 02 tracked spec is STALE after approved contract update and requires tooling reconciliation before completion. No export or runtime integration is claimed. User AGENTS.md edit is deliberately uncommitted.
 
 ## Next atomic action
 

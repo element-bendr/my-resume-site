@@ -2,11 +2,11 @@
   "status": "PASS",
   "errors": [],
   "warnings": [
-    "triangle count 97580 is above preferred range 35000..90000"
+    "triangle count 105600 is above preferred range 35000..90000"
   ],
   "metrics": {
-    "mesh_objects": 260,
-    "triangles": 97580,
+    "mesh_objects": 296,
+    "triangles": 105600,
     "materials": [
       "CC_Cyan",
       "CC_DarkGlass",

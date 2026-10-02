@@ -145,6 +145,47 @@ def core():
     tube('cc_core_crown',(0,0,2.55),.31,.024,cyan)
 
 
+def composition_pass02():
+    """Replace disconnected canopy massing with supported, open portal frames."""
+    for obj in list(COLLECTION.objects):
+        if obj.name.startswith(('cc_arch_', 'cc_portal_', 'cc_shell_arcade')):
+            bpy.data.objects.remove(obj, do_unlink=True)
+    # Posts are outside each entrance rectangle and outside the walking annulus.
+    frames = [
+        ('client', (-7.15,-1.94), (-7.15,1.94), 3.15),
+        ('hobby', (7.15,-1.94), (7.15,1.94), 3.15),
+        ('timeline', (-1.97,-5.35), (1.97,-5.35), 2.55),
+        ('build', (-6.96,5.25), (-3.04,5.25), 3.55),
+        ('automation', (3.04,5.25), (6.96,5.25), 3.55),
+    ]
+    for name,a,b,height in frames:
+        for index,point in enumerate((a,b)):
+            x,y=point
+            box(f'cc_portal_{name}_foot_{index}',(x,y,.24),(.42,.48,.35),gunmetal,.055)
+            box(f'cc_portal_{name}_post_{index}',(x,y,height/2),(.24,.32,height),stone,.045)
+            box(f'cc_portal_{name}_post_inlay_{index}',(x,y-.17,height/2),(.06,.035,height-.3),cyan,.008)
+        beam('cc_arch_'+name,(*a,height),(*b,height),.22,stone)
+        beam('cc_portal_'+name+'_inlay',(*a,height-.13),(*b,height-.13),.032,cyan)
+        # A second depth rail visibly joins the posts: roof ribs, never floating beams.
+        for index,point in enumerate((a,b)):
+            beam(f'cc_portal_{name}_rib_{index}',(*point,height),
+                 (point[0],point[1]+.55,height+.24),.14,gunmetal)
+        beam('cc_portal_'+name+'_rear', (a[0],a[1]+.55,height+.24),
+             (b[0],b[1]+.55,height+.24),.16,gunmetal)
+    # The foreground entry is low/open, while rear gateways establish skyline depth.
+    for side in (-1,1):
+        for i in range(3):
+            x=side*(5.65+i*.62)
+            box(f'cc_shell_colonnade_{side}_{i}',(x,-3.7,1.05),(.22,.36,1.98),stone,.05)
+        box(f'cc_shell_colonnade_canopy_{side}',(side*6.27,-3.7,2.18),(1.76,.62,.18),gunmetal,.06)
+    # Core apex ribs make the instrument silhouette layered without filling its void.
+    for i in range(3):
+        a=i*math.tau/3+.5
+        beam(f'cc_core_apex_rib_{i}',(.68*math.cos(a),.68*math.sin(a),1.22),
+             (.21*math.cos(a),.21*math.sin(a),2.68),.045,stone)
+    tube('cc_core_apex_halo',(0,0,2.74),.25,.019,cyan)
+
+
 def tower(name,x,y,h,angle=0):
     # Stepped buttresses and recessed glazing make each silhouette architectural.
     box('cc_shell_'+name+'_plinth',(x,y,.23),(1.14,1.16,.34),gunmetal,.08,angle)
