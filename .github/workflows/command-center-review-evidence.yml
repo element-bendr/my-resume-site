@@ -1,0 +1,63 @@
+name: Command Center review evidence
+
+on:
+  push:
+    branches:
+      - "feat/blender-world-art-pipeline"
+    paths:
+      - "art/blender/command-center/previews/**"
+      - "art/blender/command-center/references/**"
+      - "art/blender/command-center/*review.md"
+      - "art/blender/command-center/*validation.json"
+      - ".github/workflows/command-center-review-evidence.yml"
+  pull_request:
+    paths:
+      - "art/blender/command-center/previews/**"
+      - "art/blender/command-center/references/**"
+      - "art/blender/command-center/*review.md"
+      - "art/blender/command-center/*validation.json"
+      - ".github/workflows/command-center-review-evidence.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  package-review-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify required Massing V2 evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            art/blender/command-center/previews/massing-v2-runtime.png
+            art/blender/command-center/previews/massing-v2-top.png
+            art/blender/command-center/previews/massing-v2-side.png
+            art/blender/command-center/massing-v2-review.md
+            art/blender/command-center/references/command-center-concept.png
+            art/blender/command-center/references/portfolio-world-concept-board.png
+            art/blender/command-center/references/portfolio-world-neon-hub.png
+          )
+          for file in "${required[@]}"; do
+            test -f "$file" || { echo "missing review evidence: $file" >&2; exit 1; }
+          done
+          sha256sum "${required[@]}" > art/blender/command-center/review-evidence.sha256
+
+      - name: Upload review evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: command-center-review-evidence
+          path: |
+            art/blender/command-center/previews/massing-v2-runtime.png
+            art/blender/command-center/previews/massing-v2-top.png
+            art/blender/command-center/previews/massing-v2-side.png
+            art/blender/command-center/massing-v2-review.md
+            art/blender/command-center/references/command-center-concept.png
+            art/blender/command-center/references/portfolio-world-concept-board.png
+            art/blender/command-center/references/portfolio-world-neon-hub.png
+            art/blender/command-center/review-evidence.sha256
+          if-no-files-found: error
+          retention-days: 14
