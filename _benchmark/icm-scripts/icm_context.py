@@ -691,26 +691,18 @@ def compact_context_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         "bootstrap_sources": bootstrap_sources,
         "blocking_unresolved": manifest.get("blocking_unresolved", []),
         "budget": {
-            "bootstrap_source_files": manifest.get("budget", {}).get("bootstrap_source_files", 0),
-            "bootstrap_source_bytes": manifest.get("budget", {}).get("bootstrap_source_bytes", 0),
             "estimated_tokens_if_bootstrap_sources_loaded": manifest.get("budget", {}).get(
                 "estimated_tokens_if_bootstrap_sources_loaded", 0
             ),
-            "compact_manifest_chars": 0,
             "estimated_compact_manifest_tokens": 0,
-            "token_estimate": "chars/4",
         },
     }
 
     for _ in range(4):
-        chars, tokens = _estimate_json_tokens(payload)
+        _, tokens = _estimate_json_tokens(payload)
         budget = payload["budget"]
-        if (
-            budget["compact_manifest_chars"] == chars
-            and budget["estimated_compact_manifest_tokens"] == tokens
-        ):
+        if budget["estimated_compact_manifest_tokens"] == tokens:
             break
-        budget["compact_manifest_chars"] = chars
         budget["estimated_compact_manifest_tokens"] = tokens
 
     return payload
@@ -902,8 +894,7 @@ def build_context_manifest(root: Path, *, subject: str | None = None) -> dict[st
     }
 
     compact = compact_context_manifest(manifest)
-    manifest["budget"]["compact_manifest_chars"] = compact["budget"]["compact_manifest_chars"]
-    manifest["budget"]["estimated_compact_manifest_tokens"] = compact["budget"][
-        "estimated_compact_manifest_tokens"
-    ]
+    compact_chars, compact_tokens = _estimate_json_tokens(compact)
+    manifest["budget"]["compact_manifest_chars"] = compact_chars
+    manifest["budget"]["estimated_compact_manifest_tokens"] = compact_tokens
     return manifest
