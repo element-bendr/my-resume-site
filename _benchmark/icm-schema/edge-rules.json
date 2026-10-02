@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "rules": [
+    {
+      "type": "contains",
+      "from": ["project", "system", "workflow", "stage"],
+      "to": ["system", "workflow", "stage", "task", "decision", "constraint", "dependency", "artifact", "evidence", "acceptance_criterion", "protected_resource", "actor", "pull_request", "unresolved"],
+      "acyclic": "global"
+    },
+    {
+      "type": "depends_on",
+      "from": ["system", "workflow", "stage", "task", "artifact"],
+      "to": ["system", "workflow", "stage", "task", "artifact", "dependency"],
+      "acyclic": "execution_only"
+    },
+    {
+      "type": "blocks",
+      "from": ["constraint", "dependency", "unresolved", "stage", "task"],
+      "to": ["workflow", "stage", "task"],
+      "acyclic": "execution_only"
+    },
+    {
+      "type": "implements",
+      "from": ["task", "pull_request"],
+      "to": ["decision", "constraint", "task"],
+      "acyclic": "none"
+    },
+    {
+      "type": "modifies",
+      "from": ["task", "pull_request"],
+      "to": ["artifact", "protected_resource"],
+      "acyclic": "none"
+    },
+    {
+      "type": "produces",
+      "from": ["workflow", "stage", "task"],
+      "to": ["artifact", "evidence"],
+      "acyclic": "none"
+    },
+    {
+      "type": "validates",
+      "from": ["evidence"],
+      "to": ["workflow", "stage", "task", "artifact", "acceptance_criterion"],
+      "acyclic": "none"
+    },
+    {
+      "type": "satisfies",
+      "from": ["evidence", "task", "pull_request"],
+      "to": ["acceptance_criterion"],
+      "acyclic": "none"
+    },
+    {
+      "type": "protects",
+      "from": ["constraint"],
+      "to": ["protected_resource"],
+      "acyclic": "none"
+    },
+    {
+      "type": "supersedes",
+      "from": ["decision", "artifact", "constraint"],
+      "to": ["decision", "artifact", "constraint"],
+      "acyclic": "global"
+    },
+    {
+      "type": "derived_from",
+      "from": ["artifact", "evidence", "decision", "constraint"],
+      "to": ["artifact", "evidence", "decision", "constraint"],
+      "acyclic": "none"
+    },
+    {
+      "type": "owned_by",
+      "from": ["project", "system", "workflow", "stage", "task", "decision", "artifact", "protected_resource"],
+      "to": ["actor"],
+      "acyclic": "none"
+    },
+    {
+      "type": "requires",
+      "from": ["system", "workflow", "stage", "task"],
+      "to": ["constraint", "dependency", "acceptance_criterion", "artifact"],
+      "acyclic": "none"
+    }
+  ],
+  "execution_node_types": ["workflow", "stage", "task"],
+  "global_invariants": {
+    "unique_node_ids": true,
+    "unique_edge_ids": true,
+    "edge_endpoints_must_exist": true,
+    "self_edges_forbidden": true,
+    "node_id_prefix_must_match_type": true,
+    "edge_id_prefix": "edge."
+  }
+}
