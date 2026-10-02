@@ -15,6 +15,7 @@
     "owner": "ChatGPT coordinator",
     "write_paths": [
       "tools/blender/**",
+      "art/blender/**",
       "public/world/art/**",
       "src/world/**",
       "scripts/check-blender-assets.mjs",
