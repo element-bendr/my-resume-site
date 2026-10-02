@@ -26,7 +26,11 @@
     "verify:world-assets": "node scripts/check-world-budget.mjs",
     "verify:ask-disclosure": "node scripts/check-ask-client-disclosure.mjs",
     "verify:world-ask": "node scripts/check-world-ask-boundary.mjs",
-    "verify:world-zones": "node scripts/check-world-zones.mjs"
+    "verify:world-zones": "node scripts/check-world-zones.mjs",
+    "art:cc:bootstrap": "blender -b --python tools/blender/bootstrap_command_center.py",
+    "art:cc:validate": "blender -b art/blender/command-center/source/command-center.blend --python tools/blender/validate_command_center_source.py",
+    "art:cc:preview": "blender -b art/blender/command-center/source/command-center.blend --python tools/blender/render_command_center_preview.py",
+    "art:cc:export": "blender -b art/blender/command-center/source/command-center.blend --python tools/blender/export_command_center.py"
   },
   "dependencies": {
     "react": "19.3.0",
