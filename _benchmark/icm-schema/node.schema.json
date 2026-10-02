@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/element-bendr/icm-repo-template/.icm/schema/node.schema.json",
+  "title": "ICM Graph Node",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "type", "title", "origin", "attributes"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*(?:\\.[a-z0-9][a-z0-9_-]*)+$",
+      "maxLength": 160
+    },
+    "type": {
+      "enum": [
+        "project",
+        "system",
+        "workflow",
+        "stage",
+        "task",
+        "decision",
+        "constraint",
+        "dependency",
+        "artifact",
+        "evidence",
+        "acceptance_criterion",
+        "protected_resource",
+        "actor",
+        "pull_request",
+        "unresolved"
+      ]
+    },
+    "title": { "type": "string", "minLength": 1, "maxLength": 240 },
+    "status": { "type": ["string", "null"], "maxLength": 64 },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["authored", "observed", "derived", "generated"] },
+        "path": { "type": ["string", "null"], "minLength": 1 },
+        "ref": { "type": ["string", "null"], "minLength": 1 },
+        "note": { "type": ["string", "null"], "maxLength": 500 }
+      }
+    },
+    "attributes": { "type": "object" }
+  }
+}
