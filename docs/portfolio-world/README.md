@@ -28,6 +28,7 @@ For current work:
 - `BLENDER-ASSET-CONTRACT.md` — hard interface between Blender assets and the runtime.
 - `BLENDER-AUTHORING-GUIDE.md` — modeling/export/source-control workflow.
 - `BLENDER-QA-CERTIFICATION.md` — required visual, runtime, performance and fallback gates.
+- `COMMAND-CENTER-BLENDER-SPEC.md` — frozen Stage 02 dimensions, clearances, architecture, materials, preview camera and visual acceptance contract.
 - `BLENDER-STAGE-01-VALIDATION.md` — current asset-bake evidence/status.
 
 Related decision:
@@ -37,6 +38,7 @@ Related decision:
 Active workflow:
 
 - `../../workflow/active/portfolio-world-blender-art/`
+- `../../art/blender/command-center/LOCAL-CODEX-HANDOFF.md` — exact local Blender/Codex execution sequence for Stage 02.
 
 ## Historical certification
 
