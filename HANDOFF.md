@@ -6,7 +6,7 @@ Upgrade the certified Portfolio World from primitive-heavy Three.js scenery to g
 
 ## Phase
 
-BLENDER_ART_STAGE_02_CONTRACT_READY_LOCAL_EXECUTION_PENDING
+BLENDER_ART_STAGE_02_ACTIVE_GUIDE_BOOTSTRAP_BLOCKED
 
 ## Execution mode
 
@@ -20,7 +20,7 @@ implementation
 - implementation branch: `feat/blender-world-art-pipeline`
 - draft PR: #21
 - primary workflow: `workflow/active/portfolio-world-blender-art`
-- active stage: `01-art-contract-bake`
+- active stage: `02-command-center-integration`
 - template: ICM 2.1.0 @ `90322a2441539f24eafdbd2c8a36bc6392192af4`
 
 ## Current state
@@ -39,7 +39,9 @@ Implemented on the Blender branch:
 - visual/runtime certification checklist;
 - dedicated six-stage ICM workflow.
 
-The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Exact-head GitHub bake/CI run `36816140894` passed against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Stage 01 is formally certified by state commit `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`; Stage 02 is blocked awaiting activation. Runtime scenery replacement has **not** begun.
+The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Exact-head GitHub bake/CI run `36816140894` passed against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Stage 01 is formally certified by state commit `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
+
+Stage 02 is activated. User-authorized local Blender is version 5.2.1 LTS rather than the repository's 4.5.14 target. The one permitted guide bootstrap attempt was made once and failed before creating a source file because the script requests the removed `BLENDER_EEVEE_NEXT` enum; no authored geometry or export was produced. This version deviation is recorded for repair without changing repository target contracts.
 
 The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
 
@@ -47,6 +49,8 @@ The prior certified `main` production deployment/smoke record remains pending. T
 
 - GitHub bake run `36815004861`: Blender 4.5.14 LTS artifact PASS.
 - exact-head GitHub bake/CI run `36816140894`: PASS against `549d35838ddc4d048af83102001a9be00d3e66f1`.
+- Stage 02 activation: PASS via existing workflow tooling; active stage is `02-command-center-integration`.
+- `npm run art:cc:bootstrap`: attempted once; blocked by Blender 5.2.1 enum incompatibility before source creation.
 - Six GLB SHA-256/size checks and `npm run art:verify`: PASS.
 - Basic GLB version/JSON/node/mesh/material parse proof: PASS.
 - Full inherited repository gates are rerunning for the exact evidence candidate.
@@ -62,13 +66,13 @@ The prior certified `main` production deployment/smoke record remains pending. T
 ## Stale / uncertain state
 
 - Stage 01 certification state is recorded at `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
-- Stage 02 is blocked with `awaiting_activation` and remains inactive until local Blender execution begins.
+- Stage 02 is active; guide source creation is blocked on the Blender 5.2.1 compatibility repair.
 - Stage 02 now has a frozen authored-scene specification, local bootstrap/validator/render/export scripts, and a local Codex handoff.
 - Browser/runtime visual acceptance remains pending because no authored `.blend` has been created yet.
 
 ## Canonical decisions
 
-- Blender 4.5 LTS is the canonical 3D asset/export toolchain. Stage 01 used headless Blender on GitHub Actions with a Python generator; it did not connect to the user's local Blender installation and does not count as final authored art.
+- Blender 4.5 LTS remains the repository's canonical 3D asset/export target. User-authorized Blender 5.2.1 LTS is the current local execution environment; this is a tooling-version deviation only and does not change target contracts.
 - GLBs are visual scenery only.
 - React remains authoritative for topology, movement, station positions, camera, routes, content, accessibility and fallback.
 - WebGL 2 remains the production renderer.
@@ -121,18 +125,15 @@ Expected intact:
 
 ## Blockers
 
-No architectural blocker.
-
-Immediate technical gate: start local Stage 02 execution with Blender 4.5 LTS. Activate the managed stage, run `npm run art:cc:bootstrap`, author `art/blender/command-center/source/command-center.blend`, validate it, render the canonical preview, and do not export/integrate until the visual review passes.
+Current blocker: the guide bootstrap script uses the removed Blender 4.5 Eevee enum under authorized Blender 5.2.1. No authored source exists yet; no validation, preview, export, or runtime integration is claimed.
 
 ## Next atomic action
 
-1. on the local machine, confirm Blender 4.5 LTS and the feature branch;
-2. run `python3 scripts/workflow_activate.py --workflow portfolio-world-blender-art --write`;
-3. run `npm run art:cc:bootstrap`;
-4. open and author `art/blender/command-center/source/command-center.blend` using `docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md`;
-5. iterate with `npm run art:cc:validate` and `npm run art:cc:preview`;
-6. export/integrate only after explicit visual PASS.
+1. repair the bootstrap engine selection for Blender 5.2.1 without changing Stage 02 contracts;
+2. create the guide-only `art/blender/command-center/source/command-center.blend` once;
+3. run `npm run art:cc:validate` and inspect the guide collections/markers;
+4. author and preview only after structural validation passes;
+5. export/integrate only after explicit visual PASS.
 
 ## Minimum resume context
 
