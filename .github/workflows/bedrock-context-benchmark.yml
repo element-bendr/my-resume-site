@@ -1,0 +1,113 @@
+name: Bedrock v0.3 Website Context Benchmark
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "_benchmark/**"
+      - ".github/workflows/bedrock-context-benchmark.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bedrock-context-benchmark-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Prepare immutable website target
+        run: |
+          git worktree add --detach /tmp/icm-benchmark-target "${{ github.event.pull_request.base.sha }}"
+          mkdir -p /tmp/icm-benchmark-tools
+          cp _benchmark/icm-scripts/*.py /tmp/icm-benchmark-tools/
+          cp _benchmark/context_benchmark.py /tmp/icm-benchmark-tools/
+          mkdir -p /tmp/icm-benchmark-target/.icm/schema
+          cp _benchmark/icm-schema/* /tmp/icm-benchmark-target/.icm/schema/
+
+      - name: Verify target baseline
+        working-directory: /tmp/icm-benchmark-target
+        run: |
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.base.sha }}"
+          python3 scripts/bootstrap_check.py
+          python3 scripts/workflow_check.py
+
+      - name: Build legacy Stage 05 context baseline
+        working-directory: /tmp/icm-benchmark-target
+        run: |
+          python3 - <<'PY' > /tmp/baseline.json
+          import json
+          from pathlib import Path
+          state = json.loads(Path("workflow/active/portfolio-world-rebuild/state.json").read_text())
+          stage = next(x for x in state["stages"] if x["id"] == "05-integration")
+          paths = ["AGENTS.md", "CONTEXT.md", "HANDOFF.md", stage["context"]]
+          paths.extend(dep["path"] for dep in stage.get("depends_on", []))
+          print(json.dumps({"workflow_id":"portfolio-world-rebuild","stage":stage["id"],"paths":list(dict.fromkeys(paths))}, indent=2))
+          PY
+          cat /tmp/baseline.json
+
+      - name: Initialize disposable certified graph state
+        env:
+          PYTHONPATH: /tmp/icm-benchmark-tools
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from icm_init import initialize_repository
+          result = initialize_repository(Path("/tmp/icm-benchmark-target"), write=True)
+          print(json.dumps({"status": result["status"], "written": result["written"]}, indent=2))
+          PY
+
+      - name: Build compact graph runtime context
+        env:
+          PYTHONPATH: /tmp/icm-benchmark-tools
+        run: |
+          python3 - <<'PY' > /tmp/graph.json
+          import json
+          from pathlib import Path
+          from icm_context import build_context_manifest, compact_context_manifest
+          full = build_context_manifest(Path("/tmp/icm-benchmark-target"), subject="stage.portfolio-world-rebuild-05-integration")
+          print(json.dumps(compact_context_manifest(full), indent=2, sort_keys=True))
+          PY
+          cat /tmp/graph.json
+
+      - name: Compare model-visible source context
+        run: |
+          python3 /tmp/icm-benchmark-tools/context_benchmark.py --repo /tmp/icm-benchmark-target --baseline-json /tmp/baseline.json --graph-json /tmp/graph.json > /tmp/benchmark.json
+          cat /tmp/benchmark.json
+          {
+            echo '## Bedrock v0.3 website context benchmark'
+            echo
+            echo '```json'
+            cat /tmp/benchmark.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Prove application/source stayed unchanged
+        working-directory: /tmp/icm-benchmark-target
+        run: |
+          python3 - <<'PY'
+          import subprocess
+          lines = subprocess.check_output(['git','status','--porcelain'], text=True).splitlines()
+          bad = []
+          for line in lines:
+              path = line[3:]
+              if not path.startswith('.icm/'):
+                  bad.append(line)
+          if bad:
+              raise SystemExit('unexpected target mutation: ' + repr(bad))
+          print('DISPOSABLE_ICM_ONLY: PASS')
+          PY
