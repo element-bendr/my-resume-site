@@ -2,11 +2,11 @@
   "status": "PASS",
   "errors": [],
   "warnings": [
-    "triangle count 29812 is below preferred authored range 35000..90000"
+    "triangle count 24228 is below preferred authored range 35000..90000"
   ],
   "metrics": {
-    "mesh_objects": 119,
-    "triangles": 29812,
+    "mesh_objects": 98,
+    "triangles": 24228,
     "materials": [
       "CC_Graphite",
       "CC_SoftMetal",
@@ -14,15 +14,5 @@
     ],
     "material_count": 3
   },
-  "source": "/mnt/shared/projects/mixed/Resume-gamified/.worktrees/blender-world-art/art/blender/command-center/source/command-center.blend",
-  "massing_v2": {
-    "total_meshes": 150,
-    "total_triangles": 36688,
-    "preview_context_meshes": 31,
-    "preview_context_triangles": 6876,
-    "review_materials": 3,
-    "image_textures": 0,
-    "soft_ceiling": 50000,
-    "preview_context_is_non_export": true
-  }
+  "source": "/mnt/shared/projects/mixed/Resume-gamified/.worktrees/blender-world-art/art/blender/command-center/source/command-center.blend"
 }

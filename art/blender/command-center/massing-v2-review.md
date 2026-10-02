@@ -1,97 +1,87 @@
-# Command Center Massing V2 greybox
+# Revised civic-hub massing greybox
 
-Status: **MASSING V2 GREYBOX — REVIEW READY**. Composition acceptance is pending.
+Status: **REVISED CIVIC-HUB MASSING — HUMAN REVIEW READY**.
+Human composition acceptance remains pending; Stage 02 remains blocked.
 
-## Provenance and scope
+## Authority and provenance
 
-Resumed after reconciliation `4329481` and provenance repair `5d56cdf`.
-Accepted preview camera decision: `79ea3fc`. Source was reset from the failed
-second pass rather than incrementally detailed. Failed source remains recoverable
-from `e948434` (SHA-256 `5c6de675b176b9cc9dbb43651d35ca7f7e5a9c300943602c758eac555ad26513`).
-The reset retains protected guides, coordinates, and the approved camera.
-
-Existing MCP Blender **5.2.1 LTS** authored, validated and rendered this candidate.
-No additional Blender process or installation was used. Repository production
-target remains Blender 4.5 LTS; this is review evidence, not production certification.
+This revision follows human rejection of the first Massing V2 composition.
+Rejected source and evidence remain preserved in commit `5f6fa43`.
+Remote recovery guidance was reconciled at `e3b6979113face7b9773c6a5d39003fb99512a39`.
+Camera decision `79ea3fc` and camera-spec blob
+`ad805aef758ace9f2fee9dca4e7dd69f28313cfb` are unchanged.
+The single existing MCP-connected Blender 5.2.1 LTS application authored/rendered
+this candidate. Repository production target remains Blender 4.5 LTS.
 
 ## Composition reset
 
-A chamfered elliptical civic island replaces the rectangular failed composition.
-Four tapered underside tiers establish suspended mass. Five projecting bridges
-connect to simple destination silhouette placeholders. Staggered perimeter
-towers and separate terrace levels frame the central open landmark volume.
-Perimeter planters, benches, trees and a spawn-position scale figure establish
-foreground scale. Three neutral review materials allow shape evaluation without
-production textures, emissive dressing or greebles.
+The broad elliptical disc is replaced by a compact octagonal civic plaza, five
+narrower threshold causeways and visible gaps between separate perimeter terraces.
+Suspended service blocks and split front keels are visible from the canonical
+runtime perspective. Three substantial, unequal-height/width civic buildings form
+a rear skyline behind the unchanged hero core. A western civic gallery, upper
+house and deep canopy frame Client Street as an occupied architectural threshold.
+Raised foreground landscape terraces and benches flank protected spawn. Retaining
+blocks, access stairs and stepped underside bodies distinguish lower service,
+primary plaza, raised terrace and civic-building levels.
 
-The canonical perspective is `(0,-21,10)` toward `(0,0,1.6)`, FOV 52°, 1600×900,
-Eevee, AgX, exposure 0. Top evidence is square 1600×1600 for the complete bridge
-plan. The oblique side evidence is 1600×900 and exposes the floating underside.
-The saved source restores the canonical perspective camera.
+Hero core/dais dimensions are unchanged. Five bridge directions remain visible in
+plan. Destination context uses broad paired wings/gates rather than lone pylons;
+it is review scenery, not Stage 03 district art. No greeble or production texture
+pass was performed.
 
-## Structural and budget validation
+## Validation and budget
 
-- Structural validation: **PASS**, zero errors.
-- Export collection: **119 meshes / 29,812 triangles**.
-- Review context: **31 meshes / 6,876 triangles**.
-- Complete greybox: **150 meshes / 36,688 triangles**.
+- Export collection: **98 meshes / 24,228 triangles**.
+- Review context: **51 meshes / 10,120 triangles**.
+- Complete greybox: **149 meshes / 34,348 triangles**.
 - Materials: **3** (`CC_SoftMetal`, `CC_Graphite`, `CC_Teal`).
-- Image textures: **0**.
-- Massing preferred 20k–40k and 50k soft ceiling: **PASS**.
-- Production validator warns below its 35k preferred lower bound; this is expected
-  for the deliberately lower-detail Massing V2 gate.
-- Workflow check: **PASS**. Strict workflow status: **CURRENT**.
-- Stage 02 remains blocked: `massing_v2_visual_reset_required`.
+- Production/image textures: **0**; render-result buffers are not textures.
+- Structural validation: **PASS**, zero errors.
+- Complete-greybox 20k–40k preferred and 50k ceiling: **PASS**.
+- Workflow strict status: **CURRENT**; Stage 02 intentionally blocked.
 
-Underside, extended bridges, satellite silhouettes and the scale figure are
-explicit `review_*` geometry in **PREVIEW_DO_NOT_EXPORT**. They are counted in
-the complete greybox total, but are excluded from the production structural
-validator. The export collection independently preserves all certified bounds,
-entrance, spawn, circulation and Ask approach clearances. The floating underside
-requires a later asset-contract/validator decision before production authoring;
-this review does not approve exporting it.
+The production-validator warning below 35k export triangles is expected for this
+cheap composition gate. No clearance/budget was relaxed. Guides are unchanged.
+Raised geometry preserves circulation, five entrances, spawn and Ask approach.
+Suspended service masses, extended bridges, destination silhouettes and scale
+figure are `review_*` geometry in `PREVIEW_DO_NOT_EXPORT`; they require a later
+asset-contract decision before production authoring/export. Their triangles are
+included in the complete count.
 
-## Comparison against finalized references
+## Evidence and candid limits
 
-The primary reference's floating hub, radial connections, open peripheral depth
-and skyline hierarchy are now represented by massing. The side view communicates
-the floating island clearly; the top view proves all five bridge directions.
-The core is lower than the civic towers and no longer sets the whole skyline.
+All three images were rendered and inspected:
 
-Remaining visual concerns must be assessed honestly before detailing:
+- Runtime: canonical `(0,-21,10)` toward `(0,0,1.6)`, FOV 52°, 1600×900,
+  Eevee, AgX, exposure 0.
+- Top: orthographic complete bridge plan, 1600×1600.
+- Side: oblique floating/terrace view, 1600×900.
 
-- The canonical perspective still gives substantial screen area to a continuous
-  circular floor. The protected circulation band limits elevated scenery there.
-- Tower and portal silhouettes remain regular and rectilinear; the reference has
-  richer architectural variety and more integrated curved civic forms.
-- The background is a simple sky fill, with no articulated sunset horizon.
-- Canonical perspective crops remote bridge endpoints; the plan and side views
-  demonstrate their complete relationships.
-- The Ask overhead frame is recognizable as a distinct pocket but still needs
-  architectural continuity after composition acceptance.
-- Landscape is represented by scale masses, not final vegetation density.
+Saved source restores the canonical camera. This is review evidence, not human
+visual acceptance. The plaza still occupies meaningful screen area; the foreground
+Timeline portal partly overlaps the scale figure; lateral destination ends are
+cropped in the runtime view. Access stairs read more clearly in oblique evidence.
+Human review must judge the new skyline, thresholds, terraces and floating gaps
+before any detail work begins.
 
-These are review findings, not a visual PASS. Do not add detail until the greybox
-receives explicit composition approval.
-
-## Evidence hashes
+## Artifact SHA-256
 
 | Artifact | SHA-256 |
 | --- | --- |
-| `source/command-center.blend` | `2c081a183a87e416a71954b7a6d1e2cc606daa2113605835f4e7713a7a71f76b` |
-| `previews/massing-v2-runtime.png` | `a4b3e573b8ccb133ffba6ff2ae88b56874aa1e6921cb292018989755bb5444bc` |
-| `previews/massing-v2-top.png` | `b0517565887920f3fec518897db15a390bd53019f7481dc54a76866bef5f0ce5` |
-| `previews/massing-v2-side.png` | `e34b036dd968abc003c7e17c8c48960bd10e671fa0716d082e2712fc8033b527` |
-| `massing-v2-validation.json` | `d35a4bef81bb4d29de46ea9012cb03e536039ed7db29fe8157cdd10163a8c41c` |
+| `source/command-center.blend` | `e6a035dc9a10a3a46c7001dec50f5dbb2820845131db74d85a166cd75cb4e6e4` |
+| `previews/massing-v2-runtime.png` | `a820cb7d44334cb4c3e04c5f6e7658f7af166ce48d84832a2d59d7af3527b4e1` |
+| `previews/massing-v2-top.png` | `3946105fe3cd119685d958a0f19f636414eb301b3304f347ea890c472f25863f` |
+| `previews/massing-v2-side.png` | `61c938e7e6bd30e9ba7bee1ea7392c8aa6ccc868ac0e388391c5ef359fa0ba57` |
+| `massing-v2-validation.json` | `cfd5a6d30afa48455af393229f33ded44eb213f50f0ee02d2d68532fbc9ed397` |
 
-Structural checks ran through the existing `validate_command_center_source`
-module inside the connected Blender. All three saved images were inspected.
-`tools/blender/author_massing_v2.py` records the reset for reproducibility.
+Reproduction: execute `tools/blender/author_civic_hub_revision.py` in connected
+Blender. Validation uses existing `validate_command_center_source.validate`.
 
 ## Protected state and next action
 
-Runtime files, certified movement/topology/stations/Ask/content/routes and
-fallback remain unchanged. User-owned `AGENTS.md` remains untouched/uncommitted.
-No production GLB export, React integration, Stage 03, push, merge or deployment.
-Next action: independent Terra composition review of these three views, followed
-by explicit human visual acceptance before any detailed modeling resumes.
+Runtime camera/movement/topology/stations, Ask, content, routing and fallback
+remain unchanged. User-owned `AGENTS.md` is untouched and unstaged.
+No GLB export, React integration, Stage 03, merge or deployment occurred.
+Next: independent Terra review, then existing PR #21 review publishing path and
+human composition verdict. Detailed modeling remains blocked until acceptance.
