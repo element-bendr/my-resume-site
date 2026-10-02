@@ -98,7 +98,8 @@
         "art/blender/command-center/previews/massing-v2-top.png",
         "art/blender/command-center/previews/massing-v2-runtime.png",
         "art/blender/command-center/previews/massing-v2-side.png",
-        "art/blender/command-center/massing-v2-review.md"
+        "art/blender/command-center/massing-v2-review.md",
+        "docs/portfolio-world/COMMAND-CENTER-VISUAL-FAIL-02.md"
       ],
       "completion_report": "workflow/active/portfolio-world-blender-art/output/02-command-center-integration-completion-report.md",
       "block_reason": "massing_v2_visual_reset_required"
