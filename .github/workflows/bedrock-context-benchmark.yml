@@ -35,6 +35,8 @@ jobs:
           mkdir -p /tmp/icm-benchmark-tools
           cp _benchmark/icm-scripts/*.py /tmp/icm-benchmark-tools/
           cp _benchmark/context_benchmark.py /tmp/icm-benchmark-tools/
+          cp _benchmark/cumulative_context_benchmark.py /tmp/icm-benchmark-tools/
+          cp _benchmark/cumulative-trace.json /tmp/cumulative-trace.json
           mkdir -p /tmp/icm-benchmark-target/.icm/schema
           cp _benchmark/icm-schema/* /tmp/icm-benchmark-target/.icm/schema/
 
@@ -93,6 +95,25 @@ jobs:
             echo
             echo '```json'
             cat /tmp/benchmark.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Compare cumulative task-trace context
+        env:
+          PYTHONPATH: /tmp/icm-benchmark-tools
+        run: |
+          python3 /tmp/icm-benchmark-tools/cumulative_context_benchmark.py \
+            --repo /tmp/icm-benchmark-target \
+            --baseline-json /tmp/baseline.json \
+            --graph-json /tmp/graph.json \
+            --trace-json /tmp/cumulative-trace.json \
+            > /tmp/cumulative-benchmark.json
+          cat /tmp/cumulative-benchmark.json
+          {
+            echo '## Bedrock v0.3 cumulative task-trace benchmark'
+            echo
+            echo '```json'
+            cat /tmp/cumulative-benchmark.json
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
