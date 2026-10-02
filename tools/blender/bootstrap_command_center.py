@@ -18,6 +18,7 @@ from command_center_common import (
     PREVIEW_RESOLUTION,
     PREVIEW_TARGET,
     RUNTIME_POINTS,
+    select_eevee_engine,
     SOURCE_PATH,
     WORLD_BOUNDS,
     aim_object_at,
@@ -113,7 +114,7 @@ def configure_scene():
     scene = bpy.context.scene
     scene.unit_settings.system = "METRIC"
     scene.unit_settings.scale_length = 1.0
-    scene.render.engine = "BLENDER_EEVEE_NEXT"
+    scene.render.engine = select_eevee_engine(scene.render)
     scene.render.resolution_x = PREVIEW_RESOLUTION[0]
     scene.render.resolution_y = PREVIEW_RESOLUTION[1]
     scene.render.resolution_percentage = 100

@@ -10,6 +10,7 @@ from command_center_common import (
     PREVIEW_CAMERA,
     PREVIEW_PATH,
     PREVIEW_RESOLUTION,
+    select_eevee_engine,
 )
 
 
@@ -22,7 +23,7 @@ def main() -> None:
 
     scene = bpy.context.scene
     scene.camera = camera
-    scene.render.engine = "BLENDER_EEVEE_NEXT"
+    scene.render.engine = select_eevee_engine(scene.render)
     scene.render.resolution_x = PREVIEW_RESOLUTION[0]
     scene.render.resolution_y = PREVIEW_RESOLUTION[1]
     scene.render.resolution_percentage = 100

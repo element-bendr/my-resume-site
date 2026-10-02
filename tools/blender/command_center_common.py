@@ -84,6 +84,20 @@ PREVIEW_FOV_DEGREES = 52.0
 PREVIEW_RESOLUTION = (1600, 900)
 
 
+def select_eevee_engine(render_settings) -> str:
+    available = {
+        item.identifier
+        for item in render_settings.bl_rna.properties["engine"].enum_items
+    }
+    for engine in ("BLENDER_EEVEE_NEXT", "BLENDER_EEVEE"):
+        if engine in available:
+            return engine
+    raise RuntimeError(
+        "Blender does not provide a supported Eevee engine; "
+        f"available engines: {sorted(available)}"
+    )
+
+
 def world_to_blender(x: float, z: float, y: float = 0.0) -> tuple[float, float, float]:
     return (x, -z, y)
 

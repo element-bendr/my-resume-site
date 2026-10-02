@@ -41,7 +41,7 @@ Implemented on the Blender branch:
 
 The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Exact-head GitHub bake/CI run `36816140894` passed against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Stage 01 is formally certified by state commit `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
 
-Stage 02 is activated. User-authorized local Blender is version 5.2.1 LTS rather than the repository's 4.5.14 target. The one permitted guide bootstrap attempt was made once and failed before creating a source file because the script requests the removed `BLENDER_EEVEE_NEXT` enum; no authored geometry or export was produced. This version deviation is recorded for repair without changing repository target contracts.
+Stage 02 is activated. User-authorized local Blender is version 5.2.1 LTS rather than the repository's 4.5.14 target. The shared engine-selection compatibility fix now selects `BLENDER_EEVEE` on 5.2.1 while preserving `BLENDER_EEVEE_NEXT` on 4.5. The final permitted guide bootstrap attempt succeeded and created `art/blender/command-center/source/command-center.blend` (SHA-256 `2a0879650d2049ecca0ca64f61c2e2aaa953f1639d5ee7cc3af74d424ae0b236`). The validator then correctly failed because no authored export meshes/markers exist yet; no final geometry, export, or runtime integration was produced.
 
 The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
 
@@ -50,7 +50,8 @@ The prior certified `main` production deployment/smoke record remains pending. T
 - GitHub bake run `36815004861`: Blender 4.5.14 LTS artifact PASS.
 - exact-head GitHub bake/CI run `36816140894`: PASS against `549d35838ddc4d048af83102001a9be00d3e66f1`.
 - Stage 02 activation: PASS via existing workflow tooling; active stage is `02-command-center-integration`.
-- `npm run art:cc:bootstrap`: attempted once; blocked by Blender 5.2.1 enum incompatibility before source creation.
+- `npm run art:cc:bootstrap`: PASS under Blender 5.2.1 after compatibility fix.
+- `npm run art:cc:validate`: expected FAIL for the empty guide source; `validation.json` records missing authored meshes/markers.
 - Six GLB SHA-256/size checks and `npm run art:verify`: PASS.
 - Basic GLB version/JSON/node/mesh/material parse proof: PASS.
 - Full inherited repository gates are rerunning for the exact evidence candidate.
@@ -125,14 +126,14 @@ Expected intact:
 
 ## Blockers
 
-Current blocker: the guide bootstrap script uses the removed Blender 4.5 Eevee enum under authorized Blender 5.2.1. No authored source exists yet; no validation, preview, export, or runtime integration is claimed.
+Current blocker: the guide source has no authored export geometry yet, so structural validation is not green. No preview, export, or runtime integration is claimed.
 
 ## Next atomic action
 
-1. repair the bootstrap engine selection for Blender 5.2.1 without changing Stage 02 contracts;
-2. create the guide-only `art/blender/command-center/source/command-center.blend` once;
-3. run `npm run art:cc:validate` and inspect the guide collections/markers;
-4. author and preview only after structural validation passes;
+1. inspect the generated guide collections and required markers in Blender 5.2.1;
+2. author the bounded Command Center geometry in `EXPORT_COMMAND_CENTER`;
+3. rerun `npm run art:cc:validate` until structural validation passes;
+4. preview only after structural validation passes;
 5. export/integrate only after explicit visual PASS.
 
 ## Minimum resume context
