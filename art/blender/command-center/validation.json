@@ -2,20 +2,17 @@
   "status": "PASS",
   "errors": [],
   "warnings": [
-    "triangle count 105600 is above preferred range 35000..90000"
+    "triangle count 29812 is below preferred authored range 35000..90000"
   ],
   "metrics": {
-    "mesh_objects": 296,
-    "triangles": 105600,
+    "mesh_objects": 119,
+    "triangles": 29812,
     "materials": [
-      "CC_Cyan",
-      "CC_DarkGlass",
       "CC_Graphite",
-      "CC_Gunmetal",
       "CC_SoftMetal",
       "CC_Teal"
     ],
-    "material_count": 6
+    "material_count": 3
   },
   "source": "/mnt/shared/projects/mixed/Resume-gamified/.worktrees/blender-world-art/art/blender/command-center/source/command-center.blend"
 }
