@@ -6,7 +6,7 @@ Upgrade the certified Portfolio World from primitive-heavy Three.js scenery to g
 
 ## Phase
 
-BLENDER_ART_STAGE_02_MASSING_V2_RESET_REQUIRED
+DETAILED_COMMAND_CENTER_AUTHORING_ACTIVE
 
 ## Execution mode
 
@@ -21,11 +21,17 @@ implementation
 - draft PR: #21
 - primary workflow: `workflow/active/portfolio-world-blender-art`
 - active stage: `02-command-center-integration`
-- workflow status: `blocked`
-- block reason: `massing_v2_visual_reset_required`
+- workflow status: `active`
+- Massing V2 composition gate: human PASS at `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f`
 - template: ICM 2.1.0 @ `90322a2441539f24eafdbd2c8a36bc6392192af4`
 
 ## Current state
+
+Human composition PASS is recorded in PR #21 comment [5956821330](https://github.com/element-bendr/my-resume-site/pull/21#issuecomment-5956821330), scoped to candidate `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f` (34,348 triangles, 3 materials, 0 textures). Massing V2 composition is CLOSED. Stage 02 is ACTIVE for detailed authoring, not complete or certified. Preserve that composition and the approved preview camera `(0,-21,10)` toward `(0,0,1.6)`, FOV 52°. Production export, React integration, Stage 03, merge and deployment remain blocked by later gates.
+
+Next milestone: **DETAILED COMMAND CENTER — VISUAL REVIEW READY**. Produce canonical runtime, top and side views with source validation and a concise detail-review document. Independently review before any production export. Improve foreground player-scale readability, lateral direction cues and curved/terraced architecture without moving spawn or changing camera.
+
+The prior failures below remain historical evidence, not the current verdict.
 
 Stage 01 is certified as Blender/export pipeline proof.
 
@@ -44,7 +50,7 @@ Latest local evidence:
 - local evidence:
   `/mnt/shared/projects/mixed/Resume-gamified/.worktrees/blender-world-art/art/blender/command-center/visual-pass-02.md`
 
-The mandatory two-attempt stop rule is now active.
+The mandatory two-attempt stop rule triggered the preserved composition reset.
 
 A third incremental detail pass is prohibited.
 
@@ -83,12 +89,12 @@ Camera-spec provenance reconciled after local checkpoint `4329481`:
 - repin preserves the approved preview/spec change; production camera adoption
   remains deferred to visual acceptance/integration;
 - protected runtime camera, movement, topology and interactions are unchanged;
-- workflow remains blocked by `massing_v2_visual_reset_required`; provenance is
+- workflow is active for detailed Command Center authoring; provenance is
   CURRENT. `started_from_commit` and `validated_commit` are unchanged.
 
 The next valid milestone is:
 
-`MASSING V2 GREYBOX — REVIEW READY`
+`DETAILED COMMAND CENTER — VISUAL REVIEW READY`
 
 Required evidence:
 
@@ -99,7 +105,7 @@ art/blender/command-center/previews/massing-v2-side.png
 art/blender/command-center/massing-v2-review.md
 ```
 
-Massing V2 should remain cheap:
+Historical Massing V2 budget (completed composition gate):
 
 - 20k–40k triangles preferred;
 - 50k soft ceiling;
@@ -107,7 +113,7 @@ Massing V2 should remain cheap:
 - no production textures;
 - no detailed greebles.
 
-## Massing V2 visual gate
+## Massing V2 visual gate — completed with human PASS
 
 The greybox must already demonstrate:
 
@@ -123,7 +129,7 @@ The greybox must already demonstrate:
 - human-scale cues;
 - protected movement/Ask/entrance clearances intact.
 
-If the greybox does not show these qualities, stop and revise massing again before adding detail.
+Human review confirmed these qualities at the approved candidate. Preserve the composition during detailed authoring.
 
 ## Protected state
 
@@ -141,7 +147,7 @@ Do not change:
 
 ## Explicitly blocked
 
-Until Massing V2 visual PASS:
+Until later detailed visual/source/runtime certification gates:
 
 - production `command-center.glb` export;
 - `src/world/CommandCenter.tsx` Blender integration;
@@ -165,14 +171,12 @@ Until Massing V2 visual PASS:
 
 On the local Blender worktree:
 
-1. read the failed visual evidence;
-2. preserve the failed source/checkpoints;
-3. start a materially different Massing V2 greybox;
-4. render top/runtime/side massing views;
-5. run structural/clearance checks;
-6. write the reference comparison;
-7. stop at `MASSING V2 GREYBOX — REVIEW READY`;
-8. obtain visual review before detailed modeling resumes.
+1. preserve approved Massing V2 source/evidence and prior failure lineage;
+2. evolve the approved civic masses with curved terraces, facade depth, landscape and human-scale detail;
+3. preserve runtime contracts, guides, camera and review/export separation;
+4. validate source/clearances and render canonical runtime, top and side evidence;
+5. write detailed review counts, reference comparison and known limitations;
+6. stop for independent detailed visual review before production export.
 
 ## Preserved local lineage and reconciliation
 

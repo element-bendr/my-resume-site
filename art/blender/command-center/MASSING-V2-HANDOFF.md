@@ -2,7 +2,9 @@
 
 ## Current verdict
 
-Stage 02 visual authoring is BLOCKED after the mandatory two-attempt stop rule.
+Massing V2 composition is CLOSED with human PASS at `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f`, PR #21 comment [5956821330](https://github.com/element-bendr/my-resume-site/pull/21#issuecomment-5956821330). Stage 02 is ACTIVE as **DETAILED_COMMAND_CENTER_AUTHORING_ACTIVE**, not certified. Preserve the approved spatial foundation and camera; proceed to detailed authored source and runtime/top/side review evidence. Stop for independent detailed visual review before production GLB export. React integration, Stage 03, merge and deployment remain blocked.
+
+The recovery instructions and failed evidence below are historical. They do not authorize another massing reset or incremental continuation of the failed 105,600-triangle scene. The next valid milestone is **DETAILED COMMAND CENTER — VISUAL REVIEW READY**.
 
 Local evidence:
 

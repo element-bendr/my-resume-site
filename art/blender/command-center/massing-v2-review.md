@@ -1,7 +1,7 @@
 # Revised civic-hub massing greybox
 
-Status: **REVISED CIVIC-HUB MASSING — HUMAN REVIEW READY**.
-Human composition acceptance remains pending; Stage 02 remains blocked.
+Status: **HUMAN COMPOSITION PASS** at `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f`.
+Recorded in PR #21 comment [5956821330](https://github.com/element-bendr/my-resume-site/pull/21#issuecomment-5956821330). Stage 02 is ACTIVE for detailed Command Center authoring, not complete/certified. Production GLB export, React integration, Stage 03, merge and deployment remain blocked by later gates.
 
 ## Authority and provenance
 
@@ -39,7 +39,7 @@ pass was performed.
 - Production/image textures: **0**; render-result buffers are not textures.
 - Structural validation: **PASS**, zero errors.
 - Complete-greybox 20k–40k preferred and 50k ceiling: **PASS**.
-- Workflow strict status: **CURRENT**; Stage 02 intentionally blocked.
+- Workflow strict status: **CURRENT**; Stage 02 active for detailed authoring after human composition PASS.
 
 The production-validator warning below 35k export triangles is expected for this
 cheap composition gate. No clearance/budget was relaxed. Guides are unchanged.
@@ -62,8 +62,9 @@ Saved source restores the canonical camera. This is review evidence, not human
 visual acceptance. The plaza still occupies meaningful screen area; the foreground
 Timeline portal partly overlaps the scale figure; lateral destination ends are
 cropped in the runtime view. Access stairs read more clearly in oblique evidence.
-Human review must judge the new skyline, thresholds, terraces and floating gaps
-before any detail work begins.
+Human review accepted the skyline, thresholds, terraces and floating gaps.
+The listed non-blocking limits carry into detailed authoring; the approved camera
+and player spawn must remain unchanged.
 
 ## Artifact SHA-256
 
@@ -83,5 +84,6 @@ Blender. Validation uses existing `validate_command_center_source.validate`.
 Runtime camera/movement/topology/stations, Ask, content, routing and fallback
 remain unchanged. User-owned `AGENTS.md` is untouched and unstaged.
 No GLB export, React integration, Stage 03, merge or deployment occurred.
-Next: independent Terra review, then existing PR #21 review publishing path and
-human composition verdict. Detailed modeling remains blocked until acceptance.
+Next: detailed authoring on the approved composition, source/clearance validation,
+runtime/top/side visual evidence and independent detailed visual review. Human
+composition acceptance does not establish production-source/export readiness.

@@ -24,13 +24,13 @@
 
 ## Objective
 
-Recover Stage 02 after two structurally valid but visually failed authored attempts.
+Develop the human-approved Massing V2 civic-hub composition into a detailed authored Command Center.
 
-The immediate objective is **not** production integration. It is to produce a materially different Command Center Massing V2 greybox that reads as the finalized floating civic hub from the canonical runtime camera while preserving certified interaction authority.
+Current phase: **DETAILED_COMMAND_CENTER_AUTHORING_ACTIVE**. Human composition PASS at `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f` is recorded in PR #21 comment [5956821330](https://github.com/element-bendr/my-resume-site/pull/21#issuecomment-5956821330). The Massing V2 composition gate is CLOSED; preserve its spatial foundation. Stage 02 remains ACTIVE, not complete/certified.
 
-Only after Massing V2 receives explicit visual PASS may detailed Blender authoring, production export, and runtime integration resume.
+Detailed authoring is now authorized. Production GLB export remains blocked until a later detailed visual PASS and exact-source validation; React integration requires validated production export. Stage 03, merge and deployment remain blocked.
 
-## Current failure state
+## Historical failure state
 
 Local authoring evidence supplied by the Stage 02 session:
 
@@ -51,6 +51,10 @@ The user-owned `AGENTS.md` remains protected and must not be changed.
 
 ## In Scope
 
+- evolve the approved Massing V2 with curved/terraced civic architecture, facade depth, structural framing, landscape, human-scale detail and floating edge/underside treatment;
+- improve foreground player-scale readability and lateral direction cues without moving spawn or changing the approved preview camera;
+- render canonical runtime, top/plan, side/elevation and useful oblique views for detailed visual review;
+- record source counts, review-only geometry separation, limitations and protected-state proof;
 - preserve the two failed authored attempts as evidence;
 - create a new massing/composition plan before any further detail work;
 - work from the finalized reference images and frozen runtime constraints;
@@ -87,6 +91,8 @@ The user-owned `AGENTS.md` remains protected and must not be changed.
 
 ## Process
 
+Current entry point: Massing V2 human composition gate has PASSED. Preserve the approved source and prior failure evidence; continue at detailed authoring step 11 below, then stop for independent detailed visual review. Exact-source validation must prove export collection, clearances, circulation, bounds, naming, budgets and `PREVIEW_DO_NOT_EXPORT` separation before eventual production export.
+
 1. Read the prior FAIL evidence and do not continue the failed silhouette incrementally.
 2. Read `COMMAND-CENTER-MASSING-V2.md`.
 3. Preserve current failed source/checkpoints as evidence.
@@ -120,10 +126,15 @@ Immediate required outputs:
 - `art/blender/command-center/massing-v2-review.md`
 - source validation evidence for the Massing V2 candidate
 
-Deferred until Massing V2 visual PASS:
+Current detailed-authoring outputs:
 
 - final authored `command-center.blend`
 - canonical final runtime preview
+- top/plan and side/elevation detailed previews
+- concise detailed review document with exact source validation, counts, review-only separation and known limitations
+
+Deferred until detailed visual PASS and source/export validation:
+
 - production `command-center.glb`
 - React Command Center integration
 - runtime/browser evidence
@@ -191,6 +202,8 @@ After later visual PASS, the production verification sequence remains:
 
 ## Known closed decisions
 
+- human Massing V2 composition PASS: `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f`, PR comment `5956821330`;
+- the approved composition may not be redesigned without a new blocking visual finding;
 - Stage 01 GLBs prove Blender generation/export, not final art quality;
 - local `.blend` is the creative source of truth for Stage 02;
 - interaction coordinates remain React-owned;
