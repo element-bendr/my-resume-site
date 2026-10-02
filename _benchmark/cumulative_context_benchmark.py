@@ -58,17 +58,31 @@ def load_trace(payload: Any) -> list[dict[str, Any]]:
         if not isinstance(name, str) or not name:
             raise ValueError(f"phase {index}: non-empty name required")
 
-        values = raw.get("reads")
-        if values is None:
-            values = raw.get("paths")
-        if not isinstance(values, list):
-            raise ValueError(f"phase {index}: reads[] or paths[] required")
+        shared = raw.get("reads")
+        if shared is None:
+            shared = raw.get("paths")
+        legacy_values = raw.get("legacy_reads", shared)
+        graph_values = raw.get("graph_reads", shared)
+        if not isinstance(legacy_values, list) or not isinstance(graph_values, list):
+            raise ValueError(
+                f"phase {index}: provide reads[]/paths[] or both legacy_reads[] and graph_reads[]"
+            )
 
-        reads = [
+        legacy_reads = [
             _normalize_read(value, phase=index, read_index=read_index)
-            for read_index, value in enumerate(values, 1)
+            for read_index, value in enumerate(legacy_values, 1)
         ]
-        phases.append({"name": name, "reads": reads})
+        graph_reads = [
+            _normalize_read(value, phase=index, read_index=read_index)
+            for read_index, value in enumerate(graph_values, 1)
+        ]
+        phases.append(
+            {
+                "name": name,
+                "legacy_reads": legacy_reads,
+                "graph_reads": graph_reads,
+            }
+        )
     if not phases:
         raise ValueError("trace requires at least one phase")
     return phases
@@ -235,14 +249,23 @@ def compare_cumulative(
     graph_initial = graph_runtime_metrics(root, graph, ambient)
     phases = load_trace(trace)
 
+    legacy_phases = [
+        {"name": phase["name"], "reads": phase["legacy_reads"]}
+        for phase in phases
+    ]
+    graph_phases = [
+        {"name": phase["name"], "reads": phase["graph_reads"]}
+        for phase in phases
+    ]
+
     legacy_phase_results, legacy_added = phase_additions(
         root,
-        phases,
+        legacy_phases,
         seed_paths=legacy_paths,
     )
     graph_phase_results, graph_added = phase_additions(
         root,
-        phases,
+        graph_phases,
         seed_paths=_graph_seed_paths(graph, ambient),
     )
 
@@ -253,7 +276,7 @@ def compare_cumulative(
         "schema_version": 2,
         "measurement": (
             "cumulative introduced model-visible context: initial context plus source deltas from an explicit "
-            "task trace; whole-file and exact line-range reads are supported; unchanged covered content is not re-injected"
+            "task trace; each phase explicitly records legacy and graph-runtime reads; whole-file and exact line-range reads are supported; unchanged covered content is not re-injected"
         ),
         "graph_subject": graph.get("subject"),
         "graph_base_sha": graph.get("base_sha"),
@@ -272,7 +295,7 @@ def compare_cumulative(
         "estimated_cumulative_reduction_percent": reduction_percent(legacy_total, graph_total),
         "note": (
             "This is a deterministic task-trace proxy, not measured ChatGPT Plus quota or an LLM execution transcript. "
-            "Line ranges must come from a real task's targeted retrieval plan and remain frozen with the result."
+            "Legacy and graph-runtime reads must represent the same task phase. Targeted line ranges must come from a real task retrieval plan and remain frozen with the result."
         ),
     }
 
