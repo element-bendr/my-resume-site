@@ -74,3 +74,29 @@ runs the budget gate, records SHA-256 hashes and uploads the outputs as a short-
 
 A workflow definition existing in the repository is not evidence that a bake ran. Stage 01 validation
 must record an actual successful execution.
+
+
+## Stage 02 local Command Center authoring
+
+Stage 01's `generate_world.py` outputs are procedural pipeline-proof assets.
+
+The genuinely authored Command Center uses the local source lane:
+
+```bash
+npm run art:cc:bootstrap
+npm run art:cc:validate
+npm run art:cc:preview
+npm run art:cc:export
+npm run art:verify
+```
+
+Read before local execution:
+
+- `docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md`
+- `art/blender/command-center/LOCAL-CODEX-HANDOFF.md`
+
+The authoritative art source is:
+
+`art/blender/command-center/source/command-center.blend`
+
+Do not run the export step until the canonical Blender preview receives an explicit visual PASS.
