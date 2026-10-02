@@ -106,3 +106,32 @@ Do not modify:
 - movement;
 - runtime content;
 - user-owned `AGENTS.md`.
+
+## Publish review evidence to PR #21
+
+After the Massing V2 greybox is review-ready and the four required evidence files exist, the local machine may publish them to the existing PR branch without staging unrelated work.
+
+Dry-run / local commit only:
+
+```bash
+npm run art:cc:prepare-review
+```
+
+Commit, push, and add a PR #21 evidence comment when GitHub CLI is authenticated:
+
+```bash
+npm run art:cc:publish-review
+```
+
+The publisher:
+
+- refuses any branch except `feat/blender-world-art-pipeline`;
+- requires all three PNGs plus `massing-v2-review.md`;
+- refuses a dirty Git index;
+- stages only the four approved review-evidence paths;
+- never stages `AGENTS.md`;
+- records SHA-256 and byte sizes before commit;
+- pushes only the current PR branch;
+- optionally posts direct evidence links on PR #21 through authenticated `gh`.
+
+Publishing review evidence does **not** authorize GLB export, React integration, Stage 03, merge, or deployment.
