@@ -13,7 +13,7 @@
         {
           "path": "docs/portfolio-world/ASK-CONTRACT.md",
           "start_line": 21,
-          "end_line": 132
+          "end_line": 131
         },
         {
           "path": "docs/portfolio-world/CONTENT-CONTRACT.md",
@@ -28,7 +28,7 @@
         {
           "path": "docs/portfolio-world/CONTENT-CONTRACT.md",
           "start_line": 344,
-          "end_line": 382
+          "end_line": 381
         }
       ]
     },
@@ -52,17 +52,17 @@
         {
           "path": "src/ask/answer.ts",
           "start_line": 7,
-          "end_line": 50
+          "end_line": 49
         },
         {
           "path": "src/ask/client.ts",
           "start_line": 28,
-          "end_line": 107
+          "end_line": 106
         },
         {
           "path": "src/ask/evidence.ts",
           "start_line": 25,
-          "end_line": 187
+          "end_line": 186
         },
         "src/ask/intent.ts",
         "src/ask/normalize.ts",
@@ -72,7 +72,7 @@
         {
           "path": "worker/ask.ts",
           "start_line": 38,
-          "end_line": 117
+          "end_line": 116
         },
         {
           "path": "worker/index.ts",
@@ -87,7 +87,7 @@
         {
           "path": "src/app/pages/AskPage.tsx",
           "start_line": 117,
-          "end_line": 161
+          "end_line": 160
         },
         {
           "path": "src/world/InteractionOverlay.tsx",
