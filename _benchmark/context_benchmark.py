@@ -113,10 +113,7 @@ def graph_runtime_metrics(
         raise ValueError("compact graph manifest requires budget object")
 
     required = (
-        "bootstrap_source_files",
-        "bootstrap_source_bytes",
         "estimated_tokens_if_bootstrap_sources_loaded",
-        "compact_manifest_chars",
         "estimated_compact_manifest_tokens",
     )
     if any(not isinstance(budget.get(key), int) for key in required):
@@ -142,10 +139,8 @@ def graph_runtime_metrics(
     ambient_tokens = int(ambient["estimated_tokens"])
 
     return {
-        "bootstrap_source_files": int(budget["bootstrap_source_files"]),
-        "bootstrap_source_bytes": int(budget["bootstrap_source_bytes"]),
+        "bootstrap_source_files": len(bootstrap_sources),
         "bootstrap_source_estimated_tokens": bootstrap_tokens,
-        "compact_manifest_chars": int(budget["compact_manifest_chars"]),
         "compact_manifest_estimated_tokens": manifest_tokens,
         "ambient": ambient,
         "model_visible_estimated_tokens": bootstrap_tokens + manifest_tokens + ambient_tokens,
