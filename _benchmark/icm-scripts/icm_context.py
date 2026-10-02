@@ -637,42 +637,46 @@ def compact_context_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         if isinstance(source, dict)
     ]
 
-    routes: dict[str, list[Any]] = {
-        "bootstrap": [],
-        "on_demand": [],
-        "metadata_only": [],
-    }
+    routes: dict[str, dict[str, dict[str, list[Any]]]] = {}
     for item in manifest.get("items", []):
         if not isinstance(item, dict):
             continue
+
         load = item.get("source_load")
-        if load not in routes:
+        if load not in {"bootstrap", "on_demand", "metadata_only"}:
             load = "on_demand"
 
-        node_id = item.get("node_id")
         node_type = item.get("type")
-        refs = item.get("source_refs")
+        if not isinstance(node_type, str) or not node_type:
+            node_type = "unknown"
+
         status = item.get("status")
+        status_key = status if isinstance(status, str) and status else "__none__"
 
-        if load == "metadata_only" and not refs and status is None:
-            routes[load].append(node_id)
-            continue
+        node_id = item.get("node_id")
+        refs = item.get("source_refs")
+        if isinstance(refs, list):
+            source_refs = [value for value in refs if isinstance(value, str) and value]
+        else:
+            source_refs = []
 
-        compact: dict[str, Any] = {
-            "id": node_id,
-            "type": node_type,
-        }
-        if status is not None:
-            compact["status"] = status
-        if isinstance(refs, list) and refs:
-            compact["refs"] = refs
-        routes[load].append(compact)
+        if not source_refs:
+            record: Any = node_id
+        elif len(source_refs) == 1:
+            record = {"id": node_id, "ref": source_refs[0]}
+        else:
+            record = {"id": node_id, "refs": source_refs}
 
-    routes = {
-        name: values
-        for name, values in routes.items()
-        if values
-    }
+        routes.setdefault(load, {}).setdefault(node_type, {}).setdefault(status_key, []).append(record)
+
+    for by_type in routes.values():
+        for by_status in by_type.values():
+            for values in by_status.values():
+                values.sort(
+                    key=lambda value: (
+                        value if isinstance(value, str) else str(value.get("id", ""))
+                    )
+                )
 
     payload: dict[str, Any] = {
         "schema_version": manifest.get("schema_version"),
