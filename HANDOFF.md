@@ -6,7 +6,7 @@ Upgrade the certified Portfolio World from primitive-heavy Three.js scenery to g
 
 ## Phase
 
-BLENDER_ART_STAGE_02_ACTIVE_GUIDE_BOOTSTRAP_BLOCKED
+BLENDER_ART_STAGE_02_AUTHORED_PASS_01_VISUAL_BLOCKED
 
 ## Execution mode
 
@@ -41,7 +41,7 @@ Implemented on the Blender branch:
 
 The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Exact-head GitHub bake/CI run `36816140894` passed against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Stage 01 is formally certified by state commit `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
 
-Stage 02 is activated. User-authorized local Blender is version 5.2.1 LTS rather than the repository's 4.5.14 target. The shared engine-selection compatibility fix now selects `BLENDER_EEVEE` on 5.2.1 while preserving `BLENDER_EEVEE_NEXT` on 4.5. The final permitted guide bootstrap attempt succeeded and created `art/blender/command-center/source/command-center.blend` (SHA-256 `2a0879650d2049ecca0ca64f61c2e2aaa953f1639d5ee7cc3af74d424ae0b236`). The validator then correctly failed because no authored export meshes/markers exist yet; no final geometry, export, or runtime integration was produced.
+Stage 02 is active. User-authorized local Blender is 5.2.1 LTS; the repository target remains 4.5.14. The first editable Command Center pass is saved and structurally validates: 260 meshes, 97,580 triangles, six materials, zero textures. Its canonical preview is visually FAIL: floor-dominant, hero cropped, skyline outside the frame, foreground Timeline lintel obscuring the plaza. The exact prescribed camera is unchanged. Evidence and exact next action are in `art/blender/command-center/visual-pass-01.md`. No export or runtime integration occurred.
 
 The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
 
@@ -51,7 +51,8 @@ The prior certified `main` production deployment/smoke record remains pending. T
 - exact-head GitHub bake/CI run `36816140894`: PASS against `549d35838ddc4d048af83102001a9be00d3e66f1`.
 - Stage 02 activation: PASS via existing workflow tooling; active stage is `02-command-center-integration`.
 - `npm run art:cc:bootstrap`: PASS under Blender 5.2.1 after compatibility fix.
-- `npm run art:cc:validate`: expected FAIL for the empty guide source; `validation.json` records missing authored meshes/markers.
+- Existing validation entrypoint via the single MCP Blender instance: PASS, zero errors; triangles exceed preferred range but remain below the soft ceiling.
+- Existing preview entrypoint via the same MCP Blender instance: PASS; canonical 1600 x 900 image saved. Visual outcome: FAIL / camera-composition conflict.
 - Six GLB SHA-256/size checks and `npm run art:verify`: PASS.
 - Basic GLB version/JSON/node/mesh/material parse proof: PASS.
 - Full inherited repository gates are rerunning for the exact evidence candidate.
@@ -67,9 +68,9 @@ The prior certified `main` production deployment/smoke record remains pending. T
 ## Stale / uncertain state
 
 - Stage 01 certification state is recorded at `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
-- Stage 02 is active; guide source creation is blocked on the Blender 5.2.1 compatibility repair.
+- Stage 02 is active; authored source and preview are saved. Visual acceptance is blocked.
 - Stage 02 now has a frozen authored-scene specification, local bootstrap/validator/render/export scripts, and a local Codex handoff.
-- Browser/runtime visual acceptance remains pending because no authored `.blend` has been created yet.
+- Visual review must resolve canonical-camera framing before a second authored pass. Browser/runtime integration has not begun.
 
 ## Canonical decisions
 
@@ -95,7 +96,7 @@ The prior certified `main` production deployment/smoke record remains pending. T
 
 ## Validation
 
-No Stage 01 certification exists yet.
+Stage 01 certification remains intact; Stage 02 is not certified.
 
 Current proof is structural only:
 
@@ -126,14 +127,14 @@ Expected intact:
 
 ## Blockers
 
-Current blocker: the guide source has no authored export geometry yet, so structural validation is not green. No preview, export, or runtime integration is claimed.
+Current blocker: the first canonical preview fails visual composition. The fixed camera excludes skyline/horizon and crops the hero. A separately recorded camera/composition decision is needed before another pass. Structural validation is green; no export or runtime integration is claimed.
 
 ## Next atomic action
 
-1. inspect the generated guide collections and required markers in Blender 5.2.1;
-2. author the bounded Command Center geometry in `EXPORT_COMMAND_CENTER`;
-3. rerun `npm run art:cc:validate` until structural validation passes;
-4. preview only after structural validation passes;
+1. independently review the saved first-pass source and `previews/runtime.png`;
+2. record a decision resolving camera-visible composition while preserving protected runtime authority;
+3. reconsider foreground portal silhouette and massing before a second pass;
+4. retain the single MCP Blender instance and open bead `stage05-integration-dsq`;
 5. export/integrate only after explicit visual PASS.
 
 ## Minimum resume context
