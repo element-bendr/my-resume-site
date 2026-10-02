@@ -1,0 +1,42 @@
+{
+  "task": "Stage 05 Grounded Ask integration",
+  "basis": "workflow/active/portfolio-world-rebuild/05-integration-CONTEXT.md",
+  "phases": [
+    {
+      "name": "contract-and-grounding",
+      "paths": [
+        "docs/portfolio-world/ASK-CONTRACT.md",
+        "docs/portfolio-world/CONTENT-CONTRACT.md",
+        "docs/portfolio-world/LOCAL-DEVELOPMENT.md"
+      ]
+    },
+    {
+      "name": "ask-runtime",
+      "paths": [
+        "src/ask/answer.ts",
+        "src/ask/client.ts",
+        "src/ask/evidence.ts",
+        "src/ask/intent.ts",
+        "src/ask/normalize.ts",
+        "src/ask/public-source-labels.ts",
+        "src/ask/retrieve.ts",
+        "src/ask/types.ts",
+        "worker/ask.ts",
+        "worker/index.ts",
+        "src/app/pages/AskPage.tsx",
+        "src/world/InteractionOverlay.tsx"
+      ]
+    },
+    {
+      "name": "focused-validation",
+      "paths": [
+        "tests/ask-client.test.ts",
+        "tests/ask-answer.test.ts",
+        "tests/ask-retrieval.test.ts",
+        "tests/world-ask-integration.test.ts",
+        "tests/worker.test.ts",
+        "docs/portfolio-world/STAGE-05-VALIDATION.md"
+      ]
+    }
+  ]
+}
