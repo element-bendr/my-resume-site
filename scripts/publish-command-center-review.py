@@ -97,9 +97,13 @@ def main() -> int:
             print(f"  - {item}", file=sys.stderr)
         return 1
 
-    run(root, "git", "commit", "-m", args.message, capture=False)
-    commit = run(root, "git", "rev-parse", "HEAD").stdout.strip()
-    print(f"PUBLISH REVIEW: COMMIT {commit}")
+    if staged:
+        run(root, "git", "commit", "-m", args.message, capture=False)
+        commit = run(root, "git", "rev-parse", "HEAD").stdout.strip()
+        print(f"PUBLISH REVIEW: COMMIT {commit}")
+    else:
+        commit = run(root, "git", "rev-parse", "HEAD").stdout.strip()
+        print(f"PUBLISH REVIEW: EVIDENCE ALREADY COMMITTED head={commit}")
 
     if not args.push:
         print("PUBLISH REVIEW: LOCAL ONLY (rerun with --push after review)")
