@@ -10,6 +10,7 @@
 
 ## Inputs
 
+- accepted camera composition: `decisions/2026-10-02-command-center-camera-composition.md`; preview `(0,-21,10)` toward `(0,0,1.6)`, FOV 52; runtime adoption deferred to integration.
 - `workflow/active/portfolio-world-blender-art/CONTEXT.md`
 - certified Stage 01 procedural Blender/export pipeline proof
 - `docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md`

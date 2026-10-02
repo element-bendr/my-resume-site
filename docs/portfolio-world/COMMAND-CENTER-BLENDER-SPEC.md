@@ -372,18 +372,20 @@ Do not spend the entire polygon budget because Blender offers polygons free of e
 
 ## 11. Canonical preview camera
 
-The principal Blender preview must reproduce the initial runtime camera.
+The principal Blender preview uses the user-approved camera composition in
+`decisions/2026-10-02-command-center-camera-composition.md`. Runtime adoption is
+deferred until visual acceptance and integration; existing CameraRig is unchanged.
 
 Runtime:
 
-- camera position: `[0, 6.4, 10.2]`
-- target: `[0, 1.0, 3.5]`
+- approved future camera position: `[0, 10, 21]`
+- approved future target: `[0, 1.6, 0]`
 - field of view: `52°`
 
 Blender:
 
-- camera position: `(0, -10.2, 6.4)`
-- target point: `(0, -3.5, 1.0)`
+- camera position: `(0, -21, 10)`
+- target point: `(0, 0, 1.6)`
 - FOV: `52°`
 
 Name:

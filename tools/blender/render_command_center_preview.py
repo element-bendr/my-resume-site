@@ -8,6 +8,10 @@ import bpy
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from command_center_common import (
     PREVIEW_CAMERA,
+    PREVIEW_CAMERA_POSITION,
+    PREVIEW_TARGET,
+    aim_object_at,
+    fov_radians,
     PREVIEW_PATH,
     PREVIEW_RESOLUTION,
     select_eevee_engine,
@@ -20,6 +24,9 @@ def main() -> None:
         raise RuntimeError(f"missing canonical preview camera {PREVIEW_CAMERA}")
 
     PREVIEW_PATH.parent.mkdir(parents=True, exist_ok=True)
+    camera.location = PREVIEW_CAMERA_POSITION
+    aim_object_at(camera, PREVIEW_TARGET)
+    camera.data.angle = fov_radians()
 
     scene = bpy.context.scene
     scene.camera = camera
