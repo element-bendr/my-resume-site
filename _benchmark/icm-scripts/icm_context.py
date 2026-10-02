@@ -632,31 +632,47 @@ def compact_context_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         {
             "path": source.get("path"),
             "sha256": source.get("sha256"),
-            "bytes": source.get("bytes"),
-            "estimated_tokens": source.get("estimated_tokens"),
         }
         for source in manifest.get("bootstrap_sources", [])
         if isinstance(source, dict)
     ]
 
-    items: list[dict[str, Any]] = []
+    routes: dict[str, list[Any]] = {
+        "bootstrap": [],
+        "on_demand": [],
+        "metadata_only": [],
+    }
     for item in manifest.get("items", []):
         if not isinstance(item, dict):
             continue
-        compact: dict[str, Any] = {
-            "id": item.get("node_id"),
-            "type": item.get("type"),
-            "load": item.get("source_load"),
-        }
-        if item.get("status") is not None:
-            compact["status"] = item.get("status")
+        load = item.get("source_load")
+        if load not in routes:
+            load = "on_demand"
+
+        node_id = item.get("node_id")
+        node_type = item.get("type")
         refs = item.get("source_refs")
+        status = item.get("status")
+
+        if load == "metadata_only" and not refs and status is None:
+            routes[load].append(node_id)
+            continue
+
+        compact: dict[str, Any] = {
+            "id": node_id,
+            "type": node_type,
+        }
+        if status is not None:
+            compact["status"] = status
         if isinstance(refs, list) and refs:
             compact["refs"] = refs
-        bootstrap_refs = item.get("bootstrap_source_refs")
-        if isinstance(bootstrap_refs, list) and bootstrap_refs:
-            compact["bootstrap_refs"] = bootstrap_refs
-        items.append(compact)
+        routes[load].append(compact)
+
+    routes = {
+        name: values
+        for name, values in routes.items()
+        if values
+    }
 
     payload: dict[str, Any] = {
         "schema_version": manifest.get("schema_version"),
@@ -667,10 +683,9 @@ def compact_context_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         "graph_fingerprint": manifest.get("graph_fingerprint"),
         "source_fingerprint": manifest.get("source_fingerprint"),
         "fresh": manifest.get("fresh"),
-        "items": items,
+        "routes": routes,
         "bootstrap_sources": bootstrap_sources,
         "blocking_unresolved": manifest.get("blocking_unresolved", []),
-        "excluded": [".icm/generated/*.md"],
         "budget": {
             "bootstrap_source_files": manifest.get("budget", {}).get("bootstrap_source_files", 0),
             "bootstrap_source_bytes": manifest.get("budget", {}).get("bootstrap_source_bytes", 0),
@@ -679,7 +694,7 @@ def compact_context_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
             ),
             "compact_manifest_chars": 0,
             "estimated_compact_manifest_tokens": 0,
-            "measurement": "UTF-8 text uses unicode_chars_div_4_heuristic; compact manifest estimate uses serialized JSON chars/4",
+            "token_estimate": "chars/4",
         },
     }
 
@@ -695,7 +710,6 @@ def compact_context_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
         budget["estimated_compact_manifest_tokens"] = tokens
 
     return payload
-
 
 def build_context_manifest(root: Path, *, subject: str | None = None) -> dict[str, Any]:
     root = root.resolve()
