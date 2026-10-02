@@ -62,8 +62,38 @@
       "depends_on_stages": [
         "01-art-contract-bake"
       ],
-      "depends_on": [],
-      "outputs": [],
+      "depends_on": [
+        {
+          "path": "docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md",
+          "blob": "f1e12cd93896ba957cd21207ddb00ee20ab43813"
+        },
+        {
+          "path": "src/world/world-topology.ts",
+          "blob": "b7f8c8e8b0a906ab7134759e74a02a566c8527bb"
+        },
+        {
+          "path": "src/world/world-config.ts",
+          "blob": "b7e5181e34e1f6a91d2920ae0ff2a2fd2a4b4b9d"
+        },
+        {
+          "path": "src/world/WorldEntry.tsx",
+          "blob": "954a4449d29e5fe60590e1b9ece202aa029ebcba"
+        }
+      ],
+      "outputs": [
+        "docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md",
+        "art/blender/command-center/README.md",
+        "art/blender/command-center/LOCAL-CODEX-HANDOFF.md",
+        "tools/blender/command_center_common.py",
+        "tools/blender/bootstrap_command_center.py",
+        "tools/blender/validate_command_center_source.py",
+        "tools/blender/render_command_center_preview.py",
+        "tools/blender/export_command_center.py",
+        "art/blender/command-center/source/command-center.blend",
+        "art/blender/command-center/previews/runtime.png",
+        "art/blender/command-center/validation.json",
+        "public/world/art/command-center.glb"
+      ],
       "completion_report": "workflow/active/portfolio-world-blender-art/output/02-command-center-integration-completion-report.md",
       "block_reason": "awaiting_activation"
     },
