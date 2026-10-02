@@ -43,6 +43,11 @@ Prove the complete six-zone Blender world remains performant, accessible, failur
 - content/Ask changes;
 - topology/movement changes unless fixing a proven regression through a separately reviewed decision.
 
+## Dependencies
+
+- certified Stage 04 visual candidate
+- `docs/portfolio-world/BLENDER-QA-CERTIFICATION.md`
+
 ## Process
 
 1. freeze the exact Stage 04 candidate;

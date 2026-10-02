@@ -45,6 +45,12 @@ Stage 04 improves presentation. It does not rescue bad massing.
 - production deploy/merge;
 - unrelated portfolio/content changes.
 
+## Dependencies
+
+- certified six-zone Blender integration
+- `docs/portfolio-world/RENDERING-TECHNOLOGY.md`
+- `docs/portfolio-world/ASSET-BUDGET.md`
+
 ## Material/lighting principles
 
 - neutral architecture remains dominant;

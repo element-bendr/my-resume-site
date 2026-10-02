@@ -39,6 +39,11 @@ Certify the exact Blender-world candidate, make PR #21 review-ready, merge only 
 - production claims without deploy/smoke evidence;
 - direct mutation of `main` outside reviewed merge.
 
+## Dependencies
+
+- certified Stage 05 acceptance candidate
+- `docs/portfolio-world/PROMOTION-RECORD.md`
+
 ## Process
 
 1. freeze exact Stage 05 candidate;

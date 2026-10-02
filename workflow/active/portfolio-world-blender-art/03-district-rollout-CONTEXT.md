@@ -115,7 +115,7 @@ For each district:
 - `WorldDistricts.tsx` lazy-loading contract intact;
 - `DistrictStations.tsx` station ownership intact.
 
-## Per-district process
+## Process
 
 For each district, complete the entire sequence before starting the next:
 
