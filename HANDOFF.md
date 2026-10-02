@@ -74,6 +74,18 @@ Failure evidence record:
 
 ## Next milestone
 
+Camera-spec provenance reconciled after local checkpoint `4329481`:
+
+- dependency: `docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md`;
+- old pinned blob: `f1e12cd93896ba957cd21207ddb00ee20ab43813`;
+- accepted current blob: `ad805aef758ace9f2fee9dca4e7dd69f28313cfb`;
+- camera decision: `79ea3fc`, explicit user-approved preview composition;
+- repin preserves the approved preview/spec change; production camera adoption
+  remains deferred to visual acceptance/integration;
+- protected runtime camera, movement, topology and interactions are unchanged;
+- workflow remains blocked by `massing_v2_visual_reset_required`; provenance is
+  CURRENT. `started_from_commit` and `validated_commit` are unchanged.
+
 The next valid milestone is:
 
 `MASSING V2 GREYBOX — REVIEW READY`

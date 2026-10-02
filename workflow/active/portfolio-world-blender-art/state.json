@@ -65,7 +65,7 @@
       "depends_on": [
         {
           "path": "docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md",
-          "blob": "f1e12cd93896ba957cd21207ddb00ee20ab43813"
+          "blob": "ad805aef758ace9f2fee9dca4e7dd69f28313cfb"
         },
         {
           "path": "src/world/world-topology.ts",
