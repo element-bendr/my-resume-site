@@ -30,7 +30,9 @@
     "art:cc:bootstrap": "blender -b --python tools/blender/bootstrap_command_center.py",
     "art:cc:validate": "blender -b art/blender/command-center/source/command-center.blend --python tools/blender/validate_command_center_source.py",
     "art:cc:preview": "blender -b art/blender/command-center/source/command-center.blend --python tools/blender/render_command_center_preview.py",
-    "art:cc:export": "blender -b art/blender/command-center/source/command-center.blend --python tools/blender/export_command_center.py"
+    "art:cc:export": "blender -b art/blender/command-center/source/command-center.blend --python tools/blender/export_command_center.py",
+    "art:cc:publish-review": "python3 scripts/publish-command-center-review.py --push --comment",
+    "art:cc:prepare-review": "python3 scripts/publish-command-center-review.py"
   },
   "dependencies": {
     "react": "19.3.0",
