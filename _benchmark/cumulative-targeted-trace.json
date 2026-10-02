@@ -1,0 +1,91 @@
+{
+  "task": "Stage 05 Grounded Ask integration using targeted existing-source reads",
+  "basis": "Stage 05 contract plus heading/symbol ranges on certified main",
+  "mode": "targeted",
+  "phases": [
+    {
+      "name": "ask-and-disclosure-contract",
+      "reads": [
+        "docs/portfolio-world/ASK-CONTRACT.md",
+        {
+          "path": "docs/portfolio-world/CONTENT-CONTRACT.md",
+          "start_line": 30,
+          "end_line": 65
+        },
+        {
+          "path": "docs/portfolio-world/CONTENT-CONTRACT.md",
+          "start_line": 170,
+          "end_line": 210
+        },
+        {
+          "path": "docs/portfolio-world/CONTENT-CONTRACT.md",
+          "start_line": 326,
+          "end_line": 355
+        },
+        {
+          "path": "docs/portfolio-world/LOCAL-DEVELOPMENT.md",
+          "start_line": 45,
+          "end_line": 70
+        }
+      ]
+    },
+    {
+      "name": "grounding-and-api-path",
+      "reads": [
+        {
+          "path": "src/ask/evidence.ts",
+          "start_line": 1,
+          "end_line": 125
+        },
+        {
+          "path": "src/ask/evidence.ts",
+          "start_line": 160,
+          "end_line": 187
+        },
+        "src/ask/retrieve.ts",
+        "src/ask/answer.ts",
+        "src/ask/types.ts",
+        {
+          "path": "worker/ask.ts",
+          "start_line": 1,
+          "end_line": 15
+        },
+        {
+          "path": "worker/ask.ts",
+          "start_line": 70,
+          "end_line": 117
+        },
+        "worker/index.ts"
+      ]
+    },
+    {
+      "name": "ask-ui-and-terminal-route",
+      "reads": [
+        {
+          "path": "src/app/pages/AskPage.tsx",
+          "start_line": 1,
+          "end_line": 60
+        },
+        {
+          "path": "src/app/pages/AskPage.tsx",
+          "start_line": 120,
+          "end_line": 150
+        },
+        {
+          "path": "src/world/InteractionOverlay.tsx",
+          "start_line": 35,
+          "end_line": 50
+        },
+        {
+          "path": "src/world/InteractionOverlay.tsx",
+          "start_line": 100,
+          "end_line": 125
+        }
+      ]
+    },
+    {
+      "name": "green-validation-no-source-expansion",
+      "reads": []
+    }
+  ]
+}
