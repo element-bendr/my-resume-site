@@ -2,7 +2,7 @@
   "schema_version": 1,
   "workflow_id": "portfolio-world-blender-art",
   "title": "Portfolio World Blender Art Upgrade",
-  "status": "active",
+  "status": "blocked",
   "active_stage": "02-command-center-integration",
   "provenance": {
     "started_from_commit": "5f4de7ace37bfd843ef13f035a3b16ddb61f28d7",
@@ -57,7 +57,7 @@
     },
     {
       "id": "02-command-center-integration",
-      "status": "active",
+      "status": "blocked",
       "context": "workflow/active/portfolio-world-blender-art/02-command-center-integration-CONTEXT.md",
       "depends_on_stages": [
         "01-art-contract-bake"
@@ -92,9 +92,17 @@
         "art/blender/command-center/source/command-center.blend",
         "art/blender/command-center/previews/runtime.png",
         "art/blender/command-center/validation.json",
-        "public/world/art/command-center.glb"
+        "public/world/art/command-center.glb",
+        "docs/portfolio-world/COMMAND-CENTER-MASSING-V2.md",
+        "art/blender/command-center/MASSING-V2-HANDOFF.md",
+        "art/blender/command-center/previews/massing-v2-top.png",
+        "art/blender/command-center/previews/massing-v2-runtime.png",
+        "art/blender/command-center/previews/massing-v2-side.png",
+        "art/blender/command-center/massing-v2-review.md",
+        "docs/portfolio-world/COMMAND-CENTER-VISUAL-FAIL-02.md"
       ],
-      "completion_report": "workflow/active/portfolio-world-blender-art/output/02-command-center-integration-completion-report.md"
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/02-command-center-integration-completion-report.md",
+      "block_reason": "massing_v2_visual_reset_required"
     },
     {
       "id": "03-district-rollout",

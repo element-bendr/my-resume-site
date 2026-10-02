@@ -29,6 +29,8 @@ For current work:
 - `BLENDER-AUTHORING-GUIDE.md` — modeling/export/source-control workflow.
 - `BLENDER-QA-CERTIFICATION.md` — required visual, runtime, performance and fallback gates.
 - `COMMAND-CENTER-BLENDER-SPEC.md` — frozen Stage 02 dimensions, clearances, architecture, materials, preview camera and visual acceptance contract.
+- `COMMAND-CENTER-VISUAL-FAIL-02.md` — two-attempt visual FAIL evidence and stop-rule activation.
+- `COMMAND-CENTER-MASSING-V2.md` — required composition reset before detailed Blender authoring may resume.
 - `BLENDER-STAGE-01-VALIDATION.md` — current asset-bake evidence/status.
 
 Related decision:

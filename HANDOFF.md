@@ -6,7 +6,7 @@ Upgrade the certified Portfolio World from primitive-heavy Three.js scenery to g
 
 ## Phase
 
-BLENDER_ART_STAGE_02_AUTHORED_PASS_02_VISUAL_BLOCKED
+BLENDER_ART_STAGE_02_MASSING_V2_RESET_REQUIRED
 
 ## Execution mode
 
@@ -21,121 +21,121 @@ implementation
 - draft PR: #21
 - primary workflow: `workflow/active/portfolio-world-blender-art`
 - active stage: `02-command-center-integration`
+- workflow status: `blocked`
+- block reason: `massing_v2_visual_reset_required`
 - template: ICM 2.1.0 @ `90322a2441539f24eafdbd2c8a36bc6392192af4`
 
 ## Current state
 
-The certified React/R3F world is already on `main`. The visual upgrade is isolated from it.
+Stage 01 is certified as Blender/export pipeline proof.
 
-Implemented on the Blender branch:
+Stage 02 local Blender authoring was executed and reached two visual attempts.
 
-- deterministic Blender source generator for six zones;
-- typed R3F GLB loader boundary;
-- manual-only pinned Blender asset workflow;
-- GLB byte-budget gate;
-- accepted Blender/runtime authority decision;
-- Blender asset contract;
-- authoring guide;
-- visual/runtime certification checklist;
-- dedicated six-stage ICM workflow.
+Latest local evidence:
 
-The six production GLB binaries are now vendored and hash-verified from GitHub bake run `36815004861` using Blender 4.5.14 LTS. `npm run art:verify` and basic GLB parsing pass; exact sizes and hashes are recorded in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`. Terra independently reviewed documentation head `f27c70b6e45e0770e12789fde523f023ffdd8d85` against artifact candidate `94f0ec5976778d8abf80bad35aa7a743526cf1d7` and returned PASS with no required fixes. Exact-head GitHub bake/CI run `36816140894` passed against pushed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Stage 01 is formally certified by state commit `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
+- camera decision: `79ea3fc`
+- second-pass checkpoint: `e948434`
+- structural validation: PASS
+- 296 meshes
+- 105,600 triangles
+- 6 materials
+- Terra visual review: FAIL
+- failure: scene remains a flat diorama rather than the referenced floating civic hub
+- local evidence:
+  `/mnt/shared/projects/mixed/Resume-gamified/.worktrees/blender-world-art/art/blender/command-center/visual-pass-02.md`
 
-Stage 02 is active. User-authorized local Blender is 5.2.1 LTS; the repository target remains 4.5.14. Second editable pass structurally validates: 296 meshes, 105,600 triangles, six materials, zero textures. The approved camera frames the scene, and five supported portal frames replace detached lintels. Visual acceptance remains FAIL because massing/environment still fall short of the finalized reference. Evidence is in `art/blender/command-center/visual-pass-02.md`. Two-approach stop rule applies. No export or runtime integration occurred.
+The mandatory two-attempt stop rule is now active.
 
-The prior certified `main` production deployment/smoke record remains pending. This Blender branch does not silently resolve or overwrite that release state.
+A third incremental detail pass is prohibited.
 
-## Validation evidence
+No production GLB export, React integration, push from the failed local pass, merge, deployment, or `main` change occurred.
 
-- GitHub bake run `36815004861`: Blender 4.5.14 LTS artifact PASS.
-- exact-head GitHub bake/CI run `36816140894`: PASS against `549d35838ddc4d048af83102001a9be00d3e66f1`.
-- Stage 02 activation: PASS via existing workflow tooling; active stage is `02-command-center-integration`.
-- `npm run art:cc:bootstrap`: PASS under Blender 5.2.1 after compatibility fix.
-- Existing validation entrypoint via the single MCP Blender instance: PASS, zero errors; triangles exceed preferred range but remain below the soft ceiling.
-- Existing preview entrypoint via the same MCP Blender instance: PASS; canonical 1600 x 900 image saved with approved composition. Visual outcome: FAIL / architecture and environment richness.
-- Six GLB SHA-256/size checks and `npm run art:verify`: PASS.
-- Basic GLB version/JSON/node/mesh/material parse proof: PASS.
-- Full inherited repository gates are rerunning for the exact evidence candidate.
-- Detailed sizes, hashes, and stage evidence: `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`.
+The user-owned `AGENTS.md` remains protected and must not be modified.
+
+## Recovery decision
+
+Stage 02 is not abandoned.
+
+It has been reset to a new composition gate:
+
+**Command Center Massing V2**
+
+Canonical recovery document:
+
+`docs/portfolio-world/COMMAND-CENTER-MASSING-V2.md`
+
+Local execution handoff:
+
+`art/blender/command-center/MASSING-V2-HANDOFF.md`
+
+Failure evidence record:
+
+`docs/portfolio-world/COMMAND-CENTER-VISUAL-FAIL-02.md`
+
+## Next milestone
+
+The next valid milestone is:
+
+`MASSING V2 GREYBOX — REVIEW READY`
+
+Required evidence:
+
+```text
+art/blender/command-center/previews/massing-v2-top.png
+art/blender/command-center/previews/massing-v2-runtime.png
+art/blender/command-center/previews/massing-v2-side.png
+art/blender/command-center/massing-v2-review.md
+```
+
+Massing V2 should remain cheap:
+
+- 20k–40k triangles preferred;
+- 50k soft ceiling;
+- 1–3 review materials;
+- no production textures;
+- no detailed greebles.
+
+## Massing V2 visual gate
+
+The greybox must already demonstrate:
+
+- floating civic-hub composition;
+- foreground / midground / background depth;
+- visible horizon/sky;
+- multi-level plaza;
+- meaningful vertical skyline;
+- visible floating platform edge/void;
+- at least three outward destination directions;
+- at least one convincing bridge/bridge mouth;
+- proportionate hero core;
+- human-scale cues;
+- protected movement/Ask/entrance clearances intact.
+
+If the greybox does not show these qualities, stop and revise massing again before adding detail.
 
 ## Protected state
 
-- `main`: unchanged.
-- production/deployment: unchanged.
-- runtime scenery integration: not started.
-- movement, topology, camera, routes, Ask, content, dependencies: unchanged.
-
-## Stale / uncertain state
-
-- Stage 01 certification state is recorded at `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
-- Stage 02 is active; authored source and preview are saved. Visual acceptance is blocked.
-- Stage 02 now has a frozen authored-scene specification, local bootstrap/validator/render/export scripts, and a local Codex handoff.
-- Camera composition is approved and frozen; second pass remains visually FAIL. Stop further similar passes and obtain independent review. Browser/runtime integration has not begun.
-
-## Canonical decisions
-
-- Blender 4.5 LTS remains the repository's canonical 3D asset/export target. User-authorized Blender 5.2.1 LTS is the current local execution environment; this is a tooling-version deviation only and does not change target contracts.
-- GLBs are visual scenery only.
-- React remains authoritative for topology, movement, station positions, camera, routes, content, accessibility and fallback.
-- WebGL 2 remains the production renderer.
-- conventional HTML remains first-class and complete for essential portfolio access.
-- one GLB is produced per world zone.
-- production lights remain runtime-owned by default.
-- assets are integrated and certified incrementally, starting with Command Center.
-- no uncertified art reaches `main` or production.
-
-## Documentation map
-
-- architecture decision: `decisions/2026-10-01-blender-world-art.md`
-- high-level pipeline: `docs/portfolio-world/BLENDER-ART-PIPELINE.md`
-- hard asset interface: `docs/portfolio-world/BLENDER-ASSET-CONTRACT.md`
-- modeling/export workflow: `docs/portfolio-world/BLENDER-AUTHORING-GUIDE.md`
-- visual/runtime gates: `docs/portfolio-world/BLENDER-QA-CERTIFICATION.md`
-- global transfer budgets: `docs/portfolio-world/ASSET-BUDGET.md`
-- renderer policy: `docs/portfolio-world/RENDERING-TECHNOLOGY.md`
-
-## Validation
-
-Stage 01 certification remains intact; Stage 02 is not certified.
-
-Current proof is structural only:
-
-- source and contracts are committed on the isolated branch;
-- all managed stage contracts pass required-section/placeholder checks;
-- pure config tests lock GLB names and art anchors to the certified six-zone topology;
-- protected runtime/content/deployment files are absent from the branch diff;
-- the GLB verifier now validates binary GLB structure, budgets and SHA-256;
-- `main` has not been modified;
-- six binary GLB outputs are present under `public/world/art/`;
-- bake artifact and SHA-256 verification pass;
-- basic GLB loader/parse proof passes;
-- Terra independent Stage 01 review: PASS; no required fixes;
-- runtime/browser scenery validation is intentionally deferred until Stage 02.
-
-Do not describe the Blender world as complete, integrated, or production-ready yet.
-
-## Protected-state status
-
-Expected intact:
+Do not change:
 
 - `main`;
-- production deployment/domain;
-- content and Ask contracts;
-- topology/movement/camera behavior;
-- interaction station data;
-- historical workflow evidence.
+- production/deployment;
+- world topology or bridge bounds;
+- player spawn;
+- movement semantics;
+- camera runtime behavior without a separate approved decision;
+- Ask station/interactions/content;
+- fallback behavior;
+- user-owned `AGENTS.md`.
 
-## Blockers
+## Explicitly blocked
 
-Current blocker: second authored preview remains visually FAIL despite the approved camera resolving framing. See `art/blender/command-center/visual-pass-02.md`: 296 meshes, 105,600 triangles, six materials; structural PASS. Camera decision is frozen in `79ea3fc`; preview uses `(0,-21,10)` toward `(0,0,1.6)` at FOV 52, runtime unchanged. Two-approach stop rule applies. Next action is independent review and a new massing/environment plan, not another similar geometry pass. Stage 02 tracked spec is STALE after approved contract update and requires tooling reconciliation before completion. No export or runtime integration is claimed. User AGENTS.md edit is deliberately uncommitted.
+Until Massing V2 visual PASS:
 
-## Next atomic action
-
-1. independently review the saved first-pass source and `previews/runtime.png`;
-2. record a decision resolving camera-visible composition while preserving protected runtime authority;
-3. reconsider foreground portal silhouette and massing before a second pass;
-4. retain the single MCP Blender instance and open bead `stage05-integration-dsq`;
-5. export/integrate only after explicit visual PASS.
+- production `command-center.glb` export;
+- `src/world/CommandCenter.tsx` Blender integration;
+- Stage 03 district rollout;
+- merge;
+- production deployment.
 
 ## Minimum resume context
 
@@ -143,8 +143,29 @@ Current blocker: second authored preview remains visually FAIL despite the appro
 2. `CONTEXT.md`
 3. `HANDOFF.md`
 4. `workflow/active/portfolio-world-blender-art/CONTEXT.md`
-5. `workflow/active/portfolio-world-blender-art/01-art-contract-bake-CONTEXT.md`
-6. `decisions/2026-10-01-blender-world-art.md`
-7. `docs/portfolio-world/BLENDER-ASSET-CONTRACT.md`
-8. `docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md`
-9. `art/blender/command-center/LOCAL-CODEX-HANDOFF.md`
+5. `workflow/active/portfolio-world-blender-art/02-command-center-integration-CONTEXT.md`
+6. `docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md`
+7. `docs/portfolio-world/COMMAND-CENTER-VISUAL-FAIL-02.md`
+8. `docs/portfolio-world/COMMAND-CENTER-MASSING-V2.md`
+9. `art/blender/command-center/MASSING-V2-HANDOFF.md`
+
+## Next atomic action
+
+On the local Blender worktree:
+
+1. read the failed visual evidence;
+2. preserve the failed source/checkpoints;
+3. start a materially different Massing V2 greybox;
+4. render top/runtime/side massing views;
+5. run structural/clearance checks;
+6. write the reference comparison;
+7. stop at `MASSING V2 GREYBOX — REVIEW READY`;
+8. obtain visual review before detailed modeling resumes.
+
+## Preserved local lineage and reconciliation
+
+The remote recovery contract was merged with the failed local art history; both parent lineages remain auditable. Backup branch `stage02/local-pass-evidence-backup` pins `e948434`. The authored `.blend`, `previews/runtime.png`, `validation.json`, both `visual-pass-*.md` reports, three finalized reference images, camera decision `79ea3fc`, and Blender 5.2 compatibility remain preserved.
+
+Stage 01 certification state commit: `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`; exact-head bake/CI run `36816140894` passed candidate `549d35838ddc4d048af83102001a9be00d3e66f1`. Detailed historical proof remains in `docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md`.
+
+The repository Blender target remains 4.5 LTS. Current local Blender 5.2.1 LTS is user-authorized; approved preview camera `(0,-21,10)` targets `(0,0,1.6)` at FOV 52. Runtime camera behavior remains unchanged. Local `AGENTS.md` stays user-owned, dirty and uncommitted.
