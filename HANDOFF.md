@@ -6,7 +6,7 @@ Upgrade the certified Portfolio World from primitive-heavy Three.js scenery to g
 
 ## Phase
 
-BLENDER_ART_STAGE_01_ACTIVE
+BLENDER_ART_STAGE_02_CONTRACT_READY_LOCAL_EXECUTION_PENDING
 
 ## Execution mode
 
@@ -62,8 +62,9 @@ The prior certified `main` production deployment/smoke record remains pending. T
 ## Stale / uncertain state
 
 - Stage 01 certification state is recorded at `eca3c550d1af9c55cf13ec76b19f723d976b9d1e`.
-- Stage 02 is blocked with `awaiting_activation` and remains inactive.
-- Browser/runtime visual acceptance is deferred until the Stage 01 artifact is independently reviewed and certified.
+- Stage 02 is blocked with `awaiting_activation` and remains inactive until local Blender execution begins.
+- Stage 02 now has a frozen authored-scene specification, local bootstrap/validator/render/export scripts, and a local Codex handoff.
+- Browser/runtime visual acceptance remains pending because no authored `.blend` has been created yet.
 
 ## Canonical decisions
 
@@ -122,13 +123,16 @@ Expected intact:
 
 No architectural blocker.
 
-Immediate technical gate: Stage 02 must first produce or receive an editable authored Command Center `.blend` and pass visual review. The Stage 01 procedural GLB is pipeline evidence only and must not be integrated as the final visual asset.
+Immediate technical gate: start local Stage 02 execution with Blender 4.5 LTS. Activate the managed stage, run `npm run art:cc:bootstrap`, author `art/blender/command-center/source/command-center.blend`, validate it, render the canonical preview, and do not export/integrate until the visual review passes.
 
 ## Next atomic action
 
-1. freeze the Stage 02 contract;
-2. activate Stage 02 through the existing ICM tooling;
-3. only then activate Stage 02 Command Center runtime integration.
+1. on the local machine, confirm Blender 4.5 LTS and the feature branch;
+2. run `python3 scripts/workflow_activate.py --workflow portfolio-world-blender-art --write`;
+3. run `npm run art:cc:bootstrap`;
+4. open and author `art/blender/command-center/source/command-center.blend` using `docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md`;
+5. iterate with `npm run art:cc:validate` and `npm run art:cc:preview`;
+6. export/integrate only after explicit visual PASS.
 
 ## Minimum resume context
 
@@ -139,3 +143,5 @@ Immediate technical gate: Stage 02 must first produce or receive an editable aut
 5. `workflow/active/portfolio-world-blender-art/01-art-contract-bake-CONTEXT.md`
 6. `decisions/2026-10-01-blender-world-art.md`
 7. `docs/portfolio-world/BLENDER-ASSET-CONTRACT.md`
+8. `docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md`
+9. `art/blender/command-center/LOCAL-CODEX-HANDOFF.md`
