@@ -6,6 +6,7 @@ on:
       - icm/control
     paths:
       - "workflow/local-execution/queue/**"
+      - ".github/workflows/icm-control-queue.yml"
 
 permissions:
   contents: read
@@ -56,8 +57,18 @@ jobs:
               raise SystemExit("no queue records found")
 
           errors = []
+          validated = 0
+          historical = 0
           for path in queue:
               task = load_json_object(path)
+              task_id = task.get("task_id")
+              result_path = control_root / "workflow/local-execution/results" / f"{task_id}.json"
+              review_path = control_root / "workflow/local-execution/reviews" / f"{task_id}.json"
+              if result_path.is_file() and review_path.is_file():
+                  historical += 1
+                  print(f"HISTORICAL_COMPLETED: {task_id}")
+                  continue
+              validated += 1
               if task.get("trusted_ref") != trusted_ref:
                   errors.append(f"{path.name}: trusted_ref must be {trusted_ref}")
                   continue
@@ -73,5 +84,5 @@ jobs:
 
           if errors:
               raise SystemExit("\n".join(errors))
-          print(f"CONTROL_QUEUE_VALIDATION: PASS tasks={len(queue)} trusted_sha={trusted_sha}")
+          print(f"CONTROL_QUEUE_VALIDATION: PASS active={validated} historical={historical} trusted_sha={trusted_sha}")
           PY
