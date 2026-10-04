@@ -1,0 +1,46 @@
+{
+  "base_sha": "3998c4c774944baec9151111cc3f628b06fde029",
+  "blockers": [],
+  "candidate_ref": "refs/heads/icm/candidates/command-center-browser-cert-001",
+  "candidate_sha": "bee352c0c2cf81f7564fb6b61864dc693cdb6720",
+  "changed_paths": [
+    "docs/portfolio-world/evidence/command-center-browser-cert-001/1024.png",
+    "docs/portfolio-world/evidence/command-center-browser-cert-001/browser-evidence.json",
+    "docs/portfolio-world/evidence/command-center-browser-cert-001/desktop.png",
+    "docs/portfolio-world/evidence/command-center-browser-cert-001/fallback.png",
+    "docs/portfolio-world/evidence/command-center-browser-cert-001/mobile-390.png",
+    "docs/portfolio-world/evidence/command-center-browser-cert-001/runtime-certification.md"
+  ],
+  "claim_ref": "refs/heads/icm/claims/command-center-browser-cert-001",
+  "execution": {
+    "branch": "icm/run/command-center-browser-cert-001",
+    "worktree_id": "command-center-browser-cert-001"
+  },
+  "executor_identity": "local/workstation:executor/luna",
+  "next_action": "await_review",
+  "protected_state": "unchanged",
+  "record_type": "result",
+  "repository": "element-bendr/my-resume-site",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "status": "pass",
+  "task_id": "command-center-browser-cert-001",
+  "validation": [
+    {
+      "id": "blender-assets",
+      "status": "pass",
+      "summary": "exit=0"
+    },
+    {
+      "id": "runtime-integration",
+      "status": "pass",
+      "summary": "exit=0"
+    },
+    {
+      "id": "icm-stage",
+      "status": "pass",
+      "summary": "exit=0"
+    }
+  ],
+  "workflow_id": "portfolio-world-blender-art"
+}
