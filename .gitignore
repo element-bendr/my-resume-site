@@ -13,3 +13,5 @@ coverage/
 __pycache__/
 *.pyc
 .ci-artifacts/
+\n.icm-local/\n
+.icm-local/

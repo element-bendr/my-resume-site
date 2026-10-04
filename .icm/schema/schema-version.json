@@ -1,0 +1,7 @@
+{
+  "graph_schema_version": 1,
+  "storage_contract_version": 1,
+  "status": "v1-frozen",
+  "architecture_decision": "decisions/2026-09-27-graph-native-icm-compiler.md",
+  "tracking_issue": 10
+}

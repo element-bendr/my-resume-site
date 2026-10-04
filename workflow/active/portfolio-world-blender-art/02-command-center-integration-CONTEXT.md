@@ -20,7 +20,7 @@
 - `src/world/world-topology.ts`
 - `src/world/world-config.ts`
 - `src/world/WorldEntry.tsx`
-- `src/world/CommandCenter.tsx`
+- `src/world/CommandCenter.tsx`\n- `decisions/2026-10-04-blender-icm-autonomous-execution.md`\n- `docs/portfolio-world/BLENDER-AUTONOMOUS-EXECUTION.md`
 
 ## Objective
 
@@ -114,6 +114,14 @@ Current entry point: Massing V2 human composition gate has PASSED. Preserve the 
 12. Only after later authored visual PASS, export the production GLB.
 13. Only after production GLB validation, integrate into React and run runtime tests.
 
+## Execution model — graph-bounded visual loop
+
+For detailed authoring, substantial work should run through the pinned graph-backed ICM runtime. Luna is the bounded Blender executor; Terra supplies visual critique and detached independent review; Sol remains coordinator/architecture escalation rather than participating in every render correction.
+
+A bounded authoring task may iterate scene -> render -> critique -> correction while its objective and protected-state assumptions remain unchanged. Each iteration must preserve compact evidence. If the same material defect survives two materially similar attempts, stop and correct the upstream scene rule, reference interpretation, or task/stage contract before resuming.
+
+The formal reviewer remains independent of the executor. Production GLB export, React integration and promotion remain governed by the existing Stage 02 gates.
+
 ## Outputs
 
 Immediate required outputs:
@@ -168,7 +176,7 @@ Stage 02 final acceptance still additionally requires:
 
 For the current Massing V2 gate:
 
-- `python3 scripts/workflow_status.py --strict`
+- `python3 scripts/workflow_status.py --strict`\n- after canonical graph initialization: `python3 scripts/icm.py --json validate`\n- bounded runtime context: `python3 scripts/icm.py --json context --compact --subject stage.portfolio-world-blender-art-02-command-center-integration`
 - `npm run art:cc:validate` when compatible with the active source
 - inspect `massing-v2-top.png`
 - inspect `massing-v2-runtime.png`

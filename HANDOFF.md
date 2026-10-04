@@ -18,12 +18,14 @@ implementation
 - canonical branch: `main`
 - protected baseline: `5f4de7ace37bfd843ef13f035a3b16ddb61f28d7`
 - implementation branch: `feat/blender-world-art-pipeline`
-- draft PR: #21
+- ICM migration branch: `feat/blender-icm-autonomous-loop`
+- Blender draft PR: #21
+- ICM migration draft PR: #23
 - primary workflow: `workflow/active/portfolio-world-blender-art`
 - active stage: `02-command-center-integration`
 - workflow status: `active`
 - Massing V2 composition gate: human PASS at `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f`
-- template: ICM 2.1.0 @ `90322a2441539f24eafdbd2c8a36bc6392192af4`
+- installed ICM graph/runtime source: `element-bendr/icm-repo-template@5fa96deb6c3b54f6d9c17def2ea51e69e6a1fb5e`
 
 ## Current state
 
@@ -57,6 +59,19 @@ A third incremental detail pass is prohibited.
 No production GLB export, React integration, push from the failed local pass, merge, deployment, or `main` change occurred.
 
 The user-owned `AGENTS.md` remains protected and must not be modified.
+
+## Validation evidence
+
+- Stage 01 remains certified as the Blender/export pipeline proof.
+- Massing V2 composition retains the recorded human PASS at `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f`.
+- PR #23 migration run #1 compiled the inherited ICM runtime successfully, then failed closed at bootstrap because this handoff lacked the latest required validation/staleness sections. Graph initialization and context validation did not run on that failed attempt.
+- No accepted Blender source, GLB, React runtime, `main`, deployment, or `AGENTS.md` state changed during the migration attempt.
+
+## Stale / uncertain state
+
+- Canonical graph/state for the current Blender branch has not yet been promoted into repository authority; PR #23 first proves disposable initialization and compact Stage 02 resolution.
+- `icm/control`, machine-local Luna/Terra runner policies, and the first autonomous Blender queue task are not yet activated.
+- Stage 02 remains active at detailed Command Center authoring; production export, React integration, Stage 03, merge, and deployment remain blocked by the existing gates.
 
 ## Recovery decision
 
