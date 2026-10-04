@@ -1,0 +1,30 @@
+{
+  "status": "STOP",
+  "candidateSha": "3998c4c774944baec9151111cc3f628b06fde029",
+  "baseUrl": "http://127.0.0.1:4173",
+  "asset": {
+    "url": "/world/art/command-center.glb",
+    "status": 200,
+    "bytes": 845512,
+    "sha256": "72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496"
+  },
+  "viewports": {
+    "desktop.png": { "width": 1440, "height": 1000, "assetRendered": false, "visibleScene": "old procedural scene" },
+    "1024.png": { "width": 1024, "height": 768, "assetRendered": false, "visibleScene": "old procedural scene" },
+    "mobile-390.png": { "width": 390, "height": 844, "assetRendered": false, "visibleScene": "old procedural scene" }
+  },
+  "runtimeErrors": {
+    "consoleErrors": 4,
+    "pageErrors": 254,
+    "failedRequests": 0,
+    "rootCause": "CSP blocks external Draco decoder requests and WebAssembly instantiation."
+  },
+  "fallback": {
+    "links": { "Projects": "/projects", "Resume": "/resume", "Ask": "/ask", "Contact": "/contact" },
+    "askRoute": "/ask",
+    "pageErrors": 0,
+    "consoleErrors": 0,
+    "failedRequests": 0
+  },
+  "stopReason": "Authored GLB does not render in the production preview. Fix requires protected runtime or asset integration changes outside this task."
+}
