@@ -1,0 +1,91 @@
+name: ICM Blender Migration Proof
+
+on:
+  pull_request:
+    branches:
+      - feat/blender-world-art-pipeline
+    paths:
+      - ".icm/**"
+      - "schemas/icm-*.json"
+      - "scripts/icm.py"
+      - "scripts/icm_*.py"
+      - "scripts/icm/**"
+      - "workflow/active/portfolio-world-blender-art/**"
+      - "workflow/local-execution/**"
+      - "decisions/2026-10-04-blender-icm-autonomous-execution.md"
+      - "docs/portfolio-world/BLENDER-AUTONOMOUS-EXECUTION.md"
+      - ".github/workflows/icm-blender-migration.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prove-migration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile ICM runtime
+        run: |
+          python3 -m compileall -q scripts/icm.py scripts/icm_*.py scripts/icm
+
+      - name: Verify inherited repository workflow
+        run: |
+          python3 scripts/bootstrap_check.py
+          python3 scripts/workflow_check.py
+          python3 scripts/workflow_status.py --strict
+
+      - name: Audit and initialize disposable graph state
+        run: |
+          python3 scripts/icm.py --json audit > /tmp/icm-audit.json
+          python3 scripts/icm.py --json init --write > /tmp/icm-init.json
+          cat /tmp/icm-audit.json
+          cat /tmp/icm-init.json
+
+      - name: Validate graph-backed repository state
+        run: |
+          python3 scripts/icm.py --json validate
+
+      - name: Resolve bounded Stage 02 context
+        run: |
+          python3 scripts/icm.py --json context --compact \
+            --subject stage.portfolio-world-blender-art-02-command-center-integration \
+            > /tmp/icm-context.json
+          python3 - <<'PY'
+          import json
+          p=json.load(open("/tmp/icm-context.json"))
+          assert p["subject"] == "stage.portfolio-world-blender-art-02-command-center-integration"
+          assert p["status"] in {"PASS","BLOCKED"}
+          assert p.get("fresh") is True
+          print(json.dumps({
+              "status": p["status"],
+              "subject": p["subject"],
+              "base_sha": p["base_sha"],
+              "bootstrap_sources": len(p.get("bootstrap_sources", [])),
+              "budget": p.get("budget", {}),
+          }, indent=2, sort_keys=True))
+          PY
+
+      - name: Prove initialization touched only compiler-owned state
+        run: |
+          python3 - <<'PY'
+          import subprocess
+          allowed=(".icm/graph/", ".icm/state/", ".icm/generated/")
+          bad=[]
+          for line in subprocess.check_output(["git","status","--porcelain"], text=True).splitlines():
+              path=line[3:]
+              if not path.startswith(allowed):
+                  bad.append(line)
+          if bad:
+              raise SystemExit("unexpected mutation: " + repr(bad))
+          print("ICM_DISPOSABLE_STATE_ONLY: PASS")
+          PY
