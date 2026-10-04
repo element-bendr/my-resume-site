@@ -1,0 +1,31 @@
+{
+  "base_sha": "b0e42fd234ec32272d34478296ea9dba455c9ea0",
+  "blockers": [],
+  "candidate_ref": "refs/heads/icm/candidates/blender-loop-fixture-001",
+  "candidate_sha": "91469fa48a100b8c379a7d870e37cc1b1556aa7c",
+  "changed_paths": [
+    "workflow/local-execution/fixtures/blender-loop-fixture-001.txt"
+  ],
+  "claim_ref": "refs/heads/icm/claims/blender-loop-fixture-001",
+  "execution": {
+    "branch": "icm/run/blender-loop-fixture-001",
+    "worktree_id": "blender-loop-fixture-001"
+  },
+  "executor_identity": "github-actions/fixture:executor/deterministic",
+  "next_action": "await_review",
+  "protected_state": "unchanged",
+  "record_type": "result",
+  "repository": "element-bendr/my-resume-site",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "status": "pass",
+  "task_id": "blender-loop-fixture-001",
+  "validation": [
+    {
+      "id": "fixture-smoke",
+      "status": "pass",
+      "summary": "exit=0"
+    }
+  ],
+  "workflow_id": "portfolio-world-blender-art"
+}
