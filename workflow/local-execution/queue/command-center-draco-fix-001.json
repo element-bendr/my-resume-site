@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-draco-fix-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "3998c4c774944baec9151111cc3f628b06fde029",
+  "trusted_ref": "refs/heads/icm/candidates/command-center-runtime-test-001",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "006e6fae49962a94d5a05ec920de52307217ed0a"
+  },
+  "executor_profile": "runtime-luna",
+  "review_policy": "independent",
+  "scope": [
+    "Resolve the browser-certification STOP caused by Drei's default external Draco decoder and production CSP, without weakening CSP and without changing the certified production GLB.",
+    "Vendor the JavaScript Draco decoder from the exact locally installed three@0.186.0 package into public/draco/draco_decoder.js.",
+    "Configure CommandCenterArt to use a dedicated DRACOLoader with decoder path /draco/ and decoder config { type: 'js' }.",
+    "Disable Drei's default Draco loader for the Command Center useGLTF call and inject the dedicated local loader through the loader extension hook.",
+    "Add focused regression coverage and concise correction evidence.",
+    "Do not perform full browser visual certification in this task; that remains a separately queued recertification after this candidate independently passes."
+  ],
+  "write_paths": [
+    "src/world/art/CommandCenterArt.tsx",
+    "tests/command-center-runtime.test.ts",
+    "public/draco/draco_decoder.js",
+    "public/draco/README.md",
+    "docs/portfolio-world/evidence/command-center-draco-fix-001/**"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "package-lock.json",
+    "public/_headers",
+    "public/world/art/**",
+    "art/blender/**",
+    "src/world/CommandCenter.tsx",
+    "src/world/WorldEntry.tsx",
+    "src/world/WorldTopology.tsx",
+    "src/world/PlayerController.tsx",
+    "src/world/CameraRig.tsx",
+    "src/world/InteractionStation.tsx",
+    "src/world/WorldDistricts.tsx",
+    "src/world/world-config.ts",
+    "src/world/world-topology.ts",
+    "src/content/**",
+    "workflow/**",
+    "decisions/**",
+    "worker/**",
+    "wrangler.jsonc"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/candidates/command-center-runtime-test-001",
+    "refs/heads/icm/candidates/command-center-browser-cert-001"
+  ],
+  "acceptance": [
+    "Task executes from exact certified runtime candidate SHA 3998c4c774944baec9151111cc3f628b06fde029.",
+    "The failed browser-certification evidence candidate bee352c0c2cf81f7564fb6b61864dc693cdb6720 remains unchanged and is referenced in correction evidence.",
+    "public/world/art/command-center.glb remains byte-for-byte unchanged at SHA-256 72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496 and 845512 bytes.",
+    "public/_headers remains byte-for-byte unchanged.",
+    "No wasm-unsafe-eval, unsafe-eval, gstatic.com, googleapis.com, or other external Draco decoder origin is added to CSP.",
+    "public/draco/draco_decoder.js is copied from the locally installed three@0.186.0 package, preferably node_modules/three/examples/jsm/libs/draco/gltf/draco_decoder.js, without network download.",
+    "public/draco/README.md records decoder provenance, exact package version, source path, destination path, and SHA-256.",
+    "CommandCenterArt.tsx constructs a dedicated DRACOLoader, sets decoder path /draco/, forces decoder config type js, disables Drei's default Draco loader, and supplies the dedicated loader through the GLTF loader extension hook.",
+    "The existing Suspense/error-boundary decorative fallback remains intact.",
+    "No topology, movement, spawn, bridge, camera, Ask, station, content, HUD, or other district behavior changes.",
+    "Focused runtime tests cover the self-hosted decoder boundary without depending on the external Google decoder.",
+    "command-center-draco-local validation passes.",
+    "blender-assets validation passes.",
+    "runtime-integration / npm run verify passes.",
+    "icm-stage validation passes.",
+    "Independent Terra review returns pass with no required fixes.",
+    "Protected state remains unchanged."
+  ],
+  "validation": [
+    "command-center-draco-local",
+    "blender-assets",
+    "runtime-integration",
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The certified runtime candidate ref no longer resolves to 3998c4c774944baec9151111cc3f628b06fde029.",
+    "The certified production GLB hash or size changes.",
+    "The exact three@0.186.0 JavaScript Draco decoder cannot be located locally in the installed dependency tree.",
+    "Fixing the issue would require weakening CSP, adding WebAssembly execution permission, or allowing an external decoder CDN.",
+    "A proposed fix requires changing the production GLB, Blender source, topology, movement, camera, Ask, stations, WorldEntry, PlayerController, or deployment configuration.",
+    "npm run verify or command-center-draco-local cannot pass inside the declared write scope.",
+    "Unexpected unrelated diffs appear.",
+    "Independent review returns fix_required or stop."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
