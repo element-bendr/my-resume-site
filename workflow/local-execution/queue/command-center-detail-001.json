@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-detail-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "aee1b6149fe28e2d5d8afcd4ae207f08f656f474",
+  "trusted_ref": "refs/heads/feat/blender-world-art-pipeline",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "1dcc7bc7eae4f46015404fd904734f3732b80be0"
+  },
+  "executor_profile": "blender-luna",
+  "review_policy": "independent",
+  "scope": [
+    "Evolve the approved Massing V2 Command Center into a detailed authored candidate without changing its accepted spatial composition or preview camera.",
+    "Use Blender or Blender Python for curved and terraced civic architecture, facade depth, structural framing, landscape, human-scale detail, floating edge and underside treatment.",
+    "Commit the editable Blender source, canonical detailed runtime/top/side previews, current source-validation report, and a concise detailed review document.",
+    "Do not export the production GLB or integrate React in this task."
+  ],
+  "write_paths": [
+    "art/blender/command-center/source/command-center.blend",
+    "art/blender/command-center/previews/detail-runtime.png",
+    "art/blender/command-center/previews/detail-top.png",
+    "art/blender/command-center/previews/detail-side.png",
+    "art/blender/command-center/validation.json",
+    "art/blender/command-center/detail-review.md",
+    "tools/blender/detail_*.py"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "decisions/**",
+    "workflow/active/**",
+    "docs/portfolio-world/COMMAND-CENTER-MASSING-V2.md",
+    "docs/portfolio-world/COMMAND-CENTER-VISUAL-FAIL-02.md",
+    "art/blender/command-center/references/**",
+    "art/blender/command-center/previews/massing-v2-*.png",
+    "art/blender/command-center/massing-v2-review.md",
+    "art/blender/command-center/massing-v2-validation.json",
+    "art/blender/command-center/visual-pass-*.md",
+    "public/world/art/**",
+    "src/world/**"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control"
+  ],
+  "acceptance": [
+    "The accepted Massing V2 spatial foundation and preview camera remain unchanged.",
+    "The scene reads as a detailed floating civic hub with curved or terraced architecture, facade depth, structural framing, landscape, human-scale cues, and credible floating edge or underside treatment.",
+    "Foreground player-scale readability and lateral destination cues improve without moving spawn, bridge entrances, Ask clearances, topology, or runtime camera behavior.",
+    "art/blender/command-center/validation.json is committed with status PASS.",
+    "detail-runtime.png, detail-top.png, and detail-side.png are committed as canonical detailed review evidence.",
+    "detail-review.md contains Reference comparison, Source validation, Protected state, and Known limitations sections.",
+    "No production command-center.glb export or React integration change occurs.",
+    "The candidate passes blender-candidate and icm-stage validation.",
+    "Independent Terra review returns pass with no required fixes before any later export task is created."
+  ],
+  "validation": [
+    "blender-candidate",
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The trusted Blender branch head no longer equals the task base SHA.",
+    "A requested change requires modifying protected camera, topology, spawn, Ask, bridge, React, production GLB, workflow contract, or approved Massing V2 evidence.",
+    "The same material visual defect survives two materially similar repair attempts.",
+    "Required reference interpretation is ambiguous enough that a protected composition decision would have to be reopened.",
+    "Source validation cannot pass within the declared write scope.",
+    "Any unexpected unrelated diff appears.",
+    "Executor or reviewer would need credentials, pushes, merges, or authority outside the local ICM contract."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
