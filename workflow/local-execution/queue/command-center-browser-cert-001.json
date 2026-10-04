@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-browser-cert-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "3998c4c774944baec9151111cc3f628b06fde029",
+  "trusted_ref": "refs/heads/icm/candidates/command-center-runtime-test-001",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "2484d8fbaa63c9ba8418845d0d57d7768977fa88"
+  },
+  "executor_profile": "runtime-luna",
+  "review_policy": "independent",
+  "scope": [
+    "Certify the exact Command Center runtime integration candidate in a real browser without modifying application, Blender, GLB, topology, content, or deployment state.",
+    "Build and launch the production preview locally from the exact candidate SHA.",
+    "Reuse the repository's existing browser certification patterns and pinned/transient Chromium or Playwright approach where practical.",
+    "Capture desktop, tablet-or-small-desktop, mobile, and forced non-WebGL evidence for /play?zone=command-center.",
+    "Verify the production GLB is actually requested successfully, retains the certified byte size/hash, and renders as Command Center scenery while React-owned movement, Ask, HUD and navigation remain functional.",
+    "Record page errors, console errors, failed requests, HTTP failures, viewport overflow, GLB request outcome, interaction checks, route-exit checks, and visual evidence.",
+    "Commit evidence only. Do not change runtime code in this task."
+  ],
+  "write_paths": [
+    "docs/portfolio-world/evidence/command-center-browser-cert-001/**"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "package-lock.json",
+    "decisions/**",
+    "workflow/**",
+    "art/blender/**",
+    "public/**",
+    "src/**",
+    "tests/**",
+    "scripts/**",
+    "worker/**",
+    "wrangler.jsonc"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/candidates/command-center-runtime-test-001",
+    "refs/heads/icm/candidates/command-center-export-evidence-001"
+  ],
+  "acceptance": [
+    "Task executes from exact runtime candidate SHA 3998c4c774944baec9151111cc3f628b06fde029.",
+    "The production GLB remains byte-for-byte unchanged at SHA-256 72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496 and 845512 bytes.",
+    "npm run verify passes before browser certification.",
+    "A production preview starts successfully and /api/health returns ok.",
+    "Desktop WebGL evidence is captured at 1440x1000 for /play?zone=command-center after the GLB finishes loading.",
+    "Additional responsive evidence is captured at 1024x768 and 390x844.",
+    "A forced non-WebGL path is exercised and the conventional fallback exposes working Projects, Resume, Ask and Contact navigation.",
+    "Browser evidence records zero application page errors, zero unexpected console errors, zero failed asset/API requests, and zero unexpected HTTP failures on the certified Command Center path.",
+    "The browser requests /world/art/command-center.glb successfully and the response byte length is consistent with the certified asset.",
+    "The Command Center visually reads as the certified floating civic hub rather than the old procedural grid/hologram scene.",
+    "The player/avatar, HUD, Ask station, movement target feedback and world navigation remain visually and functionally legible over the authored scenery.",
+    "The authored GLB does not visually obscure the player spawn, Ask interaction area, bridge entrances, HUD, or essential movement/readability cues.",
+    "No obvious z-fighting, exploded transforms, missing materials, black/magenta asset failure, gross clipping, or severe camera/scenery mismatch is visible.",
+    "At 390x844, the world HUD/map controls remain usable and the viewport has no horizontal overflow.",
+    "Ask Terminal interaction reaches the existing Ask flow or opens its interaction overlay without runtime failure.",
+    "At least one SPA exit from /play to a conventional route completes with zero page errors and no failed requests.",
+    "Evidence includes browser-evidence.json, desktop.png, 1024.png, mobile-390.png, fallback.png or fallback evidence, and runtime-certification.md.",
+    "blender-assets, runtime-integration and icm-stage validations pass on the unchanged candidate/evidence commit.",
+    "Independent Terra review of the exact screenshots/logs returns pass with no required fixes.",
+    "No application code, GLB, Blender source, feature branch, main, or deployment change occurs."
+  ],
+  "validation": [
+    "blender-assets",
+    "runtime-integration",
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The certified runtime candidate ref no longer resolves to 3998c4c774944baec9151111cc3f628b06fde029.",
+    "The production GLB hash or size differs from the certified values.",
+    "The GLB request fails, returns a non-success status, or the asset does not render.",
+    "A browser/page/runtime error appears that cannot be explained as a known harmless headless-browser environment warning.",
+    "The authored scene materially obscures spawn, Ask, bridge entrances, movement readability, or HUD.",
+    "The visual result materially diverges from the certified Blender detailed renders or appears broken after integration.",
+    "Fixing a discovered issue would require any protected application or asset path change; in that case preserve evidence and STOP so a separate correction task can be created.",
+    "Unexpected unrelated diffs appear.",
+    "Independent Terra review returns fix_required or stop."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
