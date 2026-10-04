@@ -29,6 +29,7 @@ jobs:
       - name: Resolve trusted code branch
         run: |
           git fetch origin refs/heads/feat/blender-world-art-pipeline:refs/remotes/origin/feat/blender-world-art-pipeline
+          git fetch origin "refs/heads/icm/candidates/*:refs/remotes/origin/icm/candidates/*"
           trusted_sha="$(git rev-parse refs/remotes/origin/feat/blender-world-art-pipeline)"
           echo "TRUSTED_SHA=$trusted_sha" >> "$GITHUB_ENV"
           git worktree add --detach /tmp/icm-code "$trusted_sha"
@@ -69,16 +70,54 @@ jobs:
                   print(f"HISTORICAL_COMPLETED: {task_id}")
                   continue
               validated += 1
-              if task.get("trusted_ref") != trusted_ref:
-                  errors.append(f"{path.name}: trusted_ref must be {trusted_ref}")
+              task_ref = task.get("trusted_ref")
+              resolved_sha = None
+
+              if task_ref == trusted_ref:
+                  resolved_sha = trusted_sha
+              elif isinstance(task_ref, str) and task_ref.startswith("refs/heads/icm/candidates/"):
+                  source_task_id = task_ref.rsplit("/", 1)[-1]
+                  source_result_path = control_root / "workflow/local-execution/results" / f"{source_task_id}.json"
+                  source_review_path = control_root / "workflow/local-execution/reviews" / f"{source_task_id}.json"
+                  if not source_result_path.is_file() or not source_review_path.is_file():
+                      errors.append(f"{path.name}: candidate trusted_ref lacks durable source result/review")
+                      continue
+                  source_result = load_json_object(source_result_path)
+                  source_review = load_json_object(source_review_path)
+                  remote_ref = "refs/remotes/origin/icm/candidates/" + source_task_id
+                  try:
+                      import subprocess
+                      resolved_sha = subprocess.check_output(
+                          ["git", "-C", str(code_root), "rev-parse", remote_ref],
+                          text=True,
+                      ).strip()
+                  except subprocess.CalledProcessError:
+                      errors.append(f"{path.name}: candidate trusted_ref is unavailable: {task_ref}")
+                      continue
+
+                  source_ok = (
+                      source_result.get("status") == "pass"
+                      and source_review.get("verdict") == "pass"
+                      and source_review.get("independent") is True
+                      and source_review.get("required_fixes") == []
+                      and source_result.get("candidate_ref") == task_ref
+                      and source_result.get("candidate_sha") == resolved_sha
+                      and source_review.get("candidate_sha") == resolved_sha
+                  )
+                  if not source_ok:
+                      errors.append(f"{path.name}: candidate trusted_ref is not backed by a durable independent PASS")
+                      continue
+              else:
+                  errors.append(f"{path.name}: trusted_ref must be the code authority or a certified ICM candidate ref")
                   continue
+
               task_errors = validate_task(
                   code_root,
                   task,
                   expected_repository="element-bendr/my-resume-site",
                   trusted_control_refs={"refs/heads/icm/control"},
                   allowed_validation_ids=allowed,
-                  trusted_ref_sha=trusted_sha,
+                  trusted_ref_sha=resolved_sha,
               )
               errors.extend(f"{path.name}: {item}" for item in task_errors)
 
