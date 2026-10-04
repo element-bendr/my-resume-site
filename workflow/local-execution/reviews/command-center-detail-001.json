@@ -1,0 +1,32 @@
+{
+  "base_sha": "aee1b6149fe28e2d5d8afcd4ae207f08f656f474",
+  "candidate_sha": "19521998ec8666e40bffae1ff411df5420f7bdb6",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [
+    {
+      "id": "visual-civic-hub-readability",
+      "message": "The canonical detailed renders do not satisfy the required detailed floating civic-hub read. The runtime view remains a shallow, front-facing diorama with a dominant empty plaza; the top view is mostly an unarticulated slab; and the side view does not establish a credible floating island/underside or terraced civic depth. Added facade bays, rings, lamps, and planters are visible but do not correct the required spatial result.",
+      "paths": [
+        "art/blender/command-center/previews/detail-runtime.png",
+        "art/blender/command-center/previews/detail-top.png",
+        "art/blender/command-center/previews/detail-side.png",
+        "art/blender/command-center/detail-review.md"
+      ],
+      "severity": "error"
+    }
+  ],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [
+    "Rework the authored geometry so the approved camera clearly reads as a layered floating civic hub: materially break up the central slab, strengthen terraced elevation and landscape massing, and make the floating edge/underside credible without changing protected topology, clearances, spawn, bridge entrances, or camera."
+  ],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "blender-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-detail-001",
+  "validation_summary": "Candidate SHA 19521998ec8666e40bffae1ff411df5420f7bdb6 is valid and clean. Independent read-only Blender validation passed (209 export meshes, 48,236 triangles, 5 approved materials; camera 0,-21,10 at 52 degrees); committed validation.json is PASS; protected-path diff is empty. Review fails solely on the visual acceptance criterion.",
+  "verdict": "fix_required",
+  "workflow_id": "portfolio-world-blender-art"
+}
