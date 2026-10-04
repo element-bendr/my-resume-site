@@ -21,6 +21,10 @@
       "python3",
       "scripts/workflow_status.py",
       "--strict"
+    ],
+    "blender-assets": [
+      "node",
+      "scripts/check-blender-assets.mjs"
     ]
   },
   "worktree_root": ".icm-local/worktrees",

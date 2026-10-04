@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "record_type": "command_center_export_evidence",
+  "source_task": "command-center-detail-002",
+  "source_candidate_ref": "refs/heads/icm/candidates/command-center-detail-002",
+  "source_candidate_sha": "0a5e3ea05ad1b1e5d2986a786bb7a33c531565c1",
+  "glb_path": "public/world/art/command-center.glb",
+  "glb_sha256": "__EXECUTOR_FILL__",
+  "glb_bytes": 0,
+  "source_validation": "pass",
+  "blender_assets_validation": "pass"
+}
