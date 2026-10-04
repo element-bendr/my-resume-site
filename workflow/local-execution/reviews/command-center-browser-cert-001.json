@@ -1,0 +1,33 @@
+{
+  "base_sha": "3998c4c774944baec9151111cc3f628b06fde029",
+  "candidate_sha": "bee352c0c2cf81f7564fb6b61864dc693cdb6720",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [
+    {
+      "id": "command-center-glb-not-rendered",
+      "message": "Committed browser evidence records status STOP: the GLB fetches with the certified 845512-byte SHA-256, but fails to render because CSP blocks Draco decoder/WebAssembly. Desktop, 1024, and mobile captures show the old procedural scene, with 4 console errors and 254 page errors. This fails the required rendered-GLB, zero-error, and visual-integration acceptance criteria.",
+      "paths": [
+        "docs/portfolio-world/evidence/command-center-browser-cert-001/browser-evidence.json",
+        "docs/portfolio-world/evidence/command-center-browser-cert-001/runtime-certification.md",
+        "docs/portfolio-world/evidence/command-center-browser-cert-001/desktop.png",
+        "docs/portfolio-world/evidence/command-center-browser-cert-001/1024.png",
+        "docs/portfolio-world/evidence/command-center-browser-cert-001/mobile-390.png"
+      ],
+      "severity": "blocker"
+    }
+  ],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [
+    "Create a separate authorized runtime/asset-integration task to resolve the Draco/CSP failure, then recertify browser rendering and error-free responsive paths."
+  ],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "runtime-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-browser-cert-001",
+  "validation_summary": "Exact review HEAD bee352c0c2cf81f7564fb6b61864dc693cdb6720 is based on 3998c4c774944baec9151111cc3f628b06fde029. Diff contains evidence only; protected paths and production GLB are unchanged. The committed evidence itself proves the certification stop condition, so PASS is not possible.",
+  "verdict": "stop",
+  "workflow_id": "portfolio-world-blender-art"
+}
