@@ -1,0 +1,18 @@
+{
+  "base_sha": "3998c4c774944baec9151111cc3f628b06fde029",
+  "candidate_sha": "b5e27e729e6481bc98875177057fc0a193aef7ce",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "runtime-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-draco-fix-001",
+  "validation_summary": "Candidate HEAD is b5e27e729e6481bc98875177057fc0a193aef7ce with parent/base 3998c4c774944baec9151111cc3f628b06fde029. Diff is limited to the five authorized paths; protected paths, CSP, GLB hash/size (72008b...d7496; 845512 bytes), and headers are unchanged. Draco configuration, self-hosted decoder checksum/provenance, historical STOP reference, fallback preservation, and focused regression coverage satisfy the contract. Committed evidence records all four required validations as passed; decoder syntax and diff checks pass.",
+  "verdict": "pass",
+  "workflow_id": "portfolio-world-blender-art"
+}
