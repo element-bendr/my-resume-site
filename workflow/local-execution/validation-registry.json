@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "trusted_code_ref": "refs/heads/feat/blender-world-art-pipeline",
+  "allowed_validation_ids": [
+    "fixture-smoke"
+  ]
+}
