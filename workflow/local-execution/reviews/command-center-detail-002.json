@@ -1,0 +1,18 @@
+{
+  "base_sha": "19521998ec8666e40bffae1ff411df5420f7bdb6",
+  "candidate_sha": "0a5e3ea05ad1b1e5d2986a786bb7a33c531565c1",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "blender-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-detail-002",
+  "validation_summary": "Candidate 0a5e3ea05ad1b1e5d2986a786bb7a33c531565c1 is valid and descends from 19521998ec8666e40bffae1ff411df5420f7bdb6. Runtime, top, and side renders satisfy the bounded civic-hub detail acceptance; validation.json reports PASS with zero errors. Protected-path and production/runtime integration diffs are empty; worktree is clean.",
+  "verdict": "pass",
+  "workflow_id": "portfolio-world-blender-art"
+}
