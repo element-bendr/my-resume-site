@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-runtime-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "890f584306b6a44c4bf5d325591cb7e9ee1bf718",
+  "trusted_ref": "refs/heads/icm/candidates/command-center-export-evidence-001",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "e63be4a4fe44a67f8046ab0e63ad1b9cc2478d47"
+  },
+  "executor_profile": "runtime-luna",
+  "review_policy": "independent",
+  "scope": [
+    "Integrate the certified Command Center production GLB into the existing React Three Fiber Command Center runtime without changing movement, topology, camera, interaction, Ask, HUD, route, or fallback authority.",
+    "Use the existing BLENDER_ART_ASSETS and BLENDER_ART_PLACEMENTS registry as the asset path and placement authority.",
+    "Replace only procedural decorative Command Center scenery that would visually duplicate the certified GLB.",
+    "Keep InteractionStation rendering, movement target marker, runtime lighting/fog required by the scene, and all React-owned behavior intact.",
+    "Add a bounded Suspense/error fallback for Command Center decorative scenery so an asset loading failure does not destroy world navigation or conventional routes.",
+    "Add or update focused tests/evidence proving the GLB integration boundary.",
+    "Do not merge, deploy, or modify other districts in this task."
+  ],
+  "write_paths": [
+    "src/world/CommandCenter.tsx",
+    "src/world/art/CommandCenterArt.tsx",
+    "src/world/art/BlenderDistrictArt.tsx",
+    "tests/blender-art-contract.test.ts",
+    "tests/command-center-runtime.test.ts",
+    "docs/portfolio-world/COMMAND-CENTER-RUNTIME-INTEGRATION.md"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "package-lock.json",
+    "decisions/**",
+    "workflow/**",
+    "art/blender/**",
+    "public/world/art/**",
+    "src/content/**",
+    "src/world/WorldEntry.tsx",
+    "src/world/WorldTopology.tsx",
+    "src/world/PlayerController.tsx",
+    "src/world/CameraRig.tsx",
+    "src/world/InteractionStation.tsx",
+    "src/world/WorldDistricts.tsx",
+    "src/world/world-config.ts",
+    "src/world/world-topology.ts",
+    "src/world/districts/**",
+    "worker/**",
+    "wrangler.jsonc"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/candidates/command-center-export-001",
+    "refs/heads/icm/candidates/command-center-export-evidence-001"
+  ],
+  "acceptance": [
+    "Task executes from exact certified export candidate SHA 890f584306b6a44c4bf5d325591cb7e9ee1bf718.",
+    "public/world/art/command-center.glb remains byte-for-byte unchanged with SHA-256 72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496 and size 845512 bytes.",
+    "The runtime loads the Command Center GLB through BLENDER_ART_ASSETS['command-center'] and BLENDER_ART_PLACEMENTS['command-center'] rather than introducing duplicate asset path or placement literals.",
+    "The GLB is decorative scenery only; no topology, walkability, station, content, spawn, bridge, camera, Ask, or navigation authority is inferred from GLB meshes or object names.",
+    "Ask Terminal remains React-owned and uses the existing station configuration and interaction behavior.",
+    "Player spawn, movement, click/tap/keyboard controls, camera rig, bridges, world bounds, and zone topology remain unchanged.",
+    "Current procedural decorative geometry that would duplicate the certified GLB is removed or replaced without removing interaction stations, movement target feedback, or required runtime lights/fog.",
+    "Command Center asset loading is bounded by Suspense and a local decorative failure fallback so an asset failure does not take down navigation or conventional routes.",
+    "Other districts and their lazy-loading behavior remain unchanged.",
+    "Conventional routes and no-WebGL fallback remain unchanged.",
+    "Focused tests/evidence document the integration boundary and protect the asset registry/runtime ownership rules.",
+    "blender-assets validation passes.",
+    "runtime-integration validation (npm run verify) passes.",
+    "icm-stage validation passes.",
+    "Independent Terra review returns pass with no required fixes.",
+    "No merge to main and no deployment occurs."
+  ],
+  "validation": [
+    "blender-assets",
+    "runtime-integration",
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The certified export candidate ref no longer resolves to 890f584306b6a44c4bf5d325591cb7e9ee1bf718.",
+    "The production GLB hash or byte size changes.",
+    "Integration requires changing world topology, spawn, bridges, camera, interaction station coordinates/content, Ask behavior, WorldEntry, PlayerController, or deployment configuration.",
+    "A proposed implementation derives gameplay or content authority from GLB meshes/object names.",
+    "Asset failure handling would require removing existing conventional/WebGL fallback behavior.",
+    "Any unexpected unrelated diff appears.",
+    "Automated repository verification fails and cannot be repaired inside the declared runtime/test write scope.",
+    "Independent review returns fix_required or stop."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
