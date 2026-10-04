@@ -32,10 +32,8 @@ jobs:
 
       - name: Assert fixture-only task and exact trusted head
         env:
-          CONTROL_REF: refs/heads/icm/control
           TASK_ID: blender-loop-fixture-001
         run: |
-          git fetch origin "$CONTROL_REF:$CONTROL_REF"
           python3 - <<'PY'
           import json
           import os
@@ -57,7 +55,50 @@ jobs:
           print(f"FIXTURE_AUTHORITY: PASS base={head}")
           PY
 
+      - name: Detect durable completion
+        id: durable
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_OUTPUT: ${{ github.output }}
+        run: |
+          python3 - <<'PY'
+          import base64
+          import json
+          import os
+          import urllib.error
+          import urllib.request
+          from pathlib import Path
+
+          token = os.environ["GITHUB_TOKEN"]
+          headers = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+          records = {}
+          for kind in ("results", "reviews"):
+              path = f"workflow/local-execution/{kind}/blender-loop-fixture-001.json"
+              url = f"https://api.github.com/repos/element-bendr/my-resume-site/contents/{path}?ref=icm/control"
+              try:
+                  req = urllib.request.Request(url, headers=headers)
+                  with urllib.request.urlopen(req, timeout=20) as response:
+                      payload = json.load(response)
+              except urllib.error.HTTPError as exc:
+                  if exc.code == 404:
+                      records[kind] = None
+                      continue
+                  raise
+              records[kind] = json.loads(base64.b64decode(payload["content"]).decode("utf-8"))
+
+          complete = (
+              records.get("results", {}).get("status") == "pass"
+              and records.get("reviews", {}).get("verdict") == "pass"
+          )
+          output = Path(os.environ.get("GITHUB_OUTPUT", ""))
+          if output:
+              with output.open("a", encoding="utf-8") as handle:
+                  handle.write(f"complete={'true' if complete else 'false'}\n")
+          print(f"DURABLE_COMPLETION={complete}")
+          PY
+
       - name: Create machine-local fixture policies
+        if: steps.durable.outputs.complete != 'true'
         run: |
           mkdir -p /tmp/icm-policy /tmp/icm-worktrees /tmp/icm-state /tmp/icm-review-worktrees
           cat > /tmp/icm-policy/runner.json <<'JSON'
@@ -107,6 +148,7 @@ jobs:
           JSON
 
       - name: Run hardened control loop
+        if: steps.durable.outputs.complete != 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -122,34 +164,50 @@ jobs:
             --reviewer-identity github-actions/fixture:reviewer/deterministic \
             --json | tee /tmp/control-loop.json
 
-      - name: Prove pass and durable records
+      - name: Prove durable fixture state
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python3 - <<'PY'
+          import base64
           import json
           import os
+          import subprocess
           import urllib.request
-
-          result = json.load(open("/tmp/control-loop.json", encoding="utf-8"))
-          assert result["status"] == "PASS"
-          run = result["run"]
-          assert run["coordinator_action"] == "complete"
-          assert run["review"]["verdict"] == "pass"
-          assert run["result"]["status"] == "pass"
 
           headers = {
               "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
               "Accept": "application/vnd.github+json"
           }
-          for path in (
-              "workflow/local-execution/results/blender-loop-fixture-001.json",
-              "workflow/local-execution/reviews/blender-loop-fixture-001.json",
-          ):
+
+          def record(kind):
+              path = f"workflow/local-execution/{kind}/blender-loop-fixture-001.json"
               url = f"https://api.github.com/repos/element-bendr/my-resume-site/contents/{path}?ref=icm/control"
               req = urllib.request.Request(url, headers=headers)
               with urllib.request.urlopen(req, timeout=20) as response:
                   payload = json.load(response)
-              assert payload.get("sha")
-          print("DURABLE_FIXTURE_RECORDS: PASS")
+              return json.loads(base64.b64decode(payload["content"]).decode("utf-8"))
+
+          result = record("results")
+          review = record("reviews")
+          assert result["status"] == "pass"
+          assert result["protected_state"] == "unchanged"
+          assert result["changed_paths"] == ["workflow/local-execution/fixtures/blender-loop-fixture-001.txt"]
+          assert review["verdict"] == "pass"
+          assert review["independent"] is True
+          assert review["required_fixes"] == []
+          assert review["candidate_sha"] == result["candidate_sha"]
+
+          refs = subprocess.check_output([
+              "git", "ls-remote", "origin",
+              "refs/heads/icm/claims/blender-loop-fixture-001",
+              "refs/heads/icm/candidates/blender-loop-fixture-001",
+          ], text=True)
+          mapping = {}
+          for line in refs.splitlines():
+              sha, ref = line.split("\t", 1)
+              mapping[ref] = sha
+          assert mapping["refs/heads/icm/claims/blender-loop-fixture-001"] == result["base_sha"]
+          assert mapping["refs/heads/icm/candidates/blender-loop-fixture-001"] == result["candidate_sha"]
+          print("DURABLE_FIXTURE_STATE: PASS")
           PY
