@@ -1,0 +1,92 @@
+name: ICM Canonical Graph
+
+on:
+  pull_request:
+    branches:
+      - feat/blender-world-art-pipeline
+    paths:
+      - ".github/workflows/icm-canonical-graph.yml"
+      - ".icm/schema/**"
+      - ".icm/graph/**"
+      - ".icm/state/**"
+      - ".icm/generated/**"
+      - "scripts/icm.py"
+      - "scripts/icm_*.py"
+      - "scripts/icm/**"
+      - "workflow/**"
+      - "decisions/**"
+      - "CONTEXT.md"
+      - "HANDOFF.md"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: icm-canonical-graph-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  canonicalize:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Prove exact PR head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          echo "EXACT_HEAD=$EXPECTED_HEAD"
+
+      - name: Validate inherited workflow
+        run: |
+          python3 scripts/bootstrap_check.py
+          python3 scripts/workflow_check.py
+          python3 scripts/workflow_status.py --strict
+
+      - name: Materialize canonical graph state
+        run: |
+          python3 scripts/icm.py --json init --write | tee /tmp/icm-init.json
+          python3 scripts/icm.py --json validate | tee /tmp/icm-validate.json
+          python3 scripts/icm.py --json context --compact \
+            --subject stage.portfolio-world-blender-art-02-command-center-integration \
+            | tee /tmp/icm-context.json
+
+      - name: Enforce compiler-owned write boundary
+        run: |
+          python3 - <<'PY'
+          import subprocess
+          allowed = (".icm/graph/", ".icm/state/", ".icm/generated/")
+          bad = []
+          for line in subprocess.check_output(["git","status","--porcelain"], text=True).splitlines():
+              path = line[3:]
+              if not path.startswith(allowed):
+                  bad.append(line)
+          if bad:
+              raise SystemExit("unexpected mutation: " + repr(bad))
+          print("ICM_WRITE_BOUNDARY: PASS")
+          PY
+
+      - name: Commit canonical graph state when changed
+        env:
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: |
+          git add .icm/graph .icm/state .icm/generated
+          if git diff --cached --quiet; then
+            echo "CANONICAL_GRAPH_ALREADY_CURRENT: PASS"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(icm): materialize canonical Blender graph state"
+          git push origin "HEAD:$HEAD_BRANCH"
