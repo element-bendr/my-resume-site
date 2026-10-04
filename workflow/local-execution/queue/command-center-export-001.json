@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-export-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "0a5e3ea05ad1b1e5d2986a786bb7a33c531565c1",
+  "trusted_ref": "refs/heads/icm/candidates/command-center-detail-002",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "9519b244b7a42b97c184357e446aeb1060bbae6e"
+  },
+  "executor_profile": "blender-luna",
+  "review_policy": "independent",
+  "scope": [
+    "Export the certified Command Center detail candidate into the production GLB using the repository's existing Blender export pipeline.",
+    "Treat refs/heads/icm/candidates/command-center-detail-002 at 0a5e3ea05ad1b1e5d2986a786bb7a33c531565c1 as immutable source authority.",
+    "Run source validation as part of export, run the existing GLB integrity and budget checker, then commit only the production command-center.glb and exact export evidence.",
+    "If the export script rewrites art/blender/command-center/validation.json only because the worktree path changed, restore that file to the task base before committing.",
+    "Do not modify Blender source, detailed renders, React, runtime integration, workflow contracts, or deployment state."
+  ],
+  "write_paths": [
+    "public/world/art/command-center.glb",
+    "art/blender/command-center/export-validation.json"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "decisions/**",
+    "workflow/active/**",
+    "workflow/local-execution/**",
+    "art/blender/command-center/source/**",
+    "art/blender/command-center/previews/**",
+    "art/blender/command-center/validation.json",
+    "art/blender/command-center/detail-review.md",
+    "art/blender/command-center/massing-v2-review.md",
+    "art/blender/command-center/massing-v2-validation.json",
+    "art/blender/command-center/references/**",
+    "tools/blender/**",
+    "src/**",
+    "public/world/art/build-lab.glb",
+    "public/world/art/automation-lab.glb",
+    "public/world/art/client-street.glb",
+    "public/world/art/timeline.glb",
+    "public/world/art/hobby-district.glb"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/candidates/command-center-detail-002"
+  ],
+  "acceptance": [
+    "Task executes from exact source candidate SHA 0a5e3ea05ad1b1e5d2986a786bb7a33c531565c1.",
+    "The certified Blender source and all detailed visual evidence remain byte-for-byte unchanged.",
+    "npm run art:cc:export completes successfully from the certified source.",
+    "node scripts/check-blender-assets.mjs passes, including GLB v2 structure, declared length, JSON chunk, 900 KiB per-file ceiling, and total staged GLB budget.",
+    "Only public/world/art/command-center.glb and art/blender/command-center/export-validation.json are committed.",
+    "export-validation.json records source task, source candidate ref/SHA, GLB path, SHA-256, byte size, source validation PASS, and blender-assets validation PASS.",
+    "The committed export evidence SHA-256 and byte size exactly match the committed command-center.glb.",
+    "Runner validations blender-assets and icm-stage pass.",
+    "Independent Terra review returns pass with no required fixes.",
+    "No React integration, merge, deployment, or other production asset change occurs."
+  ],
+  "validation": [
+    "blender-assets",
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The certified candidate ref no longer resolves to 0a5e3ea05ad1b1e5d2986a786bb7a33c531565c1.",
+    "Source validation fails before export.",
+    "The production GLB fails structural or budget validation.",
+    "Any path outside the two declared write paths changes after transient files are restored.",
+    "Any protected ref moves during execution.",
+    "Export requires changing Blender source, camera, geometry, materials, detailed evidence, React, runtime contracts, or workflow contracts.",
+    "Export evidence does not match the committed GLB hash or byte size.",
+    "Independent review returns fix_required or stop."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
