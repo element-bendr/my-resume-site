@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "blender-loop-fixture-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "b0e42fd234ec32272d34478296ea9dba455c9ea0",
+  "trusted_ref": "refs/heads/feat/blender-world-art-pipeline",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "b0e42fd234ec32272d34478296ea9dba455c9ea0"
+  },
+  "executor_profile": "fixture-smoke",
+  "review_policy": "independent",
+  "scope": [
+    "Prove the local execution bridge end to end without modifying Blender, GLB, React, graph authority, workflow contracts, or production state."
+  ],
+  "write_paths": [
+    "workflow/local-execution/fixtures/**"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".icm/**",
+    "art/blender/**",
+    "public/world/art/**",
+    "src/world/**",
+    "workflow/active/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    ".github/**"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control"
+  ],
+  "acceptance": [
+    "Candidate changes exactly workflow/local-execution/fixtures/blender-loop-fixture-001.txt.",
+    "Receipt content deterministically identifies the task and exact base SHA.",
+    "Executor leaves a clean committed candidate.",
+    "fixture-smoke validation passes.",
+    "Protected paths and refs remain unchanged.",
+    "Independent reviewer returns pass with no required fixes."
+  ],
+  "validation": [
+    "fixture-smoke"
+  ],
+  "stop_conditions": [
+    "Trusted Blender branch head no longer equals the task base SHA.",
+    "Any protected path or protected ref changes.",
+    "Executor leaves uncommitted changes or writes outside the declared fixture path.",
+    "Validation or independent review fails.",
+    "Existing claim or candidate ref conflicts with this task ID."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
