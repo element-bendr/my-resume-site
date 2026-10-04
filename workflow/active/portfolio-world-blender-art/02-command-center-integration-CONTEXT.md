@@ -114,6 +114,14 @@ Current entry point: Massing V2 human composition gate has PASSED. Preserve the 
 12. Only after later authored visual PASS, export the production GLB.
 13. Only after production GLB validation, integrate into React and run runtime tests.
 
+## Execution model — graph-bounded visual loop
+
+For detailed authoring, substantial work should run through the pinned graph-backed ICM runtime. Luna is the bounded Blender executor; Terra supplies visual critique and detached independent review; Sol remains coordinator/architecture escalation rather than participating in every render correction.
+
+A bounded authoring task may iterate scene -> render -> critique -> correction while its objective and protected-state assumptions remain unchanged. Each iteration must preserve compact evidence. If the same material defect survives two materially similar attempts, stop and correct the upstream scene rule, reference interpretation, or task/stage contract before resuming.
+
+The formal reviewer remains independent of the executor. Production GLB export, React integration and promotion remain governed by the existing Stage 02 gates.
+
 ## Outputs
 
 Immediate required outputs:
