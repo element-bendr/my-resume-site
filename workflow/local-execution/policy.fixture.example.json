@@ -1,0 +1,27 @@
+{
+  "repository": "element-bendr/my-resume-site",
+  "trusted_control_refs": [
+    "refs/heads/icm/control"
+  ],
+  "executor_commands": {
+    "fixture-smoke": [
+      "python3",
+      "tools/icm/fixture_executor.py",
+      "--task-file",
+      "{task_file}"
+    ]
+  },
+  "validation_commands": {
+    "fixture-smoke": [
+      "python3",
+      "tools/icm/validate_fixture.py",
+      "--task-file",
+      "{task_file}"
+    ]
+  },
+  "worktree_root": ".icm-local/worktrees",
+  "state_root": ".icm-local/state",
+  "command_timeout_seconds": 120,
+  "environment_allowlist": [],
+  "candidate_remote": "origin"
+}
