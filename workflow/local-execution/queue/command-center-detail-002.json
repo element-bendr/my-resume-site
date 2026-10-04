@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-detail-002",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "19521998ec8666e40bffae1ff411df5420f7bdb6",
+  "trusted_ref": "refs/heads/icm/candidates/command-center-detail-001",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "4a7b55ceac1ec61ae3782db9fa1ca7b1ab894172"
+  },
+  "executor_profile": "blender-luna",
+  "review_policy": "independent",
+  "scope": [
+    "Correct Terra finding visual-civic-hub-readability on immutable candidate 19521998ec8666e40bffae1ff411df5420f7bdb6 without reopening its passing validation or protected contracts.",
+    "Make the approved camera read as a layered floating civic hub by breaking up the slab visually, strengthening terraced elevation and landscape massing, and making the floating edge and underside credible.",
+    "Preserve the accepted Massing V2 spatial composition, protected circulation and entrances, spawn, Ask clearances, topology, and approved preview camera.",
+    "Commit revised Blender source, canonical runtime/top/side evidence, source-validation report, and review document; do not export the production GLB or integrate React."
+  ],
+  "write_paths": [
+    "art/blender/command-center/source/command-center.blend",
+    "art/blender/command-center/previews/detail-runtime.png",
+    "art/blender/command-center/previews/detail-top.png",
+    "art/blender/command-center/previews/detail-side.png",
+    "art/blender/command-center/validation.json",
+    "art/blender/command-center/detail-review.md",
+    "tools/blender/detail_*.py"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "decisions/**",
+    "workflow/active/**",
+    "docs/portfolio-world/COMMAND-CENTER-MASSING-V2.md",
+    "docs/portfolio-world/COMMAND-CENTER-VISUAL-FAIL-02.md",
+    "art/blender/command-center/references/**",
+    "art/blender/command-center/previews/massing-v2-*.png",
+    "art/blender/command-center/massing-v2-review.md",
+    "art/blender/command-center/massing-v2-validation.json",
+    "art/blender/command-center/visual-pass-*.md",
+    "public/world/art/**",
+    "src/world/**"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/candidates/command-center-detail-001"
+  ],
+  "acceptance": [
+    "The canonical runtime view reads as a layered floating civic hub rather than a shallow front-facing diorama with a dominant empty plaza.",
+    "The top view shows deliberate plaza segmentation and terraced landscape or architectural massing while all protected legal movement and entrance clearances remain valid.",
+    "The runtime and side views establish credible floating edge, bounded underside depth, and foreground-to-skyline elevation hierarchy.",
+    "The accepted Massing V2 composition and preview camera remain unchanged, and no protected topology, spawn, bridge entrance, Ask, runtime, or interaction contract changes.",
+    "art/blender/command-center/validation.json is committed with status PASS and all three canonical detail renders are updated.",
+    "detail-review.md records the correction, source validation, protected state, known limitations, and comparison with candidate 19521998ec8666e40bffae1ff411df5420f7bdb6.",
+    "No production command-center.glb export or React integration change occurs.",
+    "The candidate passes blender-candidate and icm-stage validation.",
+    "Independent Terra review returns pass with no required fixes before any later export task is created."
+  ],
+  "validation": [
+    "blender-candidate",
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The trusted candidate ref no longer equals the task base SHA.",
+    "The correction would require modifying protected camera, topology, spawn, Ask, bridge entrances, React, production GLB, workflow contract, or approved Massing V2 evidence.",
+    "The same visual civic-hub readability defect survives two materially similar repair attempts within this correction task.",
+    "Required reference interpretation is ambiguous enough that the accepted composition decision would have to be reopened.",
+    "Source validation cannot pass within the declared write scope.",
+    "Any unexpected unrelated diff appears.",
+    "Executor or reviewer would need authority outside the local ICM contract."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
