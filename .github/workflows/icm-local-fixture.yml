@@ -6,6 +6,7 @@ on:
       - feat/blender-world-art-pipeline
     paths:
       - "tools/icm/fixture_*.py"
+      - "tools/icm/validate_blender_candidate.py"
       - "workflow/local-execution/policy.fixture.example.json"
       - "workflow/local-execution/reviewer-policy.fixture.example.json"
       - ".github/workflows/icm-local-fixture.yml"
@@ -29,7 +30,7 @@ jobs:
           python-version: "3.12"
 
       - name: Compile fixture tools
-        run: python3 -m compileall -q tools/icm/fixture_executor.py tools/icm/validate_fixture.py tools/icm/fixture_reviewer.py
+        run: python3 -m compileall -q tools/icm/fixture_executor.py tools/icm/validate_fixture.py tools/icm/fixture_reviewer.py tools/icm/validate_blender_candidate.py
 
       - name: Exercise executor, validator and reviewer
         run: |
@@ -90,3 +91,61 @@ jobs:
           assert decision["findings"][0]["id"] == "fixture-scope"
           print("FIXTURE_TOOLCHAIN: PASS")
           PY
+
+      - name: Exercise read-only Blender candidate validator
+        run: |
+          base="$(git rev-parse HEAD)"
+          state_dir="$(mktemp -d)"
+          task_file="$state_dir/blender-task.json"
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+
+          Path("art/blender/command-center/source/command-center.blend").write_bytes(
+              Path("art/blender/command-center/source/command-center.blend").read_bytes() + b"ICM-CI"
+          )
+          preview_dir = Path("art/blender/command-center/previews")
+          preview_dir.mkdir(parents=True, exist_ok=True)
+          for name in ("detail-runtime.png", "detail-top.png", "detail-side.png"):
+              (preview_dir / name).write_bytes(b"PNG" + b"x" * 60000)
+          Path("art/blender/command-center/validation.json").write_text(
+              json.dumps({
+                  "status": "PASS",
+                  "errors": [],
+                  "warnings": [],
+                  "metrics": {"triangles": 40000, "material_count": 3}
+              }, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          Path("art/blender/command-center/detail-review.md").write_text(
+              "# Detailed Command Center Review\n\n"
+              "## Reference comparison\nSynthetic CI fixture.\n\n"
+              "## Source validation\nPASS.\n\n"
+              "## Protected state\nUnchanged.\n\n"
+              "## Known limitations\nSynthetic files only.\n",
+              encoding="utf-8",
+          )
+          PY
+
+          git add             art/blender/command-center/source/command-center.blend             art/blender/command-center/previews/detail-runtime.png             art/blender/command-center/previews/detail-top.png             art/blender/command-center/previews/detail-side.png             art/blender/command-center/validation.json             art/blender/command-center/detail-review.md
+          git -c user.name="ICM CI" -c user.email="icm-ci@local.invalid" commit -m "test: synthetic Blender candidate"
+
+          python3 - "$task_file" "$base" "$PWD" <<'PY'
+          import json, sys
+          path, base, worktree = sys.argv[1:]
+          payload = {
+              "task": {
+                  "task_id": "synthetic-blender-candidate",
+                  "base_sha": base
+              },
+              "execution": {
+                  "worktree": worktree,
+                  "branch": "icm/run/synthetic-blender-candidate"
+              }
+          }
+          with open(path, "w", encoding="utf-8") as f:
+              json.dump(payload, f)
+          PY
+
+          python3 tools/icm/validate_blender_candidate.py --task-file "$task_file"
