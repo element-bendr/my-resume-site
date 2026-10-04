@@ -1,0 +1,4 @@
+task_id=blender-loop-fixture-001
+base_sha=b0e42fd234ec32272d34478296ea9dba455c9ea0
+executor=deterministic-fixture
+purpose=prove-local-execution-plumbing
