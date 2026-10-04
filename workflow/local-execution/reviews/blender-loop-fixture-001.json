@@ -1,0 +1,27 @@
+{
+  "base_sha": "b0e42fd234ec32272d34478296ea9dba455c9ea0",
+  "candidate_sha": "91469fa48a100b8c379a7d870e37cc1b1556aa7c",
+  "executor_identity": "github-actions/fixture:executor/deterministic",
+  "findings": [
+    {
+      "id": "fixture-scope",
+      "message": "Candidate contains only the deterministic local-execution fixture receipt.",
+      "paths": [
+        "workflow/local-execution/fixtures/blender-loop-fixture-001.txt"
+      ],
+      "severity": "info"
+    }
+  ],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [],
+  "reviewer_identity": "github-actions/fixture:reviewer/deterministic",
+  "reviewer_profile": "fixture-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "blender-loop-fixture-001",
+  "validation_summary": "Exact candidate SHA, bounded path, deterministic receipt content and clean detached review worktree verified.",
+  "verdict": "pass",
+  "workflow_id": "portfolio-world-blender-art"
+}
