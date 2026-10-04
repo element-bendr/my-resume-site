@@ -1,0 +1,37 @@
+{
+  "base_sha": "0a5e3ea05ad1b1e5d2986a786bb7a33c531565c1",
+  "blockers": [],
+  "candidate_ref": "refs/heads/icm/candidates/command-center-export-001",
+  "candidate_sha": "f64a6fd4fed450aff3d5ffc9e05a8e029e169b77",
+  "changed_paths": [
+    "art/blender/command-center/export-validation.json",
+    "public/world/art/command-center.glb"
+  ],
+  "claim_ref": "refs/heads/icm/claims/command-center-export-001",
+  "execution": {
+    "branch": "icm/run/command-center-export-001",
+    "worktree_id": "command-center-export-001"
+  },
+  "executor_identity": "local/workstation:executor/luna",
+  "next_action": "await_review",
+  "protected_state": "unchanged",
+  "record_type": "result",
+  "repository": "element-bendr/my-resume-site",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "status": "pass",
+  "task_id": "command-center-export-001",
+  "validation": [
+    {
+      "id": "blender-assets",
+      "status": "pass",
+      "summary": "exit=0"
+    },
+    {
+      "id": "icm-stage",
+      "status": "pass",
+      "summary": "exit=0"
+    }
+  ],
+  "workflow_id": "portfolio-world-blender-art"
+}
