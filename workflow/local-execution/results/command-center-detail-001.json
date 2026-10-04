@@ -1,0 +1,42 @@
+{
+  "base_sha": "aee1b6149fe28e2d5d8afcd4ae207f08f656f474",
+  "blockers": [],
+  "candidate_ref": "refs/heads/icm/candidates/command-center-detail-001",
+  "candidate_sha": "19521998ec8666e40bffae1ff411df5420f7bdb6",
+  "changed_paths": [
+    "art/blender/command-center/detail-review.md",
+    "art/blender/command-center/previews/detail-runtime.png",
+    "art/blender/command-center/previews/detail-side.png",
+    "art/blender/command-center/previews/detail-top.png",
+    "art/blender/command-center/source/command-center.blend",
+    "art/blender/command-center/validation.json",
+    "tools/blender/detail_command_center.py"
+  ],
+  "claim_ref": "refs/heads/icm/claims/command-center-detail-001",
+  "execution": {
+    "branch": "icm/run/command-center-detail-001",
+    "worktree_id": "command-center-detail-001"
+  },
+  "executor_identity": "local/workstation:executor/luna",
+  "next_action": "await_review",
+  "protected_state": "unchanged",
+  "record_type": "result",
+  "repository": "element-bendr/my-resume-site",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "status": "pass",
+  "task_id": "command-center-detail-001",
+  "validation": [
+    {
+      "id": "blender-candidate",
+      "status": "pass",
+      "summary": "exit=0"
+    },
+    {
+      "id": "icm-stage",
+      "status": "pass",
+      "summary": "exit=0"
+    }
+  ],
+  "workflow_id": "portfolio-world-blender-art"
+}
