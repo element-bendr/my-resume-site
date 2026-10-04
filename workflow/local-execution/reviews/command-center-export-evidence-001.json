@@ -1,0 +1,18 @@
+{
+  "base_sha": "f64a6fd4fed450aff3d5ffc9e05a8e029e169b77",
+  "candidate_sha": "890f584306b6a44c4bf5d325591cb7e9ee1bf718",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "blender-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-export-evidence-001",
+  "validation_summary": "Candidate 890f584306b6a44c4bf5d325591cb7e9ee1bf718 is based on f64a6fd4fed450aff3d5ffc9e05a8e029e169b77; only the declared evidence JSON changed. Evidence schema/values, committed GLB hash (72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496) and size (845512), and protected-path immutability all verified. npm run art:verify and python3 scripts/workflow_status.py --strict passed.",
+  "verdict": "pass",
+  "workflow_id": "portfolio-world-blender-art"
+}
