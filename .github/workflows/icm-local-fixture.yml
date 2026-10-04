@@ -1,0 +1,92 @@
+name: ICM Local Fixture Tools
+
+on:
+  pull_request:
+    branches:
+      - feat/blender-world-art-pipeline
+    paths:
+      - "tools/icm/fixture_*.py"
+      - "workflow/local-execution/policy.fixture.example.json"
+      - "workflow/local-execution/reviewer-policy.fixture.example.json"
+      - ".github/workflows/icm-local-fixture.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  fixture-tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Compile fixture tools
+        run: python3 -m compileall -q tools/icm/fixture_executor.py tools/icm/validate_fixture.py tools/icm/fixture_reviewer.py
+
+      - name: Exercise executor, validator and reviewer
+        run: |
+          base="$(git rev-parse HEAD)"
+          task_id="fixture-ci-smoke"
+          state_dir="$(mktemp -d)"
+          task_file="$state_dir/task.json"
+          review_context="$state_dir/review-context.json"
+          review_output="$state_dir/review-output.json"
+
+          python3 - "$task_file" "$base" "$PWD" "$task_id" <<'PY'
+          import json, sys
+          path, base, worktree, task_id = sys.argv[1:]
+          payload = {
+              "schema_version": 1,
+              "task": {
+                  "task_id": task_id,
+                  "base_sha": base
+              },
+              "execution": {
+                  "worktree": worktree,
+                  "branch": f"icm/run/{task_id}"
+              }
+          }
+          with open(path, "w", encoding="utf-8") as f:
+              json.dump(payload, f)
+          PY
+
+          python3 tools/icm/fixture_executor.py --task-file "$task_file"
+          candidate="$(git rev-parse HEAD)"
+          python3 tools/icm/validate_fixture.py --task-file "$task_file"
+
+          python3 - "$review_context" "$review_output" "$task_file" "$candidate" <<'PY'
+          import json, sys
+          context_path, output_path, task_path, candidate = sys.argv[1:]
+          task_payload = json.load(open(task_path, encoding="utf-8"))
+          task = task_payload["task"]
+          context = {
+              "task": task,
+              "result": {
+                  "candidate_sha": candidate
+              },
+              "review": {
+                  "candidate_worktree": task_payload["execution"]["worktree"],
+                  "decision_output": output_path
+              }
+          }
+          with open(context_path, "w", encoding="utf-8") as f:
+              json.dump(context, f)
+          PY
+
+          python3 tools/icm/fixture_reviewer.py --context "$review_context" --output "$review_output"
+          python3 - "$review_output" <<'PY'
+          import json, sys
+          decision = json.load(open(sys.argv[1], encoding="utf-8"))
+          assert decision["verdict"] == "pass"
+          assert decision["required_fixes"] == []
+          assert decision["findings"][0]["id"] == "fixture-scope"
+          print("FIXTURE_TOOLCHAIN: PASS")
+          PY

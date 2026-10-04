@@ -1,0 +1,16 @@
+{
+  "reviewer_commands": {
+    "fixture-review": [
+      "python3",
+      "tools/icm/fixture_reviewer.py",
+      "--context",
+      "{review_context}",
+      "--output",
+      "{review_output}"
+    ]
+  },
+  "review_root": ".icm-local/review-worktrees",
+  "state_root": ".icm-local/state",
+  "environment_allowlist": [],
+  "command_timeout_seconds": 120
+}
