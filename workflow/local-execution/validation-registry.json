@@ -4,6 +4,7 @@
   "allowed_validation_ids": [
     "blender-assets",
     "blender-candidate",
+    "command-center-draco-local",
     "fixture-smoke",
     "icm-stage",
     "runtime-integration"

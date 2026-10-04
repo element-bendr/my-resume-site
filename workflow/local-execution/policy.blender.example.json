@@ -35,6 +35,10 @@
       "npm",
       "run",
       "verify"
+    ],
+    "command-center-draco-local": [
+      "node",
+      "scripts/check-command-center-draco-runtime.mjs"
     ]
   },
   "worktree_root": ".icm-local/worktrees",
