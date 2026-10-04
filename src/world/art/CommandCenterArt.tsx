@@ -1,5 +1,6 @@
 import { Component, Suspense, type ReactNode } from "react";
 import { useGLTF } from "@react-three/drei";
+import { DRACOLoader } from "three-stdlib";
 import {
   BLENDER_ART_ASSETS,
   BLENDER_ART_PLACEMENTS,
@@ -7,6 +8,10 @@ import {
 
 export const COMMAND_CENTER_ART_ASSET = BLENDER_ART_ASSETS["command-center"];
 export const COMMAND_CENTER_ART_PLACEMENT = BLENDER_ART_PLACEMENTS["command-center"];
+
+const commandCenterDracoLoader = new DRACOLoader();
+commandCenterDracoLoader.setDecoderPath("/draco/");
+commandCenterDracoLoader.setDecoderConfig({ type: "js" });
 
 function CommandCenterArtFallback() {
   return (
@@ -45,7 +50,12 @@ class CommandCenterArtBoundary extends Component<
 }
 
 function CommandCenterArtScene() {
-  const { scene } = useGLTF(COMMAND_CENTER_ART_ASSET);
+  const { scene } = useGLTF(
+    COMMAND_CENTER_ART_ASSET,
+    false,
+    false,
+    (loader) => loader.setDRACOLoader(commandCenterDracoLoader),
+  );
 
   return (
     <group position={COMMAND_CENTER_ART_PLACEMENT}>

@@ -22,7 +22,10 @@ describe("Command Center authored scenery boundary", () => {
       'export const COMMAND_CENTER_ART_PLACEMENT = BLENDER_ART_PLACEMENTS["command-center"];',
     );
     expect(commandCenterArtSource).toContain(
-      "useGLTF(COMMAND_CENTER_ART_ASSET)",
+      "useGLTF(\n    COMMAND_CENTER_ART_ASSET,\n    false,\n    false,",
+    );
+    expect(commandCenterArtSource).toContain(
+      "loader.setDRACOLoader(commandCenterDracoLoader)",
     );
     expect(commandCenterArtSource).toContain(
       "<group position={COMMAND_CENTER_ART_PLACEMENT}>",
@@ -46,6 +49,19 @@ describe("Command Center authored scenery boundary", () => {
     expect(commandCenterArtSource).toContain(
       "<Suspense fallback={<CommandCenterArtFallback />}>",
     );
+  });
+
+  it("uses the self-hosted JavaScript Draco decoder", () => {
+    expect(commandCenterArtSource).toContain(
+      'import { DRACOLoader } from "three-stdlib";',
+    );
+    expect(commandCenterArtSource).toContain(
+      'commandCenterDracoLoader.setDecoderPath("/draco/");',
+    );
+    expect(commandCenterArtSource).toContain(
+      'commandCenterDracoLoader.setDecoderConfig({ type: "js" });',
+    );
+    expect(commandCenterArtSource).toContain("useGLTF(\n    COMMAND_CENTER_ART_ASSET,\n    false,");
   });
 
   it("keeps React-owned interaction and movement feedback in CommandCenter", () => {
