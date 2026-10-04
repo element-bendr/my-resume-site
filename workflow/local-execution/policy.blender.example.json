@@ -8,6 +8,11 @@
       "__CONFIGURE_LOCAL_LUNA_EXECUTOR__",
       "--task-file",
       "{task_file}"
+    ],
+    "runtime-luna": [
+      "__CONFIGURE_LOCAL_LUNA_EXECUTOR__",
+      "--task-file",
+      "{task_file}"
     ]
   },
   "validation_commands": {
@@ -25,6 +30,11 @@
     "blender-assets": [
       "node",
       "scripts/check-blender-assets.mjs"
+    ],
+    "runtime-integration": [
+      "npm",
+      "run",
+      "verify"
     ]
   },
   "worktree_root": ".icm-local/worktrees",

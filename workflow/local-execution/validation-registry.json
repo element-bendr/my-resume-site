@@ -5,6 +5,7 @@
     "blender-assets",
     "blender-candidate",
     "fixture-smoke",
-    "icm-stage"
+    "icm-stage",
+    "runtime-integration"
   ]
 }
