@@ -1,0 +1,18 @@
+{
+  "base_sha": "0a5e3ea05ad1b1e5d2986a786bb7a33c531565c1",
+  "candidate_sha": "f64a6fd4fed450aff3d5ffc9e05a8e029e169b77",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "blender-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-export-001",
+  "validation_summary": "Candidate f64a6fd4 matches the export ref; trusted source ref resolves to required base 0a5e3ea. Diff contains only the two permitted paths; protected paths unchanged and worktree clean. Evidence SHA-256 and byte size match GLB. Passed check-blender-assets, workflow_status --strict, and icm validate.",
+  "verdict": "pass",
+  "workflow_id": "portfolio-world-blender-art"
+}
