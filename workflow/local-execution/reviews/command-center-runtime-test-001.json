@@ -1,0 +1,18 @@
+{
+  "base_sha": "d29071a4c0d5013f35e2baef890efc4ab8da3071",
+  "candidate_sha": "3998c4c774944baec9151111cc3f628b06fde029",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "runtime-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-runtime-test-001",
+  "validation_summary": "Candidate 3998c4c774944baec9151111cc3f628b06fde029 is a clean descendant of required base d29071a4c0d5013f35e2baef890efc4ab8da3071. Diff is limited to tests/command-center-runtime.test.ts; its assertions cover registry-backed asset/placement use, local Suspense/error containment, and React-owned station/marker rendering. Protected GLB is unchanged: 845512 bytes, SHA-256 72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496. blender-assets and icm-stage pass locally; committed result evidence records runtime-integration pass. Focused runtime test could not be rerun because this detached read-only worktree lacks the installed vitest binary.",
+  "verdict": "pass",
+  "workflow_id": "portfolio-world-blender-art"
+}
