@@ -1,0 +1,31 @@
+{
+  "base_sha": "890f584306b6a44c4bf5d325591cb7e9ee1bf718",
+  "candidate_sha": "d29071a4c0d5013f35e2baef890efc4ab8da3071",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [
+    {
+      "id": "runtime-ownership-test-does-not-protect-contract",
+      "message": "The added focused test never imports or inspects CommandCenter or CommandCenterArt. It only reasserts registry data and a six-asset count, so it cannot detect removal of the GLB component, a duplicate path/placement literal, lost Suspense/error fallback, or loss of React-owned station/movement rendering. This does not satisfy the acceptance requirement that focused tests protect the runtime ownership boundary.",
+      "paths": [
+        "tests/command-center-runtime.test.ts",
+        "src/world/CommandCenter.tsx",
+        "src/world/art/CommandCenterArt.tsx"
+      ],
+      "severity": "error"
+    }
+  ],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [
+    "Replace or extend tests/command-center-runtime.test.ts with focused assertions that exercise or inspect the CommandCenter/CommandCenterArt integration boundary: registry-backed asset and placement use, local Suspense/error fallback, and preservation of React-owned InteractionStation and MoveTargetMarker rendering."
+  ],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "runtime-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-runtime-001",
+  "validation_summary": "Exact candidate HEAD d29071a4c0d5013f35e2baef890efc4ab8da3071 has parent/base 890f584306b6a44c4bf5d325591cb7e9ee1bf718; working tree is clean. Diff is limited to the four declared paths, with no protected-path changes or whitespace errors. command-center.glb hash and size match 72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496 / 845512 bytes. Independent read-only checks passed: npm run art:verify and python3 scripts/workflow_status.py --strict. Review-context evidence records runtime-integration as passed; it was not rerun because this review is strictly read-only and npm run verify writes build output.",
+  "verdict": "fix_required",
+  "workflow_id": "portfolio-world-blender-art"
+}
