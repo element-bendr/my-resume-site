@@ -1,0 +1,155 @@
+name: ICM Fixture Control Loop
+
+on:
+  push:
+    branches:
+      - icm/control
+    paths:
+      - ".github/workflows/icm-fixture-control-loop.yml"
+      - "workflow/local-execution/queue/blender-loop-fixture-001.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: icm-fixture-control-loop
+  cancel-in-progress: false
+
+jobs:
+  fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/blender-world-art-pipeline
+          fetch-depth: 0
+          persist-credentials: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Assert fixture-only task and exact trusted head
+        env:
+          CONTROL_REF: refs/heads/icm/control
+          TASK_ID: blender-loop-fixture-001
+        run: |
+          git fetch origin "$CONTROL_REF:$CONTROL_REF"
+          python3 - <<'PY'
+          import json
+          import os
+          import subprocess
+          import urllib.request
+
+          task_id = os.environ["TASK_ID"]
+          url = f"https://raw.githubusercontent.com/element-bendr/my-resume-site/icm/control/workflow/local-execution/queue/{task_id}.json"
+          with urllib.request.urlopen(url, timeout=20) as response:
+              task = json.load(response)
+
+          head = subprocess.check_output(["git","rev-parse","HEAD"], text=True).strip()
+          assert task["task_id"] == "blender-loop-fixture-001"
+          assert task["executor_profile"] == "fixture-smoke"
+          assert task["validation"] == ["fixture-smoke"]
+          assert task["write_paths"] == ["workflow/local-execution/fixtures/**"]
+          assert task["base_sha"] == head
+          assert task["trusted_ref"] == "refs/heads/feat/blender-world-art-pipeline"
+          print(f"FIXTURE_AUTHORITY: PASS base={head}")
+          PY
+
+      - name: Create machine-local fixture policies
+        run: |
+          mkdir -p /tmp/icm-policy /tmp/icm-worktrees /tmp/icm-state /tmp/icm-review-worktrees
+          cat > /tmp/icm-policy/runner.json <<'JSON'
+          {
+            "repository": "element-bendr/my-resume-site",
+            "trusted_control_refs": ["refs/heads/icm/control"],
+            "executor_commands": {
+              "fixture-smoke": [
+                "python3",
+                "tools/icm/fixture_executor.py",
+                "--task-file",
+                "{task_file}"
+              ]
+            },
+            "validation_commands": {
+              "fixture-smoke": [
+                "python3",
+                "tools/icm/validate_fixture.py",
+                "--task-file",
+                "{task_file}"
+              ]
+            },
+            "worktree_root": "/tmp/icm-worktrees",
+            "state_root": "/tmp/icm-state",
+            "command_timeout_seconds": 120,
+            "environment_allowlist": [],
+            "candidate_remote": "origin"
+          }
+          JSON
+          cat > /tmp/icm-policy/reviewer.json <<'JSON'
+          {
+            "reviewer_commands": {
+              "fixture-review": [
+                "python3",
+                "tools/icm/fixture_reviewer.py",
+                "--context",
+                "{review_context}",
+                "--output",
+                "{review_output}"
+              ]
+            },
+            "review_root": "/tmp/icm-review-worktrees",
+            "state_root": "/tmp/icm-state",
+            "environment_allowlist": [],
+            "command_timeout_seconds": 120
+          }
+          JSON
+
+      - name: Run hardened control loop
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 scripts/icm/control_loop.py \
+            --repo-root "$PWD" \
+            --repository element-bendr/my-resume-site \
+            --task-id blender-loop-fixture-001 \
+            --control-ref refs/heads/icm/control \
+            --runner-policy /tmp/icm-policy/runner.json \
+            --reviewer-policy /tmp/icm-policy/reviewer.json \
+            --executor-identity github-actions/fixture:executor/deterministic \
+            --reviewer-profile fixture-review \
+            --reviewer-identity github-actions/fixture:reviewer/deterministic \
+            --json | tee /tmp/control-loop.json
+
+      - name: Prove pass and durable records
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import urllib.request
+
+          result = json.load(open("/tmp/control-loop.json", encoding="utf-8"))
+          assert result["status"] == "PASS"
+          run = result["run"]
+          assert run["coordinator_action"] == "complete"
+          assert run["review"]["verdict"] == "pass"
+          assert run["result"]["status"] == "pass"
+
+          headers = {
+              "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
+              "Accept": "application/vnd.github+json"
+          }
+          for path in (
+              "workflow/local-execution/results/blender-loop-fixture-001.json",
+              "workflow/local-execution/reviews/blender-loop-fixture-001.json",
+          ):
+              url = f"https://api.github.com/repos/element-bendr/my-resume-site/contents/{path}?ref=icm/control"
+              req = urllib.request.Request(url, headers=headers)
+              with urllib.request.urlopen(req, timeout=20) as response:
+                  payload = json.load(response)
+              assert payload.get("sha")
+          print("DURABLE_FIXTURE_RECORDS: PASS")
+          PY
