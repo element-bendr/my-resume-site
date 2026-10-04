@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-browser-cert-002",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "b5e27e729e6481bc98875177057fc0a193aef7ce",
+  "trusted_ref": "refs/heads/icm/candidates/command-center-draco-fix-001",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "86001dc75532aee5ee6693ad5fe2dc95c0e4be18"
+  },
+  "executor_profile": "runtime-luna",
+  "review_policy": "independent",
+  "scope": [
+    "Re-run browser, visual, and runtime certification against the exact independently certified Draco/CSP correction candidate.",
+    "Build and launch the production preview from the exact candidate SHA without modifying application, GLB, decoder, CSP, Blender, topology, content, or deployment state.",
+    "Capture desktop 1440x1000, 1024x768, mobile 390x844, and forced non-WebGL evidence after the Command Center GLB and local Draco JS decoder have settled.",
+    "Prove the browser requests /draco/draco_decoder.js successfully from same-origin, does not request Google/gstatic Draco assets, and emits no WebAssembly/CSP decoder failures.",
+    "Prove the certified Command Center GLB now renders in the actual browser and the prior procedural/fallback presentation is no longer the dominant scene.",
+    "Exercise Ask interaction, movement readability, map/HUD usability, at least one SPA exit, network/error state, and responsive overflow.",
+    "Commit evidence only."
+  ],
+  "write_paths": [
+    "docs/portfolio-world/evidence/command-center-browser-cert-002/**"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "package-lock.json",
+    "public/**",
+    "art/blender/**",
+    "src/**",
+    "tests/**",
+    "scripts/**",
+    "workflow/**",
+    "decisions/**",
+    "worker/**",
+    "wrangler.jsonc"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/candidates/command-center-draco-fix-001",
+    "refs/heads/icm/candidates/command-center-browser-cert-001"
+  ],
+  "acceptance": [
+    "Task executes from exact correction candidate SHA b5e27e729e6481bc98875177057fc0a193aef7ce.",
+    "The historical failed browser evidence candidate bee352c0c2cf81f7564fb6b61864dc693cdb6720 remains unchanged and is referenced in the new certification evidence.",
+    "The production GLB remains byte-for-byte unchanged at SHA-256 72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496 and 845512 bytes.",
+    "The self-hosted decoder remains public/draco/draco_decoder.js at SHA-256 8625489da79a805f4f2a7d511c3e52d8b4085608a9d2a4d5f4f9de5db0aea04f and 512465 bytes.",
+    "public/_headers remains unchanged.",
+    "command-center-draco-local, blender-assets, runtime-integration, and icm-stage validations pass before browser certification.",
+    "A production preview starts successfully and /api/health returns healthy state.",
+    "The browser version is explicitly recorded in browser-evidence.json.",
+    "At 1440x1000, 1024x768, and 390x844 the browser requests /draco/draco_decoder.js successfully from same-origin.",
+    "No request is made to gstatic.com, googleapis.com, or any other external Draco decoder origin.",
+    "No WebAssembly compilation, wasm-unsafe-eval, unsafe-eval, or CSP decoder error is observed.",
+    "The browser requests /world/art/command-center.glb successfully and the response corresponds to the certified 845512-byte asset.",
+    "The authored Command Center GLB visibly renders as the floating civic hub rather than falling back to the old procedural/fallback presentation.",
+    "Desktop 1440x1000, 1024x768, and mobile 390x844 screenshots are captured after render settlement.",
+    "Zero application page errors are recorded on the certified Command Center browser path.",
+    "Zero unexpected application console errors are recorded.",
+    "Zero failed requests and zero unexpected HTTP failures are recorded.",
+    "At 390x844 the viewport has no horizontal overflow and HUD/map controls remain usable.",
+    "Ask Terminal remains visible/usable and its interaction or canonical Ask navigation succeeds without runtime error.",
+    "Player/avatar, movement target feedback, bridge/destination entrances, and essential movement readability remain visible and usable.",
+    "At least one SPA exit from /play to a conventional route completes with zero page errors and zero failed requests.",
+    "Forced non-WebGL fallback renders and exposes working Projects, Resume, Ask, and Contact links; Ask reaches /ask.",
+    "No obvious z-fighting, exploded transforms, missing/broken materials, black/magenta failure geometry, gross clipping, severe camera mismatch, or authored-scene obstruction of spawn/Ask/HUD/bridge entrances is visible.",
+    "Evidence includes desktop-1440.png, desktop-1024.png, mobile-390.png, fallback.png, browser-evidence.json, and runtime-certification.md.",
+    "Independent Terra visual/runtime review returns pass with no required fixes.",
+    "No application code, decoder, GLB, CSP, Blender source, feature branch, main, or deployment change occurs."
+  ],
+  "validation": [
+    "command-center-draco-local",
+    "blender-assets",
+    "runtime-integration",
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The certified Draco/CSP correction ref no longer resolves to b5e27e729e6481bc98875177057fc0a193aef7ce.",
+    "The production GLB hash/size or local decoder hash/size differs from the certified values.",
+    "The browser attempts to load an external Draco decoder or uses WebAssembly for Command Center decoding.",
+    "A CSP/decoder error remains.",
+    "The GLB request succeeds but authored scenery still does not render.",
+    "An application page error, unexpected console error, failed request, or unexpected HTTP failure appears and is not a known harmless headless-browser environment warning.",
+    "The authored scene materially obscures spawn, Ask, HUD, bridge entrances, movement readability, or required interaction cues.",
+    "The visual result materially diverges from the certified Blender intent or is broken after integration.",
+    "Fixing any discovered issue would require modifying a protected application/asset path; preserve evidence and STOP for a separate correction task.",
+    "Unexpected unrelated diffs appear.",
+    "Independent Terra review returns fix_required or stop."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
