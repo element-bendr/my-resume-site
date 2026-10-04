@@ -22,7 +22,7 @@ preview = bpy.data.collections["PREVIEW_DO_NOT_EXPORT"]
 detail_prefixes = (
     "cc_facade_", "cc_civic_arch_", "cc_lateral_", "cc_core_structural_",
     "cc_core_crown_outer", "cc_core_crown_inner", "cc_foreground_",
-    "cc_floating_", "cc_landscape_",
+    "cc_floating_", "cc_landscape_", "cc_terrace_", "cc_underside_",
 )
 for obj in list(export.objects):
     if obj.name.startswith(detail_prefixes):
@@ -103,6 +103,58 @@ def arc(name, center, radius, start, end, z, tube, mat=stone, collection=export)
     mesh = bpy.data.meshes.new(name)
     mesh.from_pydata(verts, [], faces)
     return finish(bpy.data.objects.new(name, mesh), name, mat, collection, 0.025)
+
+
+def plaza_sector(name, inner, outer, start, end, z, height, mat):
+    segments = 12
+    verts = []
+    for level in (z - height / 2, z + height / 2):
+        for radius in (inner, outer):
+            for i in range(segments + 1):
+                angle = start + (end - start) * i / segments
+                verts.append((radius * math.cos(angle), radius * math.sin(angle), level))
+    stride = segments + 1
+    faces = []
+    for i in range(segments):
+        j = i + 1
+        faces.extend((
+            (i, j, stride + j, stride + i),
+            (2 * stride + i, 3 * stride + i, 3 * stride + j, 2 * stride + j),
+            (i, 2 * stride + i, 2 * stride + j, j),
+            (stride + i, stride + j, 3 * stride + j, 3 * stride + i),
+        ))
+    mesh = bpy.data.meshes.new(name)
+    mesh.from_pydata(verts, [], faces)
+    mesh.update()
+    return finish(
+        bpy.data.objects.new(name, mesh), name, mat,
+        bevel=0.025,
+    )
+
+
+# Low relief civic bands break the single plaza plane without narrowing protected routes.
+for index in range(8):
+    start = math.radians(index * 45 + 5)
+    end = math.radians((index + 1) * 45 - 5)
+    plaza_sector(
+        f"cc_terrace_plaza_sector_{index}", 1.88, 4.28, start, end,
+        0.18, 0.20, dark if index % 2 else teal,
+    )
+
+# Stepped landscape plinths give the foreground a readable middle tier below the skyline.
+for index, (x, y, height) in enumerate((
+    (-5.25, -3.75, 0.46), (5.25, -3.75, 0.64),
+    (-5.65, 3.35, 0.72), (6.10, 3.35, 0.92),
+)):
+    box(f"cc_terrace_landscape_{index}_base", (x, y, height / 2), (1.55, 0.78, height), dark, bevel=0.08)
+    box(f"cc_terrace_landscape_{index}_cap", (x, y, height + 0.10), (1.30, 0.62, 0.18), stone, bevel=0.04)
+    for stem in (-0.34, 0, 0.34):
+        cylinder(f"cc_terrace_landscape_{index}_stem_{stem}", (x + stem, y, height + 0.58), 0.04, 0.85, dark, vertices=12)
+        torus(f"cc_terrace_landscape_{index}_leaf_{stem}", (x + stem, y, height + 1.03), 0.16, 0.04, teal, rotate=(math.pi / 2, 0, 0))
+
+# Shallow keels stay inside the authored floor envelope while making the floating edge legible in profile.
+for index, (x, y) in enumerate(((-3.8, -4.45), (3.8, -4.45), (-3.8, 4.25), (3.8, 4.25))):
+    box(f"cc_underside_keel_{index}", (x, y, -0.10), (2.4, 0.42, 0.18), dark, bevel=0.05)
 
 
 # Facade depth: layered window bays make the background civic hall read as occupied architecture.

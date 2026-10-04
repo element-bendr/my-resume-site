@@ -1,32 +1,39 @@
 # Command Center Detail Review
 
+Status: **SOURCE VALIDATION PASS — VISUAL REVIEW READY**
+
 ## Reference comparison
 
-The detailed candidate preserves the accepted Massing V2 composition and preview camera while adding the authored cues requested for the civic hub: layered facade bays and ledges on the background civic hall, curved lateral canopies, a layered cyan structural crown around the hero core, foreground lamps/seating, perimeter planting, and a compressed suspended-edge treatment. The runtime view retains foreground, midground, and background separation, the five lateral/diagonal destination directions, the central civic plaza, and visible sky around the floating platform.
+Compared with candidate `19521998ec8666e40bffae1ff411df5420f7bdb6`, this bounded correction keeps the approved Massing V2 buildings, bridges, entrances, spawn, Ask approach, and preview camera unchanged. It adds only authored detail geometry in `tools/blender/detail_command_center.py`:
 
-Canonical evidence:
+- alternating low-relief civic plaza sectors break up the former uninterrupted slab;
+- stepped perimeter landscape plinths add a foreground-to-midground tier below the rear skyline;
+- shallow underside keels strengthen the floating edge in the side view without extending below the source envelope.
 
-- `previews/detail-runtime.png` — approved runtime camera composition.
-- `previews/detail-top.png` — plan/terrace and destination layout.
-- `previews/detail-side.png` — elevation, vertical hierarchy, and floating edge.
+The canonical runtime view now reads as a layered floating civic hub. The top view shows deliberate radial plaza segmentation and terraced landscape massing. The side view establishes foreground, skyline, and bounded underside depth.
 
 ## Source validation
 
-- Blender: 5.2.1 LTS (local authoring executable).
-- Source: `source/command-center.blend`.
-- Result: `PASS`.
-- Export collection: 209 mesh objects, 48,236 triangles, 5 approved materials.
-- Preview-only bridge, destination, scale, and lighting objects remain outside `EXPORT_COMMAND_CENTER`.
-- Production export was intentionally not run.
+`blender -b art/blender/command-center/source/command-center.blend --python tools/blender/validate_command_center_source.py`
+
+Result: **PASS**
+
+- 253 export mesh objects
+- 59,660 triangles
+- 5 approved materials
+- zero validation errors
+- canonical camera restored to `(0, -21, 10)` toward `(0, 0, 1.6)`, FOV 52°
+
+Required evidence rendered before commit:
+
+- `previews/detail-runtime.png`
+- `previews/detail-top.png`
+- `previews/detail-side.png`
 
 ## Protected state
 
-- Massing V2 spatial foundation, spawn, Ask clearances, bridge entrances, topology, and runtime camera behavior were not changed.
-- Runtime camera remains `(0, -21, 10)` aimed at `(0, 0, 1.6)` with 52° FOV.
-- No React files, production GLB, protected references, workflow state, or `AGENTS.md` were changed.
+No React, runtime, topology, movement, spawn, bridge entrance, Ask, production GLB, Massing V2 preview, Massing V2 review, workflow contract, protected ref, or `AGENTS.md` change was made. The production export remains intentionally absent from this task.
 
 ## Known limitations
 
-- Materials remain intentionally restrained and texture-free; this is a detailed authored review candidate, not production export polish.
-- The underside treatment is a bounded visual edge/brace treatment rather than a full structural simulation.
-- Terra independent visual review is still required before any later export task.
+This is a bounded visual detail pass, not a production export or runtime integration. Materials remain procedural and intentionally restrained. The detailed review renders are evidence for independent Terra review; they do not themselves authorize GLB export, React integration, merge, or deployment.

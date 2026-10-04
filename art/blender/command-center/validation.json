@@ -3,8 +3,8 @@
   "errors": [],
   "warnings": [],
   "metrics": {
-    "mesh_objects": 209,
-    "triangles": 48236,
+    "mesh_objects": 253,
+    "triangles": 59660,
     "materials": [
       "CC_Cyan",
       "CC_DarkGlass",
@@ -14,5 +14,5 @@
     ],
     "material_count": 5
   },
-  "source": "/mnt/shared/projects/mixed/Resume-gamified/.worktrees/icm-command-center-detail-001/.icm-local/worktrees/command-center-detail-001/art/blender/command-center/source/command-center.blend"
+  "source": "/mnt/shared/projects/mixed/Resume-gamified/.worktrees/icm-command-center-detail-001/.icm-local/worktrees/command-center-detail-002/art/blender/command-center/source/command-center.blend"
 }
