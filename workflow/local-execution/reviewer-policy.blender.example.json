@@ -1,0 +1,15 @@
+{
+  "reviewer_commands": {
+    "blender-terra-review": [
+      "__CONFIGURE_LOCAL_TERRA_REVIEWER__",
+      "--context",
+      "{review_context}",
+      "--output",
+      "{review_output}"
+    ]
+  },
+  "review_root": ".icm-local/review-worktrees",
+  "state_root": ".icm-local/state",
+  "environment_allowlist": [],
+  "command_timeout_seconds": 1800
+}
