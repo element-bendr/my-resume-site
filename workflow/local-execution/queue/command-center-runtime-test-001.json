@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-runtime-test-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "d29071a4c0d5013f35e2baef890efc4ab8da3071",
+  "trusted_ref": "refs/heads/icm/candidates/command-center-runtime-001",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "1eb5ac991a013be65318552efacd6369f949395a"
+  },
+  "executor_profile": "runtime-luna",
+  "review_policy": "independent",
+  "scope": [
+    "Correct only Terra finding runtime-ownership-test-does-not-protect-contract on immutable candidate d29071a4c0d5013f35e2baef890efc4ab8da3071.",
+    "Replace or extend tests/command-center-runtime.test.ts with focused assertions that protect registry-backed asset and placement use, local Suspense/error fallback, and preservation of React-owned InteractionStation and MoveTargetMarker rendering.",
+    "Do not change production runtime code, the certified GLB, Blender source/evidence, workflow contracts, or protected runtime authority."
+  ],
+  "write_paths": [
+    "tests/command-center-runtime.test.ts"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "package-lock.json",
+    "decisions/**",
+    "workflow/**",
+    "art/blender/**",
+    "public/world/art/**",
+    "src/**",
+    "worker/**",
+    "wrangler.jsonc",
+    "docs/**"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/candidates/command-center-export-evidence-001",
+    "refs/heads/icm/candidates/command-center-runtime-001"
+  ],
+  "acceptance": [
+    "Task executes from exact immutable runtime candidate SHA d29071a4c0d5013f35e2baef890efc4ab8da3071.",
+    "Only tests/command-center-runtime.test.ts changes.",
+    "Focused tests inspect the actual CommandCenter and CommandCenterArt integration boundary rather than only reasserting registry data.",
+    "Tests fail if registry-backed Command Center asset or placement use is removed or replaced by duplicate literals.",
+    "Tests fail if local Suspense/error fallback containment is removed.",
+    "Tests fail if React-owned InteractionStation or MoveTargetMarker rendering is removed from CommandCenter.",
+    "The production GLB remains byte-for-byte unchanged at SHA-256 72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496 and 845512 bytes.",
+    "blender-assets, runtime-integration, and icm-stage validations pass.",
+    "Independent Terra review returns pass with no required fixes."
+  ],
+  "validation": [
+    "blender-assets",
+    "runtime-integration",
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The trusted runtime candidate ref no longer resolves to d29071a4c0d5013f35e2baef890efc4ab8da3071.",
+    "The focused test correction requires changing production runtime code or any path outside the single declared test file.",
+    "The production GLB hash or byte size changes.",
+    "Any protected ref moves during execution.",
+    "Automated verification cannot pass within the declared test-only scope.",
+    "Independent review returns fix_required or stop."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
