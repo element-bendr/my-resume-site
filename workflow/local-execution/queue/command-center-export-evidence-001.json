@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-export-evidence-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "f64a6fd4fed450aff3d5ffc9e05a8e029e169b77",
+  "trusted_ref": "refs/heads/icm/candidates/command-center-export-001",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "78a10cce0b902b1de31819857d133eade4c723eb"
+  },
+  "executor_profile": "blender-luna",
+  "review_policy": "independent",
+  "scope": [
+    "Correct only the export evidence shape on certified export candidate f64a6fd4fed450aff3d5ffc9e05a8e029e169b77.",
+    "Rewrite art/blender/command-center/export-validation.json to match workflow/local-execution/export-evidence.example.json exactly in structure while preserving the verified GLB SHA-256 and byte size.",
+    "Keep public/world/art/command-center.glb and every Blender source, render, runtime, workflow, and protected artifact byte-for-byte unchanged.",
+    "Run the existing Blender asset and strict ICM validations, then commit only the corrected evidence file."
+  ],
+  "write_paths": [
+    "art/blender/command-center/export-validation.json"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "decisions/**",
+    "workflow/**",
+    "art/blender/command-center/source/**",
+    "art/blender/command-center/previews/**",
+    "art/blender/command-center/validation.json",
+    "art/blender/command-center/detail-review.md",
+    "art/blender/command-center/references/**",
+    "tools/blender/**",
+    "src/**",
+    "public/world/art/**"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/candidates/command-center-detail-002",
+    "refs/heads/icm/candidates/command-center-export-001"
+  ],
+  "acceptance": [
+    "The task executes from exact export candidate SHA f64a6fd4fed450aff3d5ffc9e05a8e029e169b77.",
+    "Only art/blender/command-center/export-validation.json changes.",
+    "The evidence contains schema_version 1 and record_type command_center_export_evidence.",
+    "The evidence records source_task command-center-detail-002, the exact certified source candidate ref/SHA, GLB path, SHA-256, byte size, source validation pass, and blender-assets validation pass using the repository example field names.",
+    "The evidence GLB SHA-256 and byte size exactly match the unchanged committed command-center.glb.",
+    "public/world/art/command-center.glb remains byte-for-byte unchanged at SHA-256 72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496 and 845512 bytes.",
+    "Runner validations blender-assets and icm-stage pass.",
+    "Independent Terra review returns pass with no required fixes."
+  ],
+  "validation": [
+    "blender-assets",
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The trusted export candidate ref no longer resolves to f64a6fd4fed450aff3d5ffc9e05a8e029e169b77.",
+    "The GLB hash or byte size differs from the certified export evidence values.",
+    "Any path other than the single declared evidence file changes.",
+    "Any protected ref moves during execution.",
+    "The correction would require re-exporting the GLB or modifying source, runtime, workflow, or protected state.",
+    "Independent review returns fix_required or stop."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
