@@ -48,7 +48,7 @@ jobs:
 
       - name: Test no-op candidate rejection
         run: |
-          PYTHONPATH=scripts/icm:scripts python3 -m unittest -v scripts.icm.test_local_runner_noop
+          PYTHONPATH=scripts/icm:scripts python3 scripts/icm/test_local_runner_noop.py -v
 
       - name: Verify inherited repository workflow
         run: |
