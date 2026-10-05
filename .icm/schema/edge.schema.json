@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/element-bendr/icm-repo-template/.icm/schema/edge.schema.json",
+  "title": "ICM Graph Edge",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "type", "from", "to", "origin", "attributes"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "id": {
+      "type": "string",
+      "pattern": "^edge\\.[a-z0-9][a-z0-9_.-]*$",
+      "maxLength": 200
+    },
+    "type": {
+      "enum": [
+        "contains",
+        "depends_on",
+        "blocks",
+        "implements",
+        "modifies",
+        "produces",
+        "validates",
+        "satisfies",
+        "protects",
+        "supersedes",
+        "derived_from",
+        "owned_by",
+        "requires"
+      ]
+    },
+    "from": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*(?:\\.[a-z0-9][a-z0-9_-]*)+$",
+      "maxLength": 160
+    },
+    "to": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*(?:\\.[a-z0-9][a-z0-9_-]*)+$",
+      "maxLength": 160
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["authored", "observed", "derived", "generated"] },
+        "path": { "type": ["string", "null"], "minLength": 1 },
+        "ref": { "type": ["string", "null"], "minLength": 1 },
+        "note": { "type": ["string", "null"], "maxLength": 500 }
+      }
+    },
+    "attributes": { "type": "object" }
+  }
+}

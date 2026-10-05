@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/element-bendr/icm-repo-template/schemas/icm-review.schema.json",
+  "title": "ICM Local Execution Review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","record_type","task_id","repository","workflow_id","stage_id","base_sha","candidate_sha","executor_identity","reviewer_profile","reviewer_identity","independent","verdict","findings","required_fixes","validation_summary"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "record_type": { "const": "review" },
+    "task_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$", "maxLength": 128 },
+    "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$", "maxLength": 200 },
+    "workflow_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,127}$", "maxLength": 128 },
+    "stage_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,127}$", "maxLength": 128 },
+    "base_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "candidate_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "executor_identity": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "reviewer_profile": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$", "maxLength": 64 },
+    "reviewer_identity": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "independent": { "const": true },
+    "verdict": { "enum": ["pass","fix_required","stop"] },
+    "findings": {
+      "type": "array", "maxItems": 128,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id","severity","message"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$", "maxLength": 64 },
+          "severity": { "enum": ["info","warning","error","blocker"] },
+          "message": { "type": "string", "minLength": 1, "maxLength": 1000 },
+          "paths": { "type": "array", "maxItems": 32, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 300 } }
+        }
+      }
+    },
+    "required_fixes": { "type": "array", "maxItems": 64, "items": { "type": "string", "minLength": 1, "maxLength": 500 } },
+    "validation_summary": { "type": "string", "minLength": 1, "maxLength": 2000 }
+  }
+}

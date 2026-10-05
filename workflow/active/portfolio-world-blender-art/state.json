@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "workflow_id": "portfolio-world-blender-art",
+  "title": "Portfolio World Blender Art Upgrade",
+  "status": "active",
+  "active_stage": "02-command-center-integration",
+  "provenance": {
+    "started_from_commit": "5f4de7ace37bfd843ef13f035a3b16ddb61f28d7",
+    "validated_commit": "532b1047d6a2c8dc43b30f085462db759454cadc"
+  },
+  "execution": {
+    "mode": "implementation",
+    "branch": "feat/blender-world-art-pipeline",
+    "worktree": ".",
+    "owner": "ChatGPT coordinator",
+    "write_paths": [
+      "tools/blender/**",
+      "art/blender/**",
+      "public/world/art/**",
+      "src/world/**",
+      "scripts/check-blender-assets.mjs",
+      "docs/portfolio-world/**",
+      "decisions/**",
+      "workflow/**",
+      "HANDOFF.md",
+      "CONTEXT.md",
+      "package.json",
+      ".github/workflows/blender-assets.yml"
+    ]
+  },
+  "stages": [
+    {
+      "id": "01-art-contract-bake",
+      "status": "certified",
+      "context": "workflow/active/portfolio-world-blender-art/01-art-contract-bake-CONTEXT.md",
+      "depends_on_stages": [],
+      "depends_on": [],
+      "outputs": [
+        "tools/blender/generate_world.py",
+        "tools/blender/README.md",
+        "src/world/art/BlenderDistrictArt.tsx",
+        "scripts/check-blender-assets.mjs",
+        "docs/portfolio-world/BLENDER-ART-PIPELINE.md",
+        "docs/portfolio-world/BLENDER-ASSET-CONTRACT.md",
+        "docs/portfolio-world/BLENDER-AUTHORING-GUIDE.md",
+        "decisions/2026-10-01-blender-world-art.md",
+        "public/world/art/command-center.glb",
+        "public/world/art/build-lab.glb",
+        "public/world/art/automation-lab.glb",
+        "public/world/art/client-street.glb",
+        "public/world/art/timeline.glb",
+        "public/world/art/hobby-district.glb",
+        "docs/portfolio-world/BLENDER-STAGE-01-VALIDATION.md",
+        "src/world/art/blender-art-config.ts",
+        "tests/blender-art-contract.test.ts"
+      ],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/01-art-contract-bake-completion-report.md"
+    },
+    {
+      "id": "02-command-center-integration",
+      "status": "active",
+      "context": "workflow/active/portfolio-world-blender-art/02-command-center-integration-CONTEXT.md",
+      "depends_on_stages": [
+        "01-art-contract-bake"
+      ],
+      "depends_on": [
+        {
+          "path": "docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md",
+          "blob": "ad805aef758ace9f2fee9dca4e7dd69f28313cfb"
+        },
+        {
+          "path": "src/world/world-topology.ts",
+          "blob": "b7f8c8e8b0a906ab7134759e74a02a566c8527bb"
+        },
+        {
+          "path": "src/world/world-config.ts",
+          "blob": "b7e5181e34e1f6a91d2920ae0ff2a2fd2a4b4b9d"
+        },
+        {
+          "path": "src/world/WorldEntry.tsx",
+          "blob": "954a4449d29e5fe60590e1b9ece202aa029ebcba"
+        }
+      ],
+      "outputs": [
+        "docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md",
+        "art/blender/command-center/README.md",
+        "art/blender/command-center/LOCAL-CODEX-HANDOFF.md",
+        "tools/blender/command_center_common.py",
+        "tools/blender/bootstrap_command_center.py",
+        "tools/blender/validate_command_center_source.py",
+        "tools/blender/render_command_center_preview.py",
+        "tools/blender/export_command_center.py",
+        "art/blender/command-center/source/command-center.blend",
+        "art/blender/command-center/previews/runtime.png",
+        "art/blender/command-center/validation.json",
+        "public/world/art/command-center.glb",
+        "docs/portfolio-world/COMMAND-CENTER-MASSING-V2.md",
+        "art/blender/command-center/MASSING-V2-HANDOFF.md",
+        "art/blender/command-center/previews/massing-v2-top.png",
+        "art/blender/command-center/previews/massing-v2-runtime.png",
+        "art/blender/command-center/previews/massing-v2-side.png",
+        "art/blender/command-center/massing-v2-review.md",
+        "docs/portfolio-world/COMMAND-CENTER-VISUAL-FAIL-02.md"
+      ],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/02-command-center-integration-completion-report.md"
+    },
+    {
+      "id": "03-district-rollout",
+      "status": "pending",
+      "context": "workflow/active/portfolio-world-blender-art/03-district-rollout-CONTEXT.md",
+      "depends_on_stages": [
+        "02-command-center-integration"
+      ],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/03-district-rollout-completion-report.md"
+    },
+    {
+      "id": "04-lighting-materials-post",
+      "status": "pending",
+      "context": "workflow/active/portfolio-world-blender-art/04-lighting-materials-post-CONTEXT.md",
+      "depends_on_stages": [
+        "03-district-rollout"
+      ],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/04-lighting-materials-post-completion-report.md"
+    },
+    {
+      "id": "05-performance-accessibility",
+      "status": "pending",
+      "context": "workflow/active/portfolio-world-blender-art/05-performance-accessibility-CONTEXT.md",
+      "depends_on_stages": [
+        "04-lighting-materials-post"
+      ],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/05-performance-accessibility-completion-report.md"
+    },
+    {
+      "id": "06-certification-promotion",
+      "status": "pending",
+      "context": "workflow/active/portfolio-world-blender-art/06-certification-promotion-CONTEXT.md",
+      "depends_on_stages": [
+        "05-performance-accessibility"
+      ],
+      "depends_on": [],
+      "outputs": [],
+      "completion_report": "workflow/active/portfolio-world-blender-art/output/06-certification-promotion-completion-report.md"
+    }
+  ]
+}

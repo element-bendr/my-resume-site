@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/element-bendr/icm-repo-template/.icm/schema/graph.schema.json",
+  "title": "ICM Graph Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "nodes", "edges"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "nodes": {
+      "type": "array",
+      "items": { "$ref": "node.schema.json" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "$ref": "edge.schema.json" }
+    }
+  }
+}

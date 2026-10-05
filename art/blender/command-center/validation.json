@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "errors": [],
+  "warnings": [
+    "triangle count 29812 is below preferred authored range 35000..90000"
+  ],
+  "metrics": {
+    "mesh_objects": 119,
+    "triangles": 29812,
+    "materials": [
+      "CC_Graphite",
+      "CC_SoftMetal",
+      "CC_Teal"
+    ],
+    "material_count": 3
+  },
+  "source": "/mnt/shared/projects/mixed/Resume-gamified/.worktrees/blender-world-art/art/blender/command-center/source/command-center.blend"
+}

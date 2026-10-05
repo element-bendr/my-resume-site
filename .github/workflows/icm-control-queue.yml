@@ -1,0 +1,77 @@
+name: ICM Control Queue Validation
+
+on:
+  push:
+    branches:
+      - icm/control
+    paths:
+      - "workflow/local-execution/queue/**"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-queue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Resolve trusted code branch
+        run: |
+          git fetch origin refs/heads/feat/blender-world-art-pipeline:refs/remotes/origin/feat/blender-world-art-pipeline
+          trusted_sha="$(git rev-parse refs/remotes/origin/feat/blender-world-art-pipeline)"
+          echo "TRUSTED_SHA=$trusted_sha" >> "$GITHUB_ENV"
+          git worktree add --detach /tmp/icm-code "$trusted_sha"
+
+      - name: Validate every queued task against current code authority
+        env:
+          CONTROL_ROOT: ${{ github.workspace }}
+        run: |
+          PYTHONPATH=/tmp/icm-code/scripts/icm:/tmp/icm-code/scripts python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from task_validate import load_json_object, validate_task
+
+          code_root = Path("/tmp/icm-code")
+          control_root = Path(os.environ["CONTROL_ROOT"])
+          registry = json.loads(
+              (code_root / "workflow/local-execution/validation-registry.json").read_text(encoding="utf-8")
+          )
+          trusted_ref = registry["trusted_code_ref"]
+          allowed = set(registry["allowed_validation_ids"])
+          trusted_sha = os.environ["TRUSTED_SHA"]
+
+          queue = sorted((control_root / "workflow/local-execution/queue").glob("*.json"))
+          if not queue:
+              raise SystemExit("no queue records found")
+
+          errors = []
+          for path in queue:
+              task = load_json_object(path)
+              if task.get("trusted_ref") != trusted_ref:
+                  errors.append(f"{path.name}: trusted_ref must be {trusted_ref}")
+                  continue
+              task_errors = validate_task(
+                  code_root,
+                  task,
+                  expected_repository="element-bendr/my-resume-site",
+                  trusted_control_refs={"refs/heads/icm/control"},
+                  allowed_validation_ids=allowed,
+                  trusted_ref_sha=trusted_sha,
+              )
+              errors.extend(f"{path.name}: {item}" for item in task_errors)
+
+          if errors:
+              raise SystemExit("\n".join(errors))
+          print(f"CONTROL_QUEUE_VALIDATION: PASS tasks={len(queue)} trusted_sha={trusted_sha}")
+          PY

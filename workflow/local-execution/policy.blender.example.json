@@ -1,0 +1,67 @@
+{
+  "repository": "element-bendr/my-resume-site",
+  "trusted_control_refs": [
+    "refs/heads/icm/control"
+  ],
+  "executor_commands": {
+    "blender-luna": [
+      "__CONFIGURE_LOCAL_LUNA_EXECUTOR__",
+      "--task-file",
+      "{task_file}"
+    ],
+    "runtime-luna": [
+      "__CONFIGURE_LOCAL_LUNA_EXECUTOR__",
+      "--task-file",
+      "{task_file}"
+    ],
+    "blender-codex-reference": [
+      "__CONFIGURE_LOCAL_CODEX_EXECUTOR__",
+      "--task-file",
+      "{task_file}"
+    ]
+  },
+  "validation_commands": {
+    "blender-candidate": [
+      "python3",
+      "tools/icm/validate_blender_candidate.py",
+      "--task-file",
+      "{task_file}"
+    ],
+    "icm-stage": [
+      "python3",
+      "scripts/workflow_status.py",
+      "--strict"
+    ],
+    "blender-assets": [
+      "node",
+      "scripts/check-blender-assets.mjs"
+    ],
+    "runtime-integration": [
+      "npm",
+      "run",
+      "verify"
+    ],
+    "command-center-draco-local": [
+      "node",
+      "scripts/check-command-center-draco-runtime.mjs"
+    ],
+    "reference-rebuild-geometry": [
+      "blender",
+      "-b",
+      "art/blender/command-center/source/command-center.blend",
+      "--python",
+      "tools/blender/audit_reference_rebuild.py"
+    ],
+    "reference-rebuild-evidence": [
+      "python3",
+      "tools/icm/validate_reference_rebuild_evidence.py",
+      "--task-file",
+      "{task_file}"
+    ]
+  },
+  "worktree_root": ".icm-local/worktrees",
+  "state_root": ".icm-local/state",
+  "command_timeout_seconds": 7200,
+  "environment_allowlist": [],
+  "candidate_remote": "origin"
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "trusted_code_ref": "refs/heads/feat/blender-world-art-pipeline",
+  "allowed_validation_ids": [
+    "blender-assets",
+    "blender-candidate",
+    "command-center-draco-local",
+    "fixture-smoke",
+    "icm-stage",
+    "reference-rebuild-evidence",
+    "reference-rebuild-geometry",
+    "runtime-integration"
+  ]
+}
