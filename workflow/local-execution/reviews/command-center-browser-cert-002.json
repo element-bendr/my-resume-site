@@ -1,0 +1,18 @@
+{
+  "base_sha": "b5e27e729e6481bc98875177057fc0a193aef7ce",
+  "candidate_sha": "12fc276c7437b6767c164e104431ea606bf08888",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "runtime-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-browser-cert-002",
+  "validation_summary": "PASS. HEAD 12fc276c7437b6767c164e104431ea606bf08888 has parent/exact correction candidate b5e27e729e6481bc98875177057fc0a193aef7ce; only the six allowed certification-evidence files changed. Protected paths, public/_headers, GLB, and decoder are unchanged; live hashes and sizes match the contract. Committed evidence records all required pre-certification validations passing, healthy preview, Chromium version, same-origin JS Draco with no external decoder/WASM/CSP failures, zero runtime/network errors, interactions/routes/fallback, and all required screenshots. Independent visual inspection confirms an authored civic hub renders at desktop and mobile, controls remain visible, and fallback exposes the required routes. Worktree is clean.",
+  "verdict": "pass",
+  "workflow_id": "portfolio-world-blender-art"
+}
