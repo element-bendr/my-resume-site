@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "candidateSha": "b5e27e729e6481bc98875177057fc0a193aef7ce",
+  "historicalFailedCandidateSha": "bee352c0c2cf81f7564fb6b61864dc693cdb6720",
+  "browser": { "name": "Chromium", "version": "153.0.8010.12", "playwright": "1.63.0" },
+  "baseUrl": "http://127.0.0.1:4173",
+  "health": { "status": 200, "body": { "ok": true, "service": "vijay-kumaran-portfolio-world", "stage": "app-foundation" } },
+  "asset": {
+    "url": "/world/art/command-center.glb",
+    "status": 200,
+    "bytes": 845512,
+    "sha256": "72008b693cf0fc889aea7cf8af94ec2876cc0e3a7807b430e6e483fe275d7496"
+  },
+  "decoder": {
+    "url": "/draco/draco_decoder.js",
+    "status": 200,
+    "bytes": 512465,
+    "sha256": "8625489da79a805f4f2a7d511c3e52d8b4085608a9d2a4d5f4f9de5db0aea04f",
+    "sameOrigin": true,
+    "decoderType": "JavaScript"
+  },
+  "viewports": {
+    "desktop-1440": { "width": 1440, "height": 1000, "assetRendered": true, "visibleFallback": false, "canvas": 1, "hudVisible": true, "mapUsable": true, "askLabelVisible": true, "noHorizontalOverflow": true },
+    "desktop-1024": { "width": 1024, "height": 768, "assetRendered": true, "visibleFallback": false, "canvas": 1, "hudVisible": true, "mapUsable": true, "askLabelVisible": true, "noHorizontalOverflow": true },
+    "mobile-390": { "width": 390, "height": 844, "assetRendered": true, "visibleFallback": false, "canvas": 1, "hudVisible": true, "mapUsable": true, "askLabelVisible": true, "noHorizontalOverflow": true }
+  },
+  "interactions": {
+    "movementTargetClick": true,
+    "mapPanelVisible": true,
+    "askTerminalDialog": true,
+    "askTerminalRoute": "/ask",
+    "spaExit": { "route": "/projects", "pageErrors": 0, "consoleErrors": 0, "failedRequests": 0, "httpFailures": 0 }
+  },
+  "fallback": {
+    "viewport": "390x844",
+    "statusVisible": true,
+    "links": { "Projects": "/projects", "Resume": "/resume", "Ask": "/ask", "Contact": "/contact" },
+    "askRoute": "/ask",
+    "pageErrors": 0,
+    "consoleErrors": 0,
+    "failedRequests": 0,
+    "httpFailures": 0
+  },
+  "network": {
+    "sameOriginDracoRequestsOnly": true,
+    "externalDracoOrigins": [],
+    "externalDecoderHosts": ["gstatic.com", "googleapis.com"],
+    "externalDecoderRequestsObserved": [],
+    "wasmCompilationObserved": false,
+    "wasmUnsafeEvalObserved": false,
+    "unsafeEvalObserved": false,
+    "cspDecoderErrors": []
+  },
+  "errors": { "consoleErrors": 0, "pageErrors": 0, "failedRequests": 0, "unexpectedHttpFailures": 0 }
+}
