@@ -114,3 +114,10 @@ Self-reporting does not replace the human visual gate. It exists to prove Codex 
 The final export collection must not retain the known legacy detail-pass object families and must not be dominated by very low-complexity primitive meshes.
 
 The committed validator is intentionally heuristic, not an art critic. Human approval remains the final visual authority.
+
+
+Each comparison iteration must preserve its runtime-camera render under:
+
+`art/blender/command-center/previews/reference-iterations/`
+
+The comparison JSON must point to each real render and record a substantive `largest_mismatch` and `correction`. At least three real intermediate renders are mandatory before the final runtime render.
