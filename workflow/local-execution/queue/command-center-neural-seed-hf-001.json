@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-neural-seed-hf-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "4a9fe7a6a14c2266f8dbc2b90df9baee91a6282e",
+  "trusted_ref": "refs/heads/feat/blender-world-art-pipeline",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "codex-coordinator",
+    "commit_sha": "44fdabf512b5b9a5d2a1d65d311d18114b922ffb"
+  },
+  "executor_profile": "blender-codex-reference",
+  "review_policy": "independent",
+  "scope": [
+    "Correct the exhausted command-center-neural-seed-001 task by producing its missing neural seed deliverables without rewriting its immutable result, review, claim, or candidate refs.",
+    "Use the exact approved command-center-concept.png as the first full-scene input to Microsoft TRELLIS.2 on Hugging Face paid GPU inference.",
+    "Spend no more than USD 3.50 total, use one 512-class variant first, and stop generation immediately if that full-scene seed is structurally promising.",
+    "Only if the first seed is unusable, permit at most two additional runs derived from the same approved reference: one central civic hub crop and one coherent side architectural cluster crop.",
+    "Record model/version, input mode, settings, output hash/bytes, spend evidence, and accept/reject reason for every generation.",
+    "Import a usable generated mesh into Blender for cleanup, alignment, and review rendering only; do not procedurally reconstruct the primary architecture.",
+    "Stop at NEURAL SEED REBUILD — HUMAN VISUAL REVIEW READY. Do not export the production runtime GLB or modify React."
+  ],
+  "write_paths": [
+    "art/blender/command-center/neural-seed/**",
+    "art/blender/command-center/source/command-center.blend",
+    "art/blender/command-center/previews/neural-runtime.png",
+    "art/blender/command-center/previews/neural-top.png",
+    "art/blender/command-center/previews/neural-side.png",
+    "art/blender/command-center/neural-seed-review.md",
+    "art/blender/command-center/neural-seed-provenance.json"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "package-lock.json",
+    "decisions/**",
+    "workflow/**",
+    "docs/**",
+    "tools/blender/**",
+    "tools/icm/**",
+    "art/blender/command-center/references/**",
+    "art/blender/command-center/previews/massing-v2-*.png",
+    "art/blender/command-center/previews/reference-*.png",
+    "art/blender/command-center/massing-v2-review.md",
+    "art/blender/command-center/massing-v2-validation.json",
+    "public/**",
+    "src/**",
+    "tests/**",
+    "worker/**",
+    "wrangler.jsonc"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/claims/command-center-neural-seed-001",
+    "refs/heads/icm/candidates/command-center-neural-seed-001"
+  ],
+  "acceptance": [
+    "The exact primary reference command-center-concept.png is the sole visual source authority and its SHA-256 is recorded.",
+    "The first and only initial inference is one full-scene 512-class variant; additional inference occurs only after a recorded unusable verdict for that seed.",
+    "No more than three generations occur and the aggregate recorded spend does not exceed USD 3.50.",
+    "At least one generated mesh seed GLB produced by Microsoft TRELLIS.2 is committed under art/blender/command-center/neural-seed before Blender cleanup.",
+    "neural-seed-provenance.json records generator/model, version/commit when available, settings, input mode, output path, GLB SHA-256/bytes, spend evidence, and accept/reject reason for every run.",
+    "The final command-center.blend contains imported generated mesh seed geometry rather than a fresh primitive procedural reconstruction.",
+    "Player spawn, five bridge interfaces, Ask clearance, walkable topology, world scale and runtime camera operating constraints remain unchanged.",
+    "neural-runtime.png, neural-top.png and neural-side.png are committed for human review.",
+    "No production public/world/art/command-center.glb replacement, React/runtime change, merge, or deployment occurs.",
+    "icm-stage validation passes and independent review verifies provenance and protected state; human visual approval remains mandatory."
+  ],
+  "validation": [
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The trusted feature branch head no longer equals the task base SHA.",
+    "The primary reference image is unavailable, unreadable, or has an unexpected SHA-256.",
+    "The Hugging Face account is unauthenticated, inference cannot persist its output, or the next job could exceed the USD 3.50 aggregate cap.",
+    "No usable generated mesh seed results from the maximum permitted three generations.",
+    "Matching the generated seed requires moving protected spawn, bridge interfaces, Ask clearance, topology, world scale, or camera.",
+    "The workflow starts reconstructing the primary architecture from primitive Blender geometry instead of imported generated mesh.",
+    "Any path outside the declared write scope changes.",
+    "Any production GLB export, React/runtime edit, main change, merge, or deployment is attempted."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
