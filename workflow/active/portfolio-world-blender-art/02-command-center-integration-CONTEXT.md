@@ -26,7 +26,7 @@
 
 Rebuild the Command Center from the approved primary reference image, using the existing scene only as spatial constraint evidence rather than visual authority.
 
-Current phase: **REFERENCE_DRIVEN_COMMAND_CENTER_REBUILD_ACTIVE**. The earlier Massing V2 PASS remains historical evidence for protected spatial anchors only. It is no longer visual authority. Preserve topology, spawn, bridge entrances, Ask clearance, world scale and camera operating constraints; architectural geometry, silhouette, facade language, terraces, landscape, materials, lighting and decorative structure may be substantially rebuilt to match `art/blender/command-center/references/command-center-concept.png`. Stage 02 remains ACTIVE, not complete/certified.
+Current phase: **NEURAL_SEED_COMMAND_CENTER_REBUILD_ACTIVE**. The earlier Massing V2 PASS remains historical evidence for protected spatial anchors only. It is no longer visual authority. Preserve topology, spawn, bridge entrances, Ask clearance, world scale and camera operating constraints; architectural geometry, silhouette, facade language, terraces, landscape, materials, lighting and decorative structure may be substantially rebuilt to match `art/blender/command-center/references/command-center-concept.png`. Stage 02 remains ACTIVE, not complete/certified.
 
 Detailed authoring is now authorized. Production GLB export remains blocked until a later detailed visual PASS and exact-source validation; React integration requires validated production export. Stage 03, merge and deployment remain blocked.
 
@@ -230,3 +230,24 @@ After later visual PASS, the production verification sequence remains:
 - required visual validation cannot be performed;
 - unexpected unrelated diff appears;
 - user-owned `AGENTS.md` is modified.
+
+
+## Upstream approach decision — neural seed
+
+The reference-driven procedural Blender reconstruction lane stopped after two materially similar attempts. Do not attempt a third scripted plate/perimeter/primitive reconstruction.
+
+New source strategy:
+
+1. use `art/blender/command-center/references/command-center-concept.png` as the primary input;
+2. generate one or more textured 3D mesh seeds using an image-to-3D model, with Microsoft TRELLIS.2 as the preferred first implementation;
+3. if whole-scene generation is not useful, segment/crop the same approved reference into architectural clusters and generate separate mesh seeds;
+4. import the generated mesh seed(s) into Blender;
+5. clean, remesh/decimate, align, combine and adapt those meshes around the protected runtime anchors;
+6. use Blender for mesh cleanup, material repair, camera matching, anchor alignment and final authoring, not for another primitive procedural reconstruction.
+
+Forbidden fallback:
+- no third procedural plate-and-perimeter scene;
+- no cube/cylinder/torus reconstruction as the primary architecture;
+- no engine switch solely to reproduce the same procedural strategy in JavaScript.
+
+Three.js remains runtime authority. Engine replacement is deferred unless a real authored/generated mesh cannot meet browser/runtime constraints.
