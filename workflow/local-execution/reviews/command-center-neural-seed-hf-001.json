@@ -1,0 +1,36 @@
+{
+  "base_sha": "4a9fe7a6a14c2266f8dbc2b90df9baee91a6282e",
+  "candidate_sha": "4a9fe7a6a14c2266f8dbc2b90df9baee91a6282e",
+  "executor_identity": "local/workstation:executor/luna",
+  "findings": [
+    {
+      "id": "missing-neural-seed-deliverables",
+      "message": "Candidate equals its declared base and trusted ref, and contains none of the required neural seed GLB, provenance, review, or neural runtime/top/side renders. Therefore it cannot establish TRELLIS.2 generation, the reference SHA record, spend/run limits, imported seed geometry in the Blender source, or human visual-review readiness.",
+      "paths": [
+        "art/blender/command-center/neural-seed",
+        "art/blender/command-center/neural-seed-provenance.json",
+        "art/blender/command-center/neural-seed-review.md",
+        "art/blender/command-center/previews/neural-runtime.png",
+        "art/blender/command-center/previews/neural-top.png",
+        "art/blender/command-center/previews/neural-side.png",
+        "art/blender/command-center/source/command-center.blend"
+      ],
+      "severity": "error"
+    }
+  ],
+  "independent": true,
+  "record_type": "review",
+  "repository": "element-bendr/my-resume-site",
+  "required_fixes": [
+    "Commit a generated TRELLIS.2 mesh seed GLB under art/blender/command-center/neural-seed and complete neural-seed-provenance.json for every generation, including the recorded reference SHA-256, settings, output hashes/bytes, spend, and accept/reject rationale.",
+    "Import the accepted seed into command-center.blend while preserving protected anchors; commit neural-runtime.png, neural-top.png, neural-side.png, and neural-seed-review.md, then rerun the stage validation for that changed candidate."
+  ],
+  "reviewer_identity": "local/workstation:reviewer/terra",
+  "reviewer_profile": "blender-terra-review",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "task_id": "command-center-neural-seed-hf-001",
+  "validation_summary": "Recorded icm-stage validation is pass (exit=0). Protected state is unchanged: candidate/base and candidate/trusted-ref diffs are empty. The required artifacts are absent, so the candidate is invalid and visual inspection cannot occur.",
+  "verdict": "fix_required",
+  "workflow_id": "portfolio-world-blender-art"
+}
