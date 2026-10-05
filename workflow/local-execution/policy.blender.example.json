@@ -13,6 +13,11 @@
       "__CONFIGURE_LOCAL_LUNA_EXECUTOR__",
       "--task-file",
       "{task_file}"
+    ],
+    "blender-codex-reference": [
+      "__CONFIGURE_LOCAL_CODEX_EXECUTOR__",
+      "--task-file",
+      "{task_file}"
     ]
   },
   "validation_commands": {
@@ -39,6 +44,19 @@
     "command-center-draco-local": [
       "node",
       "scripts/check-command-center-draco-runtime.mjs"
+    ],
+    "reference-rebuild-geometry": [
+      "blender",
+      "-b",
+      "art/blender/command-center/source/command-center.blend",
+      "--python",
+      "tools/blender/audit_reference_rebuild.py"
+    ],
+    "reference-rebuild-evidence": [
+      "python3",
+      "tools/icm/validate_reference_rebuild_evidence.py",
+      "--task-file",
+      "{task_file}"
     ]
   },
   "worktree_root": ".icm-local/worktrees",
