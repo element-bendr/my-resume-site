@@ -1,0 +1,29 @@
+{
+  "base_sha": "4a9fe7a6a14c2266f8dbc2b90df9baee91a6282e",
+  "blockers": [],
+  "candidate_ref": "refs/heads/icm/candidates/command-center-neural-seed-001",
+  "candidate_sha": "4a9fe7a6a14c2266f8dbc2b90df9baee91a6282e",
+  "changed_paths": [],
+  "claim_ref": "refs/heads/icm/claims/command-center-neural-seed-001",
+  "execution": {
+    "branch": "icm/run/command-center-neural-seed-001",
+    "worktree_id": "command-center-neural-seed-001"
+  },
+  "executor_identity": "local/workstation:executor/luna",
+  "next_action": "await_review",
+  "protected_state": "unchanged",
+  "record_type": "result",
+  "repository": "element-bendr/my-resume-site",
+  "schema_version": 1,
+  "stage_id": "02-command-center-integration",
+  "status": "pass",
+  "task_id": "command-center-neural-seed-001",
+  "validation": [
+    {
+      "id": "icm-stage",
+      "status": "pass",
+      "summary": "exit=0"
+    }
+  ],
+  "workflow_id": "portfolio-world-blender-art"
+}
