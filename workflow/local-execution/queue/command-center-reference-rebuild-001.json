@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-reference-rebuild-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "90c657f616b5ad5dd15c3891db0fef420c87b52f",
+  "trusted_ref": "refs/heads/feat/blender-world-art-pipeline",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "e124873ff92891058c8a270c99f68c0dec736545"
+  },
+  "executor_profile": "blender-codex-reference",
+  "review_policy": "independent",
+  "scope": [
+    "Rebuild the Command Center in Blender using art/blender/command-center/references/command-center-concept.png as the primary visual authority.",
+    "Treat existing Blender geometry as disposable visual implementation; preserve only protected runtime/spatial anchors.",
+    "Use Codex vision plus Blender/Blender Python in an iterative reference -> build -> render -> compare -> correct loop.",
+    "Prioritize major silhouette, depth, curved architecture, facade articulation, material separation, landscape, human-scale cues and floating-platform form before small detail.",
+    "Stop at REFERENCE REBUILD — HUMAN VISUAL REVIEW READY. Do not export GLB or modify React."
+  ],
+  "write_paths": [
+    "art/blender/command-center/source/command-center.blend",
+    "art/blender/command-center/previews/reference-runtime.png",
+    "art/blender/command-center/previews/reference-top.png",
+    "art/blender/command-center/previews/reference-side.png",
+    "art/blender/command-center/reference-rebuild-review.md",
+    "art/blender/command-center/reference-rebuild-validation.json",
+    "tools/blender/reference_*.py"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "package-lock.json",
+    "decisions/**",
+    "workflow/**",
+    "docs/**",
+    "art/blender/command-center/references/**",
+    "art/blender/command-center/previews/massing-v2-*.png",
+    "art/blender/command-center/massing-v2-review.md",
+    "art/blender/command-center/massing-v2-validation.json",
+    "public/**",
+    "src/**",
+    "tests/**",
+    "worker/**",
+    "wrangler.jsonc"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/candidates/command-center-draco-fix-001",
+    "refs/heads/icm/candidates/command-center-browser-cert-001"
+  ],
+  "acceptance": [
+    "Primary visual authority is command-center-concept.png; secondary references may inform atmosphere only.",
+    "Player spawn, bridge interfaces, Ask clearance, walkable topology, world scale and runtime camera operating constraints remain unchanged.",
+    "Existing Massing V2 geometry is not protected visual composition and may be replaced wholesale.",
+    "The runtime-camera render materially resembles the reference in overall silhouette, foreground/midground/background depth, vertical hierarchy, curved versus orthogonal architectural language, facade depth, landscape distribution, material separation and floating-platform form.",
+    "The result does not read primarily as cubes, cylinders, toruses, repeated slabs or emissive trim decorating primitive massing.",
+    "Large visual mismatches are corrected before small-detail polish.",
+    "The editable command-center.blend is committed.",
+    "reference-runtime.png, reference-top.png and reference-side.png are committed.",
+    "reference-rebuild-review.md explicitly compares the final runtime render against the primary reference and lists remaining visible differences.",
+    "reference-rebuild-validation.json records source validation status, mesh/triangle/material counts and protected-anchor status.",
+    "Blender source validation passes without weakening protected-clearance rules.",
+    "No production GLB export occurs.",
+    "No React/runtime, CSP, decoder, topology, content, main or deployment change occurs.",
+    "icm-stage validation passes.",
+    "Independent reviewer finds no protected-state violation. Visual approval for export remains a human gate even if independent review passes."
+  ],
+  "validation": [
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The trusted feature branch head no longer equals the task base SHA.",
+    "The primary reference image is unavailable or unreadable.",
+    "Matching the reference would require moving protected spawn, bridge interfaces, Ask clearance, topology or world scale.",
+    "Two materially similar rebuild approaches still produce a primitive/blocky visual language; in that case stop and report the unresolved upstream visual constraint.",
+    "Blender source validation cannot pass without weakening protected spatial rules.",
+    "Any path outside the declared write scope changes.",
+    "Any GLB export, React/runtime edit, main change or deployment is attempted."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
