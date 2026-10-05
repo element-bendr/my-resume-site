@@ -1,11 +1,16 @@
 # Command Center reference images
 
-The previously approved concept image is not currently stored in this repository.
-
-When that exact image becomes available, place it here as:
+Primary visual authority:
 
 `command-center-concept.png`
 
-Until then, `docs/portfolio-world/COMMAND-CENTER-BLENDER-SPEC.md` is the canonical authoring brief.
+This is the approved target image for the reference-driven Command Center rebuild.
 
-A newly generated or merely similar image must not silently replace the approved reference.
+Secondary visual references:
+
+- `portfolio-world-concept-board.png`
+- `portfolio-world-neon-hub.png`
+
+The primary reference controls architectural appearance, silhouette, layering, material direction and visual hierarchy. Secondary references may inform lighting/material atmosphere but must not dilute or replace the primary target.
+
+Runtime topology, spawn, bridge entrances, Ask clearance, world scale and camera operating constraints remain authoritative from the runtime contracts. Existing Blender geometry is not visual authority and may be substantially replaced.
