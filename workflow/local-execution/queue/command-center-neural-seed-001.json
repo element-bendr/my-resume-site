@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "record_type": "task",
+  "task_id": "command-center-neural-seed-001",
+  "repository": "element-bendr/my-resume-site",
+  "workflow_id": "portfolio-world-blender-art",
+  "stage_id": "02-command-center-integration",
+  "base_sha": "4a9fe7a6a14c2266f8dbc2b90df9baee91a6282e",
+  "trusted_ref": "refs/heads/feat/blender-world-art-pipeline",
+  "origin": {
+    "kind": "same_repository_control",
+    "ref": "refs/heads/icm/control",
+    "actor": "chatgpt-coordinator",
+    "commit_sha": "e80a57ec32bef45512ff2b3ce23348879cccb10a"
+  },
+  "executor_profile": "blender-codex-reference",
+  "review_policy": "independent",
+  "scope": [
+    "Generate real 3D mesh seed geometry from the approved command-center-concept.png before doing any Blender authoring.",
+    "Use Microsoft TRELLIS.2 as the preferred image-to-3D generator. Use an official/local installation or an already-authorized hosted inference endpoint; do not invent credentials or silently substitute another generator.",
+    "Attempt whole-scene generation first. If it is visually unusable, crop/segment the same approved reference into coherent architectural clusters and generate multiple seed meshes.",
+    "Import generated seed mesh geometry into Blender and use Blender only for cleanup, remesh/decimation, material repair, assembly, scale/origin alignment, protected-anchor fitting and review rendering.",
+    "Do not procedurally reconstruct the architecture from primitives. A generated mesh must exist before Blender cleanup begins.",
+    "Stop at NEURAL SEED REBUILD — HUMAN VISUAL REVIEW READY. Do not export the production runtime GLB or modify React."
+  ],
+  "write_paths": [
+    "art/blender/command-center/neural-seed/**",
+    "art/blender/command-center/source/command-center.blend",
+    "art/blender/command-center/previews/neural-runtime.png",
+    "art/blender/command-center/previews/neural-top.png",
+    "art/blender/command-center/previews/neural-side.png",
+    "art/blender/command-center/neural-seed-review.md",
+    "art/blender/command-center/neural-seed-provenance.json"
+  ],
+  "protected_paths": [
+    "AGENTS.md",
+    ".github/**",
+    ".icm/**",
+    "CONTEXT.md",
+    "HANDOFF.md",
+    "package.json",
+    "package-lock.json",
+    "decisions/**",
+    "workflow/**",
+    "docs/**",
+    "tools/blender/**",
+    "tools/icm/**",
+    "art/blender/command-center/references/**",
+    "art/blender/command-center/previews/massing-v2-*.png",
+    "art/blender/command-center/previews/reference-*.png",
+    "art/blender/command-center/massing-v2-review.md",
+    "art/blender/command-center/massing-v2-validation.json",
+    "public/**",
+    "src/**",
+    "tests/**",
+    "worker/**",
+    "wrangler.jsonc"
+  ],
+  "protected_refs": [
+    "refs/heads/main",
+    "refs/heads/feat/blender-world-art-pipeline",
+    "refs/heads/icm/control",
+    "refs/heads/icm/claims/command-center-reference-rebuild-001"
+  ],
+  "acceptance": [
+    "The exact primary reference command-center-concept.png is the only visual source authority.",
+    "At least one generated mesh seed GLB produced by an image-to-3D model is committed under art/blender/command-center/neural-seed before final Blender cleanup.",
+    "neural-seed-provenance.json records reference SHA-256, generator/model, version or commit when available, settings, source crop/full-scene mode, seed GLB SHA-256/bytes and Blender cleanup steps.",
+    "The final command-center.blend contains imported/generated mesh seed geometry rather than a fresh primitive procedural reconstruction.",
+    "No committed tools/blender authoring script is changed or added for this task.",
+    "If whole-scene generation is unusable, any segmented inputs must be crops/derivatives of the same approved reference and be recorded in provenance.",
+    "Player spawn, five bridge interfaces, Ask clearance, walkable topology, world scale and runtime camera operating constraints remain unchanged.",
+    "The final runtime render materially resembles the reference in silhouette, depth, architectural curvature, facade complexity, material separation, landscape and floating-platform form.",
+    "The final scene must not read as a circular plate with perimeter walls and decorative arches.",
+    "neural-runtime.png, neural-top.png and neural-side.png are committed for human review.",
+    "No production public/world/art/command-center.glb replacement occurs.",
+    "No React/runtime, topology, CSP, decoder, main or deployment change occurs.",
+    "icm-stage validation passes.",
+    "Independent review verifies provenance and protected state; human visual approval remains mandatory before export."
+  ],
+  "validation": [
+    "icm-stage"
+  ],
+  "stop_conditions": [
+    "The trusted feature branch head no longer equals the task base SHA.",
+    "The primary reference image is unavailable or unreadable.",
+    "No usable image-to-3D compute or already-authorized inference endpoint is available; STOP and report the compute/inference blocker rather than reverting to procedural Blender.",
+    "The generator cannot produce any usable mesh seed from either the whole reference or bounded crops/segments of the same reference.",
+    "Matching or fitting the generated seed would require moving protected spawn, bridge interfaces, Ask clearance, topology or world scale.",
+    "The workflow starts reconstructing the primary architecture from primitive Blender geometry instead of imported generated mesh.",
+    "The final render still reads as the same plate/perimeter/arch language after generated-mesh cleanup.",
+    "Any path outside the declared write scope changes.",
+    "Any production GLB export, React/runtime edit, main change or deployment is attempted."
+  ],
+  "claim": {
+    "strategy": "atomic_git_ref",
+    "ref_prefix": "refs/heads/icm/claims/",
+    "allow_force_update": false,
+    "stale_takeover": "coordinator_authorized_only"
+  }
+}
