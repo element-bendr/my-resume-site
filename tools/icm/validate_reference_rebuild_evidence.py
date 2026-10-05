@@ -66,6 +66,23 @@ def main() -> int:
     iterations = comparison.get("iterations")
     if not isinstance(iterations, list) or len(iterations) < 3:
         raise SystemExit("REFERENCE REBUILD EVIDENCE: FAIL fewer than 3 visual compare iterations")
+    for index, iteration in enumerate(iterations, start=1):
+        if not isinstance(iteration, dict):
+            raise SystemExit(f"REFERENCE REBUILD EVIDENCE: FAIL iteration {index} is not an object")
+        render_value = iteration.get("render")
+        mismatch = iteration.get("largest_mismatch")
+        correction = iteration.get("correction")
+        if not isinstance(render_value, str) or not render_value.startswith(
+            "art/blender/command-center/previews/reference-iterations/"
+        ):
+            raise SystemExit(f"REFERENCE REBUILD EVIDENCE: FAIL iteration {index} render path invalid")
+        render_path = Path(render_value)
+        if not render_path.is_file() or render_path.stat().st_size < 100_000:
+            raise SystemExit(f"REFERENCE REBUILD EVIDENCE: FAIL iteration {index} render missing/small")
+        if not isinstance(mismatch, str) or len(mismatch.strip()) < 20:
+            raise SystemExit(f"REFERENCE REBUILD EVIDENCE: FAIL iteration {index} mismatch is not substantive")
+        if not isinstance(correction, str) or len(correction.strip()) < 20:
+            raise SystemExit(f"REFERENCE REBUILD EVIDENCE: FAIL iteration {index} correction is not substantive")
 
     required_axes = {
         "silhouette",
