@@ -85,3 +85,39 @@ No browser certification.
 No deployment.
 
 The user must visually approve the runtime-camera render before Terra final review and any subsequent export task.
+
+
+## Mandatory comparison evidence
+
+The builder must create:
+
+`art/blender/command-center/reference-comparison.json`
+
+It must record the exact SHA-256 of the primary reference, at least three render/compare iterations, the largest mismatch found in each iteration, and the corrective action taken.
+
+The final comparison must grade exactly these axes as `close` or `minor_gap` before the task may stop:
+
+- silhouette;
+- depth;
+- curvature;
+- facade_depth;
+- materials;
+- landscape;
+- human_scale;
+- floating_platform;
+- lighting.
+
+Self-reporting does not replace the human visual gate. It exists to prove Codex actually performed a reference-comparison loop rather than one-shot procedural generation.
+
+## Anti-regression geometry gate
+
+The final export collection must not retain the known legacy detail-pass object families and must not be dominated by very low-complexity primitive meshes.
+
+The committed validator is intentionally heuristic, not an art critic. Human approval remains the final visual authority.
+
+
+Each comparison iteration must preserve its runtime-camera render under:
+
+`art/blender/command-center/previews/reference-iterations/`
+
+The comparison JSON must point to each real render and record a substantive `largest_mismatch` and `correction`. At least three real intermediate renders are mandatory before the final runtime render.

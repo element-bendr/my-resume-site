@@ -7,6 +7,8 @@
     "command-center-draco-local",
     "fixture-smoke",
     "icm-stage",
+    "reference-rebuild-evidence",
+    "reference-rebuild-geometry",
     "runtime-integration"
   ]
 }
