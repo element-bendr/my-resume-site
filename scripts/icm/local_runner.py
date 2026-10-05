@@ -338,6 +338,19 @@ def command_environment(policy: RunnerPolicy) -> dict[str, str]:
     return {key: value for key, value in os.environ.items() if key in allowed}
 
 
+def require_candidate_progress(worktree: Path, base_sha: str, changes: list[str]) -> str:
+    candidate_sha = current_sha(worktree)
+    if candidate_sha == base_sha:
+        raise RunnerError(
+            "executor produced unchanged candidate HEAD; no-op candidates cannot be published"
+        )
+    if not changes:
+        raise RunnerError(
+            "executor produced no changed paths; empty commits/no-op candidates cannot be published"
+        )
+    return candidate_sha
+
+
 def execute_task(
     repo_root: Path,
     task: dict[str, Any],
@@ -399,6 +412,7 @@ def execute_task(
             raise RunnerError("; ".join(scope_errors))
         if git(worktree, "status", "--porcelain", "--untracked-files=all"):
             raise RunnerError("executor left uncommitted changes; exact candidate SHA cannot be proven")
+        candidate_sha = require_candidate_progress(worktree, task["base_sha"], changes)
 
         validation: list[dict[str, Any]] = []
         for validation_id in task["validation"]:
@@ -429,7 +443,7 @@ def execute_task(
         outcome = {
             "task_id": task["task_id"],
             "base_sha": task["base_sha"],
-            "candidate_sha": current_sha(worktree),
+            "candidate_sha": candidate_sha,
             "claim_ref": claim_ref,
             "branch": _branch_for(task["task_id"]),
             "worktree": str(worktree),
