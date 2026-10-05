@@ -24,9 +24,9 @@
 
 ## Objective
 
-Develop the human-approved Massing V2 civic-hub composition into a detailed authored Command Center.
+Rebuild the Command Center from the approved primary reference image, using the existing scene only as spatial constraint evidence rather than visual authority.
 
-Current phase: **DETAILED_COMMAND_CENTER_AUTHORING_ACTIVE**. Human composition PASS at `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f` is recorded in PR #21 comment [5956821330](https://github.com/element-bendr/my-resume-site/pull/21#issuecomment-5956821330). The Massing V2 composition gate is CLOSED; preserve its spatial foundation. Stage 02 remains ACTIVE, not complete/certified.
+Current phase: **REFERENCE_DRIVEN_COMMAND_CENTER_REBUILD_ACTIVE**. The earlier Massing V2 PASS remains historical evidence for protected spatial anchors only. It is no longer visual authority. Preserve topology, spawn, bridge entrances, Ask clearance, world scale and camera operating constraints; architectural geometry, silhouette, facade language, terraces, landscape, materials, lighting and decorative structure may be substantially rebuilt to match `art/blender/command-center/references/command-center-concept.png`. Stage 02 remains ACTIVE, not complete/certified.
 
 Detailed authoring is now authorized. Production GLB export remains blocked until a later detailed visual PASS and exact-source validation; React integration requires validated production export. Stage 03, merge and deployment remain blocked.
 
@@ -91,7 +91,7 @@ The user-owned `AGENTS.md` remains protected and must not be changed.
 
 ## Process
 
-Current entry point: Massing V2 human composition gate has PASSED. Preserve the approved source and prior failure evidence; continue at detailed authoring step 11 below, then stop for independent detailed visual review. Exact-source validation must prove export collection, clearances, circulation, bounds, naming, budgets and `PREVIEW_DO_NOT_EXPORT` separation before eventual production export.
+Current entry point: restart visual authoring from the primary reference. Preserve prior source and evidence for audit only. Codex may replace existing decorative Blender geometry wholesale while preserving protected runtime/spatial anchors. Stop at HUMAN VISUAL REVIEW READY before any new production export.
 
 1. Read the prior FAIL evidence and do not continue the failed silhouette incrementally.
 2. Read `COMMAND-CENTER-MASSING-V2.md`.
@@ -211,7 +211,8 @@ After later visual PASS, the production verification sequence remains:
 ## Known closed decisions
 
 - human Massing V2 composition PASS: `dbc8d7c18fdf7b6d6761e79dbcff329f33ccda5f`, PR comment `5956821330`;
-- the approved composition may not be redesigned without a new blocking visual finding;
+- Massing V2 is no longer protected as visual composition; only its runtime/spatial anchors remain protected;
+- `art/blender/command-center/references/command-center-concept.png` is the primary visual authority for the rebuild;
 - Stage 01 GLBs prove Blender generation/export, not final art quality;
 - local `.blend` is the creative source of truth for Stage 02;
 - interaction coordinates remain React-owned;
